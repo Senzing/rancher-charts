@@ -1,0 +1,18 @@
+{{- if .Values.rbacEnabled }}
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ template "senzing-console.fullname" . }}-endpoint-reader
+  labels:
+    app: {{ template "senzing-console.name" . }}
+    chart: {{ template "senzing-console.chart" .  }}
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+subjects:
+- kind: ServiceAccount
+  name: {{ template "senzing-console.fullname" . }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ template "senzing-console.fullname" . }}-endpoint-reader
+{{- end }}

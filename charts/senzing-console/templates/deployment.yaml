@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "senzing-console.fullname" . }}
+  labels:
+    {{- include "senzing-console.labels" . | nindent 4 }}
+  {{- with .Values.deployment.metadata.annotations }}
+  annotations:
+    {{ toYaml . | indent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "senzing-console.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "senzing-console.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- with .Values.deployment.spec.template.metadata.annotations }}
+      annotations:
+        {{ toYaml . | indent 8 }}
+      {{- end }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ template "senzing.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .Values.rbacEnabled}}
+          securityContext:
+            privileged: true
+          {{- end }}
+          {{- if .Values.senzing.persistentVolumeClaim }}
+          volumeMounts:
+            - name: senzing-storage
+              mountPath: /opt/senzing/data
+              subPath: senzing-data/2.0.0
+            - name: senzing-storage
+              mountPath: /etc/opt/senzing
+              subPath: senzing-etc
+            - name: senzing-storage
+              mountPath: /opt/senzing/g2
+              subPath: senzing-g2
+            - name: senzing-storage
+              mountPath: /var/opt/senzing
+              subPath: senzing-var
+            - name: senzing-storage
+              mountPath: /opt/IBM
+              subPath: senzing-db2-drivers
+          {{- end }}
+          {{- if .Values.senzing.optSenzingClaim }}
+          volumeMounts:
+            - name: senzing-storage
+              mountPath: /opt/senzing
+          {{- end }}
+      {{- if .Values.rbacEnabled}}
+      serviceAccountName: {{ template "senzing-console.fullname" . }}
+      {{- end }}
+      {{- if .Values.senzing.persistentVolumeClaim }}
+      volumes:
+        - name: senzing-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.senzing.persistentVolumeClaim }}
+      {{- end }}
+      {{- if .Values.senzing.optSenzingClaim }}
+      volumes:
+        - name: senzing-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.senzing.optSenzingClaim }}
+      {{- end }}
+# --- Standard suffix ---
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.securityContext.enabled }}
+      securityContext:
+        fsGroup: {{ .Values.securityContext.fsGroup }}
+        runAsGroup: {{ .Values.securityContext.runAsGroup }}
+        runAsUser: {{ .Values.securityContext.runAsUser }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
