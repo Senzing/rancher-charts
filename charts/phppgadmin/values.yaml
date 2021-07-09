@@ -23,9 +23,15 @@ image:
   tag: latest
 
 ingress:
-  annotations:
+  annotations: {}
+  certManager: false
   enabled: false
-  tls:
+  extraHosts: []
+  extraTls: []
+  hostname: phpmyadmin.local
+  pathType: ImplementationSpecific
+  secrets: []
+  tls: false
 
 livenessProbe:
   enabled: true
