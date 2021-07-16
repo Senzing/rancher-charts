@@ -1,0 +1,49 @@
+affinity: {}
+
+deployment:
+  metadata:
+    annotations:
+  spec:
+    template:
+      metadata:
+        annotations:
+
+fullnameOverride: ""
+
+image:
+  pullPolicy: Always
+  registry: docker.io
+  repository: senzing/senzing-console
+  tag: latest
+
+imagePullSecrets: []
+
+ingress:
+  annotations: {}
+  enabled: false
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+
+nameOverride: ""
+nodeSelector: {}
+rbacEnabled: false
+replicaCount: 1
+resources: {}
+
+securityContext:
+  enabled: true
+  runAsUser: 1001
+  runAsGroup: 1001
+  fsGroup: 1001
+
+senzing:
+  debug: 0
+  persistentVolumeClaim: senzing-persistent-volume-claim
+
+service:
+  port: 80
+  type: ClusterIP
+
+tolerations: []

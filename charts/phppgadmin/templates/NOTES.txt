@@ -1,0 +1,40 @@
+
+** Please be patient while the chart is being deployed **
+
+1. Get the application URL by running these commands:
+
+{{- if .Values.ingress.enabled }}
+
+  You should be able to access your new phppgadmin installation through
+
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .Values.ingress.hostname }}/
+
+{{- else if eq .Values.service.type "LoadBalancer" }}
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace {{ .Release.Namespace }} -w {{ include "common.names.fullname" . }}'
+
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "common.names.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+  {{- $port:=.Values.service.port | toString }}
+  echo "phppgadmin URL: http://$SERVICE_IP{{- if ne $port "80" }}:{{ .Values.service.port }}{{ end }}/"
+
+{{- else if contains "NodePort" .Values.service.type }}
+
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "common.names.fullname" . }}'
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo "phppgadmin URL: http://$NODE_IP:$NODE_PORT"
+
+{{- else if contains "ClusterIP" .Values.service.type }}
+
+  echo "phppgadmin URL: http://127.0.0.1:{{ .Values.service.port }}"
+  kubectl port-forward --namespace {{ .Release.Namespace }} svc/{{ template "common.names.fullname" . }} {{ .Values.service.port }}:{{ .Values.service.port }}
+
+{{- end }}
+
+2. How to log in
+{{- if .Values.phppgadmin.serverHost }}
+
+phppgadmin has been configured to connect to a database in {{.Values.phppgadmin.serverHost}}
+with port {{.Values.phppgadmin.serverPort}}
+Please login using a database username and password.
+{{- end }}

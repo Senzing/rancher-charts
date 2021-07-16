@@ -1,0 +1,110 @@
+containerPorts:
+  http: 8080
+  https: 8443
+
+containerSecurityContext:
+  enabled: true
+  runAsUser: 1001
+
+deployment:
+  metadata:
+    annotations:
+  spec:
+    template:
+      metadata:
+        annotations:
+
+image:
+  pullPolicy: Always
+  pullSecrets:
+    - myRegistryKeySecretName
+  registry: docker.io
+  repository: senzing/phppgadmin
+  tag: latest
+
+ingress:
+  annotations: {}
+  certManager: false
+  enabled: false
+  extraHosts: []
+  extraTls: []
+  hostname: phpmyadmin.local
+  pathType: ImplementationSpecific
+  secrets: []
+  tls: false
+
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 6
+  httpGet:
+    path: /
+    port: http
+
+nodeAffinityPreset:
+  type: ""
+  key: ""
+  values: []
+replicaCount: 1
+resources: {}
+
+metrics:
+  enabled: false
+  serviceMonitor:
+    enabled: false
+  pullSecrets:
+    - myRegistryKeySecretName
+
+phppgadmin:
+  ajaxRefresh: 3
+  autoComplete: default on
+  defaultLang: auto
+  extraLoginSecurity: false
+  helpBase: http://www.postgresql.org/docs/%s/interactive/
+  leftWidth: 200
+  maxChars: 50
+  maxRows: 30
+  minPasswordLength: 1
+  ownedOnly: false
+  serverDefaultDb: template1
+  serverDesc: PostgreSQL
+  serverHost:
+  serverPgDumpAllPath: /usr/bin/pg_dumpall
+  serverPgDumpPath: /usr/bin/pg_dump
+  serverPort: 5432
+  serverSslMode: allow
+  showAdvanced: false
+  showComments: true
+  showOids: false
+  showSystem: false
+  theme: default
+  userXhtlmStrict: false
+
+podAffinityPreset: ""
+podAntiAffinityPreset: soft
+podSecurityContext:
+  enabled: true
+  fsGroup: 1001
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 6
+  httpGet:
+    path: /
+    port: http
+
+service:
+  port: 8080
+  httpsPort: 8443
+  name: phppgadmin
+  nodePorts:
+    http: ""
+    https: ""
+  type: LoadBalancer
