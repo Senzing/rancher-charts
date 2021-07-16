@@ -9,4 +9,4 @@ keywords:
 name: senzing-yum
 sources:
  - https://github.com/Senzing/senzing-yum
-version: 1.1.5
+version: 1.1.6
