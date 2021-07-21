@@ -26,6 +26,12 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
+          env:
+            {{- if .Values.senzing.engineConfigurationJson }}
+            - name: SENZING_ENGINE_CONFIGURATION_JSON
+              value: >-
+              {{ .Values.senzing.engineConfigurationJson  | nindent 16 }}
+            {{- end }}
           image: {{ template "senzing.image" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:

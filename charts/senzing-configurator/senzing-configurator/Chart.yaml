@@ -9,4 +9,4 @@ keywords:
 name: senzing-configurator
 sources:
  - https://github.com/Senzing/configurator
-version: 1.2.0
+version: 1.2.1

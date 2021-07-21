@@ -27,6 +27,11 @@ spec:
             - name: SENZING_DATABASE_URL
               value: "{{ .Values.senzing.databaseUrl }}"
             {{- end }}
+            {{- if .Values.senzing.engineConfigurationJson }}
+            - name: SENZING_ENGINE_CONFIGURATION_JSON
+              value: >-
+              {{ .Values.senzing.engineConfigurationJson  | nindent 16 }}
+            {{- end }}
           image: {{ template "senzing.image" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.rbacEnabled}}
