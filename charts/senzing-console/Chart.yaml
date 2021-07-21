@@ -9,4 +9,4 @@ keywords:
 name: senzing-console
 sources:
  - https://github.com/Senzing/docker-senzing-console
-version: 1.0.0
+version: 1.0.1
