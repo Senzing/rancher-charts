@@ -19,6 +19,7 @@ Used by:
     1. [Clone repository](#clone-repository)
     1. [Identify public charts](#identify-public-charts)
     1. [Helm lint](#helm-lint)
+    1. [Helm template](#helm-template)
     1. [Package Helm chart](#package-helm-chart)
 
 ## Using Helm
@@ -129,6 +130,37 @@ Used by:
       cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
       pwd; \
       helm lint; \
+    done
+    ```
+
+### Helm template
+
+1. Single chart.
+
+    :pencil2: Identify chart.
+
+    ```console
+    export CHART_NAME=senzing-hello-world
+    ```
+
+    Example:
+
+    ```console
+    cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
+    helm template .
+    ```
+
+1. Public charts. Example:
+
+    ```console
+    for CHART_NAME in ${CHART_NAMES[@]}; \
+    do \
+      cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
+      printf "\n"
+      printf "# ----------------------------------------------------------------\n"
+      printf "# $(pwd)\n"; \
+      printf "# ----------------------------------------------------------------\n\n"
+      helm template .; \
     done
     ```
 
