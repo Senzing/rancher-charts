@@ -7,8 +7,6 @@ Charts used with [Kubernetes](https://github.com/Senzing/knowledge-base/blob/mas
 Used by:
 
 - [Helm](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/helm.md)
-- [Rancher](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/rancher.md)
-  - [Catalog](https://rancher.com/docs/rancher/v2.x/en/catalog/)
 
 ### Contents
 
@@ -17,9 +15,6 @@ Used by:
     1. [List helm repositories](#list-helm-repositories)
     1. [View charts in Senzing Helm repository](#view-charts-in-senzing-helm-repository)
     1. [Remove helm repository](#remove-helm-repository)
-1. [Using Rancher Catalog](#using-rancher-catalog)
-    1. [Add catalog](#add-catalog)
-    1. [Delete catalog](#delete-catalog)
 1. [Development](#development)
     1. [Clone repository](#clone-repository)
     1. [Identify public charts](#identify-public-charts)
@@ -33,7 +28,7 @@ Used by:
 1. Example:
 
     ```console
-    helm repo add senzing 'https://senzing.github.io/charts/'
+    helm repo add senzing 'https://hub.senzing.com/charts/'
     ```
 
 ### List helm repositories
@@ -58,45 +53,6 @@ Used by:
 
     ```console
     helm repo remove senzing
-    ```
-
-## Using Rancher Catalog
-
-### Add catalog
-
-1. Using Rancher Web interface.
-   Reference: [Adding custom catalogs](https://rancher.com/docs/rancher/v2.x/en/catalog/#adding-custom-catalogs).
-   Example:
-
-    1. Choose Rancher > Top, Left-most dropdown box > Global
-    1. Choose Rancher > Catalogs tab
-    1. Click "Add Catalog" button.
-    1. In "Add Catalog" dialog box:
-        1. **Name:** senzing
-        1. **Catalog URL:** [https://github.com/senzing/charts](https://github.com/senzing/charts)
-        1. **Branch:** master
-        1. **Kind:** Helm
-    1. Click "Create" button
-
-1. Using Rancher command line interface (CLI).  Example:
-
-    ```console
-    rancher catalog add senzing https://github.com/senzing/charts
-    ```
-
-### Delete catalog
-
-1. Using Rancher Web interface. Example:
-
-    1. Choose Rancher > Global tab
-    1. Choose Rancher > Catalogs tab
-    1. In "Custom" section, select "senzing" catalog.
-    1. Click "Delete" button.
-
-1. Using Rancher command line interface (CLI). Example:
-
-    ```console
-    rancher catalog delete senzing
     ```
 
 ## Development
