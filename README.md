@@ -7,8 +7,6 @@ Charts used with [Kubernetes](https://github.com/Senzing/knowledge-base/blob/mas
 Used by:
 
 - [Helm](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/helm.md)
-- [Rancher](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/rancher.md)
-  - [Catalog](https://rancher.com/docs/rancher/v2.x/en/catalog/)
 
 ### Contents
 
@@ -17,13 +15,11 @@ Used by:
     1. [List helm repositories](#list-helm-repositories)
     1. [View charts in Senzing Helm repository](#view-charts-in-senzing-helm-repository)
     1. [Remove helm repository](#remove-helm-repository)
-1. [Using Rancher Catalog](#using-rancher-catalog)
-    1. [Add catalog](#add-catalog)
-    1. [Delete catalog](#delete-catalog)
 1. [Development](#development)
     1. [Clone repository](#clone-repository)
     1. [Identify public charts](#identify-public-charts)
     1. [Helm lint](#helm-lint)
+    1. [Helm template](#helm-template)
     1. [Package Helm chart](#package-helm-chart)
 
 ## Using Helm
@@ -33,7 +29,7 @@ Used by:
 1. Example:
 
     ```console
-    helm repo add senzing 'https://senzing.github.io/charts/'
+    helm repo add senzing 'https://hub.senzing.com/charts/'
     ```
 
 ### List helm repositories
@@ -58,45 +54,6 @@ Used by:
 
     ```console
     helm repo remove senzing
-    ```
-
-## Using Rancher Catalog
-
-### Add catalog
-
-1. Using Rancher Web interface.
-   Reference: [Adding custom catalogs](https://rancher.com/docs/rancher/v2.x/en/catalog/#adding-custom-catalogs).
-   Example:
-
-    1. Choose Rancher > Top, Left-most dropdown box > Global
-    1. Choose Rancher > Catalogs tab
-    1. Click "Add Catalog" button.
-    1. In "Add Catalog" dialog box:
-        1. **Name:** senzing
-        1. **Catalog URL:** [https://github.com/senzing/charts](https://github.com/senzing/charts)
-        1. **Branch:** master
-        1. **Kind:** Helm
-    1. Click "Create" button
-
-1. Using Rancher command line interface (CLI).  Example:
-
-    ```console
-    rancher catalog add senzing https://github.com/senzing/charts
-    ```
-
-### Delete catalog
-
-1. Using Rancher Web interface. Example:
-
-    1. Choose Rancher > Global tab
-    1. Choose Rancher > Catalogs tab
-    1. In "Custom" section, select "senzing" catalog.
-    1. Click "Delete" button.
-
-1. Using Rancher command line interface (CLI). Example:
-
-    ```console
-    rancher catalog delete senzing
     ```
 
 ## Development
@@ -126,13 +83,13 @@ Used by:
       "ibm-db2-driver-installer" \
       "kafka-test-client" \
       "mysql-client" \
-      "phpmyadmin" \
       "phppgadmin" \
       "postgresql-client" \
       "resolver" \
       "senzing-api-server" \
       "senzing-base" \
       "senzing-configurator" \
+      "senzing-console" \
       "senzing-debug" \
       "senzing-entity-search-web-app" \
       "senzing-hello-world" \
@@ -161,7 +118,7 @@ Used by:
     Example:
 
     ```console
-    cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}/${CHART_NAME}
+    cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm lint
     ```
 
@@ -170,9 +127,40 @@ Used by:
     ```console
     for CHART_NAME in ${CHART_NAMES[@]}; \
     do \
-      cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}/${CHART_NAME}; \
+      cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
       pwd; \
       helm lint; \
+    done
+    ```
+
+### Helm template
+
+1. Single chart.
+
+    :pencil2: Identify chart.
+
+    ```console
+    export CHART_NAME=senzing-hello-world
+    ```
+
+    Example:
+
+    ```console
+    cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
+    helm template .
+    ```
+
+1. Public charts. Example:
+
+    ```console
+    for CHART_NAME in ${CHART_NAMES[@]}; \
+    do \
+      cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
+      printf "\n"
+      printf "# ----------------------------------------------------------------\n"
+      printf "# $(pwd)\n"; \
+      printf "# ----------------------------------------------------------------\n\n"
+      helm template .; \
     done
     ```
 
@@ -190,7 +178,7 @@ Used by:
 
     ```console
     cd ${GIT_REPOSITORY_DIR}/docs
-    helm package ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}/${CHART_NAME}
+    helm package ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm repo index .
     ```
 
@@ -201,7 +189,7 @@ Used by:
 
     for CHART_NAME in ${CHART_NAMES[@]}; \
     do \
-      helm package ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}/${CHART_NAME}; \
+      helm package ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
     done
 
     helm repo index .

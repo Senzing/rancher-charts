@@ -1,9 +1,0 @@
-categories:
-  - Senzing
-questions:
-
-  - variable: senzing.sleepTime
-    label: Period, in seconds, between hello-world messages.
-    description: "Example: 300 (5 minutes)"
-    type: int
-    default: 300

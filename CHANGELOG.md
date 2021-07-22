@@ -6,8 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.6] - 2020-10-15
+## [1.0.1] - 2020-07-22
 
-### Added in 1.0.1
+### Changed in 1.0.1
 
-1. Added annotations
+- Migration to Helm 3 support
+- Restructure chart directories to "flatten" them.
+
+## [1.0.0] - 2020-07-02
+
+### Added to 1.0.0
+
+- Helm 2 versions.
