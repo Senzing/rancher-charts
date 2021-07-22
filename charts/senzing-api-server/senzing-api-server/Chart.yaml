@@ -9,4 +9,4 @@ keywords:
 name: senzing-api-server
 sources:
  - https://github.com/Senzing/senzing-api-server
-version: 1.2.0
+version: 1.2.1
