@@ -39,7 +39,6 @@ securityContext:
 
 senzing:
   bindAddr: all
-  iniFile: /etc/opt/senzing/G2Module.ini
   persistentVolumeClaim: senzing-persistent-volume-claim
 
 service:
