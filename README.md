@@ -133,6 +133,7 @@ Used by:
       "senzing-api-server" \
       "senzing-base" \
       "senzing-configurator" \
+      "senzing-console" \
       "senzing-debug" \
       "senzing-entity-search-web-app" \
       "senzing-hello-world" \
@@ -161,7 +162,7 @@ Used by:
     Example:
 
     ```console
-    cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}/${CHART_NAME}
+    cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm lint
     ```
 
@@ -170,7 +171,7 @@ Used by:
     ```console
     for CHART_NAME in ${CHART_NAMES[@]}; \
     do \
-      cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}/${CHART_NAME}; \
+      cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
       pwd; \
       helm lint; \
     done
@@ -190,7 +191,7 @@ Used by:
 
     ```console
     cd ${GIT_REPOSITORY_DIR}/docs
-    helm package ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}/${CHART_NAME}
+    helm package ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm repo index .
     ```
 
@@ -201,7 +202,7 @@ Used by:
 
     for CHART_NAME in ${CHART_NAMES[@]}; \
     do \
-      helm package ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}/${CHART_NAME}; \
+      helm package ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
     done
 
     helm repo index .
