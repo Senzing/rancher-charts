@@ -82,7 +82,6 @@ Used by:
       "ibm-db2-driver-installer" \
       "kafka-test-client" \
       "mysql-client" \
-      "phpmyadmin" \
       "phppgadmin" \
       "postgresql-client" \
       "resolver" \
