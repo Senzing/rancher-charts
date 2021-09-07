@@ -6,7 +6,10 @@ icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
  - senzing
  - api
+ - kafka
+ - rabbitmq
+ - azure service bus
 name: senzing-api-server
 sources:
  - https://github.com/Senzing/senzing-api-server
-version: 1.2.1
+version: 1.3.0
