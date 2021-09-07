@@ -110,6 +110,14 @@ spec:
             - name: SENZING_API_SERVER_VERBOSE
               value: {{ .Values.senzing.verbose | quote }}
             {{- end }}
+            {{- if .Values.senzing.azureQueueConnectionString }}
+            - name: SENZING_AZURE_CONNECTION_STRING
+              value: "{{ .Values.senzing.azureQueueConnectionString }}"
+            {{- end }}
+            {{- if .Values.senzing.azureQueueName }}
+            - name: SENZING_AZURE_QUEUE_NAME
+              value: "{{ .Values.senzing.azureQueueName }}"
+            {{- end }}
             {{- if .Values.senzing.kafkaBootstrapServer }}
             - name: SENZING_KAFKA_BOOTSTRAP_SERVER
               value: {{ .Values.senzing.kafkaBootstrapServer | quote }}

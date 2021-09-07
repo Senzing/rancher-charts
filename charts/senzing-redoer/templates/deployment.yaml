@@ -27,6 +27,14 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           env:
+            {{- if .Values.senzing.azureQueueConnectionString }}
+            - name: SENZING_AZURE_CONNECTION_STRING
+              value: "{{ .Values.senzing.azureQueueConnectionString }}"
+            {{- end }}
+            {{- if .Values.senzing.azureQueueName }}
+            - name: SENZING_AZURE_QUEUE_NAME
+              value: "{{ .Values.senzing.azureQueueName }}"
+            {{- end }}
             {{- if .Values.senzing.configPath }}
             - name: SENZING_CONFIG_PATH
               value: "{{ .Values.senzing.configPath }}"
