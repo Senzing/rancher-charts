@@ -13,7 +13,7 @@ fullnameOverride: ""
 image:
   pullPolicy: Always
   registry: docker.io
-  repository: senzing/yum
+  repository: senzing/apt
   tag: latest
 
 imagePullSecrets: []
