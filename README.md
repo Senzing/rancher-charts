@@ -87,6 +87,7 @@ Used by:
       "postgresql-client" \
       "resolver" \
       "senzing-api-server" \
+      "senzing-apt" \
       "senzing-base" \
       "senzing-configurator" \
       "senzing-console" \

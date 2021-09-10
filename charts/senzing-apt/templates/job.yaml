@@ -1,9 +1,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "senzing-yum.fullname" . }}
+  name: {{ include "senzing-apt.fullname" . }}
   labels:
-    {{- include "senzing-yum.labels" . | nindent 4 }}
+    {{- include "senzing-apt.labels" . | nindent 4 }}
   {{- with .Values.deployment.metadata.annotations }}
   annotations:
     {{ toYaml . | indent 4 }}
@@ -18,9 +18,9 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          {{- if .Values.senzing.yumParameters }}
+          {{- if .Values.senzing.aptParameters }}
           args:
-            {{- toYaml .Values.senzing.yumParameters | nindent 12 }}
+            {{- toYaml .Values.senzing.aptParameters | nindent 12 }}
           {{- end }}
           env:
             {{- if .Values.senzing.acceptEula }}
@@ -74,7 +74,7 @@ spec:
           {{- end }}
       restartPolicy: Never
       {{- if .Values.rbacEnabled}}
-      serviceAccountName: {{ template "senzing-yum.fullname" . }}
+      serviceAccountName: {{ template "senzing-apt.fullname" . }}
       {{- end }}
       volumes:
         {{- if .Values.senzing.optMicrosoftDataClaim }}
