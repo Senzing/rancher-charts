@@ -25,7 +25,7 @@ spec:
             - {{ .Values.mssql.database }}
             - "-e"
             - "-i"
-            - "/data/{{ .Values.mssql.file }}"
+            - /data/{{ .Values.mssql.file }}
             - "-o"
             - "/dev/stdout"
             - "-P"

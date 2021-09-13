@@ -26,6 +26,14 @@ ingress:
       paths: []
   tls: []
 
+mssql:
+  database: ""
+  file: ""
+  host: ""
+  password: ""
+  storageClaim: ""
+  username: ""
+
 nameOverride: ""
 nodeSelector: {}
 replicaCount: 1
