@@ -54,9 +54,16 @@ spec:
             - name: senzing-storage
               mountPath: /var/opt/senzing
               subPath: senzing-var
+            {{- if .Values.senzing.mountOptIbm }}
             - name: senzing-storage
               mountPath: /opt/IBM
               subPath: senzing-db2-drivers
+            {{- end }}
+            {{- if .Values.senzing.mountOptMicrosoft }}
+            - name: senzing-storage
+              mountPath: /opt/microsoft
+              subPath: opt-microsoft
+            {{- end }}
           {{- end }}
           {{- if .Values.senzing.optSenzingClaim }}
           volumeMounts:

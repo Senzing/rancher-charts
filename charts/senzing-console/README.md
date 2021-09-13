@@ -57,6 +57,9 @@ cluster using the
 | `image.tag` | Image tag | `latest` |
 | `image.pullPolicy` | Image pull policy | `IfNotPresent` |
 | `senzing.persistentVolumeClaim` | A Persistent Volume Claim (PVC) that can store `/opt/senzing` data | `senzing-persistent-volume-claim` |
+| `senzing.mountOptMicrosoft` | Mount `/opt/microsoft` for use with MS SQL database driver | `false` |
+| `senzing.engineConfigurationJson` | [SENZING_ENGINE_CONFIGURATION_JSON](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_engine_configuration_json) | None |
+
 
 1. Specify each parameter using the `--set key=value[,key=value]` argument to `helm install` or use multiple `--set` arguments. Example:
 
