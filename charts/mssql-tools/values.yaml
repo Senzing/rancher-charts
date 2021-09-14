@@ -12,8 +12,8 @@ fullnameOverride: ""
 
 image:
   pullPolicy: Always
-  registry: docker.io
-  repository: mcr.microsoft.com/mssql-tools
+  registry: mcr.microsoft.com
+  repository: mssql-tools
   tag: latest
 
 imagePullSecrets: []

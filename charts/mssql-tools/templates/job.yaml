@@ -2,6 +2,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ include "mssql-tools.fullname" . }}
+  labels:
+    {{- include "mssql-tools.labels" . | nindent 4 }}
   {{- with .Values.deployment.metadata.annotations }}
   annotations:
     {{ toYaml . | indent 4 }}
@@ -18,8 +20,9 @@ spec:
         - name: {{ .Chart.Name }}
           image: {{ template "senzing.image" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/opt/mssql-tools/bin/sqlcmd"]
+          {{- if .Values.mssql.file }}
           # Reference: https://docs.microsoft.com/en-us/sql/tools/sqlcmd-utility
+          command: ["/opt/mssql-tools/bin/sqlcmd"]
           args:
             - "-d"
             - {{ .Values.mssql.database }}
@@ -34,6 +37,10 @@ spec:
             - {{ .Values.mssql.host }}
             - "-U"
             - {{ .Values.mssql.username }}
+          {{- else }}
+          command: ["sleep"]
+          args: ["infinity"]
+          {{- end }}
           {{- if .Values.mssql.storageClaim }}
           volumeMounts:
             - name: mssql-storage
