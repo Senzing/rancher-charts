@@ -18,4 +18,4 @@ A Microsoft SQL Database client.
 
 ## References
 
-1. For command-line options, see https://docs.microsoft.com/en-us/sql/tools/sqlcmd-utility
+1. [command-line options](https://docs.microsoft.com/en-us/sql/tools/sqlcmd-utility)
