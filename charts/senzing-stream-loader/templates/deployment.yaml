@@ -300,8 +300,13 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- if .Values.senzing.persistentVolumeClaim }}
           volumeMounts:
+            {{- if .Values.senzing.license }}
+            - name: senzing-license
+              mountPath: /opt/senzing/license
+              readOnly: true
+            {{- end }}
+            {{- if .Values.senzing.persistentVolumeClaim }}
             - name: senzing-storage
               mountPath: /opt/senzing/data
               subPath: senzing-data/2.0.0
@@ -317,16 +322,30 @@ spec:
             - name: senzing-storage
               mountPath: /opt/IBM
               subPath: senzing-db2-drivers
+            {{- end }}
+          {{- if .Values.senzing.license }}
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - rm -r {{ .Values.senzing.licensePath }}; cp /opt/senzing/license/g2.lic {{ .Values.senzing.licensePath }}
           {{- end }}
       {{- if .Values.rbacEnabled}}
       serviceAccountName: {{ template "senzing-stream-loader.fullname" . }}
       {{- end }}
-      {{- if .Values.senzing.persistentVolumeClaim }}
       volumes:
+        {{- if .Values.senzing.license }}
+        - name: senzing-license
+          secret:
+            secretName: senzing-license
+        {{- end }}
+        {{- if .Values.senzing.persistentVolumeClaim }}
         - name: senzing-storage
           persistentVolumeClaim:
             claimName: {{ .Values.senzing.persistentVolumeClaim }}
-      {{- end }}
+        {{- end }}
 # --- Standard suffix ---
       {{- with .Values.affinity }}
       affinity:

@@ -40,6 +40,7 @@ securityContext:
 senzing:
   persistentVolumeClaim: senzing-persistent-volume-claim
   subcommand: kafka
+  licensePath: /etc/opt/senzing/g2.lic
 
 service:
   port: 80
