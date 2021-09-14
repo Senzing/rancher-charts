@@ -10,6 +10,9 @@ deployment:
 
 fullnameOverride: ""
 
+global:
+    imageRegistry: ""
+
 image:
   pullPolicy: Always
   registry: docker.io
@@ -39,6 +42,11 @@ securityContext:
   fsGroup: 1001
 
 senzing:
+  databaseUrl: ""
+  debug: false
+  engineConfigurationJson: ""
+  mountOptIbm: false
+  mountOptMicrosoft: false
   persistentVolumeClaim: senzing-persistent-volume-claim
 
 service:

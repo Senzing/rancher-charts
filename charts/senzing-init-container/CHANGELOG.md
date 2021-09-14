@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2] - 2021-09-14
+
+### Added in 1.2.2
+
+1. Support for Microsoft SQL Database
+
 ## [1.2.1] - 2021-07-21
 
 ### Added in 1.2.1
