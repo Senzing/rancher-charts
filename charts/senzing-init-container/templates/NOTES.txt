@@ -13,15 +13,15 @@ More information:
 The command being run:
 
 ```console
-python init-container.py {{ .Values.senzing.subcommand -}}
-  {{- if .Values.senzing.dataSource }} \
-  --data-source "{{ .Values.senzing.dataSource }}"
-  {{- end }}
+python init-container.py
   {{- if .Values.senzing.debug }} \
   --debug "{{ .Values.senzing.debug }}"
   {{- end }}
-  {{- if .Values.senzing.senzingDir }} \
-  --senzing-dir {{ .Values.senzing.senzingDir }}
+  {{- if .Values.senzing.databaseUrl }}
+  --database-url {{ .Values.senzing.databaseUrl }}
+  {{- end }}
+  {{- if .Values.senzing.engineConfigurationJson }}
+  --engine-configuration-json {{ .Values.senzing.engineConfigurationJson }}
   {{- end }}
 ```
 
