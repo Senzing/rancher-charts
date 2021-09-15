@@ -50,6 +50,9 @@ python stream-loader.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.delayInSeconds }} \
   --delay-in-seconds "{{ .Values.senzing.delayInSeconds }}"
   {{- end }}
+  {{- if .Values.senzing.delayRandomized }} \
+  --delay-randomized "{{ .Values.senzing.delayRandomized }}"
+  {{- end }}
   {{- if .Values.senzing.engineConfigurationJson }} \
   --engine-configuration-json "{{ .Values.senzing.engineConfigurationJson }}"
   {{- end }}
@@ -197,11 +200,14 @@ python stream-loader.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.skipDatabasePerformanceTest }} \
   --skip-database-performance-test "{{ .Values.senzing.skipDatabasePerformanceTest }}"
   {{- end }}
+  {{- if .Values.senzing.skipGovernor }} \
+  --skip-governor "{{ .Values.senzing.skipGovernor }}"
+  {{- end }}
+  {{- if .Values.senzing.skipInfoFilter }} \
+  --skip-info-filter "{{ .Values.senzing.skipInfoFilter }}"
+  {{- end }}
   {{- if .Values.senzing.sleepTimeInSeconds }} \
   --sleep-time-in-seconds "{{ .Values.senzing.sleepTimeInSeconds }}"
-  {{- end }}
-  {{- if .Values.senzing.sqsDeadLetterQueueEnabled }} \
-  --sqs-dead-letter-queue-enabled "{{ .Values.senzing.sqsDeadLetterQueueEnabled }}"
   {{- end }}
   {{- if .Values.senzing.sqsFailureQueueUrl }} \
   --sqs-failure-queue-url "{{ .Values.senzing.sqsFailureQueueUrl }}"
