@@ -51,9 +51,25 @@ spec:
             - name: AWS_SESSION_TOKEN
               value: "{{ .Values.senzing.awsSessionToken }}"
             {{- end }}
-            {{- if .Values.senzing.azureQueueConnectionString }}
+            {{- if .Values.senzing.azureConnectionString }}
             - name: SENZING_AZURE_CONNECTION_STRING
-              value: "{{ .Values.senzing.azureQueueConnectionString }}"
+              value: "{{ .Values.senzing.azureConnectionString }}"
+            {{- end }}
+            {{- if .Values.senzing.azureFailureConnectionString }}
+            - name: SENZING_AZURE_FAILURE_CONNECTION_STRING
+              value: "{{ .Values.senzing.azureFailureConnectionString }}"
+            {{- end }}
+            {{- if .Values.senzing.azureFailureQueueName }}
+            - name: SENZING_AZURE_FAILURE_QUEUE_NAME
+              value: "{{ .Values.senzing.azureFailureQueueName }}"
+            {{- end }}
+            {{- if .Values.senzing.azureInfoConnectionString }}
+            - name: SENZING_AZURE_INFO_CONNECTION_STRING
+              value: "{{ .Values.senzing.azureInfoConnectionString }}"
+            {{- end }}
+            {{- if .Values.senzing.azureInfoQueueName }}
+            - name: SENZING_AZURE_INFO_QUEUE_NAME
+              value: "{{ .Values.senzing.azureInfoQueueName }}"
             {{- end }}
             {{- if .Values.senzing.azureQueueName }}
             - name: SENZING_AZURE_QUEUE_NAME
@@ -314,9 +330,16 @@ spec:
             - name: senzing-storage
               mountPath: /var/opt/senzing
               subPath: senzing-var
+            {{- if .Values.senzing.mountOptIbm }}
             - name: senzing-storage
               mountPath: /opt/IBM
               subPath: senzing-db2-drivers
+            {{- end }}
+            {{- if .Values.senzing.mountOptMicrosoft }}
+            - name: senzing-storage
+              mountPath: /opt/microsoft
+              subPath: opt-microsoft
+            {{- end }}
           {{- end }}
       {{- if .Values.rbacEnabled}}
       serviceAccountName: {{ template "senzing-stream-loader.fullname" . }}
