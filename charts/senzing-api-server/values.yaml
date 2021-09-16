@@ -38,8 +38,50 @@ securityContext:
   fsGroup: 1001
 
 senzing:
+  allowedOrigins: ""
+  autoRefreshPeriod: ""
+  azureQueueConnectionString: ""
+  azureQueueName: ""
   bindAddr: all
-  persistentVolumeClaim: senzing-persistent-volume-claim
+  concurrency: ""
+  configId: ""
+  enableAdmin: ""
+  engineConfigurationJson: ""
+  httpConcurrency: ""
+  iniFile: ""
+  initEnvVar: ""
+  initFile: ""
+  kafkaBootstrapServer: ""
+  kafkaGroup: ""
+  kafkaInfoBootstrapServer: ""
+  kafkaInfoGroup: ""
+  kafkaInfoTopic: ""
+  moduleName: ""
+  monitorFile: ""
+  mountOptIbm: false
+  mountOptMicrosoft: false
+  persistentVolumeClaim: ""
+  quiet: ""
+  rabbitmqExchange: ""
+  rabbitmqHost: ""
+  rabbitmqInfoExchange: ""
+  rabbitmqInfoHost: ""
+  rabbitmqInfoPassword: ""
+  rabbitmqInfoPort: ""
+  rabbitmqInfoRoutingKey: ""
+  rabbitmqInfoUsername: ""
+  rabbitmqInfoVirtualHost: ""
+  rabbitmqPassword: ""
+  rabbitmqPort: ""
+  rabbitmqUsername: ""
+  rabbitmqVirtualHost: ""
+  readOnly: ""
+  skipEnginePriming: ""
+  skipStartupPerf: ""
+  sqsInfoQueueUrl: ""
+  statsInterval: ""
+  urlBasePath: ""
+  verbose: ""
 
 service:
   port: 8080
