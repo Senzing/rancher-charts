@@ -27,6 +27,18 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           env:
+            {{- if .Values.senzing.mountOptIbm }}
+            - name: LD_LIBRARY_PATH
+              value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/IBM/db2/clidriver/lib
+            {{- end }}
+            {{- if .Values.senzing.mountOptMicrosoft }}
+            - name: LD_LIBRARY_PATH
+              value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/microsoft/msodbcsql17/lib64
+            - name: ODBCINI
+              value: /opt/microsoft/msodbcsql17/etc/odbc.ini
+            - name: ODBCSYSINI
+              value: /opt/microsoft/msodbcsql17/etc
+            {{- end }}
             {{- if .Values.senzing.awsAccessKeyId }}
             - name: AWS_ACCESS_KEY_ID
               value: "{{ .Values.senzing.awsAccessKeyId }}"
@@ -51,9 +63,25 @@ spec:
             - name: AWS_SESSION_TOKEN
               value: "{{ .Values.senzing.awsSessionToken }}"
             {{- end }}
-            {{- if .Values.senzing.azureQueueConnectionString }}
+            {{- if .Values.senzing.azureConnectionString }}
             - name: SENZING_AZURE_CONNECTION_STRING
-              value: "{{ .Values.senzing.azureQueueConnectionString }}"
+              value: "{{ .Values.senzing.azureConnectionString }}"
+            {{- end }}
+            {{- if .Values.senzing.azureFailureConnectionString }}
+            - name: SENZING_AZURE_FAILURE_CONNECTION_STRING
+              value: "{{ .Values.senzing.azureFailureConnectionString }}"
+            {{- end }}
+            {{- if .Values.senzing.azureFailureQueueName }}
+            - name: SENZING_AZURE_FAILURE_QUEUE_NAME
+              value: "{{ .Values.senzing.azureFailureQueueName }}"
+            {{- end }}
+            {{- if .Values.senzing.azureInfoConnectionString }}
+            - name: SENZING_AZURE_INFO_CONNECTION_STRING
+              value: "{{ .Values.senzing.azureInfoConnectionString }}"
+            {{- end }}
+            {{- if .Values.senzing.azureInfoQueueName }}
+            - name: SENZING_AZURE_INFO_QUEUE_NAME
+              value: "{{ .Values.senzing.azureInfoQueueName }}"
             {{- end }}
             {{- if .Values.senzing.azureQueueName }}
             - name: SENZING_AZURE_QUEUE_NAME
@@ -82,6 +110,10 @@ spec:
             {{- if .Values.senzing.delayInSeconds }}
             - name: SENZING_DELAY_IN_SECONDS
               value: "{{ .Values.senzing.delayInSeconds }}"
+            {{- end }}
+            {{- if .Values.senzing.delayRandomized }}
+            - name: SENZING_DELAY_RANDOMIZED
+              value: "{{ .Values.senzing.delayRandomized }}"
             {{- end }}
             {{- if .Values.senzing.engineConfigurationJson }}
             - name: SENZING_ENGINE_CONFIGURATION_JSON
@@ -192,6 +224,10 @@ spec:
             - name: SENZING_RABBITMQ_FAILURE_USERNAME
               value: "{{ .Values.senzing.rabbitmqFailureUsername }}"
             {{- end }}
+            {{- if .Values.senzing.rabbitmqFailureVirtualHost }}
+            - name: SENZING_RABBITMQ_FAILURE_VIRTUAL_HOST
+              value: "{{ .Values.senzing.rabbitmqFailureVirtualHost }}"
+            {{- end }}
             {{- if .Values.senzing.rabbitmqHeartbeatInSeconds }}
             - name: SENZING_RABBITMQ_HEARTBEAT_IN_SECONDS
               value: "{{ .Values.senzing.rabbitmqHeartbeatInSeconds }}"
@@ -228,6 +264,10 @@ spec:
             - name: SENZING_RABBITMQ_INFO_USERNAME
               value: "{{ .Values.senzing.rabbitmqInfoUsername }}"
             {{- end }}
+            {{- if .Values.senzing.rabbitmqInfoVirtualHost }}
+            - name: SENZING_RABBITMQ_INFO_VIRTUAL_HOST
+              value: "{{ .Values.senzing.rabbitmqInfoVirtualHost }}"
+            {{- end }}
             {{- if .Values.senzing.rabbitmqPassword }}
             - name: SENZING_RABBITMQ_PASSWORD
               value: "{{ .Values.senzing.rabbitmqPassword }}"
@@ -244,6 +284,14 @@ spec:
             - name: SENZING_RABBITMQ_QUEUE
               value: "{{ .Values.senzing.rabbitmqQueue }}"
             {{- end }}
+            {{- if .Values.senzing.rabbitmqReconnectDelayInSeconds }}
+            - name: SENZING_RABBITMQ_RECONNECT_DELAY_IN_SECONDS
+              value: "{{ .Values.senzing.rabbitmqReconnectDelayInSeconds }}"
+            {{- end }}
+            {{- if .Values.senzing.rabbitmqReconnectNumberOfRetries }}
+            - name: SENZING_RABBITMQ_RECONNECT_NUMBER_OF_RETRIES
+              value: "{{ .Values.senzing.rabbitmqReconnectNumberOfRetries }}"
+            {{- end }}
             {{- if .Values.senzing.rabbitmqUsername }}
             - name: SENZING_RABBITMQ_USERNAME
               value: "{{ .Values.senzing.rabbitmqUsername }}"
@@ -251,6 +299,10 @@ spec:
             {{- if .Values.senzing.rabbitmqUseExistingEntities }}
             - name: SENZING_RABBITMQ_USE_EXISTING_ENTITIES
               value: "{{ .Values.senzing.rabbitmqUseExistingEntities }}"
+            {{- end }}
+            {{- if .Values.senzing.rabbitmqVirtualHost }}
+            - name: SENZING_RABBITMQ_VIRTUAL_HOST
+              value: "{{ .Values.senzing.rabbitmqVirtualHost }}"
             {{- end }}
             {{- if .Values.senzing.resourcePath }}
             - name: SENZING_RESOURCE_PATH
@@ -260,17 +312,25 @@ spec:
             - name: SENZING_SKIP_DATABASE_PERFORMANCE_TEST
               value: "{{ .Values.senzing.skipDatabasePerformanceTest }}"
             {{- end }}
+            {{- if .Values.senzing.skipGovernor }}
+            - name: SENZING_SKIP_GOVERNOR
+              value: "{{ .Values.senzing.skipGovernor }}"
+            {{- end }}
+            {{- if .Values.senzing.skipInfoFilter }}
+            - name: SENZING_SKIP_INFO_FILTER
+              value: "{{ .Values.senzing.skipInfoFilter }}"
+            {{- end }}
             {{- if .Values.senzing.sleepTimeInSeconds }}
             - name: SENZING_SLEEP_TIME_IN_SECONDS
               value: "{{ .Values.senzing.sleepTimeInSeconds }}"
             {{- end }}
-            {{- if .Values.senzing.sqsDeadLetterQueueEnabled }}
-            - name: SENZING_SQS_DEAD_LETTER_QUEUE_ENABLED
-              value: "{{ .Values.senzing.sqsDeadLetterQueueEnabled }}"
-            {{- end }}
             {{- if .Values.senzing.sqsFailureQueueUrl }}
             - name: SENZING_SQS_FAILURE_QUEUE_URL
               value: "{{ .Values.senzing.sqsFailureQueueUrl }}"
+            {{- end }}
+            {{- if .Values.senzing.sqsInfoQueueDelaySeconds }}
+            - name: SENZING_SQS_INFO_QUEUE_DELAY_SECONDS
+              value: "{{ .Values.senzing.sqsInfoQueueDelaySeconds }}"
             {{- end }}
             {{- if .Values.senzing.sqsInfoQueueUrl }}
             - name: SENZING_SQS_INFO_QUEUE_URL
@@ -284,13 +344,17 @@ spec:
             - name: SENZING_SQS_WAIT_TIME_SECONDS
               value: "{{ .Values.senzing.sqsWaitTimeSeconds }}"
             {{- end }}
-            {{- if .Values.senzing.supportPath }}
-            - name: SENZING_SUPPORT_PATH
-              value: "{{ .Values.senzing.supportPath }}"
+            {{- if .Values.senzing.streamLoaderDirectiveName }}
+            - name: SENZING_STREAM_LOADER_DIRECTIVE_NAME
+              value: "{{ .Values.senzing.streamLoaderDirectiveName }}"
             {{- end }}
             {{- if .Values.senzing.subcommand }}
             - name: SENZING_SUBCOMMAND
               value: "{{ .Values.senzing.subcommand }}"
+            {{- end }}
+            {{- if .Values.senzing.supportPath }}
+            - name: SENZING_SUPPORT_PATH
+              value: "{{ .Values.senzing.supportPath }}"
             {{- end }}
             {{- if .Values.senzing.threadsPerProcess }}
             - name: SENZING_THREADS_PER_PROCESS
@@ -314,9 +378,16 @@ spec:
             - name: senzing-storage
               mountPath: /var/opt/senzing
               subPath: senzing-var
+            {{- if .Values.senzing.mountOptIbm }}
             - name: senzing-storage
               mountPath: /opt/IBM
               subPath: senzing-db2-drivers
+            {{- end }}
+            {{- if .Values.senzing.mountOptMicrosoft }}
+            - name: senzing-storage
+              mountPath: /opt/microsoft
+              subPath: opt-microsoft
+            {{- end }}
           {{- end }}
       {{- if .Values.rbacEnabled}}
       serviceAccountName: {{ template "senzing-stream-loader.fullname" . }}

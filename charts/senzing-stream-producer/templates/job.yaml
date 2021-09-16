@@ -35,9 +35,9 @@ spec:
             - name: AWS_SESSION_TOKEN
               value: "{{ .Values.senzing.awsSessionToken }}"
             {{- end }}
-            {{- if .Values.senzing.azureQueueConnectionString }}
+            {{- if .Values.senzing.azureConnectionString }}
             - name: SENZING_AZURE_CONNECTION_STRING
-              value: "{{ .Values.senzing.azureQueueConnectionString }}"
+              value: "{{ .Values.senzing.azureConnectionString }}"
             {{- end }}
             {{- if .Values.senzing.azureQueueName }}
             - name: SENZING_AZURE_QUEUE_NAME

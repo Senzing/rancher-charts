@@ -13,6 +13,25 @@ The command being run:
 
 ```console
 python stream-loader.py {{ .Values.senzing.subcommand -}}
+
+  {{- if .Values.senzing.azureConnectionString }} \
+  --azure-connection-string "{{ .Values.senzing.azureConnectionString }}"
+  {{- end }}
+  {{- if .Values.senzing.azureFailureConnectionString }} \
+  --azure-failure-connection-string "{{ .Values.senzing.azureFailureConnectionString }}"
+  {{- end }}
+  {{- if .Values.senzing.azureFailureQueueName }} \
+  --azure-failure-queue-name "{{ .Values.senzing.azureFailureQueueName }}"
+  {{- end }}
+  {{- if .Values.senzing.azureInfoConnectionString }} \
+  --azure-info-connection-string "{{ .Values.senzing.azureInfoConnectionString }}"
+  {{- end }}
+  {{- if .Values.senzing.azureInfoQueueName }} \
+  --azure-info-queue-name "{{ .Values.senzing.azureInfoQueueName }}"
+  {{- end }}
+  {{- if .Values.senzing.azureQueueName }} \
+  --azure-queue-name "{{ .Values.senzing.azureQueueName }}"
+  {{- end }}
   {{- if .Values.senzing.configPath }} \
   --config-path "{{ .Values.senzing.configPath }}"
   {{- end }}
@@ -30,6 +49,9 @@ python stream-loader.py {{ .Values.senzing.subcommand -}}
   {{- end }}
   {{- if .Values.senzing.delayInSeconds }} \
   --delay-in-seconds "{{ .Values.senzing.delayInSeconds }}"
+  {{- end }}
+  {{- if .Values.senzing.delayRandomized }} \
+  --delay-randomized "{{ .Values.senzing.delayRandomized }}"
   {{- end }}
   {{- if .Values.senzing.engineConfigurationJson }} \
   --engine-configuration-json "{{ .Values.senzing.engineConfigurationJson }}"
@@ -73,6 +95,9 @@ python stream-loader.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.kafkaTopic }} \
   --kafka-topic "{{ .Values.senzing.kafkaTopic }}"
   {{- end }}
+  {{- if .Values.senzing.logLevel }} \
+  --log-level "{{ .Values.senzing.logLevel }}"
+  {{- end }}
   {{- if .Values.senzing.logLicensePeriodInSeconds }} \
   --log-license-period-in-seconds "{{ .Values.senzing.logLicensePeriodInSeconds }}"
   {{- end }}
@@ -81,6 +106,9 @@ python stream-loader.py {{ .Values.senzing.subcommand -}}
   {{- end }}
   {{- if .Values.senzing.primeEngine }} \
   --prime-engine {{ .Values.senzing.primeEngine }}
+  {{- end }}
+  {{- if .Values.senzing.queueMax }} \
+  --queue-max {{ .Values.senzing.queueMax }}
   {{- end }}
   {{- if .Values.senzing.rabbitmqExchange }} \
   --rabbitmq-exchange "{{ .Values.senzing.rabbitmqExchange }}"
@@ -105,6 +133,9 @@ python stream-loader.py {{ .Values.senzing.subcommand -}}
   {{- end }}
   {{- if .Values.senzing.rabbitmqFailureUsername }} \
   --rabbitmq-failure-username "{{ .Values.senzing.rabbitmqFailureUsername }}"
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqFailureVirtualHost }} \
+  --rabbitmq-failure-virtual-host "{{ .Values.senzing.rabbitmqFailureVirtualHost }}"
   {{- end }}
   {{- if .Values.senzing.rabbitmqHeartbeatInSeconds }} \
   --rabbitmq-heartbeat-in-seconds "{{ .Values.senzing.rabbitmqHeartbeatInSeconds }}"
@@ -133,6 +164,9 @@ python stream-loader.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.rabbitmqInfoUsername }} \
   --rabbitmq-info-username "{{ .Values.senzing.rabbitmqInfoUsername }}"
   {{- end }}
+  {{- if .Values.senzing.rabbitmqInfoVirtualHost }} \
+  --rabbitmq-info-virtual-host "{{ .Values.senzing.rabbitmqInfoVirtualHost }}"
+  {{- end }}
   {{- if .Values.senzing.rabbitmqPassword }} \
   --rabbitmq-password "{{ .Values.senzing.rabbitmqPassword }}"
   {{- end }}
@@ -142,8 +176,14 @@ python stream-loader.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.rabbitmqPrefetchCount }} \
   --rabbitmq-prefetch-count "{{ .Values.senzing.rabbitmqPrefetchCount }}"
   {{- end }}
-  {{- if .Values.senzing.rabbitmqQueue }}
+  {{- if .Values.senzing.rabbitmqQueue }} \
   --rabbitmq-queue "{{ .Values.senzing.rabbitmqQueue }}"
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqReconnectDelayInSeconds }} \
+  --rabbitmq-reconnect-delay-in-seconds "{{ .Values.senzing.rabbitmqReconnectDelayInSeconds }}"
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqReconnectNumberOfRetries }} \
+  --rabbitmq-reconnect-number-of-retries "{{ .Values.senzing.rabbitmqReconnectNumberOfRetries }}"
   {{- end }}
   {{- if .Values.senzing.rabbitmqUseExistingEntities }} \
   --rabbitmq-use-existing-entities "{{ .Values.senzing.rabbitmqUseExistingEntities }}"
@@ -151,20 +191,29 @@ python stream-loader.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.rabbitmqUsername }} \
   --rabbitmq-username "{{ .Values.senzing.rabbitmqUsername }}"
   {{- end }}
+  {{- if .Values.senzing.rabbitmqVirtualHost }} \
+  --rabbitmq-virtual-host "{{ .Values.senzing.rabbitmqVirtualHost }}"
+  {{- end }}
   {{- if .Values.senzing.resourcePath }} \
   --resource-path "{{ .Values.senzing.resourcePath }}"
   {{- end }}
   {{- if .Values.senzing.skipDatabasePerformanceTest }} \
   --skip-database-performance-test "{{ .Values.senzing.skipDatabasePerformanceTest }}"
   {{- end }}
+  {{- if .Values.senzing.skipGovernor }} \
+  --skip-governor "{{ .Values.senzing.skipGovernor }}"
+  {{- end }}
+  {{- if .Values.senzing.skipInfoFilter }} \
+  --skip-info-filter "{{ .Values.senzing.skipInfoFilter }}"
+  {{- end }}
   {{- if .Values.senzing.sleepTimeInSeconds }} \
   --sleep-time-in-seconds "{{ .Values.senzing.sleepTimeInSeconds }}"
   {{- end }}
-  {{- if .Values.senzing.sqsDeadLetterQueueEnabled }} \
-  --sqs-dead-letter-queue-enabled "{{ .Values.senzing.sqsDeadLetterQueueEnabled }}"
-  {{- end }}
   {{- if .Values.senzing.sqsFailureQueueUrl }} \
   --sqs-failure-queue-url "{{ .Values.senzing.sqsFailureQueueUrl }}"
+  {{- end }}
+  {{- if .Values.senzing.sqsInfoQueueDelaySeconds }} \
+  --sqs-info-queue-delay-seconds "{{ .Values.senzing.sqsInfoQueueDelaySeconds }}"
   {{- end }}
   {{- if .Values.senzing.sqsInfoQueueUrl }} \
   --sqs-info-queue-url "{{ .Values.senzing.sqsInfoQueueUrl }}"
@@ -174,6 +223,9 @@ python stream-loader.py {{ .Values.senzing.subcommand -}}
   {{- end }}
   {{- if .Values.senzing.sqsWaitTimeSeconds }} \
   --sqs-wait-time-seconds "{{ .Values.senzing.sqsWaitTimeSeconds }}"
+  {{- end }}
+  {{- if .Values.senzing.streamLoaderDirectiveName }} \
+  --stream-loader-directive-name "{{ .Values.senzing.streamLoaderDirectiveName }}"
   {{- end }}
   {{- if .Values.senzing.supportPath }} \
   --support-path "{{ .Values.senzing.supportPath }}"
