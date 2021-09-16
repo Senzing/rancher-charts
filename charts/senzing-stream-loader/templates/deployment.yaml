@@ -27,6 +27,18 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           env:
+            {{- if .Values.senzing.mountOptIbm }}
+            - name: LD_LIBRARY_PATH
+              value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/IBM/db2/clidriver/lib
+            {{- end }}
+            {{- if .Values.senzing.mountOptMicrosoft }}
+            - name: LD_LIBRARY_PATH
+              value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/microsoft/msodbcsql17/lib64
+            - name: ODBCINI
+              value: /opt/microsoft/msodbcsql17/etc/odbc.ini
+            - name: ODBCSYSINI
+              value: /opt/microsoft/msodbcsql17/etc
+            {{- end }}
             {{- if .Values.senzing.awsAccessKeyId }}
             - name: AWS_ACCESS_KEY_ID
               value: "{{ .Values.senzing.awsAccessKeyId }}"
