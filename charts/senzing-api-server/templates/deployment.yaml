@@ -79,6 +79,10 @@ spec:
             - name: SENZING_API_SERVER_INIT_JSON
               value: >-
               {{ .Values.senzing.engineConfigurationJson  | nindent 16 }}
+            {{- else if .Values.senzing.initJson }}
+            - name: SENZING_API_SERVER_INIT_JSON
+              value: >-
+              {{ .Values.senzing.initJson  | nindent 16 }}
             {{- end }}
             {{- if .Values.senzing.iniFile }}
             - name: SENZING_API_SERVER_INI_FILE
