@@ -6,13 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.3.0] - 2021-09-07
+## [1.3.0] - 2021-09-17
 
 ### Added in 1.3.0
 
 1. Add support for:
    - `senzing.azureQueueConnectionString`
    - `senzing.azureQueueName`
+   - `senzing.mountOptMicrosoft`
 
 ## [1.2.0] - 2021-05-05
 
