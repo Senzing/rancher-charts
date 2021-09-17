@@ -75,6 +75,8 @@ senzing:
   logLevel: ""
   logLicensePeriodInSeconds: ""
   monitoringPeriodInSeconds: ""
+  mountOptIbm: false
+  mountOptMicrosoft: false
   persistentVolumeClaim: senzing-persistent-volume-claim
   primeEngine: ""
   queueMax: ""

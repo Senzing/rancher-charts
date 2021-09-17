@@ -27,6 +27,18 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           env:
+            {{- if .Values.senzing.mountOptIbm }}
+            - name: LD_LIBRARY_PATH
+              value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/IBM/db2/clidriver/lib
+            {{- end }}
+            {{- if .Values.senzing.mountOptMicrosoft }}
+            - name: LD_LIBRARY_PATH
+              value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/microsoft/msodbcsql17/lib64
+            - name: ODBCINI
+              value: /opt/microsoft/msodbcsql17/etc/odbc.ini
+            - name: ODBCSYSINI
+              value: /opt/microsoft/msodbcsql17/etc
+            {{- end }}
             {{- if .Values.senzing.allowedOrigins }}
             - name: SENZING_API_SERVER_ALLOWED_ORIGINS
               value: {{ .Values.senzing.allowedOrigins | quote }}
@@ -63,7 +75,11 @@ spec:
             - name: SENZING_API_SERVER_INIT_FILE
               value: {{ .Values.senzing.initFile | quote }}
             {{- end }}
-            {{- if .Values.senzing.initJson }}
+            {{- if .Values.senzing.engineConfigurationJson }}
+            - name: SENZING_API_SERVER_INIT_JSON
+              value: >-
+              {{ .Values.senzing.engineConfigurationJson  | nindent 16 }}
+            {{- else if .Values.senzing.initJson }}
             - name: SENZING_API_SERVER_INIT_JSON
               value: >-
               {{ .Values.senzing.initJson  | nindent 16 }}
@@ -117,6 +133,11 @@ spec:
             {{- if .Values.senzing.azureQueueName }}
             - name: SENZING_AZURE_QUEUE_NAME
               value: "{{ .Values.senzing.azureQueueName }}"
+            {{- end }}
+            {{- if .Values.senzing.engineConfigurationJson }}
+            - name: SENZING_ENGINE_CONFIGURATION_JSON
+              value: >-
+              {{ .Values.senzing.engineConfigurationJson  | nindent 16 }}
             {{- end }}
             {{- if .Values.senzing.kafkaBootstrapServer }}
             - name: SENZING_KAFKA_BOOTSTRAP_SERVER
@@ -216,9 +237,16 @@ spec:
             - name: senzing-storage
               mountPath: /var/opt/senzing
               subPath: senzing-var
+            {{- if .Values.senzing.mountOptIbm }}
             - name: senzing-storage
               mountPath: /opt/IBM
               subPath: senzing-db2-drivers
+            {{- end }}
+            {{- if .Values.senzing.mountOptMicrosoft }}
+            - name: senzing-storage
+              mountPath: /opt/microsoft
+              subPath: opt-microsoft
+            {{- end }}
           {{- end }}
           workingDir: /app
       {{- if .Values.rbacEnabled}}
