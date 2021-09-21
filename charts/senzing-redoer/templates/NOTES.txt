@@ -12,6 +12,24 @@ The command being run:
 
 ```console
 python3 redoer.py {{ .Values.senzing.subcommand -}}
+  {{- if .Values.senzing.azureConnectionString }} \
+  --azure-connection-string {{ .Values.senzing.azureConnectionString }}
+  {{- end }}
+  {{- if .Values.senzing.azureFailureConnectionString }} \
+  --azure-failure-connection-string {{ .Values.senzing.azureFailureConnectionString }}
+  {{- end }}
+  {{- if .Values.senzing.azureFailureQueueName }} \
+  --azure-failure-queue-name {{ .Values.senzing.azureFailureQueueName }}
+  {{- end }}
+    {{- if .Values.senzing.azureInfoConnectionString }} \
+  --azure-info-connection-string {{ .Values.senzing.azureInfoConnectionString }}
+  {{- end }}
+  {{- if .Values.senzing.azureInfoQueueName }} \
+  --azure-info-queue-name {{ .Values.senzing.azureInfoQueueName }}
+  {{- end }}
+  {{- if .Values.senzing.azureQueueName }} \
+  --azure-queue-name {{ .Values.senzing.azureQueueName }}
+  {{- end }}
   {{- if .Values.senzing.configPath }} \
   --config-path {{ .Values.senzing.configPath }}
   {{- end }}
@@ -21,8 +39,20 @@ python3 redoer.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.debug }} \
   --debug {{ .Values.senzing.debug }}
   {{- end }}
+  {{- if .Values.senzing.delayInSeconds }} \
+  --delay-in-seconds {{ .Values.senzing.delayInSeconds }}
+  {{- end }}
   {{- if .Values.senzing.engineConfigurationJson }} \
   --engine-configuration-json {{ .Values.senzing.engineConfigurationJson }}
+  {{- end }}
+  {{- if .Values.senzing.entrypointSleep }} \
+  --entrypoint-sleep {{ .Values.senzing.entrypointSleep }}
+  {{- end }}
+  {{- if .Values.senzing.exitOnThreadTermination }} \
+  --exit-on-thread-termination {{ .Values.senzing.exitOnThreadTermination }}
+  {{- end }}
+  {{- if .Values.senzing.expirationWarningInDays }} \
+  --expiration-warning-in-days {{ .Values.senzing.expirationWarningInDays }}
   {{- end }}
   {{- if .Values.senzing.kafkaBootstrapServer }} \
   --kafka-bootstrap-server {{ .Values.senzing.kafkaBootstrapServer }}
@@ -48,6 +78,12 @@ python3 redoer.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.kafkaRedoTopic }} \
   --kafka-redo-topic {{ .Values.senzing.kafkaRedoTopic }}
   {{- end }}
+  {{- if .Values.senzing.logLevel }} \
+  --log-level {{ .Values.senzing.logLevel }}
+  {{- end }}
+  {{- if .Values.senzing.logLicensePeriodInSeconds }} \
+  --log-license-period-in-seconds {{ .Values.senzing.logLicensePeriodInSeconds }}
+  {{- end }}
   {{- if .Values.senzing.monitoringPeriodInSeconds }} \
   --monitoring-period-in-seconds {{ .Values.senzing.monitoringPeriodInSeconds }}
   {{- end }}
@@ -56,6 +92,12 @@ python3 redoer.py {{ .Values.senzing.subcommand -}}
   {{- end }}
   {{- if .Values.senzing.rabbitmqDeliveryMode }} \
   --rabbitmq-delivery-mode {{ .Values.senzing.rabbitmqDeliveryMode }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqExchange }} \
+  --rabbitmq-exchange {{ .Values.senzing.rabbitmqExchange }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqFailureExchange }} \
+  --rabbitmq-failure-exchange {{ .Values.senzing.rabbitmqFailureExchange }}
   {{- end }}
   {{- if .Values.senzing.rabbitmqFailureHost }} \
   --rabbitmq-failure-host {{ .Values.senzing.rabbitmqFailureHost }}
@@ -66,11 +108,23 @@ python3 redoer.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.rabbitmqFailureQueue }} \
   --rabbitmq-failure-queue {{ .Values.senzing.rabbitmqFailureQueue }}
   {{- end }}
+  {{- if .Values.senzing.rabbitmqFailureRoutingKey }} \
+  --rabbitmq-failure-routing-key {{ .Values.senzing.rabbitmqFailureRoutingKey }}
+  {{- end }}
   {{- if .Values.senzing.rabbitmqFailureUsername }} \
   --rabbitmq-failure-username {{ .Values.senzing.rabbitmqFailureUsername }}
   {{- end }}
+  {{- if .Values.senzing.rabbitmqFailureVirtualHost }} \
+  --rabbitmq-failure-virtual-host {{ .Values.senzing.rabbitmqFailureVirtualHost }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqHearbeatInSeconds }} \
+  --rabbitmq-heartbeat-in-seconds {{ .Values.senzing.rabbitmqHearbeatInSeconds }}
+  {{- end }}
   {{- if .Values.senzing.rabbitmqHost }} \
   --rabbitmq-host {{ .Values.senzing.rabbitmqHost }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqInfoExchange }} \
+  --rabbitmq-info-exchange {{ .Values.senzing.rabbitmqInfoExchange }}
   {{- end }}
   {{- if .Values.senzing.rabbitmqInfoHost }} \
   --rabbitmq-info-host {{ .Values.senzing.rabbitmqInfoHost }}
@@ -81,14 +135,26 @@ python3 redoer.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.rabbitmqInfoQueue }} \
   --rabbitmq-info-queue {{ .Values.senzing.rabbitmqInfoQueue }}
   {{- end }}
+  {{- if .Values.senzing.rabbitmqInfoRoutingKey }} \
+  --rabbitmq-info-routing-key {{ .Values.senzing.rabbitmqInfoRoutingKey }}
+  {{- end }}
   {{- if .Values.senzing.rabbitmqInfoUsername }} \
   --rabbitmq-info-username {{ .Values.senzing.rabbitmqInfoUsername }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqInfoVirtualHost }} \
+  --rabbitmq-info-virtual-host {{ .Values.senzing.rabbitmqInfoVirtualHost }}
   {{- end }}
   {{- if .Values.senzing.rabbitmqPassword }} \
   --rabbitmq-password {{ .Values.senzing.rabbitmqPassword }}
   {{- end }}
   {{- if .Values.senzing.rabbitmqPrefetchCount }} \
   --rabbitmq-prefetch-count {{ .Values.senzing.rabbitmqPrefetchCount }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqReconnectDelayInSeconds }} \
+  --rabbitmq-reconnect-delay-in-seconds {{ .Values.senzing.rabbitmqReconnectDelayInSeconds }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqRedoExchange }} \
+  --rabbitmq-redo-exchange {{ .Values.senzing.rabbitmqRedoExchange }}
   {{- end }}
   {{- if .Values.senzing.rabbitmqRedoHost }} \
   --rabbitmq-redo-host {{ .Values.senzing.rabbitmqRedoHost }}
@@ -99,15 +165,51 @@ python3 redoer.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.rabbitmqRedoQueue }} \
   --rabbitmq-redo-queue {{ .Values.senzing.rabbitmqRedoQueue }}
   {{- end }}
+  {{- if .Values.senzing.rabbitmqRedoRoutingKey }} \
+  --rabbitmq-redo-routing-key {{ .Values.senzing.rabbitmqRedoRoutingKey }}
+  {{- end }}
   {{- if .Values.senzing.rabbitmqRedoUsername }} \
   --rabbitmq-redo-username {{ .Values.senzing.rabbitmqRedoUsername }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqRedoVirtualHost }} \
+  --rabbitmq-redo-virtual-host {{ .Values.senzing.rabbitmqRedoVirtualHost }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqUseExistingEntities }} \
+  --rabbitmq-use-existing-entities {{ .Values.senzing.rabbitmqUseExistingEntities }}
   {{- end }}
   {{- if .Values.senzing.rabbitmqUsername }} \
   --rabbitmq-username {{ .Values.senzing.rabbitmqUsername }}
   {{- end }}
+  {{- if .Values.senzing.rabbitmqVirtualHost }} \
+  --rabbitmq-virtual-host {{ .Values.senzing.rabbitmqVirtualHost }}
+  {{- end }}
+  {{- if .Values.senzing.redoRetryLimit }} \
+  --redo-retry-limit {{ .Values.senzing.redoRetryLimit }}
+  {{- end }}
+  {{- if .Values.senzing.redoRetrySleepTimeInSeconds }} \
+  --redo-retry-sleep-time-in-seconds {{ .Values.senzing.redoRetrySleepTimeInSeconds }}
+  {{- end }}
   {{- if .Values.senzing.redoSleepTimeInSeconds }} \
   --redo-sleep-time-in-seconds {{ .Values.senzing.redoSleepTimeInSeconds }}
-    {{- end }}
+  {{- end }}
+  {{- if .Values.senzing.resourcePath }} \
+  --resource-path {{ .Values.senzing.resourcePath }}
+  {{- end }}
+  {{- if .Values.senzing.sleepTimeInSeconds }} \
+  --sleep-time-in-seconds {{ .Values.senzing.sleepTimeInSeconds }}
+  {{- end }}
+  {{- if .Values.senzing.sqsFailureQueueUrl }} \
+  --sqs-failure-queue-url {{ .Values.senzing.sqsFailureQueueUrl }}
+  {{- end }}
+  {{- if .Values.senzing.sqsInfoQueueUrl }} \
+  --sqs-info-queue-url {{ .Values.senzing.sqsInfoQueueUrl }}
+  {{- end }}
+  {{- if .Values.senzing.sqsRedoQueueUrl }} \
+  --sqs-redo-queue-url {{ .Values.senzing.sqsRedoQueueUrl }}
+  {{- end }}
+  {{- if .Values.senzing.sqsRedoQueueUrl }} \
+  --support-path {{ .Values.senzing.sqsRedoQueueUrl }}
+  {{- end }}
   {{- if .Values.senzing.threadsPerProcess }} \
   --threads-per-process {{ .Values.senzing.threadsPerProcess }}
   {{- end }}
