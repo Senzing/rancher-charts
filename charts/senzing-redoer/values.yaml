@@ -39,6 +39,10 @@ securityContext:
 
 senzing:
   azureConnectionString: ""
+  azureFailureConnectionString: ""
+  azureFailureQueueName: ""
+  azureInfoConnectionString: ""
+  azureInfoQueueName: ""
   azureQueueName: ""
   configPath: ""
   databaseUrl: ""

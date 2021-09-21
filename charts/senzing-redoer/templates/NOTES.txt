@@ -15,6 +15,18 @@ python3 redoer.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.azureConnectionString }} \
   --azure-connection-string {{ .Values.senzing.azureConnectionString }}
   {{- end }}
+  {{- if .Values.senzing.azureFailureConnectionString }} \
+  --azure-failure-connection-string {{ .Values.senzing.azureFailureConnectionString }}
+  {{- end }}
+  {{- if .Values.senzing.azureFailureQueueName }} \
+  --azure-failure-queue-name {{ .Values.senzing.azureFailureQueueName }}
+  {{- end }}
+    {{- if .Values.senzing.azureInfoConnectionString }} \
+  --azure-info-connection-string {{ .Values.senzing.azureInfoConnectionString }}
+  {{- end }}
+  {{- if .Values.senzing.azureInfoQueueName }} \
+  --azure-info-queue-name {{ .Values.senzing.azureInfoQueueName }}
+  {{- end }}
   {{- if .Values.senzing.azureQueueName }} \
   --azure-queue-name {{ .Values.senzing.azureQueueName }}
   {{- end }}

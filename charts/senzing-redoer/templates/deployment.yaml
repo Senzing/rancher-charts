@@ -43,6 +43,22 @@ spec:
             - name: SENZING_AZURE_CONNECTION_STRING
               value: "{{ .Values.senzing.azureConnectionString }}"
             {{- end }}
+            {{- if .Values.senzing.azureFailureConnectionString }}
+            - name: SENZING_AZURE_FAILURE_CONNECTION_STRING
+              value: "{{ .Values.senzing.azureFailureConnectionString }}"
+            {{- end }}
+            {{- if .Values.senzing.azureFailureQueueName }}
+            - name: SENZING_AZURE_FAILURE_QUEUE_NAME
+              value: "{{ .Values.senzing.azureFailureQueueName }}"
+            {{- end }}
+            {{- if .Values.senzing.azureInfoConnectionString }}
+            - name: SENZING_AZURE_INFO_CONNECTION_STRING
+              value: "{{ .Values.senzing.azureInfoConnectionString }}"
+            {{- end }}
+            {{- if .Values.senzing.azureInfoQueueName }}
+            - name: SENZING_AZURE_INFO_QUEUE_NAME
+              value: "{{ .Values.senzing.azureInfoQueueName }}"
+            {{- end }}
             {{- if .Values.senzing.azureQueueName }}
             - name: SENZING_AZURE_QUEUE_NAME
               value: "{{ .Values.senzing.azureQueueName }}"
