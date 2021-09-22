@@ -38,7 +38,7 @@ securityContext:
   fsGroup: 1001
 
 senzing:
-  persistentVolumeClaim: senzing-persistent-volume-claim
+  persistentVolumeClaim: ""
   subcommand: service
 
 service:

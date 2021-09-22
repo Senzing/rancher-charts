@@ -39,7 +39,7 @@ securityContext:
 
 senzing:
   apiServerUrl: kafka
-  persistentVolumeClaim: senzing-persistent-volume-claim
+  persistentVolumeClaim: ""
   webServerPort: 8081
 
 service:

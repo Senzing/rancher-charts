@@ -77,7 +77,7 @@ senzing:
   monitoringPeriodInSeconds: ""
   mountOptIbm: false
   mountOptMicrosoft: false
-  persistentVolumeClaim: senzing-persistent-volume-claim
+  persistentVolumeClaim: ""
   primeEngine: ""
   queueMax: ""
   rabbitmqExchange: ""

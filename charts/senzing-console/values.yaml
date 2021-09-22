@@ -42,7 +42,7 @@ senzing:
   debug: 0
   mountOptIbm: false
   mountOptMicrosoft: false
-  persistentVolumeClaim: senzing-persistent-volume-claim
+  persistentVolumeClaim: ""
 
 service:
   port: 80

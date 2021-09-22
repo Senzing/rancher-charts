@@ -1,7 +1,7 @@
 affinity: {}
 
 db2:
-  optSenzingStorageClaim: "senzing-persistent-volume-claim"
+  optSenzingStorageClaim: ""
   password: "db2inst1"
 
 fullnameOverride: ""

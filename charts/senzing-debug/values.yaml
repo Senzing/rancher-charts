@@ -40,7 +40,7 @@ securityContext:
 
 senzing:
   debug: 0
-  persistentVolumeClaim: senzing-persistent-volume-claim
+  persistentVolumeClaim: ""
 
 service:
   port: 80

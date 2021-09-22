@@ -14,7 +14,9 @@ The commands being run:
 {{- if .Values.senzing.acceptEula }} \
 export SENZING_ACCEPT_EULA={{ .Values.senzing.acceptEula }}
 {{- end }}
-
+{{- if .Values.mssql.acceptEula }} \
+export ACCEPT_EULA={{ .Values.mssql.acceptEula }}
+{{- end }}
 {{- if .Values.senzing.aptParameters }}
 apt {{ range .Values.senzing.aptParameters }}{{.}} {{ end }}
 {{- else }}
@@ -23,10 +25,18 @@ apt -y install senzing
 ```
 
 ## End User License Agreement
+
 {{ if contains "I_ACCEPT_THE_SENZING_EULA" .Values.senzing.acceptEula }}
 Senzing End User License Agreement (EULA) has been accepted.
 {{ else }}
 The Senzing End User License Agreement (EULA) has not been accepted.
 If the apt command tries to install Senzing, it will not perform the installation.
-For more information, see (FIXME:).
+For more information, see http://hub.senzing.com/knowledge-base/lists/environment-variables#senzing_accept_eula.
+{{- end }}
+
+## MS SQL Driver End User License Agreement
+
+{{ if contains "Y" .Values.mssql.acceptEula }}
+Microsoft ODBC Driver 17 for SQL Server End User License Agreement (EULA)
+has been accepted.
 {{- end }}
