@@ -22,11 +22,29 @@ python resolver.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.debug }} \
   --debug
   {{- end }}
+  {{- if .Values.senzing.engineConfigurationJson }} \
+  --engine-configuration-json "{{ .Values.senzing.engineConfigurationJson }}"
+  {{- end }}
   {{- if .Values.senzing.entityType }} \
   --entity-type "{{ .Values.senzing.entityType }}"
   {{- end }}
-  {{- if .Values.senzing.senzingDir }} \
-  --senzing-dir {{ .Values.senzing.senzingDir }}
+  {{- if .Values.senzing.internalDatabase }} \
+  --internal-database "{{ .Values.senzing.internalDatabase }}"
+  {{- end }}
+  {{- if .Values.senzing.host }} \
+  --host "{{ .Values.senzing.host }}"
+  {{- end }}
+  {{- if .Values.senzing.inputFile }} \
+  --input-file "{{ .Values.senzing.inputFile }}"
+  {{- end }}
+  {{- if .Values.senzing.logLevel }} \
+  --log-level "{{ .Values.senzing.logLevel }}"
+  {{- end }}
+  {{- if .Values.senzing.outputFile }} \
+  --output-file "{{ .Values.senzing.outputFile }}"
+  {{- end }}
+  {{- if .Values.senzing.port }} \
+  --port "{{ .Values.senzing.port }}"
   {{- end }}
   {{- if .Values.senzing.sleepTimeInSeconds }} \
   --sleep-time-in-seconds {{ .Values.senzing.sleepTimeInSeconds }}
