@@ -46,7 +46,6 @@ senzing:
   authServerPort: ""
   authServerSsopathRewrite: ""
   authServerWriteConfigToFile: ""
-  persistentVolumeClaim: ""
   webServerAdminAuthMode: ""
   webServerAdminAuthPath: ""
   webServerAdminAuthRedirect: ""

@@ -135,33 +135,12 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 8081
+              containerPort: "{{ .Values.senzing.webServerPort }}"
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- if .Values.senzing.persistentVolumeClaim }}
-          volumeMounts:
-            - name: senzing-storage
-              mountPath: /opt/senzing/data
-              subPath: senzing-data/2.0.0
-            - name: senzing-storage
-              mountPath: /etc/opt/senzing
-              subPath: senzing-etc
-            - name: senzing-storage
-              mountPath: /opt/senzing/g2
-              subPath: senzing-g2
-            - name: senzing-storage
-              mountPath: /var/opt/senzing
-              subPath: senzing-var
-          {{- end }}
       {{- if .Values.rbacEnabled}}
       serviceAccountName: {{ template "senzing-entity-search-web-app.fullname" . }}
-      {{- end }}
-      {{- if .Values.senzing.persistentVolumeClaim }}
-      volumes:
-        - name: senzing-storage
-          persistentVolumeClaim:
-            claimName: {{ .Values.senzing.persistentVolumeClaim }}
       {{- end }}
 # --- Standard suffix ---
       {{- with .Values.affinity }}

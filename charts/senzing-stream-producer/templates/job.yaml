@@ -43,6 +43,14 @@ spec:
             - name: SENZING_AZURE_QUEUE_NAME
               value: "{{ .Values.senzing.azureQueueName }}"
             {{- end }}
+            {{- if .Values.senzing.csvDelimiter }}
+            - name: SENZING_CSV_DELIMITER
+              value: "{{ .Values.senzing.csvDelimiter }}"
+            {{- end }}
+            {{- if .Values.senzing.csvRowsInChunk }}
+            - name: SENZING_CSV_ROWS_IN_CHUNK
+              value: "{{ .Values.senzing.csvRowsInChunk }}"
+            {{- end }}
             {{- if .Values.senzing.debug }}
             - name: SENZING_DEBUG
               value: "{{ .Values.senzing.debug }}"
@@ -67,13 +75,17 @@ spec:
             - name: SENZING_KAFKA_BOOTSTRAP_SERVER
               value: "{{ .Values.senzing.kafkaBootstrapServerHost }}:{{ .Values.senzing.kafkaBootstrapServerPort }}"
             {{- end }}
-            {{- if .Values.senzing.kafkaTopic }}
-            - name: SENZING_KAFKA_TOPIC
-              value: "{{ .Values.senzing.kafkaTopic }}"
+            {{- if .Values.senzing.kafkaGroup }}
+            - name: SENZING_KAFKA_GROUP
+              value: "{{ .Values.senzing.kafkaGroup }}"
             {{- end }}
             {{- if .Values.senzing.kafkaPollInterval }}
             - name: SENZING_KAFKA_POLL_INTERVAL
               value: "{{ .Values.senzing.kafkaPollInterval }}"
+            {{- end }}
+            {{- if .Values.senzing.kafkaTopic }}
+            - name: SENZING_KAFKA_TOPIC
+              value: "{{ .Values.senzing.kafkaTopic }}"
             {{- end }}
             {{- if .Values.senzing.monitoringPeriodInSeconds }}
             - name: SENZING_MONITORING_PERIOD_IN_SECONDS
@@ -115,9 +127,17 @@ spec:
             - name: SENZING_RABBITMQ_USE_EXISTING_ENTITIES
               value: "{{ .Values.senzing.rabbitmqUseExistingEntities }}"
             {{- end }}
+            {{- if .Values.senzing.rabbitmqVirtualHost }}
+            - name: SENZING_RABBITMQ_VIRTUAL_HOST
+              value: "{{ .Values.senzing.rabbitmqVirtualHost }}"
+            {{- end }}
             {{- if .Values.senzing.readQueueMaxSize }}
             - name: SENZING_READ_QUEUE_MAXSIZE
               value: "{{ .Values.senzing.readQueueMaxSize }}"
+            {{- end }}
+            {{- if .Values.senzing.recordIdentifier }}
+            - name: SENZING_RECORD_IDENTIFIER
+              value: "{{ .Values.senzing.recordIdentifier }}"
             {{- end }}
             {{- if .Values.senzing.recordMax }}
             - name: SENZING_RECORD_MAX
@@ -130,6 +150,14 @@ spec:
             {{- if .Values.senzing.recordMonitor }}
             - name: SENZING_RECORD_MONITOR
               value: "{{ .Values.senzing.recordMonitor }}"
+            {{- end }}
+            {{- if .Values.senzing.recordsPerMessage }}
+            - name: SENZING_RECORDS_PER_MESSAGE
+              value: "{{ .Values.senzing.recordsPerMessage }}"
+            {{- end }}
+            {{- if .Values.senzing.recordSizeMax }}
+            - name: SENZING_RECORD_SIZE_MAX
+              value: "{{ .Values.senzing.recordSizeMax }}"
             {{- end }}
             {{- if .Values.senzing.sleepTimeInSeconds }}
             - name: SENZING_SLEEP_TIME_IN_SECONDS
@@ -147,9 +175,9 @@ spec:
             - name: SENZING_SUBCOMMAND
               value: "{{ .Values.senzing.subcommand }}"
             {{- end }}
-            {{- if .Values.senzing.threadsPerUnit }}
-            - name: SENZING_THREADS_PER_UNIT
-              value: "{{ .Values.senzing.threadsPerUnit }}"
+            {{- if .Values.senzing.threadsPerPrint }}
+            - name: SENZING_THREADS_PER_PRINT
+              value: "{{ .Values.senzing.threadsPerPrint }}"
             {{- end }}
       restartPolicy: Never
       {{- if .Values.rbacEnabled}}
