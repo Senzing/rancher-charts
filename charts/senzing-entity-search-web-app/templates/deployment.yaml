@@ -29,7 +29,7 @@ spec:
           env:
             {{- if .Values.senzing.apiServerUrl }}
             - name: SENZING_API_SERVER_URL
-              value: "{{ .Values.senzing.apiServerUrl}}"
+              value: "{{ .Values.senzing.apiServerUrl }}"
             {{- end }}
             {{- if .Values.senzing.authServerAdminJwpathRewrite }}
             - name: SENZING_AUTH_SERVER_ADMIN_JWTPATH_REWRITE

@@ -39,6 +39,8 @@ securityContext:
   fsGroup: 1001
 
 senzing:
+  args: ""
+  engineConfigurationJson: ""
   persistentVolumeClaim: ""
 
 service:

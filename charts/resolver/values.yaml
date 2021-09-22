@@ -55,7 +55,6 @@ senzing:
   sleepTimeInSeconds: ""
   subcommand: service
 
-
 service:
   port: 8252
   targetPort: http

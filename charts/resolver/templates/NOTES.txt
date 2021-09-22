@@ -28,14 +28,14 @@ python resolver.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.entityType }} \
   --entity-type "{{ .Values.senzing.entityType }}"
   {{- end }}
-  {{- if .Values.senzing.internalDatabase }} \
-  --internal-database "{{ .Values.senzing.internalDatabase }}"
-  {{- end }}
   {{- if .Values.senzing.host }} \
   --host "{{ .Values.senzing.host }}"
   {{- end }}
   {{- if .Values.senzing.inputFile }} \
   --input-file "{{ .Values.senzing.inputFile }}"
+  {{- end }}
+  {{- if .Values.senzing.internalDatabase }} \
+  --internal-database "{{ .Values.senzing.internalDatabase }}"
   {{- end }}
   {{- if .Values.senzing.logLevel }} \
   --log-level "{{ .Values.senzing.logLevel }}"

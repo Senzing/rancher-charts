@@ -38,9 +38,33 @@ securityContext:
   fsGroup: 1001
 
 senzing:
-  apiServerUrl: kafka
+  apiServerUrl: ""
+  authServerAdminJwpathRewrite: ""
+  authServerAdminSsopathRewrite: ""
+  authServerHostname:  ""
+  authServerJwpathRewrite: ""
+  authServerPort: ""
+  authServerSsopathRewrite: ""
+  authServerWriteConfigToFile: ""
   persistentVolumeClaim: ""
+  webServerAdminAuthMode: ""
+  webServerAdminAuthPath: ""
+  webServerAdminAuthRedirect: ""
+  webServerAdminAuthStatus: ""
+  webServerAdminSecret: ""
+  webServerAdminSeed: ""
+  webServerApiPath: ""
+  webServerAuthPath: ""
+  webServerBasicAuthJson: ""
+  webServerCorsAllowedOrigin: ""
+  webServerHosname: ""
+  webServerOperatorAuthMode: ""
+  webServerOperatorAuthRedirect: ""
+  webServerOperatorAuthStatus: ""
   webServerPort: 8081
+  webServerProxyLoglevel: ""
+  webServerSslCertPath: ""
+  webServerSslKeyPath: ""
 
 service:
   port: 80
