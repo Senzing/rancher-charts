@@ -35,7 +35,14 @@ securityContext:
 
 senzing:
   acceptEula: ""
+  aptParameters: ""
+  mountOptIbm: false
   mountOptMicrosoft: false
-  persistentVolumeClaim: senzing-persistent-volume-claim
+  optMicrosoftDataClaim: ""
+  persistentVolumeClaim: ""
+  senzingDataClaim: ""
+  senzingEtcClaim: ""
+  senzingG2Claim: ""
+  senzingVarClaim: ""
 
 tolerations: []

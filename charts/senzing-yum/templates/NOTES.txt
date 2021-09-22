@@ -27,6 +27,7 @@ yum -y install senzing
 Senzing End User License Agreement (EULA) has been accepted.
 {{ else }}
 The Senzing End User License Agreement (EULA) has not been accepted.
-If the yum command tries to install Senzing, it will not perform the installation.
-For more information, see (FIXME:).
+If the apt command tries to install Senzing, it will not perform the installation.
+For more information, see http://hub.senzing.com/knowledge-base/lists/environment-variables#senzing_accept_eula.
 {{- end }}
+

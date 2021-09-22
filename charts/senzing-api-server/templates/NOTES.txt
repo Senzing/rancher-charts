@@ -15,22 +15,118 @@ The command being run:
 java -jar senzing-api-server.jar \
   -httpPort 80
   {{- if .Values.senzing.allowedOrigins }} \
-  - -allowedOrigins {{ .Values.senzing.allowedOrigins }}
+  --allowedOrigins {{ .Values.senzing.allowedOrigins }}
+  {{- end }}
+  {{- if .Values.senzing.autoRefreshPeriod }} \
+  --auto-refresh-period {{ .Values.senzing.autoRefreshPeriod }}
   {{- end }}
   {{- if .Values.senzing.bindAddr }} \
-  - -bindAddr {{ .Values.senzing.bindAddr }}
+  --bindAddr {{ .Values.senzing.bindAddr }}
+  {{- end }}
+  {{- if .Values.senzing.clientKeyStore }} \
+  --client-key-store {{ .Values.senzing.clientKeyStore }}
+  {{- end }}
+  {{- if .Values.senzing.clientKeyStorePasword }} \
+  --client-key-store-password {{ .Values.senzing.clientKeyStorePassword }}
   {{- end }}
   {{- if .Values.senzing.concurrency }} \
-  - -concurrency {{ .Values.senzing.concurrency }}
+  --concurrency {{ .Values.senzing.concurrency }}
+  {{- end }}
+  {{- if .Values.senzing.configId }} \
+  --config-id {{ .Values.senzing.configId }}
+  {{- end }}
+  {{- if .Values.senzing.debug }} \
+  --debug {{ .Values.senzing.debug }}
+  {{- end }}
+  {{- if .Values.senzing.enableAdmin }} \
+  --enable-admin {{ .Values.senzing.enableAdmin }}
+  {{- end }}
+  {{- if .Values.senzing.httpConcurrency }} \
+  --http-concurrency {{ .Values.senzing.httpConcurrency }}
+  {{- end }}
+  {{- if .Values.senzing.port }} \
+  --http-port {{ .Values.senzing.port }}
+  {{- end }}
+  {{- if .Values.senzing.securePort }} \
+  --https-port {{ .Values.senzing.securePort }}
   {{- end }}
   {{- if .Values.senzing.iniFile }} \
-  - -iniFile {{ .Values.senzing.iniFile }}
+  --ini-file {{ .Values.senzing.iniFile }}
+  {{- end }}
+  {{- if .Values.senzing.initEnvVar }} \
+  --init-env-var {{ .Values.senzing.initEnvVar }}
+  {{- end }}
+  {{- if .Values.senzing.initFile }} \
+  --init-file {{ .Values.senzing.initFile }}
+  {{- end }}
+  {{- if .Values.senzing.initJson }} \
+  --init-json {{ .Values.senzing.initJson }}
+  {{- end }}
+  {{- if .Values.senzing.kafkaInfoBootstrapServer }} \
+  --kafka-info-bootstrap-server {{ .Values.senzing.kafkaInfoBootstrapServer }}
+  {{- end }}
+  {{- if .Values.senzing.kafkaInfoGroup }} \
+  --kafka-info-group {{ .Values.senzing.kafkaInfoGroup }}
+  {{- end }}
+  {{- if .Values.senzing.kafkaInfoTopic }} \
+  --kafka-info-topic {{ .Values.senzing.kafkaInfoTopic }}
+  {{- end }}
+  {{- if .Values.senzing.keyAlias }} \
+  --key-alias {{ .Values.senzing.keyAlias }}
+  {{- end }}
+  {{- if .Values.senzing.keyStore }} \
+  --key-store {{ .Values.senzing.keyStore }}
+  {{- end }}
+  {{- if .Values.senzing.keyStorePassword }} \
+  --key-store-password {{ .Values.senzing.keyStorePassword }}
   {{- end }}
   {{- if .Values.senzing.moduleName }} \
-  - -moduleName {{ .Values.senzing.moduleName }}
+  --module-name {{ .Values.senzing.moduleName }}
   {{- end }}
   {{- if .Values.senzing.monitorFile }} \
-  - -monitorFile {{ .Values.senzing.monitorFile }}
+  --monitor-file {{ .Values.senzing.monitorFile }}
+  {{- end }}
+  {{- if .Values.senzing.quiet }} \
+  --quiet {{ .Values.senzing.quiet }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqInfoExchange }} \
+  --rabbit-info-exchange {{ .Values.senzing.rabbitmqInfoExchange }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqInfoHost }} \
+  --rabbit-info-host {{ .Values.senzing.rabbitmqInfoHost }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqInfoPassword }} \
+  --rabbit-info-password {{ .Values.senzing.rabbitmqInfoPassword }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqInfoPort }} \
+  --rabbit-info-port {{ .Values.senzing.rabbitmqInfoPort }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqInfoRoutingKey }} \
+  --rabbit-info-routing-key {{ .Values.senzing.rabbitmqInfoRoutingKey }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqInfoUsername }} \
+  --rabbit-info-user {{ .Values.senzing.rabbitmqInfoUsername }}
+  {{- end }}
+  {{- if .Values.senzing.rabbitmqInfoVirtualHost }} \
+  --rabbit-info-virtual-host {{ .Values.senzing.rabbitmqInfoVirtualHost }}
+  {{- end }}
+  {{- if .Values.senzing.readOnly }} \
+  --read-only {{ .Values.senzing.readOnly }}
+  {{- end }}
+  {{- if .Values.senzing.skipEnginePriming }} \
+  --skip-engine-priming {{ .Values.senzing.skipEnginePriming }}
+  {{- end }}
+  {{- if .Values.senzing.skipStartupPerf }} \
+  --skip-startup-perf {{ .Values.senzing.skipStartupPerf }}
+  {{- end }}
+  {{- if .Values.senzing.sqsInfoQueueUrl }} \
+  --sqs-info-url {{ .Values.senzing.sqsInfoQueueUrl }}
+  {{- end }}
+  {{- if .Values.senzing.statsInterval }} \
+  --stats-interval {{ .Values.senzing.statsInterval }}
+  {{- end }}
+  {{- if .Values.senzing.urlBasePath }} \
+  --url-base-path {{ .Values.senzing.urlBasePath }}
   {{- end }}
   {{- if .Values.senzing.verbose }} \
   - -verbose

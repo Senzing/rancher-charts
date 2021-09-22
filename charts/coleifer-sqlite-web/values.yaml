@@ -39,7 +39,7 @@ securityContext:
 
 senzing:
   database: sqlite/G2C.db
-  persistentVolumeClaim: senzing-persistent-volume-claim
+  persistentVolumeClaim: ""
 
 service:
   port: 8080

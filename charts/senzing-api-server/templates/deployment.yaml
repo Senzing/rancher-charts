@@ -51,6 +51,14 @@ spec:
             - name: SENZING_API_SERVER_BIND_ADDR
               value: {{ .Values.senzing.bindAddr | quote }}
             {{- end }}
+            {{- if .Values.senzing.clientKeyStore }}
+            - name: SENZING_API_SERVER_CLIENT_KEY_STORE
+              value: {{ .Values.senzing.clientKeyStore }}
+            {{- end }}
+            {{- if .Values.senzing.clientKeyStorePassword }}
+            - name: SENZING_API_SERVER_CLIENT_KEY_STORE_PASSWORD
+              value: {{ .Values.senzing.clientKeyStorePassword }}
+            {{- end }}
             {{- if .Values.senzing.concurrency }}
             - name: SENZING_API_SERVER_CONCURRENCY
               value: {{ .Values.senzing.concurrency | quote }}
@@ -58,6 +66,10 @@ spec:
             {{- if .Values.senzing.configId }}
             - name: SENZING_API_SERVER_CONFIG_ID
               value: {{ .Values.senzing.configId | quote }}
+            {{- end }}
+            {{- if .Values.senzing.debug }}
+            - name: SENZING_API_SERVER_DEBUG
+              value: {{ .Values.senzing.debug | quote }}
             {{- end }}
             {{- if .Values.senzing.enableAdmin }}
             - name: SENZING_API_SERVER_ENABLE_ADMIN
@@ -88,6 +100,18 @@ spec:
             - name: SENZING_API_SERVER_INI_FILE
               value: {{ .Values.senzing.iniFile | quote }}
             {{- end }}
+            {{- if .Values.senzing.keyAlias }}
+            - name: SENZING_API_SERVER_KEY_ALIAS
+              value: {{ .Values.senzing.keyAlias }}
+            {{- end }}
+            {{- if .Values.senzing.keyStore }}
+            - name: SENZING_API_SERVER_KEY_STORE
+              value: {{ .Values.senzing.keyStore }}
+            {{- end }}
+            {{- if .Values.senzing.keyStorePassword }}
+            - name: SENZING_API_SERVER_KEY_STORE_PASSWORD
+              value: {{ .Values.senzing.keyStorePassword }}
+            {{- end }}
             {{- if .Values.senzing.moduleName }}
             - name: SENZING_API_SERVER_MODULE_NAME
               value: {{ .Values.senzing.moduleName | quote }}
@@ -96,8 +120,10 @@ spec:
             - name: SENZING_API_SERVER_MONITOR_FILE
               value: {{ .Values.senzing.monitorFile | quote }}
             {{- end }}
+            {{- if .Values.senzing.port }}
             - name: SENZING_API_SERVER_PORT
-              value: '8080'
+              value: {{ .Values.senzing.port | quote }}
+            {{- end }}
             {{- if .Values.senzing.quiet }}
             - name: SENZING_API_SERVER_QUIET
               value: {{ .Values.senzing.quiet | quote }}
@@ -105,6 +131,10 @@ spec:
             {{- if .Values.senzing.readOnly }}
             - name: SENZING_API_SERVER_READ_ONLY
               value: {{ .Values.senzing.readOnly | quote }}
+            {{- end }}
+            {{- if .Values.senzing.securePort }}
+            - name: SENZING_API_SERVER_SECURE_PORT
+              value: {{ .Values.senzing.securePort | quote }}
             {{- end }}
             {{- if .Values.senzing.skipEnginePriming }}
             - name: SENZING_API_SERVER_SKIP_ENGINE_PRIMING

@@ -40,9 +40,10 @@ securityContext:
 
 senzing:
   debug: 0
+  engineConfigurationJson: ""
   mountOptIbm: false
   mountOptMicrosoft: false
-  persistentVolumeClaim: senzing-persistent-volume-claim
+  persistentVolumeClaim: ""
 
 service:
   port: 80

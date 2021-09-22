@@ -21,8 +21,14 @@ python configurator.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.debug }} \
   --debug
   {{- end }}
+  {{- if .Values.senzing.engineConfigurationJson }} \
+  --engine-configuration-json "{{ .Values.senzing.engineConfigurationJson }}"
+  {{- end }}
   {{- if .Values.senzing.host }} \
   --host "{{ .Values.senzing.host }}"
+  {{- end }}
+  {{- if .Values.senzing.logLevel }} \
+  --log-level "{{ .Values.senzing.logLevel }}"
   {{- end }}
   {{- if .Values.senzing.port }} \
   --port "{{ .Values.senzing.port }}"

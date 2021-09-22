@@ -38,7 +38,11 @@ securityContext:
   fsGroup: 1001
 
 senzing:
-  optSenzingClaim: senzing-persistent-volume-claim
+  debug: ""
+  persistentVolumeClaim: ""
+  senzingDir: ""
+  senzingPackage: ""
+  sleepTime: ""
   subcommand: install
 
 service:

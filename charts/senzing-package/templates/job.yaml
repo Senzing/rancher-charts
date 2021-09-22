@@ -39,17 +39,17 @@ spec:
             {{- end }}
           image: {{ template "senzing.image" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.senzing.optSenzingClaim }}
+          {{- if .Values.senzing.persistentVolumeClaim }}
           volumeMounts:
             - name: senzing-storage
               mountPath: /opt/senzing
           {{- end }}
       restartPolicy: Never
-      {{- if .Values.senzing.optSenzingClaim }}
+      {{- if .Values.senzing.persistentVolumeClaim }}
       volumes:
         - name: senzing-storage
           persistentVolumeClaim:
-            claimName: {{ .Values.senzing.optSenzingClaim }}
+            claimName: {{ .Values.senzing.persistentVolumeClaim }}
       {{- end }}
 # --- Standard suffix ---
       {{- with .Values.affinity }}

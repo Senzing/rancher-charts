@@ -58,7 +58,7 @@ spec:
               mountPath: /opt/IBM
               subPath: senzing-db2-drivers
           {{- end }}
-          {{- if .Values.senzing.optSenzingClaim }}
+          {{- if .Values.senzing.persistentVolumeClaim }}
           volumeMounts:
             - name: senzing-storage
               mountPath: /opt/senzing
@@ -71,12 +71,6 @@ spec:
         - name: senzing-storage
           persistentVolumeClaim:
             claimName: {{ .Values.senzing.persistentVolumeClaim }}
-      {{- end }}
-      {{- if .Values.senzing.optSenzingClaim }}
-      volumes:
-        - name: senzing-storage
-          persistentVolumeClaim:
-            claimName: {{ .Values.senzing.optSenzingClaim }}
       {{- end }}
 # --- Standard suffix ---
       {{- with .Values.affinity }}

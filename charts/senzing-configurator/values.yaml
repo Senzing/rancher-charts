@@ -38,8 +38,17 @@ securityContext:
   fsGroup: 1001
 
 senzing:
-  persistentVolumeClaim: senzing-persistent-volume-claim
+  configPath: ""
+  databaseUrl: ""
+  debug: ""
+  engineConfigurationJson: ""
+  host: ""
+  logLevel: ""
+  persistentVolumeClaim: ""
+  port: ""
+  sleepTimeInSeconds: ""
   subcommand: service
+  supportPath: ""
 
 service:
   port: 8253
