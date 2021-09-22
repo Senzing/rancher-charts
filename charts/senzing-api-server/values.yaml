@@ -68,7 +68,7 @@ senzing:
   mountOptIbm: false
   mountOptMicrosoft: false
   persistentVolumeClaim: ""
-  port: ""
+  port: "8080"
   quiet: ""
   rabbitmqExchange: ""
   rabbitmqHost: ""
