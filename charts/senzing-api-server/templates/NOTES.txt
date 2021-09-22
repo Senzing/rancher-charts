@@ -13,7 +13,6 @@ The command being run:
 
 ```console
 java -jar senzing-api-server.jar \
-  -httpPort 80
   {{- if .Values.senzing.allowedOrigins }} \
   --allowedOrigins {{ .Values.senzing.allowedOrigins }}
   {{- end }}

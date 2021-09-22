@@ -135,7 +135,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: "{{ .Values.senzing.webServerPort }}"
+              containerPort: {{ .Values.senzing.webServerPort }}
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
