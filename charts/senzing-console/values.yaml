@@ -10,6 +10,9 @@ deployment:
 
 fullnameOverride: ""
 
+global:
+  imageRegistry: ""
+
 image:
   pullPolicy: Always
   registry: docker.io
@@ -21,6 +24,7 @@ imagePullSecrets: []
 ingress:
   annotations: {}
   enabled: false
+  paths: ""
   hosts:
     - host: chart-example.local
       paths: []
