@@ -93,11 +93,6 @@ spec:
               subPath: opt-microsoft
             {{- end }}
           {{- end }}
-          {{- if .Values.senzing.persistentVolumeClaim }}
-          volumeMounts:
-            - name: senzing-storage
-              mountPath: /opt/senzing
-          {{- end }}
       {{- if .Values.rbacEnabled}}
       serviceAccountName: {{ template "senzing-base.fullname" . }}
       {{- end }}
