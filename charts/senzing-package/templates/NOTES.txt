@@ -5,15 +5,16 @@ A job to install the Senzing_API.tgz package onto /opt/senzing.
 Normally, /opt/senzing is a Persistent Volume.
 
 More information:
- - https://github.com/Senzing/senzing-package
- - https://github.com/Senzing/charts/tree/master/charts/senzing-package/senzing-package
+
+- [GitHub](https://github.com/Senzing/senzing-package)
+- [Helm Charts](https://github.com/Senzing/charts/tree/master/charts/senzing-package)
 
 ## Command
 
 The command being run:
 
 ```console
-python senzing-package.py {{ .Values.senzing.subcommand -}}
+senzing-package.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.debug }} \
   --debug "{{ .Values.senzing.debug }}"
   {{- end }}

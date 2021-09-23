@@ -3,15 +3,16 @@
 A job to run Senzing's Configurator.
 
 More information:
+
 - [GitHub](https://github.com/Senzing/configurator)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/configurator/configurator)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/configurator)
 
 ## Command
 
 The command being run:
 
 ```console
-python configurator.py {{ .Values.senzing.subcommand -}}
+configurator.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.configPath }} \
   --config-path "{{ .Values.senzing.configPath }}"
   {{- end }}
@@ -66,25 +67,31 @@ python configurator.py {{ .Values.senzing.subcommand -}}
 
 {{- else if contains "ClusterIP" .Values.service.type }}
 
-1. Running service.type = ClusterIP
-1. Log into pod. Example:
+## Logon
 
-```console
-export SENZING_CONFIGURATOR_POD_NAME=$(kubectl get pods \
-  --namespace {{ .Release.Namespace }} \
-  --selector "app.kubernetes.io/name={{ include "senzing-configurator.name" . }}, \
-              app.kubernetes.io/instance={{ .Release.Name }}" \
-  --output jsonpath="{.items[0].metadata.name}"
-)
+1. Example:
 
-kubectl exec -it --namespace {{ .Release.Namespace }} ${SENZING_CONFIGURATOR_POD_NAME} -- /bin/bash
-```
+  ```console
+  export POD_NAME=$(kubectl get pods \
+    --namespace {{ .Release.Namespace }} \
+    --selector "app.kubernetes.io/name={{ include "senzing-configurator.name" . }}, \
+                app.kubernetes.io/instance={{ .Release.Name }}" \
+    --output jsonpath="{.items[0].metadata.name}")
 
-1. Forward internal port 8253 to external port of 8253. Example:
+  kubectl exec -it --namespace {{ .Release.Namespace }} ${POD_NAME} -- /bin/bash
+  ```
 
-```console
-kubectl port-forward \
-  --namespace {{ .Release.Namespace }} \
-  svc/{{ .Release.Name }} 8253:8253
-```
+## Port-forward
+
+1. Example:
+
+  ```console
+  export MY_PORT=8253
+
+  kubectl port-forward \
+    --address 0.0.0.0 \
+    --namespace {{ .Release.Namespace }} \
+    svc/{{ .Release.Name }} ${MY_PORT}:{{ .Values.senzing.port }}
+  ```
+
 {{- end }}

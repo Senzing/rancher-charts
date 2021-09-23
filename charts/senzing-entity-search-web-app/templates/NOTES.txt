@@ -1,41 +1,45 @@
 ## Overview
 
-Run the Senzing Entity Search WebApp
+Run the Senzing Entity Search WebApp web application.
 
 More information:
- - https://github.com/Senzing/entity-search-web-app
- - https://github.com/Senzing/charts/tree/master/charts/senzing-entity-search-web-app/senzing-entity-search-web-app
+
+- [GitHub](https://github.com/Senzing/entity-search-web-app)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-entity-search-web-app)
 
 {{- if .Values.ingress.enabled }}
 
-{{- range $host := .Values.ingress.hosts }}
-  {{- range .paths }}
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }}
-  {{- end }}
-{{- end }}
-
 {{- else if contains "NodePort" .Values.service.type }}
 
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "senzing-entity-search-web-app.fullname" . }})
-  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo http://$NODE_IP:$NODE_PORT
-
 {{- else if contains "LoadBalancer" .Values.service.type }}
-
-     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "senzing-entity-search-web-app.fullname" . }}'
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "senzing-entity-search-web-app.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-  echo http://$SERVICE_IP:{{ .Values.service.port }}
 
 {{- else if contains "ClusterIP" .Values.service.type }}
 
 ## Logon
 
-  1. Example:
+1. Example:
 
-    ```console
-    export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "senzing-entity-search-web-app.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
-    kubectl exec -it --namespace {{ .Release.Namespace }} ${POD_NAME} -- /bin/bash
-    ```
+  ```console
+  export POD_NAME=$(kubectl get pods \
+    --namespace {{ .Release.Namespace }} \
+    --selector "app.kubernetes.io/name={{ include "senzing-entity-search-web-app.name" . }}, \
+        app.kubernetes.io/instance={{ .Release.Name }}" \
+    --output jsonpath="{.items[0].metadata.name}")
+
+  kubectl exec -it --namespace {{ .Release.Namespace }} ${POD_NAME} -- /bin/bash
+  ```
+
+## Port-forward
+
+1. Example:
+
+  ```console
+  export MY_PORT=8251
+
+  kubectl port-forward \
+    --address 0.0.0.0 \
+    --namespace {{ .Release.Namespace }} \
+    svc/{{ .Release.Name }} ${MY_PORT}:{{ .Values.service.port }}
+  ```
 
 {{- end }}

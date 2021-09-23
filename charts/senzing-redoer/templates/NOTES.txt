@@ -3,15 +3,16 @@
 Pull messages from Senzing's "redo" queue, kept in the Senzing database, and send to Senzing for re-processing.
 
 More information:
- - https://github.com/Senzing/redoer
- - https://github.com/Senzing/redoer/blob/master/redoer.py
+
+- [GitHub](https://github.com/Senzing/redoer)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-redoer)
 
 ## Command
 
 The command being run:
 
 ```console
-python3 redoer.py {{ .Values.senzing.subcommand -}}
+redoer.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.azureConnectionString }} \
   --azure-connection-string {{ .Values.senzing.azureConnectionString }}
   {{- end }}
@@ -215,18 +216,43 @@ python3 redoer.py {{ .Values.senzing.subcommand -}}
   {{- end }}
 ```
 
+## Metadata
+
 {{- if .Values.ingress.enabled }}
+
+{{- range $host := .Values.ingress.hosts }}
+  {{- range .paths }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }}
+  {{- end }}
+{{- end }}
+
 {{- else if contains "NodePort" .Values.service.type }}
+
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "senzing-redoer.fullname" . }})
+  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo http://$NODE_IP:$NODE_PORT
+
 {{- else if contains "LoadBalancer" .Values.service.type }}
+
+     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "senzing-redoer.fullname" . }}'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "senzing-redoer.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  echo http://$SERVICE_IP:{{ .Values.service.port }}
+
 {{- else if contains "ClusterIP" .Values.service.type }}
 
 ## Logon
 
-  1. Example:
+1. Example:
 
-    ```console
-    export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "senzing-redoer.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
-    kubectl exec -it --namespace {{ .Release.Namespace }} ${POD_NAME} -- /bin/bash
-    ```
+  ```console
+  export POD_NAME=$(kubectl get pods \
+    --namespace {{ .Release.Namespace }} \
+    --selector "app.kubernetes.io/name={{ include "senzing-redoer.name" . }}, \
+                app.kubernetes.io/instance={{ .Release.Name }}" \
+    --output jsonpath="{.items[0].metadata.name}")
+
+  kubectl exec -it --namespace {{ .Release.Namespace }} ${POD_NAME} -- /bin/bash
+  ```
 
 {{- end }}

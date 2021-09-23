@@ -3,15 +3,16 @@
 A job to read JSON LINES from a URL-addressable file and send them to Kafka.
 
 More information:
- - https://github.com/Senzing/mock-data-generator
- - https://github.com/Senzing/charts/tree/master/charts/senzing-mock-data-generator/senzing-mock-data-generator
+
+- [GitHub](https://github.com/Senzing/mock-data-generator)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-mock-data-generator/senzing-mock-data-generator)
 
 ## Command
 
 The command being run:
 
 ```console
-python mock-data-generator.py {{ .Values.senzing.subcommand -}}
+mock-data-generator.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.dataSource }} \
   --data-source "{{ .Values.senzing.dataSource }}"
   {{- end }}
