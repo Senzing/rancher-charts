@@ -24,6 +24,7 @@ ingress:
   hosts:
     - host: chart-example.local
       paths: []
+  paths: ""
   tls: []
 
 nameOverride: ""

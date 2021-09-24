@@ -3,8 +3,9 @@
 A job to perform RPM installation of Senzing into a Persistent Volume Claim (PVC) using apt.
 
 More information:
- - https://github.com/Senzing/senzing-apt
- - https://github.com/Senzing/charts/tree/master/charts/senzing-apt/senzing-apt
+
+- [GitHub](https://github.com/Senzing/senzing-apt)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-apt)
 
 ## Command
 

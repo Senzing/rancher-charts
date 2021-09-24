@@ -3,8 +3,9 @@
 A job to perform RPM installation of Senzing into a Persistent Volume Claim (PVC) using yum.
 
 More information:
- - https://github.com/Senzing/senzing-yum
- - https://github.com/Senzing/charts/tree/master/charts/senzing-yum/senzing-yum
+
+- [GitHub](https://github.com/Senzing/senzing-yum)
+- [Helm Charts](https://github.com/Senzing/charts/tree/master/charts/senzing-yum)
 
 ## Command
 
@@ -23,6 +24,7 @@ yum -y install senzing
 ```
 
 ## End User License Agreement
+
 {{ if contains "I_ACCEPT_THE_SENZING_EULA" .Values.senzing.acceptEula }}
 Senzing End User License Agreement (EULA) has been accepted.
 {{ else }}
@@ -30,4 +32,3 @@ The Senzing End User License Agreement (EULA) has not been accepted.
 If the apt command tries to install Senzing, it will not perform the installation.
 For more information, see http://hub.senzing.com/knowledge-base/lists/environment-variables#senzing_accept_eula.
 {{- end }}
-
