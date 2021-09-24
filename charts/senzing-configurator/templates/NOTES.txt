@@ -91,7 +91,7 @@ configurator.py {{ .Values.senzing.subcommand -}}
   kubectl port-forward \
     --address 0.0.0.0 \
     --namespace {{ .Release.Namespace }} \
-    svc/{{ .Release.Name }} ${MY_PORT}:{{ .Values.senzing.port }}
+    svc/{{ .Release.Name }} ${MY_PORT}:{{ .Values.service.port }}
   ```
 
 {{- end }}
