@@ -12,10 +12,10 @@ More information:
 The commands being run:
 
 ```console
-{{- if .Values.senzing.acceptEula }} \
+{{- if .Values.senzing.acceptEula }}
 export SENZING_ACCEPT_EULA={{ .Values.senzing.acceptEula }}
 {{- end }}
-{{- if .Values.mssql.acceptEula }} \
+{{- if .Values.mssql.acceptEula }}
 export ACCEPT_EULA={{ .Values.mssql.acceptEula }}
 {{- end }}
 {{- if .Values.senzing.aptParameters }}
