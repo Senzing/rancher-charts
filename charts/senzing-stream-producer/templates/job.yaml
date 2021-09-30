@@ -179,9 +179,21 @@ spec:
             - name: SENZING_THREADS_PER_PRINT
               value: "{{ .Values.senzing.threadsPerPrint }}"
             {{- end }}
+          {{- if .Values.senzing.persistentVolumeClaim }}
+          volumeMounts:
+            - name: senzing-storage
+              mountPath: /var/opt/senzing
+              subPath: senzing-var
+          {{- end }}
       restartPolicy: Never
       {{- if .Values.rbacEnabled}}
       serviceAccountName: {{ template "senzing-stream-producer.fullname" . }}
+      {{- end }}
+      {{- if .Values.senzing.persistentVolumeClaim }}
+      volumes:
+        - name: senzing-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.senzing.persistentVolumeClaim }}
       {{- end }}
 # --- Standard suffix ---
       {{- with .Values.affinity }}
