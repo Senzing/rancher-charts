@@ -1,5 +1,23 @@
 affinity: {}
 
+#autoscaling:
+#  enabled: false
+#  maxReplicas: ""
+#  minReplicas: ""
+#  builtInMetrics: []
+#  customMetrics: []
+#  targetCPU:
+#  targetMemory:
+
+autoscaling:
+  enabled: true
+  maxReplicas: 1
+  minReplicas: 10
+  builtInMetrics: []
+  customMetrics: []
+  targetCPU: 50
+  targetMemory: 60
+
 deployment:
   metadata:
     annotations:
@@ -26,8 +44,20 @@ ingress:
       paths: []
   tls: []
 
+metrics:
+  enabled: false
+
 nameOverride: ""
 nodeSelector: {}
+nodeAffinityPreset:
+  type: ""
+
+podAffinityPreset: ""
+podAntiAffinityPreset: soft
+
+podSecurityContext:
+  enabled: false
+
 replicaCount: 1
 resources: {}
 

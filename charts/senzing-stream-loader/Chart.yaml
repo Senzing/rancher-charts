@@ -1,5 +1,15 @@
+# https://helm.sh/docs/topics/charts/#the-chartyaml-file
+
 apiVersion: v1
-appVersion: "1.0"
+appVersion: 1.4.0
+dependencies:
+# - name: common
+#   repository: https://charts.bitnami.com/bitnami
+#   version: 1.6.1
+  - name: senzing-common
+    repository: https://hub.senzing.com/charts/
+    repository: file:///home/senzing/senzing.git/charts/charts/senzing-common
+    version: 1.0.0
 description: A stream-based loader for Senzing
 home: http://senzing.com
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
@@ -10,5 +20,6 @@ keywords:
  - azure service bus
 name: senzing-stream-loader
 sources:
- - https://github.com/Senzing/stream-loader
-version: 1.3.0
+  - https://github.com/Senzing/charts/tree/master/charts/senzing-stream-loader
+type: application
+version: 1.4.0
