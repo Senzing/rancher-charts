@@ -1,9 +1,9 @@
 {{/* vim: set filetype=mustache: */}}
 {{/*
 Return  the proper Storage Class
-{{ include "common.storage.class" ( dict "persistence" .Values.path.to.the.persistence "global" $) }}
+{{ include "senzing-common.storage.class" ( dict "persistence" .Values.path.to.the.persistence "global" $) }}
 */}}
-{{- define "common.storage.class" -}}
+{{- define "senzing-common.storage.class" -}}
 
 {{- $storageClass := .persistence.storageClass -}}
 {{- if .global -}}
