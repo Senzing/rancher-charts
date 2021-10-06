@@ -2,8 +2,8 @@
 {{/*
 Warning about using rolling tag.
 Usage:
-{{ include "common.warnings.rollingTag" .Values.path.to.the.imageRoot }}
+{{ include "senzing-common.warnings.rollingTag" .Values.path.to.the.imageRoot }}
 */}}
-{{- define "common.warnings.rollingTag" -}}
+{{- define "senzing-common.warnings.rollingTag" -}}
 
 {{- end -}}
