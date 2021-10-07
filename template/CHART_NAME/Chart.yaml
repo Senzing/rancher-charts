@@ -1,0 +1,22 @@
+# https://helm.sh/docs/topics/charts/#the-chartyaml-file
+
+apiVersion: v2
+appVersion: "%%UPSTREAM_PROJECT_VERSION%%"
+dependencies:
+  - name: senzing-common
+    repository: https://hub.senzing.com/charts/
+    version: 1.0.0
+description: %%DESCRIPTION%%
+engine: gotpl
+home: %%UPSTREAM_PROJECT_URL%%
+icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
+keywords:
+ - senzing
+maintainers:
+  - email: support@senzing.com
+    name: Senzing
+name: %%CHART_NAME%%
+sources:
+  - https://github.com/Senzing/charts/tree/master/charts/senzing-stream-loader
+type: application
+version: 0.1.0
