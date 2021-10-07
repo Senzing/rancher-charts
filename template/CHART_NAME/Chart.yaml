@@ -15,7 +15,7 @@ keywords:
 maintainers:
   - email: support@senzing.com
     name: Senzing
-name: %%CHART_NAME%%
+name: ${SENZING_HELM_CHART_NAME}
 sources:
   - https://github.com/Senzing/charts/tree/master/charts/senzing-stream-loader
 type: application

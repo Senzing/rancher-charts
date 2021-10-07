@@ -1,4 +1,4 @@
-# %%CHART_NAME%%
+# ${SENZING_HELM_CHART_NAME}
 
 ## Credit
 
@@ -62,10 +62,10 @@ describing where we can improve.   Now on with the show...
    Example:
 
     ```console
-    helm install my-%%CHART_NAME%% senzing/%%CHART_NAME%%
+    helm install my-${SENZING_HELM_CHART_NAME} senzing/${SENZING_HELM_CHART_NAME}
     ```
 
-    The command deploys %%CHART_NAME%% on the Kubernetes cluster in the default configuration.
+    The command deploys `${SENZING_HELM_CHART_NAME}` on the Kubernetes cluster in the default configuration.
     The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
 1. :thinking: **Optional:** View deployed charts using
@@ -83,7 +83,7 @@ describing where we can improve.   Now on with the show...
    Example:
 
     ```console
-    helm uninstall my-%%CHART_NAME%%
+    helm uninstall my-${SENZING_HELM_CHART_NAME}
     ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -92,7 +92,7 @@ The command removes all the Kubernetes components associated with the chart and 
 
 See https://github.com/bitnami-labs/readme-generator-for-helm to create the table
 
-The above parameters map to the env variables defined in [bitnami/%%CHART_NAME%%](http://github.com/bitnami/bitnami-docker-%%CHART_NAME%%). For more information please refer to the [bitnami/%%CHART_NAME%%](http://github.com/bitnami/bitnami-docker-%%CHART_NAME%%) image documentation.
+The above parameters map to the env variables defined in [bitnami/${SENZING_HELM_CHART_NAME}](http://github.com/bitnami/bitnami-docker-%%CHART_NAME%%). For more information please refer to the [bitnami/${SENZING_HELM_CHART_NAME}](http://github.com/bitnami/bitnami-docker-%%CHART_NAME%%) image documentation.
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
@@ -104,14 +104,14 @@ helm install my-release \
     senzing/%%CHART_NAME%%
 ```
 
-The above command sets the %%CHART_NAME%% administrator account username and password to `admin` and `password` respectively. Additionally, it sets the MariaDB `root` user password to `secretpassword`.
+The above command sets the ${SENZING_HELM_CHART_NAME} administrator account username and password to `admin` and `password` respectively. Additionally, it sets the MariaDB `root` user password to `secretpassword`.
 
 > NOTE: Once this chart is deployed, it is not possible to change the application's access credentials, such as usernames or passwords, using Helm. To change these application credentials after deployment, delete any persistent volumes (PVs) used by the chart and re-deploy it, or use the application's built-in administrative tools if available.
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml senzing/%%CHART_NAME%%
+helm install my-${SENZING_HELM_CHART_NAME} -f values.yaml senzing/${SENZING_HELM_CHART_NAME}
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
