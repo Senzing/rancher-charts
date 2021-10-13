@@ -1,0 +1,15 @@
+{{- if .Values.rbacEnabled }}
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ template "resolver.fullname" . }}-endpoint-reader
+  labels:
+    app: {{ template "resolver.name" . }}
+    chart: {{ template "resolver.chart" .  }}
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+rules:
+- apiGroups: [""]
+  resources: ["endpoints"]
+  verbs: ["get"]
+{{- end }}

@@ -1,0 +1,63 @@
+affinity: {}
+
+deployment:
+  metadata:
+    annotations:
+  spec:
+    template:
+      metadata:
+        annotations:
+
+fullnameOverride: ""
+
+image:
+  pullPolicy: Always
+  registry: docker.io
+  repository: senzing/resolver
+  tag: latest
+
+imagePullSecrets: []
+
+ingress:
+  annotations: {}
+  enabled: false
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+
+nameOverride: ""
+nodeSelector: {}
+replicaCount: 1
+resources: {}
+
+securityContext:
+  enabled: true
+  runAsUser: 1001
+  runAsGroup: 1001
+  fsGroup: 1001
+
+senzing:
+  databaseUrl: ""
+  dataSource: ""
+  debug: ""
+  engineConfigurationJson: ""
+  entityType: ""
+  host: ""
+  inputFile: ""
+  internalDatabase: ""
+  logLevel: ""
+  mountOptIbm: false
+  mountOptMicrosoft: false
+  outputFile: ""
+  persistentVolumeClaim: ""
+  port: ""
+  sleepTimeInSeconds: ""
+  subcommand: service
+
+service:
+  port: 8252
+  targetPort: http
+  type: ClusterIP
+
+tolerations: []

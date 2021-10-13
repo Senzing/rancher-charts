@@ -1,0 +1,160 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "resolver.fullname" . }}
+  labels:
+    {{- include "resolver.labels" . | nindent 4 }}
+  {{- with .Values.deployment.metadata.annotations }}
+  annotations:
+    {{ toYaml . | indent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "resolver.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "resolver.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- with .Values.deployment.spec.template.metadata.annotations }}
+      annotations:
+        {{ toYaml . | indent 8 }}
+      {{- end }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          env:
+            {{- if .Values.senzing.mountOptIbm }}
+            - name: LD_LIBRARY_PATH
+              value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/IBM/db2/clidriver/lib
+            {{- end }}
+            {{- if .Values.senzing.mountOptMicrosoft }}
+            - name: LD_LIBRARY_PATH
+              value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/microsoft/msodbcsql17/lib64
+            - name: ODBCINI
+              value: /opt/microsoft/msodbcsql17/etc/odbc.ini
+            - name: ODBCSYSINI
+              value: /opt/microsoft/msodbcsql17/etc
+            {{- end }}
+            {{- if .Values.senzing.dataSource }}
+            - name: SENZING_DATA_SOURCE
+              value: "{{ .Values.senzing.dataSource }}"
+            {{- end }}
+            {{- if .Values.senzing.databaseUrl }}
+            - name: SENZING_DATABASE_URL
+              value: "{{ .Values.senzing.databaseUrl }}"
+            {{- end }}
+            {{- if .Values.senzing.debug }}
+            - name: SENZING_DEBUG
+              value: "{{ .Values.senzing.debug }}"
+            {{- end }}
+            {{- if .Values.senzing.engineConfigurationJson }}
+            - name: SENZING_ENGINE_CONFIGURATION_JSON
+              value: >-
+              {{ .Values.senzing.engineConfigurationJson  | nindent 16 }}
+            {{- end }}
+            {{- if .Values.senzing.entityType }}
+            - name: SENZING_ENTITY_TYPE
+              value: "{{ .Values.senzing.entityType }}"
+            {{- end }}
+            {{- if .Values.senzing.internalDatabase }}
+            - name: SENZING_INTERNAL_DATABASE
+              value: "{{ .Values.senzing.internalDatabase }}"
+            {{- end }}
+            {{- if .Values.senzing.host }}
+            - name: SENZING_HOST
+              value: "{{ .Values.senzing.host }}"
+            {{- end }}
+            {{- if .Values.senzing.inputFile }}
+            - name: SENZING_INPUT_FILE
+              value: "{{ .Values.senzing.inputFile }}"
+            {{- end }}
+            {{- if .Values.senzing.logLevel }}
+            - name: SENZING_LOG_LEVEL
+              value: "{{ .Values.senzing.logLevel }}"
+            {{- end }}
+            {{- if .Values.senzing.outputFile }}
+            - name: SENZING_OUTPUT_FILE
+              value: "{{ .Values.senzing.outputFile }}"
+            {{- end }}
+            {{- if .Values.senzing.port }}
+            - name: SENZING_PORT
+              value: "{{ .Values.senzing.port }}"
+            {{- end }}
+            {{- if .Values.senzing.sleepTimeInSeconds }}
+            - name: SENZING_SLEEP_TIME_IN_SECONDS
+              value: "{{ .Values.senzing.sleepTimeInSeconds }}"
+            {{- end }}
+            {{- if .Values.senzing.subcommand }}
+            - name: SENZING_SUBCOMMAND
+              value: "{{ .Values.senzing.subcommand }}"
+            {{- end }}
+          image: {{ template "senzing.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .Values.senzing.persistentVolumeClaim }}
+          volumeMounts:
+            - name: senzing-storage
+              mountPath: /opt/senzing/data
+              subPath: senzing-data/2.0.0
+            - name: senzing-storage
+              mountPath: /etc/opt/senzing
+              subPath: senzing-etc
+            - name: senzing-storage
+              mountPath: /opt/senzing/g2
+              subPath: senzing-g2
+            - name: senzing-storage
+              mountPath: /var/opt/senzing
+              subPath: senzing-var
+            {{- if .Values.senzing.mountOptIbm }}
+            - name: senzing-storage
+              mountPath: /opt/IBM
+              subPath: senzing-db2-drivers
+            {{- end }}
+            {{- if .Values.senzing.mountOptMicrosoft }}
+            - name: senzing-storage
+              mountPath: /opt/microsoft
+              subPath: opt-microsoft
+            {{- end }}
+          {{- end }}
+          workingDir: /app
+      {{- if .Values.rbacEnabled}}
+      serviceAccountName: {{ template "resolver.fullname" . }}
+      {{- end }}
+      {{- if .Values.senzing.persistentVolumeClaim }}
+      volumes:
+        - name: senzing-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.senzing.persistentVolumeClaim }}
+      {{- end }}
+# --- Standard suffix ---
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.securityContext.enabled }}
+      securityContext:
+        fsGroup: {{ .Values.securityContext.fsGroup }}
+        runAsGroup: {{ .Values.securityContext.runAsGroup }}
+        runAsUser: {{ .Values.securityContext.runAsUser }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
