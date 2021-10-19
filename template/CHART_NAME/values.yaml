@@ -54,13 +54,13 @@ diagnosticMode:
 ## @param extraDeploy Array of extra objects to deploy with the release
 ##
 extraDeploy: []
-## @param fullnameOverride String to fully override common.names.fullname
+## @param fullnameOverride String to fully override senzing-common.names.fullname
 ##
 fullnameOverride: ""
 ## @param kubeVersion Override Kubernetes version
 ##
 kubeVersion: ""
-## @param nameOverride String to partially override common.names.fullname
+## @param nameOverride String to partially override senzing-common.names.fullname
 ##
 nameOverride: ""
 
@@ -82,6 +82,23 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.args Override default container args (useful when using custom images)
   ##
   args: []
+
+  ## ${SENZING_HELM_MAIN_OBJECT_BLOCK} deployment autoscaling
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.enabled Enable ${SENZING_HELM_MAIN_OBJECT_BLOCK} deployment autoscaling
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.minReplicas ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling minimum number of replicas
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.maxReplicas ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling maximum number of replicas
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetCPU ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling target CPU percentage
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetMemory ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling target CPU memory
+  ##
+  autoscaling:
+    enabled: false
+    maxReplicas: 2
+    minReplicas: 5
+    builtInMetrics: []
+    customMetrics: []
+    targetCPU: 50
+    targetMemory: 60
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.command Override default container command (useful when using custom images)
   ##
   command: []
@@ -256,6 +273,20 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   resources:
     limits: {}
     requests: {}
+
+  ## ${SENZING_HELM_MAIN_CONTAINER_NAME} Senzing environment variables
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.databaseUrl The normalized database connection URL
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.debug Debug?  Boolean.
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.logLevel The logging filter: DEBUG, INFO, WARNING, ERROR, CRITICAL, FATAL
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.subcommand CLI sub-command
+  ##
+  senzing:
+    databaseUrl: ""
+    debug: ""
+    logLevel: ""
+    subcommand: ""
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.sidecars Add additional sidecar containers to the ${SENZING_HELM_MAIN_CONTAINER_NAME} pod(s)
   ## e.g:
   ## sidecars:
@@ -487,7 +518,7 @@ serviceAccount:
   ##
   create: true
   ## @param serviceAccount.name The name of the ServiceAccount to use.
-  ## If not set and create is true, a name is generated using the common.names.fullname template
+  ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
   ##
   name: ""
 

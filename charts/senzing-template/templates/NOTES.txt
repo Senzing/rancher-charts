@@ -12,7 +12,7 @@ More information:
 The command being run:
 
 ```console
-command-namer.py {{ .Values.senzing.subcommand -}}
+command-name.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.debug }} \
   --debug "{{ .Values.senzing.debug }}"
   {{- end }}

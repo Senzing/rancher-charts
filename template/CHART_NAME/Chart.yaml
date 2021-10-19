@@ -17,6 +17,6 @@ maintainers:
     name: Senzing
 name: ${SENZING_HELM_CHART_NAME}
 sources:
-  - https://github.com/Senzing/charts/tree/master/charts/senzing-stream-loader
+  - https://github.com/Senzing/charts/tree/master/charts/senzing-template
 type: application
 version: 0.1.0
