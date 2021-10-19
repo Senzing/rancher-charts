@@ -176,7 +176,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   livenessProbe:
     enabled: true
-    %%httpGet || command || etc%%
+#   %%httpGet || command || etc%%
     failureThreshold: bar
     initialDelaySeconds: foo
     periodSeconds: bar
@@ -239,7 +239,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   readinessProbe:
     enabled: true
-    %%httpGet || command || etc%%
+#   %%httpGet || command || etc%%
     failureThreshold: bar
     initialDelaySeconds: foo
     periodSeconds: bar
@@ -493,6 +493,6 @@ serviceAccount:
 
 ## %%SUBCHART_CONTAINER/POD_DESCRIPTION%%
 ##
-%%SUBCHART_NAME%%:
-  enabled: false
-  %%OTHER_PARAMETERS_RELATED_TO_THIS_SUBCHART%%
+## SUBCHART_NAME:
+##   enabled: false
+##   %%OTHER_PARAMETERS_RELATED_TO_THIS_SUBCHART%%

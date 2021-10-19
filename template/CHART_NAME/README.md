@@ -2,10 +2,10 @@
 
 ## Credit
 
-<remove>
-This is based off of https://github.com/bitnami/charts/blob/master/template/CHART_NAME/README.md
+[remove]
+This is based off of [Bitnami's README.md](https://github.com/bitnami/charts/blob/master/template/CHART_NAME/README.md)
 We appreciate Bitnami's leadership in Helm Chart creation.
-</remove>
+[/remove]
 
 ## Synopsis
 
@@ -90,7 +90,7 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Parameters
 
-See https://github.com/bitnami-labs/readme-generator-for-helm to create the table
+See [readme-generator-for-helm)](https://github.com/bitnami-labs/readme-generator-for-helm) to create the table
 
 The above parameters map to the env variables defined in [bitnami/${SENZING_HELM_CHART_NAME}](http://github.com/bitnami/bitnami-docker-%%CHART_NAME%%). For more information please refer to the [bitnami/${SENZING_HELM_CHART_NAME}](http://github.com/bitnami/bitnami-docker-%%CHART_NAME%%) image documentation.
 
