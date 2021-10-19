@@ -29,37 +29,39 @@ global:
 ## @param commonAnnotations Annotations to add to all deployed objects
 ##
 commonAnnotations: {}
+
 ## @param commonLabels Labels to add to all deployed objects
 ##
 commonLabels: {}
+
 ## @param clusterDomain Kubernetes cluster domain name
 ##
 clusterDomain: cluster.local
 
-## Enable diagnostic mode in the deployment
+## Enable diagnostic mode in the deployment'
+## @param diagnosticMode.args Args to override all containers in the deployment
+## @param diagnosticMode.command Command to override all containers in the deployment
+## @param diagnosticMode.enabled Enable diagnostic mode (all probes will be disabled and the command will be overridden)
 ##
 diagnosticMode:
-  ## @param diagnosticMode.args Args to override all containers in the deployment
-  ##
   args:
     - infinity
-  ## @param diagnosticMode.command Command to override all containers in the deployment
-  ##
   command:
     - sleep
-  ## @param diagnosticMode.enabled Enable diagnostic mode (all probes will be disabled and the command will be overridden)
-  ##
   enabled: false
 
 ## @param extraDeploy Array of extra objects to deploy with the release
 ##
 extraDeploy: []
+
 ## @param fullnameOverride String to fully override senzing-common.names.fullname
 ##
 fullnameOverride: ""
+
 ## @param kubeVersion Override Kubernetes version
 ##
 kubeVersion: ""
+
 ## @param nameOverride String to partially override senzing-common.names.fullname
 ##
 nameOverride: ""
@@ -73,20 +75,22 @@ nameOverride: ""
 ## %%MAIN_CONTAINER/POD_DESCRIPTION%%
 ##
 ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
+
   ## Senzing ${SENZING_HELM_MAIN_CONTAINER} image
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity Affinity for ${SENZING_HELM_MAIN_CONTAINER_NAME} pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   ## NOTE: `${SENZING_HELM_MAIN_OBJECT_BLOCK}.podAffinityPreset`, `${SENZING_HELM_MAIN_OBJECT_BLOCK}.podAntiAffinityPreset`, and `${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeAffinityPreset` will be ignored when it's set
   ##
   affinity: {}
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.args Override default container args (useful when using custom images)
   ##
   args: []
 
   ## ${SENZING_HELM_MAIN_OBJECT_BLOCK} deployment autoscaling
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.enabled Enable ${SENZING_HELM_MAIN_OBJECT_BLOCK} deployment autoscaling
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.minReplicas ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling minimum number of replicas
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.maxReplicas ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling maximum number of replicas
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.minReplicas ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling minimum number of replicas
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetCPU ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling target CPU percentage
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetMemory ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling target CPU memory
   ##
@@ -102,6 +106,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.command Override default container command (useful when using custom images)
   ##
   command: []
+
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context
@@ -110,15 +115,19 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   containerSecurityContext:
     enabled: true
     runAsUser: 1001
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.customLivenessProbe Custom livenessProbe that overrides the default one
   ##
   customLivenessProbe: {}
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.customReadinessProbe Custom readinessProbe that overrides the default one
   ##
   customReadinessProbe: {}
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.existingConfigmap The name of an existing ConfigMap with your custom configuration for ${SENZING_HELM_MAIN_CONTAINER_NAME}
   ##
   existingConfigmap:
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraEnvVars Array with extra environment variables to add to ${SENZING_HELM_MAIN_CONTAINER_NAME} nodes
   ## e.g:
   ## extraEnvVars:
@@ -126,22 +135,28 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##     value: "bar"
   ##
   extraEnvVars: []
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraEnvVarsSecret Name of existing Secret containing extra env vars for ${SENZING_HELM_MAIN_CONTAINER_NAME} nodes
   ##
   extraEnvVarsSecret:
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for ${SENZING_HELM_MAIN_CONTAINER_NAME} nodes
   ##
   extraEnvVarsCM:
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraVolumes Optionally specify extra list of additional volumes for the ${SENZING_HELM_MAIN_CONTAINER_NAME} pod(s)
   ##
   extraVolumes: []
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the ${SENZING_HELM_MAIN_CONTAINER_NAME} container(s)
   ##
   extraVolumeMounts: []
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.hostAliases ${SENZING_HELM_MAIN_CONTAINER_NAME} pods host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##
   hostAliases: []
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.debug Enable ${SENZING_HELM_MAIN_CONTAINER} image debug mode
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.pullPolicy ${SENZING_HELM_MAIN_CONTAINER} image pull policy
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.pullSecrets ${SENZING_HELM_MAIN_CONTAINER} image pull secrets
@@ -150,14 +165,17 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.tag ${SENZING_HELM_MAIN_CONTAINER} image tag (immutable tags are recommended)
   ##
   image:
+
     ## Enable debug mode
     ##
     debug: false
+
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
     ##
     pullPolicy: IfNotPresent
+
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
     ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -169,6 +187,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
     registry: docker.io
     repository: senzing/${SENZING_HELM_IMAGE_NAME}
     tag: latest
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.initContainers Add additional init containers to the ${SENZING_HELM_MAIN_CONTAINER_NAME} pod(s)
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
   ## e.g:
@@ -179,9 +198,11 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##    command: ['sh', '-c', 'echo "hello world"']
   ##
   initContainers: {}
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.lifecycleHooks for the ${SENZING_HELM_MAIN_CONTAINER_NAME} container(s) to automate configuration before or after startup
   ##
   lifecycleHooks: {}
+
   ## Configure extra options for ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe.enabled Enable livenessProbe on ${SENZING_HELM_MAIN_CONTAINER_NAME} nodes
@@ -199,16 +220,20 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
     periodSeconds: bar
     successThreshold: foo
     timeoutSeconds: foo
+
   ## Node ${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity preset
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
   ##
   nodeAffinityPreset:
+
     ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeAffinityPreset.key Node label key to match. Ignored if `${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity` is set
     ##
     key: ""
+
     ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeAffinityPreset.type Node affinity preset type. Ignored if `${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity` is set. Allowed values: `soft` or `hard`
     ##
     type: ""
+
     ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeAffinityPreset.values Node label values to match. Ignored if `${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity` is set
     ## E.g.
     ## values:
@@ -216,26 +241,32 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
     ##   - e2e-az2
     ##
     values: []
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeSelector Node labels for ${SENZING_HELM_MAIN_CONTAINER_NAME} pods assignment
   ## ref: https://kubernetes.io/docs/user-guide/node-selection/
   ##
   nodeSelector: {}
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podAffinityPreset Pod affinity preset. Ignored if `${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
   podAffinityPreset: ""
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podAnnotations Annotations for ${SENZING_HELM_MAIN_CONTAINER_NAME} pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
   podAnnotations: {}
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
   podAntiAffinityPreset: soft
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podLabels Extra labels for ${SENZING_HELM_MAIN_CONTAINER_NAME} pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
   ##
   podLabels: {}
+
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} pods' Security Context
@@ -244,9 +275,11 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   podSecurityContext:
     enabled: true
     fsGroup: 1001
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.priorityClassName ${SENZING_HELM_MAIN_CONTAINER_NAME} pods' priorityClassName
   ##
   priorityClassName: ""
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.enabled Enable readinessProbe on ${SENZING_HELM_MAIN_CONTAINER_NAME} nodes
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.failureThreshold Failure threshold for readinessProbe
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
@@ -262,9 +295,11 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
     periodSeconds: bar
     successThreshold: foo
     timeoutSeconds: foo
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.replicaCount Number of ${SENZING_HELM_MAIN_CONTAINER_NAME} replicas to deploy
   ##
   replicaCount: 1
+
   ## ${SENZING_HELM_MAIN_CONTAINER_NAME} resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.resources.limits The resources limits for the ${SENZING_HELM_MAIN_CONTAINER_NAME} containers
@@ -298,14 +333,17 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##         containerPort: 1234
   ##
   sidecars: {}
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.tolerations Tolerations for ${SENZING_HELM_MAIN_CONTAINER_NAME} pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
   ##
   tolerations: []
+
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.updateStrategy.type ${SENZING_HELM_MAIN_CONTAINER_NAME} statefulset strategy type
   ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
   ##
   updateStrategy:
+
     ## StrategyType
     ## Can be set to RollingUpdate or OnDelete
     ##
@@ -313,7 +351,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
 
 
 ## ----------------------------------------------------------------------------
-## Networking parameters
+## service parameters
 ## ----------------------------------------------------------------------------
 
 ## @section Traffic Exposure Parameters
@@ -321,15 +359,39 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
 ## ${SENZING_HELM_MAIN_CONTAINER_NAME} service parameters
 ##
 service:
-  ## @param service.type ${SENZING_HELM_MAIN_CONTAINER_NAME} service type
+
+  ## @param service.annotations Additional custom annotations for ${SENZING_HELM_MAIN_CONTAINER_NAME} service
   ##
-  type: LoadBalancer
-  ## @param service.port ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTP port
+  annotations: {}
+
+  ## @param service.clusterIP ${SENZING_HELM_MAIN_CONTAINER_NAME} service Cluster IP
+  ## e.g.:
+  ## clusterIP: None
   ##
-  port: 80
+  clusterIP:
+
+  ## @param service.externalTrafficPolicy ${SENZING_HELM_MAIN_CONTAINER_NAME} service external traffic policy
+  ## ref http://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
+  ##
+  externalTrafficPolicy: Cluster
+
   ## @param service.httpsPort ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTPS port
   ##
   httpsPort: 443
+
+  ## @param service.loadBalancerIP ${SENZING_HELM_MAIN_CONTAINER_NAME} service Load Balancer IP
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
+  ##
+  loadBalancerIP:
+
+  ## @param service.loadBalancerSourceRanges ${SENZING_HELM_MAIN_CONTAINER_NAME} service Load Balancer sources
+  ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
+  ## e.g:
+  ## loadBalancerSourceRanges:
+  ##   - 10.10.10.0/24
+  ##
+  loadBalancerSourceRanges: []
+
   ## Node ports to expose
   ## @param service.nodePorts.http Node port for HTTP
   ## @param service.nodePorts.https Node port for HTTPS
@@ -338,67 +400,42 @@ service:
   nodePorts:
     http:
     https:
-  ## @param service.clusterIP ${SENZING_HELM_MAIN_CONTAINER_NAME} service Cluster IP
-  ## e.g.:
-  ## clusterIP: None
+
+  ## @param service.port ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTP port
   ##
-  clusterIP:
-  ## @param service.loadBalancerIP ${SENZING_HELM_MAIN_CONTAINER_NAME} service Load Balancer IP
-  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
+  port: 80
+
+  ## @param service.type ${SENZING_HELM_MAIN_CONTAINER_NAME} service type
   ##
-  loadBalancerIP:
-  ## @param service.loadBalancerSourceRanges ${SENZING_HELM_MAIN_CONTAINER_NAME} service Load Balancer sources
-  ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
-  ## e.g:
-  ## loadBalancerSourceRanges:
-  ##   - 10.10.10.0/24
-  ##
-  loadBalancerSourceRanges: []
-  ## @param service.externalTrafficPolicy ${SENZING_HELM_MAIN_CONTAINER_NAME} service external traffic policy
-  ## ref http://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
-  ##
-  externalTrafficPolicy: Cluster
-  ## @param service.annotations Additional custom annotations for ${SENZING_HELM_MAIN_CONTAINER_NAME} service
-  ##
-  annotations: {}
+  type: LoadBalancer
+
+
+## ----------------------------------------------------------------------------
+## Ingress parameters
+## ----------------------------------------------------------------------------
+
 ## ${SENZING_HELM_MAIN_CONTAINER_NAME} ingress parameters
 ## ref: http://kubernetes.io/docs/user-guide/ingress/
 ##
 ingress:
-  ## @param ingress.enabled Enable ingress record generation for ${SENZING_HELM_MAIN_CONTAINER_NAME}
-  ##
-  enabled: false
-  ## @param ingress.pathType Ingress path type
-  ##
-  pathType: ImplementationSpecific
-  ## @param ingress.apiVersion Force Ingress API version (automatically detected if not set)
-  ##
-  apiVersion:
-  ## @param ingress.hostname Default host for the ingress record
-  ##
-  hostname: ${SENZING_HELM_COMPONENT_NAME}.local
-  ## @param ingress.path Default path for the ingress record
-  ## NOTE: You may need to set this to '/*' in order to use this with ALB ingress controllers
-  ##
-  path: /
+
   ## @param ingress.annotations Additional custom annotations for the ingress record
   ## NOTE: If `ingress.certManager=true`, annotation `kubernetes.io/tls-acme: "true"` will automatically be added
   ##
   annotations: {}
-  ## @param ingress.tls Enable TLS configuration for the host defined at `ingress.hostname` parameter
-  ## TLS certificates will be retrieved from a TLS secret with name: `{{- printf "%s-tls" .Values.ingress.hostname }}`
-  ## You can:
-  ##   - Use the `ingress.secrets` parameter to create this TLS secret
-  ##   - Relay on cert-manager to create it by setting `ingress.certManager=true`
-  ##   - Relay on Helm to create self-signed certificates by setting `ingress.selfSigned=true`
+
+  ## @param ingress.apiVersion Force Ingress API version (automatically detected if not set)
   ##
-  tls: false
+  apiVersion:
+
   ## @param ingress.certManager Add the corresponding annotations for cert-manager integration
   ##
   certManager: false
-  ## @param ingress.selfSigned Create a TLS secret for this ingress record using self-signed certificates generated by Helm
+
+  ## @param ingress.enabled Enable ingress record generation for ${SENZING_HELM_MAIN_CONTAINER_NAME}
   ##
-  selfSigned: false
+  enabled: false
+
   ## @param ingress.extraHosts An array with additional hostname(s) to be covered with the ingress record
   ## e.g:
   ## extraHosts:
@@ -406,6 +443,7 @@ ingress:
   ##     path: /
   ##
   extraHosts: []
+
   ## @param ingress.extraPaths An array with additional arbitrary paths that may need to be added to the ingress under the main host
   ## e.g:
   ## extraPaths:
@@ -415,6 +453,7 @@ ingress:
   ##     servicePort: use-annotation
   ##
   extraPaths: []
+
   ## @param ingress.extraTls TLS configuration for additional hostname(s) to be covered with this ingress record
   ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/#tls
   ## e.g:
@@ -424,6 +463,20 @@ ingress:
   ##   secretName: ${SENZING_HELM_COMPONENT_NAME}.local-tls
   ##
   extraTls: []
+
+  ## @param ingress.hostname Default host for the ingress record
+  ##
+  hostname: ${SENZING_HELM_COMPONENT_NAME}.local
+
+  ## @param ingress.path Default path for the ingress record
+  ## NOTE: You may need to set this to '/*' in order to use this with ALB ingress controllers
+  ##
+  path: /
+
+  ## @param ingress.pathType Ingress path type
+  ##
+  pathType: ImplementationSpecific
+
   ## @param ingress.secrets Custom TLS certificates as secrets
   ## NOTE: 'key' and 'certificate' are expected in PEM format
   ## NOTE: 'name' should line up with a 'secretName' set further up
@@ -445,49 +498,37 @@ ingress:
   ##
   secrets: []
 
+  ## @param ingress.selfSigned Create a TLS secret for this ingress record using self-signed certificates generated by Helm
+  ##
+  selfSigned: false
+
+  ## @param ingress.tls Enable TLS configuration for the host defined at `ingress.hostname` parameter
+  ## TLS certificates will be retrieved from a TLS secret with name: `{{- printf "%s-tls" .Values.ingress.hostname }}`
+  ## You can:
+  ##   - Use the `ingress.secrets` parameter to create this TLS secret
+  ##   - Relay on cert-manager to create it by setting `ingress.certManager=true`
+  ##   - Relay on Helm to create self-signed certificates by setting `ingress.selfSigned=true`
+  ##
+  tls: false
+
+
 ## ----------------------------------------------------------------------------
 ## Init container parameters
 ## ----------------------------------------------------------------------------
 
 ## @section Init Container Parameters
 
+
+## ----------------------------------------------------------------------------
+## volumePermissions parameters
+## ----------------------------------------------------------------------------
+
 ## 'volumePermissions' init container parameters
 ## Changes the owner and group of the persistent volume mount point to runAsUser:fsGroup values
 ##   based on the *podSecurityContext/*containerSecurityContext parameters
 ##
 volumePermissions:
-  ## @param volumePermissions.enabled Enable init container that changes the owner/group of the PV mount point to `runAsUser:fsGroup`
-  ##
-  enabled: false
-  ## Bitnami Shell image
-  ## ref: https://hub.docker.com/r/bitnami/bitnami-shell/tags/
-  ## @param volumePermissions.image.registry Bitnami Shell image registry
-  ## @param volumePermissions.image.repository Bitnami Shell image repository
-  ## @param volumePermissions.image.tag Bitnami Shell image tag (immutable tags are recommended)
-  ## @param volumePermissions.image.pullPolicy Bitnami Shell image pull policy
-  ## @param volumePermissions.image.pullSecrets Bitnami Shell image pull secrets
-  ##
-  image:
-    registry: docker.io
-    repository: bitnami/bitnami-shell
-    tag: "10"
-    pullPolicy: Always
-    ## Optionally specify an array of imagePullSecrets.
-    ## Secrets must be manually created in the namespace.
-    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-    ## e.g:
-    ## pullSecrets:
-    ##   - myRegistryKeySecretName
-    ##
-    pullSecrets: []
-  ## Init container's resource requests and limits
-  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-  ## @param volumePermissions.resources.limits The resources limits for the init container
-  ## @param volumePermissions.resources.requests The requested resources for the init container
-  ##
-  resources:
-    limits: {}
-    requests: {}
+
   ## Init container Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
   ## @param volumePermissions.containerSecurityContext.runAsUser Set init container's Security Context runAsUser
@@ -498,6 +539,44 @@ volumePermissions:
   containerSecurityContext:
     runAsUser: 0
 
+  ## @param volumePermissions.enabled Enable init container that changes the owner/group of the PV mount point to `runAsUser:fsGroup`
+  ##
+  enabled: false
+
+  ## Bitnami Shell image
+  ## ref: https://hub.docker.com/r/bitnami/bitnami-shell/tags/
+  ## @param volumePermissions.image.pullPolicy Bitnami Shell image pull policy
+  ## @param volumePermissions.image.pullSecrets Bitnami Shell image pull secrets
+  ## @param volumePermissions.image.registry Bitnami Shell image registry
+  ## @param volumePermissions.image.repository Bitnami Shell image repository
+  ## @param volumePermissions.image.tag Bitnami Shell image tag (immutable tags are recommended)
+  ##
+  image:
+    pullPolicy: Always
+
+    ## Optionally specify an array of imagePullSecrets.
+    ## Secrets must be manually created in the namespace.
+    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    ## e.g:
+    ## pullSecrets:
+    ##   - myRegistryKeySecretName
+    ##
+    pullSecrets: []
+
+    registry: docker.io
+    repository: bitnami/bitnami-shell
+    tag: "10"
+
+  ## Init container's resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param volumePermissions.resources.limits The resources limits for the init container
+  ## @param volumePermissions.resources.requests The requested resources for the init container
+  ##
+  resources:
+    limits: {}
+    requests: {}
+
+
 ## ----------------------------------------------------------------------------
 ## Other parameters
 ## ----------------------------------------------------------------------------
@@ -507,6 +586,7 @@ volumePermissions:
 ## RBAC configuration
 ##
 rbac:
+
   ## @param rbac.create Specifies whether RBAC resources should be created
   ##
   create: false
@@ -514,9 +594,11 @@ rbac:
 ## ServiceAccount configuration
 ##
 serviceAccount:
+
   ## @param serviceAccount.create Specifies whether a ServiceAccount should be created
   ##
   create: true
+
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
   ##
