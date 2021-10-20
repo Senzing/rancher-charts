@@ -195,6 +195,7 @@ using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readm
 
 1. Get dependencies via
    [helm dependency update](https://helm.sh/docs/helm/helm_dependency_update/).
+   Example:
 
     ```console
     helm dependency update ${SENZING_HELM_CHART_TARGET_DIR}
