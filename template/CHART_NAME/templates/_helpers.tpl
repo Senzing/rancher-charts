@@ -35,8 +35,6 @@ Compile all warnings into a single message.
 */}}
 {{- define "${SENZING_HELM_TEMPLATE_NAME}.validateValues" -}}
 {{- $messages := list -}}
-{{- $messages := append $messages (include "${SENZING_HELM_TEMPLATE_NAME}.validateValues.foo" .) -}}
-{{- $messages := append $messages (include "${SENZING_HELM_TEMPLATE_NAME}.validateValues.bar" .) -}}
 {{- $messages := without $messages "" -}}
 {{- $message := join "\n" $messages -}}
 

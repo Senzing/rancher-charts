@@ -150,9 +150,9 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
 
 ### Update templates
 
-#### _helpers.tpl
+#### configmap.yaml
 
-1. If needed, remove references to `SecondaryObjectBlock`.
+1. If needed, modify `%%CONFIG_FILE_NAME%%: |`.
 
 ### Update values.yaml
 

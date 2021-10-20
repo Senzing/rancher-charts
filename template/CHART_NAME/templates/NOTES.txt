@@ -12,12 +12,12 @@ More information:
 The command being run:
 
 ```console
-command-name.py {{ .Values.senzing.subcommand -}}
-  {{- if .Values.senzing.debug }} \
-  --debug "{{ .Values.senzing.debug }}"
+command-name.py {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.subcommand -}}
+  {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.debug }} \
+  --debug "{{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.debug }}"
   {{- end }}
-  {{- if .Values.senzing.logLevel }} \
-  --log-level "{{ .Values.senzing.logLevel }}"
+  {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.logLevel }} \
+  --log-level "{{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.logLevel }}"
   {{- end }}
 ```
 
@@ -67,8 +67,8 @@ In order to replicate the container startup scripts execute this command:
 {{- else if contains "LoadBalancer" .Values.service.type }}
 
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "senzing-stream-loader.fullname" . }}'
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "senzing-stream-loader.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ template "senzing-common.names.fullname" . }}'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ template "senzing-common.names.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   echo http://$SERVICE_IP:{{ .Values.service.port }}
 
 {{- else if contains "ClusterIP" .Values.service.type }}
@@ -91,5 +91,4 @@ In order to replicate the container startup scripts execute this command:
 
 
 {{- include "senzing-common.warnings.rollingTag" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.image }}
-{{- include "senzing-common.warnings.rollingTag" .Values.${SENZING_HELM_OTHER_OBJECT_BLOCK}.image }}
 {{- include "${SENZING_HELM_TEMPLATE_NAME}.validateValues" . }}

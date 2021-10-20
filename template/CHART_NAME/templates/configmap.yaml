@@ -12,5 +12,5 @@ metadata:
   annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
 data:
-  %%CONFIG_FILE_NAME%%: |
+# %%CONFIG_FILE_NAME%%: |
   # Config file
