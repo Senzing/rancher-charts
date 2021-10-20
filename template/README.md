@@ -207,6 +207,7 @@ using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readm
 
     ```console
     helm template  \
+      --debug \
       --values ${SENZING_HELM_CHART_TARGET_DIR}/values.yaml \
       ${SENZING_HELM_CHART_TARGET_DIR}
     ```
