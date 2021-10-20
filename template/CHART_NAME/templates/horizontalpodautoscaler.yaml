@@ -1,7 +1,7 @@
 # https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/horizontal-pod-autoscaler-v2beta2/
 
-{{- if .Values.autoscaling.enabled }}
-apiVersion: autoscaling/v2beta1
+{{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.enabled }}
+apiVersion: {{ include "senzing-common.capabilities.horizontalpodautoscaler.apiVersion" . }}
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ template "senzing-common.names.fullname" . }}
@@ -18,19 +18,19 @@ spec:
     apiVersion: {{ include "senzing-common.capabilities.deployment.apiVersion" . }}
     kind: Deployment
     name: {{ template "senzing-common.names.fullname" . }}
-  minReplicas: {{ .Values.autoscaling.minReplicas }}
-  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  minReplicas: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.maxReplicas }}
   metrics:
-    {{- if .Values.autoscaling.targetCPU }}
+    {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetCPU }}
     - type: Resource
       resource:
         name: cpu
-        targetAverageUtilization: {{ .Values.autoscaling.targetCPU }}
+        targetAverageUtilization: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetCPU }}
     {{- end }}
-    {{- if .Values.autoscaling.targetMemory }}
+    {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetMemory }}
     - type: Resource
       resource:
         name: memory
-        targetAverageUtilization: {{ .Values.autoscaling.targetMemory  }}
+        targetAverageUtilization: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetMemory  }}
     {{- end }}
 {{- end }}

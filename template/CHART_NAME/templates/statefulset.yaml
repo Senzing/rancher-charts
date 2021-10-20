@@ -95,7 +95,7 @@ spec:
           {{- end }}
           env:
             - name: SENZING_DEBUG
-              value: {{ ternary "true" "false" (or .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.debug .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.diagnosticMode.enabled) | quote }}
+              value: {{ ternary "true" "false" (or .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.debug .Values.diagnosticMode.enabled) | quote }}
             - name: foo
               value: bar
             {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraEnvVars }}

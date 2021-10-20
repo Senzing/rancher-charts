@@ -16,7 +16,7 @@ Return the proper image name (for the init container volume-permissions image)
 Return the proper Docker Image Registry Secret Names
 */}}
 {{- define "${SENZING_HELM_TEMPLATE_NAME}.imagePullSecrets" -}}
-{{- include "senzing-common.images.pullSecrets" (dict "images" (list .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.image .Values.${SENZING_HELM_SECONDARY_OBJECT_BLOCK}.image .Values.volumePermissions.image) "global" .Values.global) -}}
+{{- include "senzing-common.images.pullSecrets" (dict "images" (list .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.image .Values.volumePermissions.image) "global" .Values.global) -}}
 {{- end -}}
 
 {{/*
