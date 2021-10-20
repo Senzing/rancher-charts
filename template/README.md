@@ -193,18 +193,19 @@ using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readm
 
 ### Print Helm Chart
 
-1. Get dependencis.
-   Example:
+1. Get dependencies via
+   [helm dependency update](https://helm.sh/docs/helm/helm_dependency_update/).
 
     ```console
+    helm dependency update ${SENZING_HELM_CHART_TARGET_DIR}
     ```
 
-1. Print chart.
+1. Print chart via
+   [helm template](https://helm.sh/docs/helm/helm_template/).
    Example:
 
     ```console
     helm template  \
-      --dependency-update \
       --values ${SENZING_HELM_CHART_TARGET_DIR}/values.yaml \
       ${SENZING_HELM_CHART_TARGET_DIR}
     ```
