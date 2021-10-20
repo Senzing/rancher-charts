@@ -70,13 +70,13 @@ nameOverride: ""
 ## Container parameters
 ## ----------------------------------------------------------------------------
 
-## @section ${SENZING_HELM_MAIN_CONTAINER} Parameters
+## @section ${SENZING_HELM_MAIN_CONTAINER_NAME} Parameters
 
 ## %%MAIN_CONTAINER/POD_DESCRIPTION%%
 ##
 ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
 
-  ## Senzing ${SENZING_HELM_MAIN_CONTAINER} image
+  ## Senzing ${SENZING_HELM_MAIN_CONTAINER_NAME} image
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity Affinity for ${SENZING_HELM_MAIN_CONTAINER_NAME} pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   ## NOTE: `${SENZING_HELM_MAIN_OBJECT_BLOCK}.podAffinityPreset`, `${SENZING_HELM_MAIN_OBJECT_BLOCK}.podAntiAffinityPreset`, and `${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeAffinityPreset` will be ignored when it's set
@@ -159,12 +159,12 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   hostAliases: []
 
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.debug Enable ${SENZING_HELM_MAIN_CONTAINER} image debug mode
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.pullPolicy ${SENZING_HELM_MAIN_CONTAINER} image pull policy
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.pullSecrets ${SENZING_HELM_MAIN_CONTAINER} image pull secrets
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.registry ${SENZING_HELM_MAIN_CONTAINER} image registry
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.repository ${SENZING_HELM_MAIN_CONTAINER} image repository
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.tag ${SENZING_HELM_MAIN_CONTAINER} image tag (immutable tags are recommended)
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.debug Enable ${SENZING_HELM_MAIN_CONTAINER_NAME} image debug mode
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.pullPolicy ${SENZING_HELM_MAIN_CONTAINER_NAME} image pull policy
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.pullSecrets ${SENZING_HELM_MAIN_CONTAINER_NAME} image pull secrets
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.registry ${SENZING_HELM_MAIN_CONTAINER_NAME} image registry
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.repository ${SENZING_HELM_MAIN_CONTAINER_NAME} image repository
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.tag ${SENZING_HELM_MAIN_CONTAINER_NAME} image tag (immutable tags are recommended)
   ##
   image:
 

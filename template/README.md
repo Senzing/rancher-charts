@@ -54,21 +54,46 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
    Example:
 
     ```console
-    export SENZING_HELM_CHART_NAME=test-chart-1
+    export SENZING_HELM_CHART_NAME=nemo
     export SENZING_HELM_COMPONENT_NAME=ComponentName
-    export SENZING_HELM_CONTAINER_NAME=ContainerName
+    export SENZING_HELM_CONTAINER_NAME=nemo
     export SENZING_HELM_DESCRIPTION=Description
-    export SENZING_HELM_IMAGE_NAME=ImageName
-    export SENZING_HELM_MAIN_CONTAINER_NAME=MainContainerName
-    export SENZING_HELM_MAIN_CONTAINER=MainContainer
+    export SENZING_HELM_IMAGE_NAME=nemo
+    export SENZING_HELM_MAIN_CONTAINER_NAME=nemo
     export SENZING_HELM_MAIN_OBJECT_BLOCK=MainObjectBlock
     export SENZING_HELM_OTHER_OBJECT_BLOCK=OtherObjectBlock
     export SENZING_HELM_PORT_NAME=PortName
     export SENZING_HELM_SECONDARY_OBJECT_BLOCK=SecondaryObjectBlock
-    export SENZING_HELM_TEMPLATE_NAME=test-chart-1
+    export SENZING_HELM_TEMPLATE_NAME=nemo
     export SENZING_HELM_UPSTREAM_PROJECT_URL=UpstreamProjectUrl
     export SENZING_HELM_UPSTREAM_PROJECT_VERSION=UpstreamProjectVersion
     ```
+
+   Tips:
+
+    1. `SENZING_HELM_CHART_NAME`,
+       `SENZING_HELM_CONTAINER_NAME`
+       `SENZING_HELM_IMAGE_NAME`,
+       `SENZING_HELM_MAIN_CONTAINER_NAME`, and
+       `SENZING_HELM_TEMPLATE_NAME`
+       will probably have the same value.
+    1. `SENZING_HELM_COMPONENT_NAME`
+       is used in `metadata.labels.app.kubernetes.io/component`
+       and the ingress hostname.
+    1. `SENZING_HELM_DESCRIPTION`
+       is used in Chart.yaml `description`
+    1. `SENZING_HELM_MAIN_OBJECT_BLOCK`
+       identifyies the primary container.
+       For consistency, set value to "main"
+    1. `SENZING_HELM_PORT_NAME`
+       is used in `Service.spec.ports.name`
+    1. `SENZING_HELM_UPSTREAM_PROJECT_URL`
+       is used in `Chart.home`.
+    1. `SENZING_HELM_UPSTREAM_PROJECT_VERSION`
+       is used in `Chart.appVersion`
+    1. `SENZING_HELM_OTHER_OBJECT_BLOCK` and
+       `SENZING_HELM_SECONDARY_OBJECT_BLOCK`
+       ...FIXME:
 
 1. Identify source and target directories.
    Example:
@@ -101,7 +126,6 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
         ${SENZING_HELM_DESCRIPTION} \
         ${SENZING_HELM_IMAGE_NAME} \
         ${SENZING_HELM_MAIN_CONTAINER_NAME} \
-        ${SENZING_HELM_MAIN_CONTAINER} \
         ${SENZING_HELM_MAIN_OBJECT_BLOCK} \
         ${SENZING_HELM_OTHER_OBJECT_BLOCK} \
         ${SENZING_HELM_PORT_NAME} \
