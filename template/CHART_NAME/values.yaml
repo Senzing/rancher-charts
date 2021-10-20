@@ -353,68 +353,12 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
 
 
 ## ----------------------------------------------------------------------------
-## service parameters
+## Traffic Exposure Parameters
 ## ----------------------------------------------------------------------------
 
 ## @section Traffic Exposure Parameters
 
-## ${SENZING_HELM_MAIN_CONTAINER_NAME} service parameters
-##
-service:
-
-  ## @param service.annotations Additional custom annotations for ${SENZING_HELM_MAIN_CONTAINER_NAME} service
-  ##
-  annotations: {}
-
-  ## @param service.clusterIP ${SENZING_HELM_MAIN_CONTAINER_NAME} service Cluster IP
-  ## e.g.:
-  ## clusterIP: None
-  ##
-  clusterIP:
-
-  ## @param service.externalTrafficPolicy ${SENZING_HELM_MAIN_CONTAINER_NAME} service external traffic policy
-  ## ref http://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
-  ##
-  externalTrafficPolicy: Cluster
-
-  ## @param service.httpsPort ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTPS port
-  ##
-  httpsPort: 443
-
-  ## @param service.loadBalancerIP ${SENZING_HELM_MAIN_CONTAINER_NAME} service Load Balancer IP
-  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
-  ##
-  loadBalancerIP:
-
-  ## @param service.loadBalancerSourceRanges ${SENZING_HELM_MAIN_CONTAINER_NAME} service Load Balancer sources
-  ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
-  ## e.g:
-  ## loadBalancerSourceRanges:
-  ##   - 10.10.10.0/24
-  ##
-  loadBalancerSourceRanges: []
-
-  ## Node ports to expose
-  ## @param service.nodePorts.http Node port for HTTP
-  ## @param service.nodePorts.https Node port for HTTPS
-  ## NOTE: choose port between <30000-32767>
-  ##
-  nodePorts:
-    http:
-    https:
-
-  ## @param service.port ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTP port
-  ##
-  port: 80
-
-  ## @param service.type ${SENZING_HELM_MAIN_CONTAINER_NAME} service type
-  ##
-  type: LoadBalancer
-
-
-## ----------------------------------------------------------------------------
-## Ingress parameters
-## ----------------------------------------------------------------------------
+## ----- ingress parameters ---------------------------------------------------
 
 ## ${SENZING_HELM_MAIN_CONTAINER_NAME} ingress parameters
 ## ref: http://kubernetes.io/docs/user-guide/ingress/
@@ -513,6 +457,61 @@ ingress:
   ##
   tls: false
 
+## ----- service parameters ---------------------------------------------------
+
+## ${SENZING_HELM_MAIN_CONTAINER_NAME} service parameters
+##
+service:
+
+  ## @param service.annotations Additional custom annotations for ${SENZING_HELM_MAIN_CONTAINER_NAME} service
+  ##
+  annotations: {}
+
+  ## @param service.clusterIP ${SENZING_HELM_MAIN_CONTAINER_NAME} service Cluster IP
+  ## e.g.:
+  ## clusterIP: None
+  ##
+  clusterIP:
+
+  ## @param service.externalTrafficPolicy ${SENZING_HELM_MAIN_CONTAINER_NAME} service external traffic policy
+  ## ref http://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
+  ##
+  externalTrafficPolicy: Cluster
+
+  ## @param service.httpsPort ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTPS port
+  ##
+  httpsPort: 443
+
+  ## @param service.loadBalancerIP ${SENZING_HELM_MAIN_CONTAINER_NAME} service Load Balancer IP
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
+  ##
+  loadBalancerIP:
+
+  ## @param service.loadBalancerSourceRanges ${SENZING_HELM_MAIN_CONTAINER_NAME} service Load Balancer sources
+  ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
+  ## e.g:
+  ## loadBalancerSourceRanges:
+  ##   - 10.10.10.0/24
+  ##
+  loadBalancerSourceRanges: []
+
+  ## Node ports to expose
+  ## @param service.nodePorts.http Node port for HTTP
+  ## @param service.nodePorts.https Node port for HTTPS
+  ## NOTE: choose port between <30000-32767>
+  ##
+  nodePorts:
+    http:
+    https:
+
+  ## @param service.port ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTP port
+  ##
+  port: 80
+
+  ## @param service.type ${SENZING_HELM_MAIN_CONTAINER_NAME} service type
+  ##
+  type: LoadBalancer
+
 
 ## ----------------------------------------------------------------------------
 ## Init container parameters
@@ -520,10 +519,7 @@ ingress:
 
 ## @section Init Container Parameters
 
-
-## ----------------------------------------------------------------------------
-## volumePermissions parameters
-## ----------------------------------------------------------------------------
+## ----- volumePermissions parameters -----------------------------------------
 
 ## 'volumePermissions' init container parameters
 ## Changes the owner and group of the persistent volume mount point to runAsUser:fsGroup values
