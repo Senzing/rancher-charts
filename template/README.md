@@ -55,20 +55,19 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
 
     ```console
     export SENZING_HELM_CHART_NAME=test-chart-1
-    export SENZING_HELM_TEMPLATE_NAME=test-chart-1
-    export SENZING_HELM_MAIN_OBJECT_BLOCK=MainObjectBlock
-    export SENZING_HELM_SECONDARY_OBJECT_BLOCK=SecondaryObjectBlock
-    export SENZING_HELM_MAIN_CONTAINER=MainContainer
-    export SENZING_HELM_MAIN_CONTAINER_NAME=MainContainerName
     export SENZING_HELM_COMPONENT_NAME=ComponentName
+    export SENZING_HELM_CONTAINER_NAME=ContainerName
     export SENZING_HELM_DESCRIPTION=Description
-    export SENZING_HELM_UPSTREAM_PROJECT_URL=UpstreamProjectUrl
-    export SENZING_HELM_UPSTREAM_PROJECT_VERSION=UpstreamProjectVersion
-    export SENZING_HELM_SECONDARY_OBJECT_BLOCK=SecondaryObjectBlock
+    export SENZING_HELM_IMAGE_NAME=ImageName
+    export SENZING_HELM_MAIN_CONTAINER_NAME=MainContainerName
+    export SENZING_HELM_MAIN_CONTAINER=MainContainer
+    export SENZING_HELM_MAIN_OBJECT_BLOCK=MainObjectBlock
     export SENZING_HELM_OTHER_OBJECT_BLOCK=OtherObjectBlock
     export SENZING_HELM_PORT_NAME=PortName
-    export SENZING_HELM_CONTAINER_NAME=ContainerName
-    export SENZING_HELM_IMAGE_NAME=ImageName
+    export SENZING_HELM_SECONDARY_OBJECT_BLOCK=SecondaryObjectBlock
+    export SENZING_HELM_TEMPLATE_NAME=test-chart-1
+    export SENZING_HELM_UPSTREAM_PROJECT_URL=UpstreamProjectUrl
+    export SENZING_HELM_UPSTREAM_PROJECT_VERSION=UpstreamProjectVersion
     ```
 
 1. Identify source and target directories.
