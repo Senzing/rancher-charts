@@ -150,6 +150,10 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
 
 ### Update templates
 
+#### _helpers.tpl
+
+1. If needed, remove references to `SecondaryObjectBlock`.
+
 ### Update values.yaml
 
 ### Update README.md
@@ -202,6 +206,16 @@ using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readm
     ```
 
 1. Print chart via
+   [helm template](https://helm.sh/docs/helm/helm_template/).
+   Example:
+
+    ```console
+    helm template  \
+      --values ${SENZING_HELM_CHART_TARGET_DIR}/values.yaml \
+      ${SENZING_HELM_CHART_TARGET_DIR}
+    ```
+
+1. To debug
    [helm template](https://helm.sh/docs/helm/helm_template/).
    Example:
 
