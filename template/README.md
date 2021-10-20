@@ -195,6 +195,25 @@ using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readm
 
 ## Test Helm Chart
 
+### Lint Helm Chart
+
+1. Get dependencies via
+   [helm dependency update](https://helm.sh/docs/helm/helm_dependency_update/).
+   Example:
+
+    ```console
+    helm dependency update ${SENZING_HELM_CHART_TARGET_DIR}
+    ```
+
+1. Print chart via
+   [helm template](https://helm.sh/docs/helm/helm_template/).
+   Example:
+
+    ```console
+    helm template  \
+      --values ${SENZING_HELM_CHART_TARGET_DIR}/values.yaml \
+      ${SENZING_HELM_CHART_TARGET_DIR}
+    ```
 ### Print Helm Chart
 
 1. Get dependencies via
