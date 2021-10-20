@@ -206,11 +206,11 @@ using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readm
     ```
 
 1. Print chart via
-   [helm template](https://helm.sh/docs/helm/helm_template/).
+   [helm lint](https://helm.sh/docs/helm/helm_lint/).
    Example:
 
     ```console
-    helm template  \
+    helm lint  \
       --values ${SENZING_HELM_CHART_TARGET_DIR}/values.yaml \
       ${SENZING_HELM_CHART_TARGET_DIR}
     ```
