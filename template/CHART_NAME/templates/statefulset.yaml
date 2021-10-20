@@ -1,25 +1,22 @@
 apiVersion: {{ include "senzing-common.capabilities.statefulset.apiVersion" . }}
 kind: StatefulSet
 metadata:
-  name: {{ template "senzing-common.names.fullname" . }}
-  namespace: {{ .Release.Namespace | quote }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
   labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
     app.kubernetes.io/component: ${SENZING_HELM_COMPONENT_NAME}
     {{- if .Values.commonLabels }}
     {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
-  {{- if .Values.commonAnnotations }}
-  annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-  {{- end }}
+  name: {{ template "senzing-common.names.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.replicaCount }}
   selector:
-    matchLabels: {{ include "senzing-common.labels.matchLabels" . | nindent 6 }}
+    matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
       app.kubernetes.io/component: ${SENZING_HELM_COMPONENT_NAME}
   serviceName: {{ template "senzing-common.names.fullname" . }}
-  {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.updateStrategy }}
-  updateStrategy: {{- toYaml .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.updateStrategy | nindent 4 }}
-  {{- end }}
   template:
     metadata:
       {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.podAnnotations }}
@@ -31,11 +28,6 @@ spec:
         {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.podLabels "context" $) | nindent 8 }}
         {{- end }}
     spec:
-      serviceAccountName: {{ template "${SENZING_HELM_TEMPLATE_NAME}.serviceAccountName" . }}
-      {{- include "${SENZING_HELM_TEMPLATE_NAME}.imagePullSecrets" . | nindent 6 }}
-      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.hostAliases }}
-      hostAliases: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.hostAliases "context" $) | nindent 8 }}
-      {{- end }}
       {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity }}
       affinity: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity "context" $) | nindent 8 }}
       {{- else }}
@@ -44,54 +36,16 @@ spec:
         podAntiAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.podAntiAffinityPreset "component" "${SENZING_HELM_COMPONENT_NAME}" "context" $) | nindent 10 }}
         nodeAffinity: {{- include "senzing-common.affinities.nodes" (dict "type" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeAffinityPreset.type "key" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeAffinityPreset.key "values" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeAffinityPreset.values) | nindent 10 }}
       {{- end }}
-      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeSelector }}
-      nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeSelector "context" $) | nindent 8 }}
-      {{- end }}
-      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.tolerations }}
-      tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.tolerations "context" .) | nindent 8 }}
-      {{- end }}
-      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.priorityClassName }}
-      priorityClassName: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.priorityClassName | quote }}
-      {{- end }}
-      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.enabled }}
-      securityContext: {{- omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext "enabled" | toYaml | nindent 8 }}
-      {{- end }}
-      initContainers:
-        {{- if .Values.volumePermissions.enabled }}
-        - name: volume-permissions
-          image: {{ include "${SENZING_HELM_TEMPLATE_NAME}.volumePermissions.image" . }}
-          imagePullPolicy: {{ .Values.volumePermissions.image.pullPolicy | quote }}
-          command:
-            - %%commands%%
-          {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled }}
-          securityContext: {{- omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext "enabled" | toYaml | nindent 12 }}
-          {{- end }}
-          {{- if .Values.volumePermissions.resources }}
-          resources: {{- toYaml .Values.volumePermissions.resources | nindent 12 }}
-          {{- end }}
-          volumeMounts:
-            - name: foo
-              mountPath: bar
-        {{- end }}
-        {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.initContainers }}
-          {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.initContainers "context" $) | nindent 8 }}
-        {{- end }}
       containers:
-        - name: ${SENZING_HELM_CONTAINER_NAME}
-          image: {{ template "${SENZING_HELM_TEMPLATE_NAME}.image" . }}
-          imagePullPolicy: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.pullPolicy }}
-          {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled }}
-          securityContext: {{- omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+        - {{- if .Values.diagnosticMode.enabled }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 12 }}
+          {{- else if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.args }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.args "context" $) | nindent 12 }}
           {{- end }}
           {{- if .Values.diagnosticMode.enabled }}
           command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 12 }}
           {{- else if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.command }}
           command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.command "context" $) | nindent 12 }}
-          {{- end }}
-          {{- if .Values.diagnosticMode.enabled }}
-          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 12 }}
-          {{- else if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.args }}
-          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.args "context" $) | nindent 12 }}
           {{- end }}
           env:
             - name: SENZING_DEBUG
@@ -108,27 +62,35 @@ spec:
             - secretRef:
                 name: {{ include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraEnvVarsSecret "context" $) }}
             {{- end }}
-          {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.resources }}
-          resources: {{- toYaml .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.resources | nindent 12 }}
-          {{- end }}
+          image: {{ template "${SENZING_HELM_TEMPLATE_NAME}.image" . }}
+          imagePullPolicy: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.pullPolicy }}
           {{- if not .Values.diagnosticMode.enabled }}
+          {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.lifecycleHooks }}
+          lifecycle: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.lifecycleHooks "context" $) | nindent 12 }}
+          {{- end }}
           {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe.enabled }}
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe "enabled") "context" $) | nindent 12 }}
           {{- else if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customLivenessProbe }}
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customLivenessProbe "context" $) | nindent 12 }}
           {{- end }}
+          {{- end }}
+          name: ${SENZING_HELM_CONTAINER_NAME}
+          {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.enabled }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe "enabled") "context" $) | nindent 12 }}
           {{- else if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customReadinessProbe }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customReadinessProbe "context" $) | nindent 12 }}
           {{- end }}
-          {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.lifecycleHooks }}
-          lifecycle: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.lifecycleHooks "context" $) | nindent 12 }}
           {{- end }}
+          {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.resources }}
+         resources: {{- toYaml .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.resources | nindent 12 }}
+          {{- end }}
+          {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
           volumeMounts:
-            - name: foo
-              mountPath: bar
+            - mountPath: bar
+              name: foo
               readOnly: true
           {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraVolumeMounts }}
           {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraVolumeMounts "context" $) | nindent 12 }}
@@ -136,6 +98,43 @@ spec:
         {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.sidecars }}
         {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.sidecars "context" $) | nindent 8 }}
         {{- end }}
+      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.hostAliases }}
+      hostAliases: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.hostAliases "context" $) | nindent 8 }}
+      {{- end }}
+      {{- include "${SENZING_HELM_TEMPLATE_NAME}.imagePullSecrets" . | nindent 6 }}
+      initContainers:
+        {{- if .Values.volumePermissions.enabled }}
+        - command:
+            - %%commands%%
+          image: {{ include "${SENZING_HELM_TEMPLATE_NAME}.volumePermissions.image" . }}
+          imagePullPolicy: {{ .Values.volumePermissions.image.pullPolicy | quote }}
+          name: volume-permissions
+          {{- if .Values.volumePermissions.resources }}
+          resources: {{- toYaml .Values.volumePermissions.resources | nindent 12 }}
+          {{- end }}
+          {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - mountPath: bar
+              name: foo
+        {{- end }}
+        {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.initContainers }}
+          {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.initContainers "context" $) | nindent 8 }}
+        {{- end }}
+      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeSelector }}
+      nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.priorityClassName }}
+      priorityClassName: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.priorityClassName | quote }}
+      {{- end }}
+      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ template "${SENZING_HELM_TEMPLATE_NAME}.serviceAccountName" . }}
+      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.tolerations }}
+      tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.tolerations "context" .) | nindent 8 }}
+      {{- end }}
       volumes:
         - name: foo
           hostPath:
@@ -143,3 +142,6 @@ spec:
         {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraVolumes }}
         {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraVolumes "context" $) | nindent 8 }}
         {{- end }}
+  {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.updateStrategy }}
+  updateStrategy: {{- toYaml .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.updateStrategy | nindent 4 }}
+  {{- end }}
