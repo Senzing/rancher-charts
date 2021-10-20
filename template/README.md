@@ -146,7 +146,7 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
 
 1. Update `description`.
 1. If needed, add `keywords`.
-1. If needed, modify `sources`.
+1. Modify `sources`.
 
 ### Update templates
 
@@ -188,3 +188,23 @@ using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readm
     ```
 
 #### Cleanup README.md
+
+## Test Helm Chart
+
+### Print Helm Chart
+
+1. Get dependencis.
+   Example:
+
+    ```console
+    ```
+
+1. Print chart.
+   Example:
+
+    ```console
+    helm template  \
+      --dependency-update
+      --values ${SENZING_HELM_CHART_TARGET_DIR}/values.yaml \
+      ${SENZING_HELM_CHART_TARGET_DIR}
+    ```
