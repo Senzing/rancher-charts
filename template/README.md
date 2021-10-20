@@ -55,18 +55,18 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
 
     ```console
     export SENZING_HELM_CHART_NAME=nemo
-    export SENZING_HELM_COMPONENT_NAME=ComponentName
+    export SENZING_HELM_COMPONENT_NAME=nemoComponent
     export SENZING_HELM_CONTAINER_NAME=nemo
-    export SENZING_HELM_DESCRIPTION=Description
+    export SENZING_HELM_DESCRIPTION=nemoDescription
     export SENZING_HELM_IMAGE_NAME=nemo
     export SENZING_HELM_MAIN_CONTAINER_NAME=nemo
-    export SENZING_HELM_MAIN_OBJECT_BLOCK=MainObjectBlock
+    export SENZING_HELM_MAIN_OBJECT_BLOCK=main
     export SENZING_HELM_OTHER_OBJECT_BLOCK=OtherObjectBlock
-    export SENZING_HELM_PORT_NAME=PortName
+    export SENZING_HELM_PORT_NAME=nemoPort
     export SENZING_HELM_SECONDARY_OBJECT_BLOCK=SecondaryObjectBlock
     export SENZING_HELM_TEMPLATE_NAME=nemo
-    export SENZING_HELM_UPSTREAM_PROJECT_URL=UpstreamProjectUrl
-    export SENZING_HELM_UPSTREAM_PROJECT_VERSION=UpstreamProjectVersion
+    export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/master/charts/senzing-nemo
+    export SENZING_HELM_UPSTREAM_PROJECT_VERSION=""
     ```
 
    Tips:
@@ -79,18 +79,18 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
        will probably have the same value.
     1. `SENZING_HELM_COMPONENT_NAME`
        is used in `metadata.labels.app.kubernetes.io/component`
-       and the ingress hostname.
+       and `Ingress.hostname`.
     1. `SENZING_HELM_DESCRIPTION`
-       is used in Chart.yaml `description`
+       is used in `Chart.description`.
     1. `SENZING_HELM_MAIN_OBJECT_BLOCK`
        identifyies the primary container.
-       For consistency, set value to "main"
+       For consistency, set value to "main".
     1. `SENZING_HELM_PORT_NAME`
-       is used in `Service.spec.ports.name`
+       is used in `Service.spec.ports.name`.
     1. `SENZING_HELM_UPSTREAM_PROJECT_URL`
        is used in `Chart.home`.
     1. `SENZING_HELM_UPSTREAM_PROJECT_VERSION`
-       is used in `Chart.appVersion`
+       is used in `Chart.appVersion`.
     1. `SENZING_HELM_OTHER_OBJECT_BLOCK` and
        `SENZING_HELM_SECONDARY_OBJECT_BLOCK`
        ...FIXME:
