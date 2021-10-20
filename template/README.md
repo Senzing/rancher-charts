@@ -54,17 +54,17 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
    Example:
 
     ```console
-    export SENZING_HELM_CHART_NAME=nemo
+    export SENZING_HELM_CHART_NAME=senzing-nemo
     export SENZING_HELM_COMPONENT_NAME=nemoComponent
-    export SENZING_HELM_CONTAINER_NAME=nemo
+    export SENZING_HELM_CONTAINER_NAME=senzing-nemo
     export SENZING_HELM_DESCRIPTION=nemoDescription
     export SENZING_HELM_IMAGE_NAME=nemo
-    export SENZING_HELM_MAIN_CONTAINER_NAME=nemo
+    export SENZING_HELM_MAIN_CONTAINER_NAME=senzing-nemo
     export SENZING_HELM_MAIN_OBJECT_BLOCK=main
     export SENZING_HELM_OTHER_OBJECT_BLOCK=OtherObjectBlock
     export SENZING_HELM_PORT_NAME=nemoPort
     export SENZING_HELM_SECONDARY_OBJECT_BLOCK=SecondaryObjectBlock
-    export SENZING_HELM_TEMPLATE_NAME=nemo
+    export SENZING_HELM_TEMPLATE_NAME=senzing-nemo
     export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/master/charts/senzing-nemo
     export SENZING_HELM_UPSTREAM_PROJECT_VERSION=""
     ```
@@ -73,10 +73,11 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
 
     1. `SENZING_HELM_CHART_NAME`,
        `SENZING_HELM_CONTAINER_NAME`
-       `SENZING_HELM_IMAGE_NAME`,
        `SENZING_HELM_MAIN_CONTAINER_NAME`, and
        `SENZING_HELM_TEMPLATE_NAME`
        will probably have the same value.
+    1. `SENZING_HELM_IMAGE_NAME`
+       is the Docker image name.
     1. `SENZING_HELM_COMPONENT_NAME`
        is used in `metadata.labels.app.kubernetes.io/component`
        and `Ingress.hostname`.
