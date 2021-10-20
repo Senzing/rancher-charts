@@ -15,7 +15,7 @@ metadata:
   {{- end }}
 spec:
   scaleTargetRef:
-    apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
+    apiVersion: {{ include "senzing-common.capabilities.deployment.apiVersion" . }}
     kind: Deployment
     name: {{ template "senzing-common.names.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}

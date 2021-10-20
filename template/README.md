@@ -144,6 +144,10 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
 
 ### Update Chart.yaml
 
+1. Update `description`.
+1. If needed, add `keywords`.
+1. If needed, modify `sources`.
+
 ### Update templates
 
 ### Update values.yaml

@@ -26,8 +26,8 @@ command-name.py {{ .Values.senzing.subcommand -}}
 {{- if .Values.diagnosticMode.enabled }}
 The chart has been deployed in diagnostic mode. All probes have been disabled and the command has been overwritten with:
 
-  command: {{- include "common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 4 }}
-  args: {{- include "common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 4 }}
+  command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 4 }}
+  args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 4 }}
 
 Get the list of pods by executing:
 
@@ -90,6 +90,6 @@ In order to replicate the container startup scripts execute this command:
 {{- end }}
 
 
-{{- include "common.warnings.rollingTag" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.image }}
-{{- include "common.warnings.rollingTag" .Values.${SENZING_HELM_OTHER_OBJECT_BLOCK}.image }}
+{{- include "senzing-common.warnings.rollingTag" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.image }}
+{{- include "senzing-common.warnings.rollingTag" .Values.${SENZING_HELM_OTHER_OBJECT_BLOCK}.image }}
 {{- include "${SENZING_HELM_TEMPLATE_NAME}.validateValues" . }}
