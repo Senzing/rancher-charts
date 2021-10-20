@@ -88,6 +88,8 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   args: []
 
   ## ${SENZING_HELM_MAIN_OBJECT_BLOCK} deployment autoscaling
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.builtInMetrics ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling list of built-in metrics
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.customMetrics ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling list of custom metrics
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.enabled Enable ${SENZING_HELM_MAIN_OBJECT_BLOCK} deployment autoscaling
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.maxReplicas ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling maximum number of replicas
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.minReplicas ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling minimum number of replicas
@@ -95,11 +97,11 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetMemory ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling target CPU memory
   ##
   autoscaling:
+    builtInMetrics: []
+    customMetrics: []
     enabled: false
     maxReplicas: 2
     minReplicas: 5
-    builtInMetrics: []
-    customMetrics: []
     targetCPU: 50
     targetMemory: 60
 

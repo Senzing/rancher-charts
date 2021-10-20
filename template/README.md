@@ -116,3 +116,48 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
       > "${SENZING_HELM_CHART_TARGET_DIR}/${FILE_PATH}";
     done
     ```
+
+## Update Helm Chart package
+
+### Update Chart.yaml
+
+### Update templates
+
+### Update values.yaml
+
+### Update README.md
+
+#### Documenting paramters
+
+After the `values.yaml` file has been updated
+and documented in a style parseable by
+[readme-generator](https://github.com/bitnami-labs/readme-generator-for-helm#metadata),
+the `CHART_NAME/README.md`'s  `## Parameters` section should be updated
+using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readme-generator-for-helm).
+
+1. Install [nvm](https://github.com/nvm-sh/nvm).
+1. Install `npm`.
+   Example:
+
+    ```console
+    nvm install v12.21.0
+    ```
+
+1. Install `readme-generator`.
+   Example:
+
+    ```console
+    git clone https://github.com/bitnami-labs/readme-generator-for-helm
+    npm install -g readme-generator-for-helm
+    ```
+
+1. :pencil2: Update `CHART_NAME/README.md`.
+   Example:
+
+    ```console
+    readme-generator \
+      --readme ~/senzing.git/charts/charts/test-chart-1/README.md \
+      --values ~/senzing.git/charts/charts/test-chart-1/values.yaml
+    ```
+
+#### Cleanup README.md
