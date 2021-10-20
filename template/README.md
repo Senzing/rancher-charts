@@ -106,7 +106,6 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
         ${SENZING_HELM_OTHER_OBJECT_BLOCK} \
         ${SENZING_HELM_PORT_NAME} \
         ${SENZING_HELM_SECONDARY_OBJECT_BLOCK} \
-        ${SENZING_HELM_SECONDARY_OBJECT_BLOCK} \
         ${SENZING_HELM_TEMPLATE_NAME} \
         ${SENZING_HELM_UPSTREAM_PROJECT_URL} \
         ${SENZING_HELM_UPSTREAM_PROJECT_VERSION} \
