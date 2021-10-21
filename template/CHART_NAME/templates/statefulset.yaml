@@ -83,7 +83,7 @@ spec:
           {{- end }}
           {{- end }}
           {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.resources }}
-         resources: {{- toYaml .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.resources | nindent 12 }}
+          resources: {{- toYaml .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.resources | nindent 12 }}
           {{- end }}
           {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext "enabled" | toYaml | nindent 12 }}
