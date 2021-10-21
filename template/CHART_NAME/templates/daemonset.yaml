@@ -35,7 +35,8 @@ spec:
         nodeAffinity: {{- include "senzing-common.affinities.nodes" (dict "type" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeAffinityPreset.type "key" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeAffinityPreset.key "values" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.nodeAffinityPreset.values) | nindent 10 }}
       {{- end }}
       containers:
-        - {{- if .Values.diagnosticMode.enabled }}
+        - name: ${SENZING_HELM_CONTAINER_NAME}
+          {{- if .Values.diagnosticMode.enabled }}
           args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 12 }}
           {{- else if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.args }}
           args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.args "context" $) | nindent 12 }}
@@ -72,7 +73,6 @@ spec:
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customLivenessProbe "context" $) | nindent 12 }}
           {{- end }}
           {{- end }}
-          name: ${SENZING_HELM_CONTAINER_NAME}
           ports:
             - containerPort: foo
               protocol: bar

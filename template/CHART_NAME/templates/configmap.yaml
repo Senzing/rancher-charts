@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
 # %%CONFIG_FILE_NAME%%: |
-  # Config file
+#   Config file
 kind: ConfigMap
 metadata:
   {{- if .Values.commonAnnotations }}
