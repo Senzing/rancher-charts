@@ -214,6 +214,7 @@ using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readm
       --values ${SENZING_HELM_CHART_TARGET_DIR}/values.yaml \
       ${SENZING_HELM_CHART_TARGET_DIR}
     ```
+
 ### Print Helm Chart
 
 1. Get dependencies via
