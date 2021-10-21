@@ -187,8 +187,8 @@ using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readm
 
     ```console
     readme-generator \
-      --readme ~/senzing.git/charts/charts/test-chart-1/README.md \
-      --values ~/senzing.git/charts/charts/test-chart-1/values.yaml
+      --readme ${SENZING_HELM_CHART_TARGET_DIR}/README.md \
+      --values ${SENZING_HELM_CHART_TARGET_DIR}/values.yaml
     ```
 
 #### Cleanup README.md
