@@ -1,0 +1,6 @@
+dependencies:
+- name: senzing-common
+  repository: https://hub.senzing.com/charts/
+  version: 1.0.0
+digest: sha256:6a72787a218876be4f64c12c711a1725cfd297817ff1b6b58dcca39ea964f8ef
+generated: "2021-10-21T10:19:46.760529366-04:00"
