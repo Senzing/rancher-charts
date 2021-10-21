@@ -70,7 +70,7 @@ nameOverride: ""
 ## Container parameters
 ## ----------------------------------------------------------------------------
 
-## @section ${SENZING_HELM_MAIN_CONTAINER_NAME} Parameters
+## @section ${SENZING_HELM_MAIN_CONTAINER_NAME} parameters
 
 ## %%MAIN_CONTAINER/POD_DESCRIPTION%%
 ##
@@ -88,13 +88,13 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   args: []
 
   ## ${SENZING_HELM_MAIN_OBJECT_BLOCK} deployment autoscaling
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.builtInMetrics ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling list of built-in metrics
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.customMetrics ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling list of custom metrics
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.enabled Enable ${SENZING_HELM_MAIN_OBJECT_BLOCK} deployment autoscaling
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.maxReplicas ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling maximum number of replicas
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.minReplicas ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling minimum number of replicas
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetCPU ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling target CPU percentage
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetMemory ${SENZING_HELM_MAIN_OBJECT_BLOCK} autoscaling target CPU memory
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.builtInMetrics Autoscaling list of built-in metrics
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.customMetrics Autoscaling list of custom metrics
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.enabled Enable deployment autoscaling
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.maxReplicas Autoscaling maximum number of replicas
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.minReplicas Autoscaling minimum number of replicas
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetCPU Autoscaling target CPU percentage
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetMemory Autoscaling target CPU memory
   ##
   autoscaling:
     builtInMetrics: []
@@ -126,7 +126,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   customReadinessProbe: {}
 
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.existingConfigmap The name of an existing ConfigMap with your custom configuration for ${SENZING_HELM_MAIN_CONTAINER_NAME}
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.existingConfigmap The name of an existing ConfigMap with custom configuration for ${SENZING_HELM_MAIN_CONTAINER_NAME}
   ##
   existingConfigmap:
 
@@ -320,8 +320,8 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   senzing:
     databaseUrl: ""
-    debug: ""
-    logLevel: ""
+    debug: "False"
+    logLevel: "INFO"
     subcommand: ""
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.sidecars Add additional sidecar containers to the ${SENZING_HELM_MAIN_CONTAINER_NAME} pod(s)
@@ -415,7 +415,7 @@ ingress:
   hostname: ${SENZING_HELM_COMPONENT_NAME}.local
 
   ## @param ingress.path Default path for the ingress record
-  ## NOTE: You may need to set this to '/*' in order to use this with ALB ingress controllers
+  ## NOTE: May need to set this to '/*' in order to use this with ALB ingress controllers
   ##
   path: /
 
