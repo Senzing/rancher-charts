@@ -37,6 +37,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed in 1.0.1
 
+- Chart updates:
+  - phppgadmin:2.0.0
+  - resolver:1.2.1
+  - senzing-api-server:1.2.1
+  - senzing-base:1.2.1
+  - senzing-configurator:1.2.1
+  - senzing-console:1.0.1
+  - senzing-debug:1.2.1
+  - senzing-init-container:1.2.1
+  - senzing-yum:1.1.6
 - Migration to Helm 3 support
 - Restructure chart directories to "flatten" them.
 
