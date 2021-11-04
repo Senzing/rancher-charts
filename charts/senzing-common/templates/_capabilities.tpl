@@ -1,5 +1,6 @@
 {{/* vim: set filetype=mustache: */}}
 
+
 {{/*
 Return the target Kubernetes version
 */}}
@@ -15,27 +16,26 @@ Return the target Kubernetes version
 {{- end -}}
 {{- end -}}
 
+
 {{/*
-Return the appropriate apiVersion for podsecuritypolicy.
+Return the appropriate apiVersion for configmap.
 */}}
-{{- define "senzing-common.capabilities.policy.apiVersion" -}}
-{{- if semverCompare "<1.21-0" (include "senzing-common.capabilities.kubeVersion" .) -}}
-{{- print "policy/v1beta1" -}}
+{{- define "senzing-common.capabilities.configmap.apiVersion" -}}
+{{- print "v1" -}}
+{{- end -}}
+
+
+{{/*
+Return the appropriate apiVersion for CRDs.
+*/}}
+{{- define "senzing-common.capabilities.crd.apiVersion" -}}
+{{- if semverCompare "<1.19-0" (include "senzing-common.capabilities.kubeVersion" .) -}}
+{{- print "apiextensions.k8s.io/v1beta1" -}}
 {{- else -}}
-{{- print "policy/v1" -}}
+{{- print "apiextensions.k8s.io/v1" -}}
 {{- end -}}
 {{- end -}}
 
-{{/*
-Return the appropriate apiVersion for networkpolicy.
-*/}}
-{{- define "senzing-common.capabilities.networkPolicy.apiVersion" -}}
-{{- if semverCompare "<1.7-0" (include "senzing-common.capabilities.kubeVersion" .) -}}
-{{- print "extensions/v1beta1" -}}
-{{- else -}}
-{{- print "networking.k8s.io/v1" -}}
-{{- end -}}
-{{- end -}}
 
 {{/*
 Return the appropriate apiVersion for cronjob.
@@ -48,6 +48,19 @@ Return the appropriate apiVersion for cronjob.
 {{- end -}}
 {{- end -}}
 
+
+{{/*
+Return the appropriate apiVersion for daemonset.
+*/}}
+{{- define "senzing-common.capabilities.daemonset.apiVersion" -}}
+{{- if semverCompare "<1.16-0" (include "senzing-common.capabilities.kubeVersion" .) -}}
+{{- print "policy/v1beta1" -}}
+{{- else -}}
+{{- print "apps/v1" -}}
+{{- end -}}
+{{- end -}}
+
+
 {{/*
 Return the appropriate apiVersion for deployment.
 */}}
@@ -59,16 +72,14 @@ Return the appropriate apiVersion for deployment.
 {{- end -}}
 {{- end -}}
 
+
 {{/*
-Return the appropriate apiVersion for statefulset.
+Return the appropriate apiVersion for horizontalpodautoscaler.
 */}}
-{{- define "senzing-common.capabilities.statefulset.apiVersion" -}}
-{{- if semverCompare "<1.14-0" (include "senzing-common.capabilities.kubeVersion" .) -}}
-{{- print "apps/v1beta1" -}}
-{{- else -}}
-{{- print "apps/v1" -}}
+{{- define "senzing-common.capabilities.horizontalpodautoscaler.apiVersion" -}}
+{{- print "autoscaling/v1" -}}
 {{- end -}}
-{{- end -}}
+
 
 {{/*
 Return the appropriate apiVersion for ingress.
@@ -93,6 +104,31 @@ Return the appropriate apiVersion for ingress.
 {{- end -}}
 {{- end -}}
 
+
+{{/*
+Return the appropriate apiVersion for networkpolicy.
+*/}}
+{{- define "senzing-common.capabilities.networkPolicy.apiVersion" -}}
+{{- if semverCompare "<1.7-0" (include "senzing-common.capabilities.kubeVersion" .) -}}
+{{- print "extensions/v1beta1" -}}
+{{- else -}}
+{{- print "networking.k8s.io/v1" -}}
+{{- end -}}
+{{- end -}}
+
+
+{{/*
+Return the appropriate apiVersion for podsecuritypolicy.
+*/}}
+{{- define "senzing-common.capabilities.policy.apiVersion" -}}
+{{- if semverCompare "<1.21-0" (include "senzing-common.capabilities.kubeVersion" .) -}}
+{{- print "policy/v1beta1" -}}
+{{- else -}}
+{{- print "policy/v1" -}}
+{{- end -}}
+{{- end -}}
+
+
 {{/*
 Return the appropriate apiVersion for RBAC resources.
 */}}
@@ -104,16 +140,66 @@ Return the appropriate apiVersion for RBAC resources.
 {{- end -}}
 {{- end -}}
 
+
 {{/*
-Return the appropriate apiVersion for CRDs.
+Return the appropriate apiVersion for role.
 */}}
-{{- define "senzing-common.capabilities.crd.apiVersion" -}}
-{{- if semverCompare "<1.19-0" (include "senzing-common.capabilities.kubeVersion" .) -}}
-{{- print "apiextensions.k8s.io/v1beta1" -}}
+{{- define "senzing-common.capabilities.role.apiVersion" -}}
+{{- if semverCompare "<1.17-0" (include "senzing-common.capabilities.kubeVersion" .) -}}
+{{- print "rbac.authorization.k8s.io/v1beta1" -}}
 {{- else -}}
-{{- print "apiextensions.k8s.io/v1" -}}
+{{- print "rbac.authorization.k8s.io/v1" -}}
 {{- end -}}
 {{- end -}}
+
+
+{{/*
+Return the appropriate apiVersion for rolebinding.
+*/}}
+{{- define "senzing-common.capabilities.rolebinding.apiVersion" -}}
+{{- if semverCompare "<1.17-0" (include "senzing-common.capabilities.kubeVersion" .) -}}
+{{- print "rbac.authorization.k8s.io/v1beta1" -}}
+{{- else -}}
+{{- print "rbac.authorization.k8s.io/v1" -}}
+{{- end -}}
+{{- end -}}
+
+
+{{/*
+Return the appropriate apiVersion for secret.
+*/}}
+{{- define "senzing-common.capabilities.secret.apiVersion" -}}
+{{- print "v1" -}}
+{{- end -}}
+
+
+{{/*
+Return the appropriate apiVersion for service.
+*/}}
+{{- define "senzing-common.capabilities.service.apiVersion" -}}
+{{- print "v1" -}}
+{{- end -}}
+
+
+{{/*
+Return the appropriate apiVersion for serviceaccount.
+*/}}
+{{- define "senzing-common.capabilities.serviceaccount.apiVersion" -}}
+{{- print "v1" -}}
+{{- end -}}
+
+
+{{/*
+Return the appropriate apiVersion for statefulset.
+*/}}
+{{- define "senzing-common.capabilities.statefulset.apiVersion" -}}
+{{- if semverCompare "<1.14-0" (include "senzing-common.capabilities.kubeVersion" .) -}}
+{{- print "apps/v1beta1" -}}
+{{- else -}}
+{{- print "apps/v1" -}}
+{{- end -}}
+{{- end -}}
+
 
 {{/*
 Returns true if the used Helm version is 3.3+.
