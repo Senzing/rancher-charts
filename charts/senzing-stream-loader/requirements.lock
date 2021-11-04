@@ -1,6 +1,6 @@
 dependencies:
 - name: senzing-common
   repository: file:///home/senzing/senzing.git/charts/charts/senzing-common
-  version: 1.0.0
-digest: sha256:4c2c5116cb6b006f71b754dea3672411f03f8d2eb31392af02b77576570f3bad
-generated: "2021-10-06T14:53:57.281767616-04:00"
+  version: 1.0.1
+digest: sha256:56cb224dcee94ec35887a41fd95a028e3eb97011ab377cd9276f7f1a77ccdc25
+generated: "2021-11-04T17:17:15.847003982-04:00"
