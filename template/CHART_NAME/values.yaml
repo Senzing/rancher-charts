@@ -100,8 +100,8 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
     builtInMetrics: []
     customMetrics: []
     enabled: false
-    maxReplicas: 2
-    minReplicas: 5
+    maxReplicas: 10
+    minReplicas: 2
     targetCPU: 50
     targetMemory: 60
 
@@ -215,13 +215,13 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
   ##
   livenessProbe:
-    enabled: true
+    enabled: false
 #   %%httpGet || command || etc%%
-    failureThreshold: bar
-    initialDelaySeconds: foo
-    periodSeconds: bar
-    successThreshold: foo
-    timeoutSeconds: foo
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
 
   ## Node ${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity preset
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
@@ -290,13 +290,13 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
   ##
   readinessProbe:
-    enabled: true
+    enabled: false
 #   %%httpGet || command || etc%%
-    failureThreshold: bar
-    initialDelaySeconds: foo
-    periodSeconds: bar
-    successThreshold: foo
-    timeoutSeconds: foo
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.replicaCount Number of ${SENZING_HELM_MAIN_CONTAINER_NAME} replicas to deploy
   ##
