@@ -77,7 +77,7 @@ Return the appropriate apiVersion for deployment.
 Return the appropriate apiVersion for horizontalpodautoscaler.
 */}}
 {{- define "senzing-common.capabilities.horizontalpodautoscaler.apiVersion" -}}
-{{- print "autoscaling/v1" -}}
+{{- print "autoscaling/v2beta1" -}}
 {{- end -}}
 
 
