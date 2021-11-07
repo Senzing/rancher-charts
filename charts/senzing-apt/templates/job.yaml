@@ -48,8 +48,14 @@ spec:
           command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.command "context" $) | nindent 12 }}
           {{- end }}
           env:
-            - name: SENZING_DEBUG
-              value: {{ ternary "true" "false" (or .Values.main.image.debug .Values.diagnosticMode.enabled) | quote }}
+            {{- if .Values.main.senzing.acceptEula }}
+            - name: "SENZING_ACCEPT_EULA"
+              value: {{ .Values.main.senzing.acceptEula | quote }}
+            {{- end }}
+            {{- if .Values.main.mssql.acceptEula }}
+            - name: "ACCEPT_EULA"
+              value: {{ .Values.main.mssql.acceptEula | quote }}
+            {{- end }}
             {{- if .Values.main.extraEnvVars }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}
@@ -87,35 +93,53 @@ spec:
           {{- if .Values.main.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
+          {{- if .Values.main.senzing.persistentVolumeClaim }}
           volumeMounts:
-            - mountPath: bar
-              name: foo
+            - name: senzing-storage
+              mountPath: /opt/senzing/data
+              subPath: senzing-data
+            - name: senzing-storage
+              mountPath: /etc/opt/senzing
+              subPath: senzing-etc
+            - name: senzing-storage
+              mountPath: /opt/senzing/g2
+              subPath: senzing-g2
+            - name: senzing-storage
+              mountPath: /rpms
+              subPath: senzing-rpms
+            - name: senzing-storage
+              mountPath: /var/opt/senzing
+              subPath: senzing-var
+            {{- if .Values.main.senzing.mountOptIbm }}
+            - name: senzing-storage
+              mountPath: /opt/IBM
+              subPath: senzing-db2-drivers
+            {{- end }}
+            {{- if .Values.main.senzing.mountOptMicrosoft }}
+            - name: senzing-storage
+              mountPath: /opt/microsoft
+              subPath: opt-microsoft
+            {{- end }}
+          {{- end }}
             {{- if .Values.main.extraVolumeMounts }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
             {{- end }}
         {{- if .Values.main.sidecars }}
         {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
         {{- end }}
-      {{- if .Values.main.hostAliases }}
-      hostAliases: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.hostAliases "context" $) | nindent 8 }}
-      {{- end }}
       {{- include "senzing-apt.imagePullSecrets" . | nindent 6 }}
       initContainers:
-        {{- if .Values.volumePermissions.enabled }}
-        - command:
-            - %%commands%%
-          image: {{ include "senzing-apt.volumePermissions.image" . }}
-          imagePullPolicy: {{ .Values.volumePermissions.image.pullPolicy | quote }}
-          name: volume-permissions
-          {{- if .Values.volumePermissions.resources }}
-          resources: {{- toYaml .Values.volumePermissions.resources | nindent 12 }}
-          {{- end }}
+        - name: senzing-mount-maker
+          image: busybox:1.28
+          {{- if .Values.rbacEnabled}}
           securityContext:
-            runAsUser: 0
+            privileged: true
+          {{- end }}
+          {{- if .Values.main.senzing.persistentVolumeClaim }}
           volumeMounts:
-            - mountPath: bar
-              name: foo
-        {{- end }}
+            - name:  senzing-storage
+              mountPath: /opt/senzing
+          {{- end }}
         {{- if .Values.main.initContainers }}
           {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.initContainers "context" $) | nindent 8 }}
         {{- end }}
@@ -134,9 +158,36 @@ spec:
       tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
       {{- end }}
       volumes:
-        - name: foo
-          hostPath:
-            path: bar
+        {{- if .Values.main.senzing.optMicrosoftDataClaim }}
+        - name: opt-microsoft
+          persistentVolumeClaim:
+            claimName: {{ .Values.main.senzing.optMicrosoftDataClaim }}
+        {{- end }}
+        {{- if .Values.main.senzing.senzingDataClaim }}
+        - name: senzing-data-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.main.senzing.senzingDataClaim }}
+        {{- end }}
+        {{- if .Values.main.senzing.senzingEtcClaim }}
+        - name: senzing-etc-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.main.senzing.senzingEtcClaim }}
+        {{- end }}
+        {{- if .Values.main.senzing.senzingG2Claim }}
+        - name: senzing-g2-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.main.senzing.senzingG2Claim }}
+        {{- end }}
+        {{- if .Values.main.senzing.persistentVolumeClaim }}
+        - name: senzing-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.main.senzing.persistentVolumeClaim }}
+        {{- end }}
+        {{- if .Values.main.senzing.senzingVarClaim }}
+        - name: senzing-var-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.main.senzing.senzingVarClaim }}
+        {{- end }}
         {{- if .Values.main.extraVolumes }}
         {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumes "context" $) | nindent 8 }}
         {{- end }}

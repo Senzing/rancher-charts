@@ -1,4 +1,0 @@
-{{- range .Values.extraDeploy }}
----
-{{ include "senzing-common.tplvalues.render" (dict "value" . "context" $) }}
-{{- end }}

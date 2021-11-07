@@ -98,6 +98,7 @@ main:
   ##
   containerSecurityContext:
     enabled: true
+    privileged: true
     runAsUser: 1001
 
   ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
@@ -204,6 +205,11 @@ main:
     periodSeconds: 10
     successThreshold: 1
     timeoutSeconds: 1
+
+  ## senzing-apt Senzing environment variables
+  ## @param main.mssql.acceptEula End User License agreement.
+  mssql:
+    acceptEula: ""
 
   ## Node main.affinity preset
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
@@ -342,3 +348,16 @@ rbac:
   ## @param rbac.create Specifies whether RBAC resources should be created
   ##
   create: false
+
+## ServiceAccount configuration
+##
+serviceAccount:
+
+  ## @param serviceAccount.create Specifies whether a ServiceAccount should be created
+  ##
+  create: false
+
+  ## @param serviceAccount.name The name of the ServiceAccount to use.
+  ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
+  ##
+  name: ""
