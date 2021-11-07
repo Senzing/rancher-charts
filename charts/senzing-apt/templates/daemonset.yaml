@@ -1,5 +1,5 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: apps/v1
+kind: DaemonSet
 metadata:
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
@@ -12,7 +12,6 @@ metadata:
   name: {{ template "senzing-common.names.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.main.replicaCount }}
   selector:
     matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
       app.kubernetes.io/component: senzing-apt-component
@@ -74,6 +73,9 @@ spec:
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customLivenessProbe "context" $) | nindent 12 }}
           {{- end }}
           {{- end }}
+          ports:
+            - containerPort: foo
+              protocol: bar
           {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.main.readinessProbe.enabled }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
@@ -90,6 +92,7 @@ spec:
           volumeMounts:
             - mountPath: bar
               name: foo
+              readOnly: true
             {{- if .Values.main.extraVolumeMounts }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
             {{- end }}
@@ -125,7 +128,6 @@ spec:
       {{- if .Values.main.priorityClassName }}
       priorityClassName: {{ .Values.main.priorityClassName | quote }}
       {{- end }}
-      restartPolicy: Never
       {{- if .Values.main.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}
       {{- end }}
@@ -140,3 +142,6 @@ spec:
         {{- if .Values.main.extraVolumes }}
         {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumes "context" $) | nindent 8 }}
         {{- end }}
+  {{- if .Values.main.updateStrategy }}
+  updateStrategy: {{- toYaml .Values.main.updateStrategy | nindent 4 }}
+  {{- end }}

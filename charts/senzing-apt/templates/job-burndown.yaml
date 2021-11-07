@@ -1,0 +1,42 @@
+spec:
+  template:
+    spec:
+      containers:
+      initContainers:
+
+      volumes:
+        {{- if .Values.senzing.optMicrosoftDataClaim }}
+        - name: opt-microsoft
+          persistentVolumeClaim:
+            claimName: {{ .Values.senzing.optMicrosoftDataClaim }}
+        {{- end }}
+        {{- if .Values.senzing.senzingDataClaim }}
+        - name: senzing-data-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.senzing.senzingDataClaim }}
+        {{- end }}
+        {{- if .Values.senzing.senzingEtcClaim }}
+        - name: senzing-etc-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.senzing.senzingEtcClaim }}
+        {{- end }}
+        {{- if .Values.senzing.senzingG2Claim }}
+        - name: senzing-g2-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.senzing.senzingG2Claim }}
+        {{- end }}
+        {{- if .Values.senzing.persistentVolumeClaim }}
+        - name: senzing-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.senzing.persistentVolumeClaim }}
+        {{- end }}
+        {{- if .Values.senzing.senzingVarClaim }}
+        - name: senzing-var-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.senzing.senzingVarClaim }}
+        {{- end }}
+# --- Standard suffix ---
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

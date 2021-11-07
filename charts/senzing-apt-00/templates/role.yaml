@@ -2,10 +2,10 @@
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ template "senzing-stream-loader.fullname" . }}-endpoint-reader
+  name: {{ template "senzing-apt.fullname" . }}-endpoint-reader
   labels:
-    app: {{ template "senzing-stream-loader.name" . }}
-    chart: {{ template "senzing-stream-loader.chart" .  }}
+    app: {{ template "senzing-apt.name" . }}
+    chart: {{ template "senzing-apt.chart" .  }}
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 rules:

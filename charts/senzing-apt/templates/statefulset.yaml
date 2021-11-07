@@ -1,5 +1,5 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: {{ include "senzing-common.capabilities.statefulset.apiVersion" . }}
+kind: StatefulSet
 metadata:
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
@@ -16,6 +16,7 @@ spec:
   selector:
     matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
       app.kubernetes.io/component: senzing-apt-component
+  serviceName: {{ template "senzing-common.names.fullname" . }}
   template:
     metadata:
       {{- if .Values.main.podAnnotations }}
@@ -90,9 +91,10 @@ spec:
           volumeMounts:
             - mountPath: bar
               name: foo
-            {{- if .Values.main.extraVolumeMounts }}
-            {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
-            {{- end }}
+              readOnly: true
+          {{- if .Values.main.extraVolumeMounts }}
+          {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
+          {{- end }}
         {{- if .Values.main.sidecars }}
         {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
         {{- end }}
@@ -110,8 +112,9 @@ spec:
           {{- if .Values.volumePermissions.resources }}
           resources: {{- toYaml .Values.volumePermissions.resources | nindent 12 }}
           {{- end }}
-          securityContext:
-            runAsUser: 0
+          {{- if .Values.main.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - mountPath: bar
               name: foo
@@ -125,7 +128,6 @@ spec:
       {{- if .Values.main.priorityClassName }}
       priorityClassName: {{ .Values.main.priorityClassName | quote }}
       {{- end }}
-      restartPolicy: Never
       {{- if .Values.main.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}
       {{- end }}
@@ -140,3 +142,6 @@ spec:
         {{- if .Values.main.extraVolumes }}
         {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumes "context" $) | nindent 8 }}
         {{- end }}
+  {{- if .Values.main.updateStrategy }}
+  updateStrategy: {{- toYaml .Values.main.updateStrategy | nindent 4 }}
+  {{- end }}
