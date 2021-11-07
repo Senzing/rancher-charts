@@ -93,13 +93,12 @@ main:
 
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ## @param main.containerSecurityContext.enabled Enabled senzing-apt containers' Security Context
   ## @param main.containerSecurityContext.runAsUser Set senzing-apt containers' Security Context runAsUser
   ##
   containerSecurityContext:
-    enabled: true
     privileged: true
-    runAsUser: 1001
 
   ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
   ##
@@ -259,12 +258,15 @@ main:
 
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ## @param main.podSecurityContext.enabled Enabled senzing-apt pods' Security Context
   ## @param main.podSecurityContext.fsGroup Set senzing-apt pod's Security Context fsGroup
   ##
   podSecurityContext:
     enabled: true
     fsGroup: 1001
+    runAsGroup: 1001
+    runAsUser: 1001
 
   ## @param main.priorityClassName senzing-apt pods' priorityClassName
   ##
@@ -355,7 +357,7 @@ serviceAccount:
 
   ## @param serviceAccount.create Specifies whether a ServiceAccount should be created
   ##
-  create: false
+  create: true
 
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template

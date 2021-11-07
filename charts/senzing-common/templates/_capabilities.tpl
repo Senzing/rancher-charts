@@ -106,7 +106,7 @@ Return the appropriate apiVersion for ingress.
 
 
 {{/*
-Return the appropriate apiVersion for cronjob.
+Return the appropriate apiVersion for ob.
 */}}
 {{- define "senzing-common.capabilities.job.apiVersion" -}}
 {{- if semverCompare "<1.21-0" (include "senzing-common.capabilities.kubeVersion" .) -}}

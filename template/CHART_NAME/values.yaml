@@ -111,12 +111,12 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
 
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.runAsUser Set ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context runAsUser
   ##
   containerSecurityContext:
-    enabled: true
-    runAsUser: 1001
+    privileged: true
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.customLivenessProbe Custom livenessProbe that overrides the default one
   ##
@@ -271,12 +271,15 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
 
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} pods' Security Context
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.fsGroup Set ${SENZING_HELM_MAIN_CONTAINER_NAME} pod's Security Context fsGroup
   ##
   podSecurityContext:
     enabled: true
     fsGroup: 1001
+    runAsGroup: 1001
+    runAsUser: 1001
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.priorityClassName ${SENZING_HELM_MAIN_CONTAINER_NAME} pods' priorityClassName
   ##

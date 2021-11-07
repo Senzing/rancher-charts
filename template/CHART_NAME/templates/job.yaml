@@ -12,7 +12,6 @@ metadata:
   name: {{ template "senzing-common.names.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.replicaCount }}
   selector:
     matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
       app.kubernetes.io/component: ${SENZING_HELM_COMPONENT_NAME}

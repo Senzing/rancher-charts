@@ -1,4 +1,4 @@
-apiVersion: {{ include "senzing-common.capabilities.job.apiVersion" . }}
+apiVersion: batch/v1
 kind: Job
 metadata:
   {{- if .Values.commonAnnotations }}
@@ -12,10 +12,6 @@ metadata:
   name: {{ template "senzing-common.names.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.main.replicaCount }}
-  selector:
-    matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
-      app.kubernetes.io/component: senzing-apt-component
   template:
     metadata:
       {{- if .Values.main.podAnnotations }}
