@@ -187,7 +187,7 @@ main:
     ##
     pullSecrets: []
     registry: docker.io
-    repository: senzing/console
+    repository: senzing/senzing-console
     tag: latest
 
   ## @param main.initContainers Add additional init containers to the senzing-console pod(s)

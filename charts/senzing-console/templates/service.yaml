@@ -22,9 +22,9 @@ spec:
   loadBalancerSourceRanges: {{ .Values.service.loadBalancerSourceRanges }}
   {{- end }}
   ports:
-    - name: FIXMEport
+    - name: http
       port: 80
-      protocol: HTTP
+      protocol: TCP
   selector: {{- include "senzing-common.labels.matchLabels" . | nindent 4 }}
     app.kubernetes.io/component: senzing-console-component
   type: {{ .Values.service.type }}
