@@ -51,11 +51,11 @@ spec:
           command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.command "context" $) | nindent 12 }}
           {{- end }}
           env:
-            {{- if .Values.senzing.mountOptIbm }}
+            {{- if .Values.main.senzing.mountOptIbm }}
             - name: LD_LIBRARY_PATH
               value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/IBM/db2/clidriver/lib
             {{- end }}
-            {{- if .Values.senzing.mountOptMicrosoft }}
+            {{- if .Values.main.senzing.mountOptMicrosoft }}
             - name: LD_LIBRARY_PATH
               value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/microsoft/msodbcsql17/lib64
             - name: ODBCINI
@@ -63,10 +63,10 @@ spec:
             - name: ODBCSYSINI
               value: /opt/microsoft/msodbcsql17/etc
             {{- end }}
-            {{- if .Values.senzing.engineConfigurationJson }}
+            {{- if .Values.main.senzing.engineConfigurationJson }}
             - name: SENZING_ENGINE_CONFIGURATION_JSON
               value: >-
-              {{ .Values.senzing.engineConfigurationJson  | nindent 16 }}
+              {{ .Values.main.senzing.engineConfigurationJson  | nindent 16 }}
             {{- end }}
             {{- if .Values.main.extraEnvVars }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
@@ -105,7 +105,7 @@ spec:
           {{- if .Values.main.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
-          {{- if .Values.senzing.persistentVolumeClaim }}
+          {{- if .Values.main.senzing.persistentVolumeClaim }}
           volumeMounts:
             - name: senzing-storage
               mountPath: /opt/senzing/data
@@ -119,12 +119,12 @@ spec:
             - name: senzing-storage
               mountPath: /var/opt/senzing
               subPath: senzing-var
-            {{- if .Values.senzing.mountOptIbm }}
+            {{- if .Values.main.senzing.mountOptIbm }}
             - name: senzing-storage
               mountPath: /opt/IBM
               subPath: senzing-db2-drivers
             {{- end }}
-            {{- if .Values.senzing.mountOptMicrosoft }}
+            {{- if .Values.main.senzing.mountOptMicrosoft }}
             - name: senzing-storage
               mountPath: /opt/microsoft
               subPath: opt-microsoft
@@ -172,11 +172,11 @@ spec:
       {{- if .Values.main.tolerations }}
       tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
       {{- end }}
-      {{- if .Values.senzing.persistentVolumeClaim }}
+      {{- if .Values.main.senzing.persistentVolumeClaim }}
       volumes:
         - name: senzing-storage
           persistentVolumeClaim:
-            claimName: {{ .Values.senzing.persistentVolumeClaim }}
+            claimName: {{ .Values.main.senzing.persistentVolumeClaim }}
       {{- end }}
         {{- if .Values.main.extraVolumes }}
         {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumes "context" $) | nindent 8 }}
