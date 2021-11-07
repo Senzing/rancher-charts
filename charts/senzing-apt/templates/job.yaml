@@ -1,4 +1,4 @@
-apiVersion: batch/v1
+apiVersion: {{ include "senzing-common.capabilities.job.apiVersion" . }}
 kind: Job
 metadata:
   {{- if .Values.commonAnnotations }}
