@@ -1,4 +1,4 @@
-apiVersion: {{ include "senzing-common.capabilities.job.apiVersion" . }}
+apiVersion: batch/v1
 kind: Job
 metadata:
   {{- if .Values.commonAnnotations }}
@@ -12,9 +12,6 @@ metadata:
   name: {{ template "senzing-common.names.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 spec:
-  selector:
-    matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
-      app.kubernetes.io/component: senzing-postgresql-client-component
   template:
     metadata:
       {{- if .Values.main.podAnnotations }}
@@ -36,19 +33,21 @@ spec:
       {{- end }}
       containers:
         - name: senzing-postgresql-client
-          {{- if .Values.diagnosticMode.enabled }}
-          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 12 }}
-          {{- else if .Values.main.args }}
-          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.args "context" $) | nindent 12 }}
-          {{- end }}
-          {{- if .Values.diagnosticMode.enabled }}
-          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 12 }}
-          {{- else if .Values.main.command }}
-          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.command "context" $) | nindent 12 }}
-          {{- end }}
+          args:
+            - "-U"
+            - {{ .Values.main.postgresql.username | quote}}
+            - "-h"
+            - {{ .Values.main.postgresql.host | quote}}
+            - "-d"
+            - {{ .Values.main.postgresql.database | quote}}
+            - "-f"
+            - "/data/{{ .Values.main.postgresql.file }}"
+          command: ["psql"]
           env:
-            - name: SENZING_DEBUG
-              value: {{ ternary "true" "false" (or .Values.main.image.debug .Values.diagnosticMode.enabled) | quote }}
+            {{- if .Values.main.postgresql.password }}
+            - name: "PGPASSWORD"
+              value: {{ .Values.main.postgresql.password | quote }}
+            {{- end }}
             {{- if .Values.main.extraEnvVars }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}
@@ -86,38 +85,18 @@ spec:
           {{- if .Values.main.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
+          {{- if .Values.main.postgresql.storageClaim }}
           volumeMounts:
-            - mountPath: bar
-              name: foo
+            - name: postgresql-storage
+              mountPath: /data
+          {{- end }}
             {{- if .Values.main.extraVolumeMounts }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
             {{- end }}
         {{- if .Values.main.sidecars }}
         {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
         {{- end }}
-      {{- if .Values.main.hostAliases }}
-      hostAliases: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.hostAliases "context" $) | nindent 8 }}
-      {{- end }}
       {{- include "senzing-postgresql-client.imagePullSecrets" . | nindent 6 }}
-      initContainers:
-        {{- if .Values.volumePermissions.enabled }}
-        - command:
-            - %%commands%%
-          image: {{ include "senzing-postgresql-client.volumePermissions.image" . }}
-          imagePullPolicy: {{ .Values.volumePermissions.image.pullPolicy | quote }}
-          name: volume-permissions
-          {{- if .Values.volumePermissions.resources }}
-          resources: {{- toYaml .Values.volumePermissions.resources | nindent 12 }}
-          {{- end }}
-          securityContext:
-            runAsUser: 0
-          volumeMounts:
-            - mountPath: bar
-              name: foo
-        {{- end }}
-        {{- if .Values.main.initContainers }}
-          {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.initContainers "context" $) | nindent 8 }}
-        {{- end }}
       {{- if .Values.main.nodeSelector }}
       nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.nodeSelector "context" $) | nindent 8 }}
       {{- end }}
@@ -132,10 +111,10 @@ spec:
       {{- if .Values.main.tolerations }}
       tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
       {{- end }}
+      {{- if .Values.main.postgresql.storageClaim }}
       volumes:
-        - name: foo
-          hostPath:
-            path: bar
-        {{- if .Values.main.extraVolumes }}
-        {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumes "context" $) | nindent 8 }}
-        {{- end }}
+        - name: postgresql-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.main.postgresql.storageClaim }}
+      {{- end }}
+
