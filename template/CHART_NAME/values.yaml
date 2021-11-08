@@ -415,7 +415,7 @@ ingress:
 
   ## @param ingress.hostname Default host for the ingress record
   ##
-  hostname: ${SENZING_HELM_COMPONENT_NAME}.local
+  hostname: ${SENZING_HELM_CHART_NAME}.local
 
   ## @param ingress.path Default path for the ingress record
   ## NOTE: May need to set this to '/*' in order to use this with ALB ingress controllers
