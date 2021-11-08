@@ -1,0 +1,23 @@
+# https://helm.sh/docs/topics/charts/#the-chartyaml-file
+
+apiVersion: v2
+appVersion: ""
+dependencies:
+  - name: senzing-common
+    repository: https://hub.senzing.com/charts/
+    version: 1.0.1
+description: Postgresql client
+engine: gotpl
+home: https://github.com/Senzing/charts/tree/master/charts/senzing-postgresql-client
+icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
+keywords:
+ - postgresql
+maintainers:
+  - email: support@senzing.com
+    name: Senzing
+name: senzing-postgresql-client
+sources:
+  - https://github.com/Senzing/charts/tree/master/charts/senzing-postgresql-client
+  - https://github.com/Senzing/postgresql-client
+type: application
+version: 2.0.0
