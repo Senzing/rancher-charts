@@ -466,7 +466,7 @@ ingress:
   ## @param ingress.extraHosts An array with additional hostname(s) to be covered with the ingress record
   ## e.g:
   ## extraHosts:
-  ##   - name: senzing-stream-loader-component.local
+  ##   - name: senzing-stream-loader.local
   ##     path: /
   ##
   extraHosts: []
@@ -486,14 +486,14 @@ ingress:
   ## e.g:
   ## extraTls:
   ## - hosts:
-  ##     - senzing-stream-loader-component.local
-  ##   secretName: senzing-stream-loader-component.local-tls
+  ##     - senzing-stream-loader.local
+  ##   secretName: senzing-stream-loader.local-tls
   ##
   extraTls: []
 
   ## @param ingress.hostname Default host for the ingress record
   ##
-  hostname: senzing-stream-loader-component.local
+  hostname: senzing-stream-loader.local
 
   ## @param ingress.path Default path for the ingress record
   ## NOTE: May need to set this to '/*' in order to use this with ALB ingress controllers
@@ -513,7 +513,7 @@ ingress:
   ## Please see README.md for more information
   ## e.g:
   ## secrets:
-  ##   - name: senzing-stream-loader-component.local-tls
+  ##   - name: senzing-stream-loader.local-tls
   ##     key: |-
   ##       -----BEGIN RSA PRIVATE KEY-----
   ##       ...

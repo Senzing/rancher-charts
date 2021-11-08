@@ -396,7 +396,7 @@ ingress:
   ## @param ingress.extraHosts An array with additional hostname(s) to be covered with the ingress record
   ## e.g:
   ## extraHosts:
-  ##   - name: senzing-postgresql-client-component.local
+  ##   - name: senzing-postgresql-client.local
   ##     path: /
   ##
   extraHosts: []
@@ -416,14 +416,14 @@ ingress:
   ## e.g:
   ## extraTls:
   ## - hosts:
-  ##     - senzing-postgresql-client-component.local
-  ##   secretName: senzing-postgresql-client-component.local-tls
+  ##     - senzing-postgresql-client.local
+  ##   secretName: senzing-postgresql-client.local-tls
   ##
   extraTls: []
 
   ## @param ingress.hostname Default host for the ingress record
   ##
-  hostname: senzing-postgresql-client-component.local
+  hostname: senzing-postgresql-client.local
 
   ## @param ingress.path Default path for the ingress record
   ## NOTE: May need to set this to '/*' in order to use this with ALB ingress controllers
@@ -443,7 +443,7 @@ ingress:
   ## Please see README.md for more information
   ## e.g:
   ## secrets:
-  ##   - name: senzing-postgresql-client-component.local-tls
+  ##   - name: senzing-postgresql-client.local-tls
   ##     key: |-
   ##       -----BEGIN RSA PRIVATE KEY-----
   ##       ...

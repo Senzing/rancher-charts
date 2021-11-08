@@ -70,14 +70,14 @@ nameOverride: ""
 ## Container parameters
 ## ----------------------------------------------------------------------------
 
-## @section senzing-console parameters
+## @section phppgadmin parameters
 
 ## %%MAIN_CONTAINER/POD_DESCRIPTION%%
 ##
 main:
 
-  ## Senzing senzing-console image
-  ## @param main.affinity Affinity for senzing-console pods assignment
+  ## Senzing phppgadmin image
+  ## @param main.affinity Affinity for phppgadmin pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   ## NOTE: `main.podAffinityPreset`, `main.podAntiAffinityPreset`, and `main.nodeAffinityPreset` will be ignored when it's set
   ##
@@ -109,14 +109,24 @@ main:
   ##
   command: []
 
+  ## Configure Container ports
+  ## @param main.containerPorts.http xxx
+  ##
+  containerPorts:
+    http: 80
+    https: 443
+
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
-  ## @param main.containerSecurityContext.enabled Enabled senzing-console containers' Security Context
-  ## @param main.containerSecurityContext.runAsUser Set senzing-console containers' Security Context runAsUser
+  ## @param main.containerSecurityContext.enabled Enabled phppgadmin containers' Security Context
+  ## @param main.containerSecurityContext.runAsUser Set phppgadmin containers' Security Context runAsUser
   ##
   containerSecurityContext:
-    privileged: true
+    enabled: true
+    privileged: false
+    runAsGroup: 1001
+    runAsUser: 1001
 
   ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
   ##
@@ -126,11 +136,11 @@ main:
   ##
   customReadinessProbe: {}
 
-  ## @param main.existingConfigmap The name of an existing ConfigMap with custom configuration for senzing-console
+  ## @param main.existingConfigmap The name of an existing ConfigMap with custom configuration for phppgadmin
   ##
   existingConfigmap:
 
-  ## @param main.extraEnvVars Array with extra environment variables to add to senzing-console nodes
+  ## @param main.extraEnvVars Array with extra environment variables to add to phppgadmin nodes
   ## e.g:
   ## extraEnvVars:
   ##   - name: FOO
@@ -138,33 +148,33 @@ main:
   ##
   extraEnvVars: []
 
-  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for senzing-console nodes
+  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for phppgadmin nodes
   ##
   extraEnvVarsSecret:
 
-  ## @param main.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for senzing-console nodes
+  ## @param main.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for phppgadmin nodes
   ##
   extraEnvVarsCM:
 
-  ## @param main.extraVolumes Optionally specify extra list of additional volumes for the senzing-console pod(s)
+  ## @param main.extraVolumes Optionally specify extra list of additional volumes for the phppgadmin pod(s)
   ##
   extraVolumes: []
 
-  ## @param main.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the senzing-console container(s)
+  ## @param main.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the phppgadmin container(s)
   ##
   extraVolumeMounts: []
 
-  ## @param main.hostAliases senzing-console pods host aliases
+  ## @param main.hostAliases phppgadmin pods host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##
   hostAliases: []
 
-  ## @param main.image.debug Enable senzing-console image debug mode
-  ## @param main.image.pullPolicy senzing-console image pull policy
-  ## @param main.image.pullSecrets senzing-console image pull secrets
-  ## @param main.image.registry senzing-console image registry
-  ## @param main.image.repository senzing-console image repository
-  ## @param main.image.tag senzing-console image tag (immutable tags are recommended)
+  ## @param main.image.debug Enable phppgadmin image debug mode
+  ## @param main.image.pullPolicy phppgadmin image pull policy
+  ## @param main.image.pullSecrets phppgadmin image pull secrets
+  ## @param main.image.registry phppgadmin image registry
+  ## @param main.image.repository phppgadmin image repository
+  ## @param main.image.tag phppgadmin image tag (immutable tags are recommended)
   ##
   image:
 
@@ -187,10 +197,10 @@ main:
     ##
     pullSecrets: []
     registry: docker.io
-    repository: senzing/senzing-console
+    repository: senzing/phppgadmin
     tag: latest
 
-  ## @param main.initContainers Add additional init containers to the senzing-console pod(s)
+  ## @param main.initContainers Add additional init containers to the phppgadmin pod(s)
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
   ## e.g:
   ## initContainers:
@@ -201,13 +211,13 @@ main:
   ##
   initContainers: {}
 
-  ## @param main.lifecycleHooks for the senzing-console container(s) to automate configuration before or after startup
+  ## @param main.lifecycleHooks for the phppgadmin container(s) to automate configuration before or after startup
   ##
   lifecycleHooks: {}
 
-  ## Configure extra options for senzing-console containers' liveness and readiness probes
+  ## Configure extra options for phppgadmin containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
-  ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-console nodes
+  ## @param main.livenessProbe.enabled Enable livenessProbe on phppgadmin nodes
   ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
   ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
   ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
@@ -215,13 +225,15 @@ main:
   ## @param main.livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
   ##
   livenessProbe:
-    enabled: false
-#   %%httpGet || command || etc%%
-    failureThreshold: 3
-    initialDelaySeconds: 0
+    enabled: true
+    failureThreshold: 6
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 30
     periodSeconds: 10
     successThreshold: 1
-    timeoutSeconds: 1
+    timeoutSeconds: 30
 
   ## Node main.affinity preset
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
@@ -244,17 +256,45 @@ main:
     ##
     values: []
 
-  ## @param main.nodeSelector Node labels for senzing-console pods assignment
+  ## @param main.nodeSelector Node labels for phppgadmin pods assignment
   ## ref: https://kubernetes.io/docs/user-guide/node-selection/
   ##
   nodeSelector: {}
+
+  ## Configure phpPgAdmin
+  ## @param main.phppgadmin.ajaxRefresh xxx
+  ##
+  phppgadmin:
+    ajaxRefresh: 3
+    autoComplete: default on
+    defaultLang: auto
+    extraLoginSecurity: false
+    helpBase: http://www.postgresql.org/docs/%s/interactive/
+    leftWidth: 200
+    maxChars: 50
+    maxRows: 30
+    minPasswordLength: 1
+    ownedOnly: false
+    serverDefaultDb: template1
+    serverDesc: PostgreSQL
+    serverHost:
+    serverPgDumpAllPath: /usr/bin/pg_dumpall
+    serverPgDumpPath: /usr/bin/pg_dump
+    serverPort: 5432
+    serverSslMode: allow
+    showAdvanced: false
+    showComments: true
+    showOids: false
+    showSystem: false
+    theme: default
+    userXhtlmStrict: false
 
   ## @param main.podAffinityPreset Pod affinity preset. Ignored if `main.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
   podAffinityPreset: ""
 
-  ## @param main.podAnnotations Annotations for senzing-console pods
+  ## @param main.podAnnotations Annotations for phppgadmin pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
   podAnnotations: {}
@@ -264,7 +304,7 @@ main:
   ##
   podAntiAffinityPreset: soft
 
-  ## @param main.podLabels Extra labels for senzing-console pods
+  ## @param main.podLabels Extra labels for phppgadmin pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
   ##
   podLabels: {}
@@ -272,20 +312,21 @@ main:
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
-  ## @param main.podSecurityContext.enabled Enabled senzing-console pods' Security Context
-  ## @param main.podSecurityContext.fsGroup Set senzing-console pod's Security Context fsGroup
+  ## @param main.podSecurityContext.enabled Enabled phppgadmin pods' Security Context
+  ## @param main.podSecurityContext.fsGroup Set phppgadmin pod's Security Context fsGroup
   ##
   podSecurityContext:
     enabled: true
     fsGroup: 1001
+    privileged: false
     runAsGroup: 1001
     runAsUser: 1001
 
-  ## @param main.priorityClassName senzing-console pods' priorityClassName
+  ## @param main.priorityClassName phppgadmin pods' priorityClassName
   ##
   priorityClassName: ""
 
-  ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-console nodes
+  ## @param main.readinessProbe.enabled Enable readinessProbe on phppgadmin nodes
   ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
   ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
   ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
@@ -293,43 +334,30 @@ main:
   ## @param main.readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
   ##
   readinessProbe:
-    enabled: false
-#   %%httpGet || command || etc%%
-    failureThreshold: 3
-    initialDelaySeconds: 0
+    enabled: true
+    failureThreshold: 6
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 30
     periodSeconds: 10
     successThreshold: 1
-    timeoutSeconds: 1
+    timeoutSeconds: 30
 
-  ## @param main.replicaCount Number of senzing-console replicas to deploy
+  ## @param main.replicaCount Number of phppgadmin replicas to deploy
   ##
   replicaCount: 1
 
-  ## senzing-console resource requests and limits
+  ## phppgadmin resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-  ## @param main.resources.limits The resources limits for the senzing-console containers
-  ## @param main.resources.requests The requested resources for the senzing-console containers
+  ## @param main.resources.limits The resources limits for the phppgadmin containers
+  ## @param main.resources.requests The requested resources for the phppgadmin containers
   ##
   resources:
     limits: {}
     requests: {}
 
-  ## senzing-console Senzing environment variables
-  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-  ## @param main.senzing.databaseUrl The normalized database connection URL
-  ## @param main.senzing.debug Debug?  Boolean.
-  ## @param main.senzing.logLevel The logging filter: DEBUG, INFO, WARNING, ERROR, CRITICAL, FATAL
-  ## @param main.senzing.subcommand CLI sub-command
-  ##
-  senzing:
-    debug: 0
-    engineConfigurationJson: ""
-    mountOptIbm: false
-    mountOptMicrosoft: false
-    persistentVolumeClaim: ""
-
-
-  ## @param main.sidecars Add additional sidecar containers to the senzing-console pod(s)
+  ## @param main.sidecars Add additional sidecar containers to the phppgadmin pod(s)
   ## e.g:
   ## sidecars:
   ##   - name: your-image-name
@@ -341,12 +369,12 @@ main:
   ##
   sidecars: {}
 
-  ## @param main.tolerations Tolerations for senzing-console pods assignment
+  ## @param main.tolerations Tolerations for phppgadmin pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
   ##
   tolerations: []
 
-  ## @param main.updateStrategy.type senzing-console statefulset strategy type
+  ## @param main.updateStrategy.type phppgadmin statefulset strategy type
   ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
   ##
   updateStrategy:
@@ -365,7 +393,7 @@ main:
 
 ## ----- ingress parameters ---------------------------------------------------
 
-## senzing-console ingress parameters
+## phppgadmin ingress parameters
 ## ref: http://kubernetes.io/docs/user-guide/ingress/
 ##
 ingress:
@@ -383,14 +411,14 @@ ingress:
   ##
   certManager: false
 
-  ## @param ingress.enabled Enable ingress record generation for senzing-console
+  ## @param ingress.enabled Enable ingress record generation for phppgadmin
   ##
   enabled: false
 
   ## @param ingress.extraHosts An array with additional hostname(s) to be covered with the ingress record
   ## e.g:
   ## extraHosts:
-  ##   - name: senzing-console.local
+  ##   - name: phppgadmin.local
   ##     path: /
   ##
   extraHosts: []
@@ -410,14 +438,14 @@ ingress:
   ## e.g:
   ## extraTls:
   ## - hosts:
-  ##     - senzing-console.local
-  ##   secretName: senzing-console.local-tls
+  ##     - phppgadmin.local
+  ##   secretName: phppgadmin.local-tls
   ##
   extraTls: []
 
   ## @param ingress.hostname Default host for the ingress record
   ##
-  hostname: senzing-console.local
+  hostname: phppgadmin.local
 
   ## @param ingress.path Default path for the ingress record
   ## NOTE: May need to set this to '/*' in order to use this with ALB ingress controllers
@@ -437,7 +465,7 @@ ingress:
   ## Please see README.md for more information
   ## e.g:
   ## secrets:
-  ##   - name: senzing-console.local-tls
+  ##   - name: phppgadmin.local-tls
   ##     key: |-
   ##       -----BEGIN RSA PRIVATE KEY-----
   ##       ...
@@ -464,35 +492,35 @@ ingress:
 
 ## ----- service parameters ---------------------------------------------------
 
-## senzing-console service parameters
+## phppgadmin service parameters
 ##
 service:
 
-  ## @param service.annotations Additional custom annotations for senzing-console service
+  ## @param service.annotations Additional custom annotations for phppgadmin service
   ##
   annotations: {}
 
-  ## @param service.clusterIP senzing-console service Cluster IP
+  ## @param service.clusterIP phppgadmin service Cluster IP
   ## e.g.:
   ## clusterIP: None
   ##
   clusterIP:
 
-  ## @param service.externalTrafficPolicy senzing-console service external traffic policy
+  ## @param service.externalTrafficPolicy phppgadmin service external traffic policy
   ## ref http://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
   ##
   externalTrafficPolicy: Cluster
 
-  ## @param service.httpsPort senzing-console service HTTPS port
+  ## @param service.httpsPort phppgadmin service HTTPS port
   ##
   httpsPort: 443
 
-  ## @param service.loadBalancerIP senzing-console service Load Balancer IP
+  ## @param service.loadBalancerIP phppgadmin service Load Balancer IP
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
   ##
   loadBalancerIP:
 
-  ## @param service.loadBalancerSourceRanges senzing-console service Load Balancer sources
+  ## @param service.loadBalancerSourceRanges phppgadmin service Load Balancer sources
   ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
   ## e.g:
   ## loadBalancerSourceRanges:
@@ -509,11 +537,11 @@ service:
     http:
     https:
 
-  ## @param service.port senzing-console service HTTP port
+  ## @param service.port phppgadmin service HTTP port
   ##
   port: 80
 
-  ## @param service.type senzing-console service type
+  ## @param service.type phppgadmin service type
   ##
   type: LoadBalancer
 
