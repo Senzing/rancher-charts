@@ -11,14 +11,14 @@ engine: gotpl
 home: https://github.com/Senzing/charts/tree/master/charts/senzing-console
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
- - senzing
- - console
+  - senzing
+  - console
 maintainers:
   - email: support@senzing.com
     name: Senzing
 name: senzing-console
 sources:
- - https://github.com/Senzing/charts/tree/master/charts/senzing-console
- - https://github.com/Senzing/docker-senzing-console
+  - https://github.com/Senzing/charts/tree/master/charts/senzing-console
+  - https://github.com/Senzing/docker-senzing-console
 type: application
 version: 2.0.0

@@ -11,10 +11,10 @@ engine: gotpl
 home: https://github.com/Senzing/charts/tree/master/charts/senzing-stream-loader
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
- - senzing
- - kafka
- - rabbitmq
- - azure service bus
+  - senzing
+  - kafka
+  - rabbitmq
+  - azure service bus
 maintainers:
   - email: support@senzing.com
     name: Senzing

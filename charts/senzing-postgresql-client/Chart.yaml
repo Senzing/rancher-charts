@@ -11,7 +11,7 @@ engine: gotpl
 home: https://github.com/Senzing/charts/tree/master/charts/senzing-postgresql-client
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
- - postgresql
+  - postgresql
 maintainers:
   - email: support@senzing.com
     name: Senzing
