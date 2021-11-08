@@ -1,0 +1,356 @@
+## ----------------------------------------------------------------------------
+## Global parameters
+## ----------------------------------------------------------------------------
+
+## @section Global parameters
+## Global Docker image parameters
+## Please, note that this will override the image parameters, including dependencies, configured to use the global value
+## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
+
+## @param global.imagePullSecrets Global Docker registry secret names as an array
+## @param global.imageRegistry Global Docker image registry
+## @param global.storageClass Global StorageClass for Persistent Volume(s)
+##
+global:
+  ## E.g.
+  ## imagePullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  imagePullSecrets: []
+  imageRegistry: ""
+  storageClass: ""
+
+## ----------------------------------------------------------------------------
+## Common parameters
+## ----------------------------------------------------------------------------
+
+## @section Common parameters
+
+## @param commonAnnotations Annotations to add to all deployed objects
+##
+commonAnnotations: {}
+
+## @param commonLabels Labels to add to all deployed objects
+##
+commonLabels: {}
+
+## @param clusterDomain Kubernetes cluster domain name
+##
+clusterDomain: cluster.local
+
+## Enable diagnostic mode in the deployment'
+## @param diagnosticMode.args Args to override all containers in the deployment
+## @param diagnosticMode.command Command to override all containers in the deployment
+## @param diagnosticMode.enabled Enable diagnostic mode (all probes will be disabled and the command will be overridden)
+##
+diagnosticMode:
+  args:
+    - infinity
+  command:
+    - sleep
+  enabled: false
+
+## @param extraDeploy Array of extra objects to deploy with the release
+##
+extraDeploy: []
+
+## @param fullnameOverride String to fully override senzing-common.names.fullname
+##
+fullnameOverride: ""
+
+## @param kubeVersion Override Kubernetes version
+##
+kubeVersion: ""
+
+## @param nameOverride String to partially override senzing-common.names.fullname
+##
+nameOverride: ""
+
+## ----------------------------------------------------------------------------
+## Container parameters
+## ----------------------------------------------------------------------------
+
+## @section senzing-init-container parameters
+
+## %%MAIN_CONTAINER/POD_DESCRIPTION%%
+##
+main:
+
+  ## Senzing senzing-init-container image
+  ## @param main.affinity Affinity for senzing-init-container pods assignment
+  ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  ## NOTE: `main.podAffinityPreset`, `main.podAntiAffinityPreset`, and `main.nodeAffinityPreset` will be ignored when it's set
+  ##
+  affinity: {}
+
+  ## @param main.args Override default container args (useful when using custom images)
+  ##
+  args: []
+
+  ## @param main.command Override default container command (useful when using custom images)
+  ##
+  command: []
+
+  ## Configure Container Security Context
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
+  ## @param main.containerSecurityContext.enabled Enabled senzing-init-container containers' Security Context
+  ## @param main.containerSecurityContext.runAsUser Set senzing-init-container containers' Security Context runAsUser
+  ##
+  containerSecurityContext:
+    privileged: true
+
+  ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
+  ##
+  customLivenessProbe: {}
+
+  ## @param main.customReadinessProbe Custom readinessProbe that overrides the default one
+  ##
+  customReadinessProbe: {}
+
+  ## @param main.existingConfigmap The name of an existing ConfigMap with custom configuration for senzing-init-container
+  ##
+  existingConfigmap:
+
+  ## @param main.extraEnvVars Array with extra environment variables to add to senzing-init-container nodes
+  ## e.g:
+  ## extraEnvVars:
+  ##   - name: FOO
+  ##     value: "bar"
+  ##
+  extraEnvVars: []
+
+  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for senzing-init-container nodes
+  ##
+  extraEnvVarsSecret:
+
+  ## @param main.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for senzing-init-container nodes
+  ##
+  extraEnvVarsCM:
+
+  ## @param main.extraVolumes Optionally specify extra list of additional volumes for the senzing-init-container pod(s)
+  ##
+  extraVolumes: []
+
+  ## @param main.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the senzing-init-container container(s)
+  ##
+  extraVolumeMounts: []
+
+  ## @param main.hostAliases senzing-init-container pods host aliases
+  ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
+  ##
+  hostAliases: []
+
+  ## @param main.image.debug Enable senzing-init-container image debug mode
+  ## @param main.image.pullPolicy senzing-init-container image pull policy
+  ## @param main.image.pullSecrets senzing-init-container image pull secrets
+  ## @param main.image.registry senzing-init-container image registry
+  ## @param main.image.repository senzing-init-container image repository
+  ## @param main.image.tag senzing-init-container image tag (immutable tags are recommended)
+  ##
+  image:
+
+    ## Enable debug mode
+    ##
+    debug: false
+
+    ## Specify a imagePullPolicy
+    ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+    ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+    ##
+    pullPolicy: IfNotPresent
+
+    ## Optionally specify an array of imagePullSecrets.
+    ## Secrets must be manually created in the namespace.
+    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    ## e.g:
+    ## pullSecrets:
+    ##   - myRegistryKeySecretName
+    ##
+    pullSecrets: []
+    registry: docker.io
+    repository: senzing/init-container
+    tag: latest
+
+  ## @param main.initContainers Add additional init containers to the senzing-init-container pod(s)
+  ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+  ## e.g:
+  ## initContainers:
+  ##  - name: your-image-name
+  ##    image: your-image
+  ##    imagePullPolicy: Always
+  ##    command: ['sh', '-c', 'echo "hello world"']
+  ##
+  initContainers: {}
+
+  ## @param main.lifecycleHooks for the senzing-init-container container(s) to automate configuration before or after startup
+  ##
+  lifecycleHooks: {}
+
+  ## Configure extra options for senzing-init-container containers' liveness and readiness probes
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
+  ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-init-container nodes
+  ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
+  ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
+  ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
+  ## @param main.livenessProbe.successThreshold Success threshold for livenessProbe
+  ## @param main.livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
+  ##
+  livenessProbe:
+    enabled: false
+#   %%httpGet || command || etc%%
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
+
+  ## Node main.affinity preset
+  ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
+  ##
+  nodeAffinityPreset:
+
+    ## @param main.nodeAffinityPreset.key Node label key to match. Ignored if `main.affinity` is set
+    ##
+    key: ""
+
+    ## @param main.nodeAffinityPreset.type Node affinity preset type. Ignored if `main.affinity` is set. Allowed values: `soft` or `hard`
+    ##
+    type: ""
+
+    ## @param main.nodeAffinityPreset.values Node label values to match. Ignored if `main.affinity` is set
+    ## E.g.
+    ## values:
+    ##   - e2e-az1
+    ##   - e2e-az2
+    ##
+    values: []
+
+  ## @param main.nodeSelector Node labels for senzing-init-container pods assignment
+  ## ref: https://kubernetes.io/docs/user-guide/node-selection/
+  ##
+  nodeSelector: {}
+
+  ## @param main.podAffinityPreset Pod affinity preset. Ignored if `main.affinity` is set. Allowed values: `soft` or `hard`
+  ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+  ##
+  podAffinityPreset: ""
+
+  ## @param main.podAnnotations Annotations for senzing-init-container pods
+  ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  ##
+  podAnnotations: {}
+
+  ## @param main.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `main.affinity` is set. Allowed values: `soft` or `hard`
+  ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+  ##
+  podAntiAffinityPreset: soft
+
+  ## @param main.podLabels Extra labels for senzing-init-container pods
+  ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+  ##
+  podLabels: {}
+
+  ## Configure Pods Security Context
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
+  ## @param main.podSecurityContext.enabled Enabled senzing-init-container pods' Security Context
+  ## @param main.podSecurityContext.fsGroup Set senzing-init-container pod's Security Context fsGroup
+  ##
+  podSecurityContext:
+    enabled: true
+    fsGroup: 1001
+    runAsGroup: 1001
+    runAsUser: 1001
+
+  ## @param main.priorityClassName senzing-init-container pods' priorityClassName
+  ##
+  priorityClassName: ""
+
+  ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-init-container nodes
+  ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
+  ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
+  ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
+  ## @param main.readinessProbe.successThreshold Success threshold for readinessProbe
+  ## @param main.readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
+  ##
+  readinessProbe:
+    enabled: false
+#   %%httpGet || command || etc%%
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
+
+  ## @param main.replicaCount Number of senzing-init-container replicas to deploy
+  ##
+  replicaCount: 1
+
+  ## senzing-init-container resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param main.resources.limits The resources limits for the senzing-init-container containers
+  ## @param main.resources.requests The requested resources for the senzing-init-container containers
+  ##
+  resources:
+    limits: {}
+    requests: {}
+
+  ## senzing-init-container Senzing environment variables
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param main.senzing.databaseUrl The normalized database connection URL
+  ## @param main.senzing.debug Debug?  Boolean.
+  ## @param main.senzing.logLevel The logging filter: DEBUG, INFO, WARNING, ERROR, CRITICAL, FATAL
+  ## @param main.senzing.subcommand CLI sub-command
+  ##
+  senzing:
+    databaseUrl: ""
+    debug: false
+    engineConfigurationJson: ""
+    mountOptIbm: false
+    mountOptMicrosoft: false
+    persistentVolumeClaim: ""
+
+  ## @param main.sidecars Add additional sidecar containers to the senzing-init-container pod(s)
+  ## e.g:
+  ## sidecars:
+  ##   - name: your-image-name
+  ##     image: your-image
+  ##     imagePullPolicy: Always
+  ##     ports:
+  ##       - name: portname
+  ##         containerPort: 1234
+  ##
+  sidecars: {}
+
+  ## @param main.tolerations Tolerations for senzing-init-container pods assignment
+  ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+  ##
+  tolerations: []
+
+## ----------------------------------------------------------------------------
+## Other parameters
+## ----------------------------------------------------------------------------
+
+## @section Other Parameters
+
+## RBAC configuration
+##
+rbac:
+
+  ## @param rbac.create Specifies whether RBAC resources should be created
+  ##
+  create: false
+
+## ServiceAccount configuration
+##
+serviceAccount:
+
+  ## @param serviceAccount.create Specifies whether a ServiceAccount should be created
+  ##
+  create: true
+
+  ## @param serviceAccount.name The name of the ServiceAccount to use.
+  ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
+  ##
+  name: ""
