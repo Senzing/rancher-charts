@@ -1,0 +1,279 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+  labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
+    app.kubernetes.io/component: senzing-stream-producer-component
+    {{- if .Values.commonLabels }}
+    {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  name: {{ template "senzing-common.names.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  template:
+    metadata:
+      {{- if .Values.main.podAnnotations }}
+      annotations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podAnnotations "context" $) | nindent 8 }}
+      {{- end }}
+      labels: {{- include "senzing-common.labels.standard" . | nindent 8 }}
+        app.kubernetes.io/component: senzing-stream-producer-component
+        {{- if .Values.main.podLabels }}
+        {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podLabels "context" $) | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.main.affinity }}
+      affinity: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.affinity "context" $) | nindent 8 }}
+      {{- else }}
+      affinity:
+        podAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAffinityPreset "component" "senzing-stream-producer-component" "context" $) | nindent 10 }}
+        podAntiAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAntiAffinityPreset "component" "senzing-stream-producer-component" "context" $) | nindent 10 }}
+        nodeAffinity: {{- include "senzing-common.affinities.nodes" (dict "type" .Values.main.nodeAffinityPreset.type "key" .Values.main.nodeAffinityPreset.key "values" .Values.main.nodeAffinityPreset.values) | nindent 10 }}
+      {{- end }}
+      containers:
+        - name: senzing-stream-producer
+          {{- if .Values.diagnosticMode.enabled }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 12 }}
+          {{- else if .Values.main.args }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.args "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.diagnosticMode.enabled }}
+          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 12 }}
+          {{- else if .Values.main.command }}
+          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.command "context" $) | nindent 12 }}
+          {{- end }}
+          env:
+            {{- if .Values.main.senzing.awsAccessKeyId }}
+            - name: AWS_ACCESS_KEY_ID
+              value: "{{ .Values.main.senzing.awsAccessKeyId }}"
+            {{- end }}
+            {{- if .Values.main.senzing.awsDefaultRegion }}
+            - name: AWS_DEFAULT_REGION
+              value: "{{ .Values.main.senzing.awsDefaultRegion }}"
+            {{- end }}
+            {{- if .Values.main.senzing.awsSecretAccessKey }}
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "{{ .Values.main.senzing.awsSecretAccessKey }}"
+            {{- end }}
+            {{- if .Values.main.senzing.awsSessionToken }}
+            - name: AWS_SESSION_TOKEN
+              value: "{{ .Values.main.senzing.awsSessionToken }}"
+            {{- end }}
+            {{- if .Values.main.senzing.azureConnectionString }}
+            - name: SENZING_AZURE_CONNECTION_STRING
+              value: "{{ .Values.main.senzing.azureConnectionString }}"
+            {{- end }}
+            {{- if .Values.main.senzing.azureQueueName }}
+            - name: SENZING_AZURE_QUEUE_NAME
+              value: "{{ .Values.main.senzing.azureQueueName }}"
+            {{- end }}
+            {{- if .Values.main.senzing.csvDelimiter }}
+            - name: SENZING_CSV_DELIMITER
+              value: "{{ .Values.main.senzing.csvDelimiter }}"
+            {{- end }}
+            {{- if .Values.main.senzing.csvRowsInChunk }}
+            - name: SENZING_CSV_ROWS_IN_CHUNK
+              value: "{{ .Values.main.senzing.csvRowsInChunk }}"
+            {{- end }}
+            {{- if .Values.main.senzing.debug }}
+            - name: SENZING_DEBUG
+              value: "{{ .Values.main.senzing.debug }}"
+            {{- end }}
+            {{- if .Values.main.senzing.defaultDataSource }}
+            - name: SENZING_DEFAULT_DATA_SOURCE
+              value: "{{ .Values.main.senzing.defaultDataSource }}"
+            {{- end }}
+            {{- if .Values.main.senzing.defaultEntityType }}
+            - name: SENZING_DEFAULT_ENTITY_TYPE
+              value: "{{ .Values.main.senzing.defaultEntityType }}"
+            {{- end }}
+            {{- if .Values.main.senzing.delayInSeconds }}
+            - name: SENZING_DELAY_IN_SECONDS
+              value: "{{ .Values.main.senzing.delayInSeconds }}"
+            {{- end }}
+            {{- if .Values.main.senzing.inputUrl }}
+            - name: SENZING_INPUT_URL
+              value: "{{ .Values.main.senzing.inputUrl }}"
+            {{- end }}
+            {{- if .Values.main.senzing.kafkaBootstrapServerHost }}
+            - name: SENZING_KAFKA_BOOTSTRAP_SERVER
+              value: "{{ .Values.main.senzing.kafkaBootstrapServerHost }}:{{ .Values.main.senzing.kafkaBootstrapServerPort }}"
+            {{- end }}
+            {{- if .Values.main.senzing.kafkaGroup }}
+            - name: SENZING_KAFKA_GROUP
+              value: "{{ .Values.main.senzing.kafkaGroup }}"
+            {{- end }}
+            {{- if .Values.main.senzing.kafkaPollInterval }}
+            - name: SENZING_KAFKA_POLL_INTERVAL
+              value: "{{ .Values.main.senzing.kafkaPollInterval }}"
+            {{- end }}
+            {{- if .Values.main.senzing.kafkaTopic }}
+            - name: SENZING_KAFKA_TOPIC
+              value: "{{ .Values.main.senzing.kafkaTopic }}"
+            {{- end }}
+            {{- if .Values.main.senzing.monitoringPeriodInSeconds }}
+            - name: SENZING_MONITORING_PERIOD_IN_SECONDS
+              value: "{{ .Values.main.senzing.monitoringPeriodInSeconds }}"
+            {{- end }}
+            {{- if .Values.main.senzing.password }}
+            - name: SENZING_PASSWORD
+              value: "{{ .Values.main.senzing.password }}"
+            {{- end }}
+            {{- if .Values.main.senzing.rabbitmqExchange }}
+            - name: SENZING_RABBITMQ_EXCHANGE
+              value: "{{ .Values.main.senzing.rabbitmqExchange }}"
+            {{- end }}
+            {{- if .Values.main.senzing.rabbitmqHost }}
+            - name: SENZING_RABBITMQ_HOST
+              value: "{{ .Values.main.senzing.rabbitmqHost }}"
+            {{- end }}
+            {{- if .Values.main.senzing.rabbitmqPassword }}
+            - name: SENZING_RABBITMQ_PASSWORD
+              value: "{{ .Values.main.senzing.rabbitmqPassword }}"
+            {{- end }}
+            {{- if .Values.main.senzing.rabbitmqPort }}
+            - name: SENZING_RABBITMQ_PORT
+              value: "{{ .Values.main.senzing.rabbitmqPort }}"
+            {{- end }}
+            {{- if .Values.main.senzing.rabbitmqQueue }}
+            - name: SENZING_RABBITMQ_QUEUE
+              value: "{{ .Values.main.senzing.rabbitmqQueue }}"
+            {{- end }}
+            {{- if .Values.main.senzing.rabbitmqRoutingKey }}
+            - name: SENZING_RABBITMQ_ROUTING_KEY
+              value: "{{ .Values.main.senzing.rabbitmqRoutingKey }}"
+            {{- end }}
+            {{- if .Values.main.senzing.rabbitmqUsername }}
+            - name: SENZING_RABBITMQ_USERNAME
+              value: "{{ .Values.main.senzing.rabbitmqUsername }}"
+            {{- end }}
+            {{- if .Values.main.senzing.rabbitmqUseExistingEntities }}
+            - name: SENZING_RABBITMQ_USE_EXISTING_ENTITIES
+              value: "{{ .Values.main.senzing.rabbitmqUseExistingEntities }}"
+            {{- end }}
+            {{- if .Values.main.senzing.rabbitmqVirtualHost }}
+            - name: SENZING_RABBITMQ_VIRTUAL_HOST
+              value: "{{ .Values.main.senzing.rabbitmqVirtualHost }}"
+            {{- end }}
+            {{- if .Values.main.senzing.readQueueMaxSize }}
+            - name: SENZING_READ_QUEUE_MAXSIZE
+              value: "{{ .Values.main.senzing.readQueueMaxSize }}"
+            {{- end }}
+            {{- if .Values.main.senzing.recordIdentifier }}
+            - name: SENZING_RECORD_IDENTIFIER
+              value: "{{ .Values.main.senzing.recordIdentifier }}"
+            {{- end }}
+            {{- if .Values.main.senzing.recordMax }}
+            - name: SENZING_RECORD_MAX
+              value: "{{ .Values.main.senzing.recordMax }}"
+            {{- end }}
+            {{- if .Values.main.senzing.recordMin }}
+            - name: SENZING_RECORD_MIN
+              value: "{{ .Values.main.senzing.recordMin }}"
+            {{- end }}
+            {{- if .Values.main.senzing.recordMonitor }}
+            - name: SENZING_RECORD_MONITOR
+              value: "{{ .Values.main.senzing.recordMonitor }}"
+            {{- end }}
+            {{- if .Values.main.senzing.recordsPerMessage }}
+            - name: SENZING_RECORDS_PER_MESSAGE
+              value: "{{ .Values.main.senzing.recordsPerMessage }}"
+            {{- end }}
+            {{- if .Values.main.senzing.recordSizeMax }}
+            - name: SENZING_RECORD_SIZE_MAX
+              value: "{{ .Values.main.senzing.recordSizeMax }}"
+            {{- end }}
+            {{- if .Values.main.senzing.sleepTimeInSeconds }}
+            - name: SENZING_SLEEP_TIME_IN_SECONDS
+              value: "{{ .Values.main.senzing.sleepTimeInSeconds }}"
+            {{- end }}
+            {{- if .Values.main.senzing.sqsDelaySeconds }}
+            - name: SENZING_SQS_DELAY_SECONDS
+              value: "{{ .Values.main.senzing.sqsDelaySeconds }}"
+            {{- end }}
+            {{- if .Values.main.senzing.sqsQueueUrl }}
+            - name: SENZING_SQS_QUEUE_URL
+              value: "{{ .Values.main.senzing.sqsQueueUrl }}"
+            {{- end }}
+            {{- if .Values.main.senzing.subcommand }}
+            - name: SENZING_SUBCOMMAND
+              value: "{{ .Values.main.senzing.subcommand }}"
+            {{- end }}
+            {{- if .Values.main.senzing.threadsPerPrint }}
+            - name: SENZING_THREADS_PER_PRINT
+              value: "{{ .Values.main.senzing.threadsPerPrint }}"
+            {{- end }}
+            {{- if .Values.main.extraEnvVars }}
+            {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          envFrom:
+            {{- if .Values.main.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.main.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          image: {{ template "senzing-stream-producer.image" . }}
+          imagePullPolicy: {{ .Values.main.image.pullPolicy }}
+          {{- if not .Values.diagnosticMode.enabled }}
+          {{- if .Values.main.lifecycleHooks }}
+          lifecycle: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.lifecycleHooks "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.main.livenessProbe.enabled }}
+          livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.livenessProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customLivenessProbe }}
+          livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customLivenessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          {{- if not .Values.diagnosticMode.enabled }}
+          {{- if .Values.main.readinessProbe.enabled }}
+          readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customReadinessProbe }}
+          readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customReadinessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.main.resources }}
+          resources: {{- toYaml .Values.main.resources | nindent 12 }}
+          {{- end }}
+          {{- if .Values.main.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            {{- if .Values.main.senzing.persistentVolumeClaim }}
+            - name: senzing-storage
+              mountPath: /var/opt/senzing
+              subPath: senzing-var
+            {{- end }}
+            {{- if .Values.main.extraVolumeMounts }}
+            {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+        {{- if .Values.main.sidecars }}
+        {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
+        {{- end }}
+      {{- include "senzing-stream-producer.imagePullSecrets" . | nindent 6 }}
+      {{- if .Values.main.nodeSelector }}
+      nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.main.priorityClassName }}
+      priorityClassName: {{ .Values.main.priorityClassName | quote }}
+      {{- end }}
+      restartPolicy: Never
+      {{- if .Values.main.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ template "senzing-stream-producer.serviceAccountName" . }}
+      {{- if .Values.main.tolerations }}
+      tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
+      {{- end }}
+      volumes:
+        {{- if .Values.main.senzing.persistentVolumeClaim }}
+        - name: senzing-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.main.senzing.persistentVolumeClaim }}
+        {{- end }}
+        {{- if .Values.main.extraVolumes }}
+        {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}
