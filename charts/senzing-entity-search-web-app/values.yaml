@@ -70,14 +70,14 @@ nameOverride: ""
 ## Container parameters
 ## ----------------------------------------------------------------------------
 
-## @section senzing-api-server parameters
+## @section senzing-entity-search-web-app parameters
 
 ## %%MAIN_CONTAINER/POD_DESCRIPTION%%
 ##
 main:
 
-  ## Senzing senzing-api-server image
-  ## @param main.affinity Affinity for senzing-api-server pods assignment
+  ## Senzing senzing-entity-search-web-app image
+  ## @param main.affinity Affinity for senzing-entity-search-web-app pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   ## NOTE: `main.podAffinityPreset`, `main.podAntiAffinityPreset`, and `main.nodeAffinityPreset` will be ignored when it's set
   ##
@@ -112,8 +112,8 @@ main:
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
-  ## @param main.containerSecurityContext.enabled Enabled senzing-api-server containers' Security Context
-  ## @param main.containerSecurityContext.runAsUser Set senzing-api-server containers' Security Context runAsUser
+  ## @param main.containerSecurityContext.enabled Enabled senzing-entity-search-web-app containers' Security Context
+  ## @param main.containerSecurityContext.runAsUser Set senzing-entity-search-web-app containers' Security Context runAsUser
   ##
   containerSecurityContext:
     privileged: true
@@ -126,11 +126,11 @@ main:
   ##
   customReadinessProbe: {}
 
-  ## @param main.existingConfigmap The name of an existing ConfigMap with custom configuration for senzing-api-server
+  ## @param main.existingConfigmap The name of an existing ConfigMap with custom configuration for senzing-entity-search-web-app
   ##
   existingConfigmap:
 
-  ## @param main.extraEnvVars Array with extra environment variables to add to senzing-api-server nodes
+  ## @param main.extraEnvVars Array with extra environment variables to add to senzing-entity-search-web-app nodes
   ## e.g:
   ## extraEnvVars:
   ##   - name: FOO
@@ -138,33 +138,33 @@ main:
   ##
   extraEnvVars: []
 
-  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for senzing-api-server nodes
+  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for senzing-entity-search-web-app nodes
   ##
   extraEnvVarsSecret:
 
-  ## @param main.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for senzing-api-server nodes
+  ## @param main.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for senzing-entity-search-web-app nodes
   ##
   extraEnvVarsCM:
 
-  ## @param main.extraVolumes Optionally specify extra list of additional volumes for the senzing-api-server pod(s)
+  ## @param main.extraVolumes Optionally specify extra list of additional volumes for the senzing-entity-search-web-app pod(s)
   ##
   extraVolumes: []
 
-  ## @param main.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the senzing-api-server container(s)
+  ## @param main.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the senzing-entity-search-web-app container(s)
   ##
   extraVolumeMounts: []
 
-  ## @param main.hostAliases senzing-api-server pods host aliases
+  ## @param main.hostAliases senzing-entity-search-web-app pods host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##
   hostAliases: []
 
-  ## @param main.image.debug Enable senzing-api-server image debug mode
-  ## @param main.image.pullPolicy senzing-api-server image pull policy
-  ## @param main.image.pullSecrets senzing-api-server image pull secrets
-  ## @param main.image.registry senzing-api-server image registry
-  ## @param main.image.repository senzing-api-server image repository
-  ## @param main.image.tag senzing-api-server image tag (immutable tags are recommended)
+  ## @param main.image.debug Enable senzing-entity-search-web-app image debug mode
+  ## @param main.image.pullPolicy senzing-entity-search-web-app image pull policy
+  ## @param main.image.pullSecrets senzing-entity-search-web-app image pull secrets
+  ## @param main.image.registry senzing-entity-search-web-app image registry
+  ## @param main.image.repository senzing-entity-search-web-app image repository
+  ## @param main.image.tag senzing-entity-search-web-app image tag (immutable tags are recommended)
   ##
   image:
 
@@ -187,10 +187,10 @@ main:
     ##
     pullSecrets: []
     registry: docker.io
-    repository: senzing/senzing-api-server
+    repository: senzing/entity-search-web-app
     tag: latest
 
-  ## @param main.initContainers Add additional init containers to the senzing-api-server pod(s)
+  ## @param main.initContainers Add additional init containers to the senzing-entity-search-web-app pod(s)
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
   ## e.g:
   ## initContainers:
@@ -201,13 +201,13 @@ main:
   ##
   initContainers: {}
 
-  ## @param main.lifecycleHooks for the senzing-api-server container(s) to automate configuration before or after startup
+  ## @param main.lifecycleHooks for the senzing-entity-search-web-app container(s) to automate configuration before or after startup
   ##
   lifecycleHooks: {}
 
-  ## Configure extra options for senzing-api-server containers' liveness and readiness probes
+  ## Configure extra options for senzing-entity-search-web-app containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
-  ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-api-server nodes
+  ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-entity-search-web-app nodes
   ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
   ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
   ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
@@ -244,7 +244,7 @@ main:
     ##
     values: []
 
-  ## @param main.nodeSelector Node labels for senzing-api-server pods assignment
+  ## @param main.nodeSelector Node labels for senzing-entity-search-web-app pods assignment
   ## ref: https://kubernetes.io/docs/user-guide/node-selection/
   ##
   nodeSelector: {}
@@ -254,7 +254,7 @@ main:
   ##
   podAffinityPreset: ""
 
-  ## @param main.podAnnotations Annotations for senzing-api-server pods
+  ## @param main.podAnnotations Annotations for senzing-entity-search-web-app pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
   podAnnotations: {}
@@ -264,7 +264,7 @@ main:
   ##
   podAntiAffinityPreset: soft
 
-  ## @param main.podLabels Extra labels for senzing-api-server pods
+  ## @param main.podLabels Extra labels for senzing-entity-search-web-app pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
   ##
   podLabels: {}
@@ -272,8 +272,8 @@ main:
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
-  ## @param main.podSecurityContext.enabled Enabled senzing-api-server pods' Security Context
-  ## @param main.podSecurityContext.fsGroup Set senzing-api-server pod's Security Context fsGroup
+  ## @param main.podSecurityContext.enabled Enabled senzing-entity-search-web-app pods' Security Context
+  ## @param main.podSecurityContext.fsGroup Set senzing-entity-search-web-app pod's Security Context fsGroup
   ##
   podSecurityContext:
     enabled: true
@@ -281,11 +281,11 @@ main:
     runAsGroup: 1001
     runAsUser: 1001
 
-  ## @param main.priorityClassName senzing-api-server pods' priorityClassName
+  ## @param main.priorityClassName senzing-entity-search-web-app pods' priorityClassName
   ##
   priorityClassName: ""
 
-  ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-api-server nodes
+  ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-entity-search-web-app nodes
   ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
   ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
   ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
@@ -301,20 +301,20 @@ main:
     successThreshold: 1
     timeoutSeconds: 1
 
-  ## @param main.replicaCount Number of senzing-api-server replicas to deploy
+  ## @param main.replicaCount Number of senzing-entity-search-web-app replicas to deploy
   ##
   replicaCount: 1
 
-  ## senzing-api-server resource requests and limits
+  ## senzing-entity-search-web-app resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-  ## @param main.resources.limits The resources limits for the senzing-api-server containers
-  ## @param main.resources.requests The requested resources for the senzing-api-server containers
+  ## @param main.resources.limits The resources limits for the senzing-entity-search-web-app containers
+  ## @param main.resources.requests The requested resources for the senzing-entity-search-web-app containers
   ##
   resources:
     limits: {}
     requests: {}
 
-  ## senzing-api-server Senzing environment variables
+  ## senzing-entity-search-web-app Senzing environment variables
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ## @param main.senzing.databaseUrl The normalized database connection URL
   ## @param main.senzing.debug Debug?  Boolean.
@@ -322,61 +322,34 @@ main:
   ## @param main.senzing.subcommand CLI sub-command
   ##
   senzing:
-    allowedOrigins: ""
-    autoRefreshPeriod: ""
-    azureQueueConnectionString: ""
-    azureQueueName: ""
-    bindAddr: all
-    clientKeyStore: ""
-    clientKeyStorePassword: ""
-    concurrency: ""
-    configId: ""
-    debug: ""
-    enableAdmin: ""
-    engineConfigurationJson: ""
-    httpConcurrency: ""
-    iniFile: ""
-    initEnvVar: ""
-    initFile: ""
-    initJson: ""
-    kafkaBootstrapServer: ""
-    kafkaGroup: ""
-    kafkaInfoBootstrapServer: ""
-    kafkaInfoGroup: ""
-    kafkaInfoTopic: ""
-    keyAlias: ""
-    keyStore: ""
-    keyStorePassword: ""
-    moduleName: ""
-    monitorFile: ""
-    mountOptIbm: false
-    mountOptMicrosoft: false
-    persistentVolumeClaim: ""
-    port: "80"
-    quiet: ""
-    rabbitmqExchange: ""
-    rabbitmqHost: ""
-    rabbitmqInfoExchange: ""
-    rabbitmqInfoHost: ""
-    rabbitmqInfoPassword: ""
-    rabbitmqInfoPort: ""
-    rabbitmqInfoRoutingKey: ""
-    rabbitmqInfoUsername: ""
-    rabbitmqInfoVirtualHost: ""
-    rabbitmqPassword: ""
-    rabbitmqPort: ""
-    rabbitmqUsername: ""
-    rabbitmqVirtualHost: ""
-    readOnly: ""
-    securePort: ""
-    skipEnginePriming: ""
-    skipStartupPerf: ""
-    sqsInfoQueueUrl: ""
-    statsInterval: ""
-    urlBasePath: ""
-    verbose: ""
+    apiServerUrl: ""
+    authServerAdminJwpathRewrite: ""
+    authServerAdminSsopathRewrite: ""
+    authServerHostname:  ""
+    authServerJwpathRewrite: ""
+    authServerPort: ""
+    authServerSsopathRewrite: ""
+    authServerWriteConfigToFile: ""
+    webServerAdminAuthMode: ""
+    webServerAdminAuthPath: ""
+    webServerAdminAuthRedirect: ""
+    webServerAdminAuthStatus: ""
+    webServerAdminSecret: ""
+    webServerAdminSeed: ""
+    webServerApiPath: ""
+    webServerAuthPath: ""
+    webServerBasicAuthJson: ""
+    webServerCorsAllowedOrigin: ""
+    webServerHosname: ""
+    webServerOperatorAuthMode: ""
+    webServerOperatorAuthRedirect: ""
+    webServerOperatorAuthStatus: ""
+    webServerPort: 80
+    webServerProxyLoglevel: ""
+    webServerSslCertPath: ""
+    webServerSslKeyPath: ""
 
-  ## @param main.sidecars Add additional sidecar containers to the senzing-api-server pod(s)
+  ## @param main.sidecars Add additional sidecar containers to the senzing-entity-search-web-app pod(s)
   ## e.g:
   ## sidecars:
   ##   - name: your-image-name
@@ -388,12 +361,12 @@ main:
   ##
   sidecars: {}
 
-  ## @param main.tolerations Tolerations for senzing-api-server pods assignment
+  ## @param main.tolerations Tolerations for senzing-entity-search-web-app pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
   ##
   tolerations: []
 
-  ## @param main.updateStrategy.type senzing-api-server statefulset strategy type
+  ## @param main.updateStrategy.type senzing-entity-search-web-app statefulset strategy type
   ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
   ##
   updateStrategy:
@@ -412,7 +385,7 @@ main:
 
 ## ----- ingress parameters ---------------------------------------------------
 
-## senzing-api-server ingress parameters
+## senzing-entity-search-web-app ingress parameters
 ## ref: http://kubernetes.io/docs/user-guide/ingress/
 ##
 ingress:
@@ -430,14 +403,14 @@ ingress:
   ##
   certManager: false
 
-  ## @param ingress.enabled Enable ingress record generation for senzing-api-server
+  ## @param ingress.enabled Enable ingress record generation for senzing-entity-search-web-app
   ##
   enabled: false
 
   ## @param ingress.extraHosts An array with additional hostname(s) to be covered with the ingress record
   ## e.g:
   ## extraHosts:
-  ##   - name: senzing-api-server-component.local
+  ##   - name: senzing-entity-search-web-app-component.local
   ##     path: /
   ##
   extraHosts: []
@@ -457,14 +430,14 @@ ingress:
   ## e.g:
   ## extraTls:
   ## - hosts:
-  ##     - senzing-api-server-component.local
-  ##   secretName: senzing-api-server-component.local-tls
+  ##     - senzing-entity-search-web-app-component.local
+  ##   secretName: senzing-entity-search-web-app-component.local-tls
   ##
   extraTls: []
 
   ## @param ingress.hostname Default host for the ingress record
   ##
-  hostname: senzing-api-server.local
+  hostname: senzing-entity-search-web-app.local
 
   ## @param ingress.path Default path for the ingress record
   ## NOTE: May need to set this to '/*' in order to use this with ALB ingress controllers
@@ -484,7 +457,7 @@ ingress:
   ## Please see README.md for more information
   ## e.g:
   ## secrets:
-  ##   - name: senzing-api-server-component.local-tls
+  ##   - name: senzing-entity-search-web-app-component.local-tls
   ##     key: |-
   ##       -----BEGIN RSA PRIVATE KEY-----
   ##       ...
@@ -511,35 +484,35 @@ ingress:
 
 ## ----- service parameters ---------------------------------------------------
 
-## senzing-api-server service parameters
+## senzing-entity-search-web-app service parameters
 ##
 service:
 
-  ## @param service.annotations Additional custom annotations for senzing-api-server service
+  ## @param service.annotations Additional custom annotations for senzing-entity-search-web-app service
   ##
   annotations: {}
 
-  ## @param service.clusterIP senzing-api-server service Cluster IP
+  ## @param service.clusterIP senzing-entity-search-web-app service Cluster IP
   ## e.g.:
   ## clusterIP: None
   ##
   clusterIP:
 
-  ## @param service.externalTrafficPolicy senzing-api-server service external traffic policy
+  ## @param service.externalTrafficPolicy senzing-entity-search-web-app service external traffic policy
   ## ref http://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
   ##
   externalTrafficPolicy: Cluster
 
-  ## @param service.httpsPort senzing-api-server service HTTPS port
+  ## @param service.httpsPort senzing-entity-search-web-app service HTTPS port
   ##
   httpsPort: 443
 
-  ## @param service.loadBalancerIP senzing-api-server service Load Balancer IP
+  ## @param service.loadBalancerIP senzing-entity-search-web-app service Load Balancer IP
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
   ##
   loadBalancerIP:
 
-  ## @param service.loadBalancerSourceRanges senzing-api-server service Load Balancer sources
+  ## @param service.loadBalancerSourceRanges senzing-entity-search-web-app service Load Balancer sources
   ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
   ## e.g:
   ## loadBalancerSourceRanges:
@@ -556,11 +529,11 @@ service:
     http:
     https:
 
-  ## @param service.port senzing-api-server service HTTP port
+  ## @param service.port senzing-entity-search-web-app service HTTP port
   ##
   port: 80
 
-  ## @param service.type senzing-api-server service type
+  ## @param service.type senzing-entity-search-web-app service type
   ##
   type: LoadBalancer
 

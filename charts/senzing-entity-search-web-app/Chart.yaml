@@ -1,0 +1,23 @@
+# https://helm.sh/docs/topics/charts/#the-chartyaml-file
+
+apiVersion: v2
+appVersion: ""
+dependencies:
+  - name: senzing-common
+    repository: https://hub.senzing.com/charts/
+    version: 1.0.1
+description: The Senzing Entity Search WebApp
+engine: gotpl
+home: https://github.com/Senzing/charts/tree/master/charts/senzing-entity-search-web-app
+icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
+keywords:
+  - senzing
+maintainers:
+  - email: support@senzing.com
+    name: Senzing
+name: senzing-entity-search-web-app
+sources:
+  - https://github.com/Senzing/charts/tree/master/charts/senzing-entity-search-web-app
+  - https://github.com/Senzing/entity-search-web-app
+type: application
+version: 2.0.0

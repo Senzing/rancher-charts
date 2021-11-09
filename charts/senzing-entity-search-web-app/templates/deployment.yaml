@@ -1,0 +1,221 @@
+apiVersion: {{ include "senzing-common.capabilities.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+  labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
+    app.kubernetes.io/component: senzing-entity-search-web-app-component
+    {{- if .Values.commonLabels }}
+    {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  name: {{ template "senzing-common.names.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  replicas: {{ .Values.main.replicaCount }}
+  selector:
+    matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
+      app.kubernetes.io/component: senzing-entity-search-web-app-component
+  {{- if .Values.main.updateStrategy }}
+  strategy: {{- toYaml .Values.main.updateStrategy | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      {{- if .Values.main.podAnnotations }}
+      annotations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podAnnotations "context" $) | nindent 8 }}
+      {{- end }}
+      labels: {{- include "senzing-common.labels.standard" . | nindent 8 }}
+        app.kubernetes.io/component: senzing-entity-search-web-app-component
+        {{- if .Values.main.podLabels }}
+        {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podLabels "context" $) | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.main.affinity }}
+      affinity: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.affinity "context" $) | nindent 8 }}
+      {{- else }}
+      affinity:
+        podAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAffinityPreset "component" "senzing-entity-search-web-app-component" "context" $) | nindent 10 }}
+        podAntiAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAntiAffinityPreset "component" "senzing-entity-search-web-app-component" "context" $) | nindent 10 }}
+        nodeAffinity: {{- include "senzing-common.affinities.nodes" (dict "type" .Values.main.nodeAffinityPreset.type "key" .Values.main.nodeAffinityPreset.key "values" .Values.main.nodeAffinityPreset.values) | nindent 10 }}
+      {{- end }}
+      containers:
+        - name: senzing-entity-search-web-app
+          {{- if .Values.diagnosticMode.enabled }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 12 }}
+          {{- else if .Values.main.args }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.args "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.diagnosticMode.enabled }}
+          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 12 }}
+          {{- else if .Values.main.command }}
+          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.command "context" $) | nindent 12 }}
+          {{- end }}
+          env:
+            {{- if .Values.main.senzing.apiServerUrl }}
+            - name: SENZING_API_SERVER_URL
+              value: "{{ .Values.main.senzing.apiServerUrl }}"
+            {{- end }}
+            {{- if .Values.main.senzing.authServerAdminJwpathRewrite }}
+            - name: SENZING_AUTH_SERVER_ADMIN_JWTPATH_REWRITE
+              value: "{{ .Values.main.senzing.authServerAdminJwpathRewrite }}"
+            {{- end }}
+            {{- if .Values.main.senzing.authServerAdminSsopathRewrite }}
+            - name: SENZING_AUTH_SERVER_ADMIN_SSOPATH_REWRITE
+              value: "{{ .Values.main.senzing.authServerAdminSsopathRewrite }}"
+            {{- end }}
+            {{- if .Values.main.senzing.authServerHostname }}
+            - name: SENZING_AUTH_SERVER_HOSTNAME
+              value: "{{ .Values.main.senzing.authServerHostname }}"
+            {{- end }}
+            {{- if .Values.main.senzing.authServerJwpathRewrite }}
+            - name: SENZING_AUTH_SERVER_JWTPATH_REWRITE
+              value: "{{ .Values.main.senzing.authServerJwpathRewrite }}"
+            {{- end }}
+            {{- if .Values.main.senzing.authServerPort }}
+            - name: SENZING_AUTH_SERVER_PORT
+              value: "{{ .Values.main.senzing.authServerPort }}"
+            {{- end }}
+            {{- if .Values.main.senzing.authServerSsopathRewrite }}
+            - name: SENZING_AUTH_SERVER_SSOPATH_REWRITE
+              value: "{{ .Values.main.senzing.authServerSsopathRewrite }}"
+            {{- end }}
+            {{- if .Values.main.senzing.authServerWriteConfigToFile }}
+            - name: SENZING_AUTH_SERVER_WRITE_CONFIG_TO_FILE
+              value: "{{ .Values.main.senzing.authServerWriteConfigToFile }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerAdminAuthMode }}
+            - name: SENZING_WEB_SERVER_ADMIN_AUTH_MODE
+              value: "{{ .Values.main.senzing.webServerAdminAuthMode }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerAdminAuthPath }}
+            - name: SENZING_WEB_SERVER_ADMIN_AUTH_PATH
+              value: "{{ .Values.main.senzing.webServerAdminAuthPath }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerAdminAuthRedirect }}
+            - name: SENZING_WEB_SERVER_ADMIN_AUTH_REDIRECT
+              value: "{{ .Values.main.senzing.webServerAdminAuthRedirect }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerAdminAuthStatus }}
+            - name: SENZING_WEB_SERVER_ADMIN_AUTH_STATUS
+              value: "{{ .Values.main.senzing.webServerAdminAuthStatus }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerAdminSecret }}
+            - name: SENZING_WEB_SERVER_ADMIN_SECRET
+              value: "{{ .Values.main.senzing.webServerAdminSecret }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerAdminSeed }}
+            - name: SENZING_WEB_SERVER_ADMIN_SEED
+              value: "{{ .Values.main.senzing.webServerAdminSeed }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerApiPath }}
+            - name: SENZING_WEB_SERVER_API_PATH
+              value: "{{ .Values.main.senzing.webServerApiPath }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerAuthPath }}
+            - name: SENZING_WEB_SERVER_AUTH_PATH
+              value: "{{ .Values.main.senzing.webServerAuthPath }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerBasicAuthJson }}
+            - name: SENZING_WEB_SERVER_BASIC_AUTH_JSON
+              value: "{{ .Values.main.senzing.webServerBasicAuthJson }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerCorsAllowedOrigin }}
+            - name: SENZING_WEB_SERVER_CORS_ALLOWED_ORIGIN
+              value: "{{ .Values.main.senzing.webServerCorsAllowedOrigin }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerHosname }}
+            - name: SENZING_WEB_SERVER_HOSTNAME
+              value: "{{ .Values.main.senzing.webServerHosname }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerOperatorAuthMode }}
+            - name: SENZING_WEB_SERVER_OPERATOR_AUTH_MODE
+              value: "{{ .Values.main.senzing.webServerOperatorAuthMode }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerOperatorAuthRedirect }}
+            - name: SENZING_WEB_SERVER_OPERATOR_AUTH_REDIRECT
+              value: "{{ .Values.main.senzing.webServerOperatorAuthRedirect }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerOperatorAuthStatus }}
+            - name: SENZING_WEB_SERVER_OPERATOR_AUTH_STATUS
+              value: "{{ .Values.main.senzing.webServerOperatorAuthStatus }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerPort }}
+            - name: SENZING_WEB_SERVER_PORT
+              value: "{{ .Values.main.senzing.webServerPort }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerProxyLoglevel }}
+            - name: SENZING_WEB_SERVER_PROXY_LOGLEVEL
+              value: "{{ .Values.main.senzing.webServerProxyLoglevel }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerSslCertPath }}
+            - name: SENZING_WEB_SERVER_SSL_CERT_PATH
+              value: "{{ .Values.main.senzing.webServerSslCertPath }}"
+            {{- end }}
+            {{- if .Values.main.senzing.webServerSslKeyPath }}
+            - name: SENZING_WEB_SERVER_SSL_KEY_PATH
+              value: "{{ .Values.main.senzing.webServerSslKeyPath }}"
+            {{- end }}
+            {{- if .Values.main.extraEnvVars }}
+            {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          envFrom:
+            {{- if .Values.main.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.main.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          image: {{ template "senzing-entity-search-web-app.image" . }}
+          imagePullPolicy: {{ .Values.main.image.pullPolicy }}
+          {{- if not .Values.diagnosticMode.enabled }}
+          {{- if .Values.main.lifecycleHooks }}
+          lifecycle: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.lifecycleHooks "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.main.livenessProbe.enabled }}
+          livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.livenessProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customLivenessProbe }}
+          livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customLivenessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.main.senzing.webServerPort }}
+            {{- if .Values.main.senzing.securePort }}
+            - name: https
+              containerPort: {{ .Values.main.senzing.securePort }}
+            {{- end }}
+          {{- if not .Values.diagnosticMode.enabled }}
+          {{- if .Values.main.readinessProbe.enabled }}
+          readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customReadinessProbe }}
+          readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customReadinessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.main.resources }}
+          resources: {{- toYaml .Values.main.resources | nindent 12 }}
+          {{- end }}
+          {{- if .Values.main.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+        {{- if .Values.main.sidecars }}
+        {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
+        {{- end }}
+      {{- if .Values.main.hostAliases }}
+      hostAliases: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.hostAliases "context" $) | nindent 8 }}
+      {{- end }}
+      {{- include "senzing-entity-search-web-app.imagePullSecrets" . | nindent 6 }}
+      {{- if .Values.main.nodeSelector }}
+      nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.main.priorityClassName }}
+      priorityClassName: {{ .Values.main.priorityClassName | quote }}
+      {{- end }}
+      {{- if .Values.main.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ template "senzing-entity-search-web-app.serviceAccountName" . }}
+      {{- if .Values.main.tolerations }}
+      tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
+      {{- end }}
