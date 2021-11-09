@@ -5,7 +5,7 @@ metadata:
   annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
   labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
-    app.kubernetes.io/component: ${SENZING_HELM_COMPONENT_NAME}
+    app.kubernetes.io/component: senzing-api-server-component
     {{- if .Values.commonLabels }}
     {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
@@ -31,6 +31,7 @@ spec:
       {{- else if eq .Values.service.type "ClusterIP" }}
       nodePort: null
       {{- end }}
+    {{- if .Values.main.senzing.securePort }}
     - name: https
       port: {{ .Values.service.httpsPort }}
       protocol: TCP
@@ -40,6 +41,7 @@ spec:
       {{- else if eq .Values.service.type "ClusterIP" }}
       nodePort: null
       {{- end }}
+    {{- end }}
   selector: {{- include "senzing-common.labels.matchLabels" . | nindent 4 }}
-    app.kubernetes.io/component: ${SENZING_HELM_COMPONENT_NAME}
+    app.kubernetes.io/component: senzing-api-server-component
   type: {{ .Values.service.type }}
