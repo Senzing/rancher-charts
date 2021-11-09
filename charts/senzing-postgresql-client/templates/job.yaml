@@ -85,11 +85,11 @@ spec:
           {{- if .Values.main.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
-          {{- if .Values.main.postgresql.storageClaim }}
           volumeMounts:
+            {{- if .Values.main.postgresql.storageClaim }}
             - name: postgresql-storage
               mountPath: /data
-          {{- end }}
+            {{- end }}
             {{- if .Values.main.extraVolumeMounts }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
             {{- end }}
@@ -111,10 +111,10 @@ spec:
       {{- if .Values.main.tolerations }}
       tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
       {{- end }}
-      {{- if .Values.main.postgresql.storageClaim }}
       volumes:
+        {{- if .Values.main.postgresql.storageClaim }}
         - name: postgresql-storage
           persistentVolumeClaim:
             claimName: {{ .Values.main.postgresql.storageClaim }}
-      {{- end }}
+        {{- end }}
 

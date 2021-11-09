@@ -89,8 +89,8 @@ spec:
           {{- if .Values.main.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
-          {{- if .Values.main.senzing.persistentVolumeClaim }}
           volumeMounts:
+            {{- if .Values.main.senzing.persistentVolumeClaim }}
             - name: senzing-storage
               mountPath: /opt/senzing/data
               subPath: senzing-data
@@ -116,7 +116,7 @@ spec:
               mountPath: /opt/microsoft
               subPath: opt-microsoft
             {{- end }}
-          {{- end }}
+            {{- end }}
             {{- if .Values.main.extraVolumeMounts }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
             {{- end }}
@@ -131,11 +131,11 @@ spec:
           securityContext:
             privileged: true
           {{- end }}
-          {{- if .Values.main.senzing.persistentVolumeClaim }}
           volumeMounts:
+            {{- if .Values.main.senzing.persistentVolumeClaim }}
             - name:  senzing-storage
               mountPath: /opt/senzing
-          {{- end }}
+            {{- end }}
         {{- if .Values.main.initContainers }}
           {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.initContainers "context" $) | nindent 8 }}
         {{- end }}
