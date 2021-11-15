@@ -60,7 +60,7 @@ In order to replicate the container startup scripts execute this command:
 
 {{- else if contains "NodePort" .Values.service.type }}
 
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "senzing-stream-loader.fullname" . }})
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "senzing-common.names.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
   echo http://$NODE_IP:$NODE_PORT
 
@@ -80,7 +80,7 @@ In order to replicate the container startup scripts execute this command:
   ```console
   export POD_NAME=$(kubectl get pods \
     --namespace {{ .Release.Namespace }} \
-    --selector "app.kubernetes.io/name={{ include "senzing-stream-loader.name" . }}, \
+    --selector "app.kubernetes.io/name={{ include "senzing-postgresql-client.name" . }}, \
                 app.kubernetes.io/instance={{ .Release.Name }}" \
     --output jsonpath="{.items[0].metadata.name}")
 
