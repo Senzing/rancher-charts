@@ -1,150 +1,163 @@
-# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
-
-apiVersion: apps/v1
+apiVersion: {{ include "senzing-common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
-  name: {{ include "common.names.fullname" . }}
-  labels: {{- include "common.labels.standard" . | nindent 4 }}
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
   {{- if .Values.commonAnnotations }}
-  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
+  labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
+    app.kubernetes.io/component: phppgadmin-component
+    {{- if .Values.commonLabels }}
+    {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  name: {{ template "senzing-common.names.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.main.replicaCount }}
   selector:
-    matchLabels: {{- include "common.labels.matchLabels" . | nindent 6 }}
+    matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
+      app.kubernetes.io/component: phppgadmin-component
+  {{- if .Values.main.updateStrategy }}
+  strategy: {{- toYaml .Values.main.updateStrategy | nindent 4 }}
+  {{- end }}
   template:
     metadata:
-      labels: {{- include "common.labels.standard" . | nindent 8 }}
-        {{- if .Values.podLabels }}
-        {{- include "common.tplvalues.render" (dict "value" .Values.podLabels "context" $) | nindent 8 }}
-        {{- end }}
-      {{- if or .Values.podAnnotations (and .Values.metrics.enabled .Values.metrics.podAnnotations) }}
-      annotations:
-        {{- if .Values.podAnnotations }}
-        {{- include "common.tplvalues.render" (dict "value" .Values.podAnnotations "context" $) | nindent 8 }}
-        {{- end }}
-        {{- if and .Values.metrics.enabled .Values.metrics.podAnnotations }}
-        {{- include "common.tplvalues.render" (dict "value" .Values.metrics.podAnnotations "context" $) | nindent 8 }}
-        {{- end }}
+      {{- if .Values.main.podAnnotations }}
+      annotations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podAnnotations "context" $) | nindent 8 }}
       {{- end }}
+      labels: {{- include "senzing-common.labels.standard" . | nindent 8 }}
+        app.kubernetes.io/component: phppgadmin-component
+        {{- if .Values.main.podLabels }}
+        {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podLabels "context" $) | nindent 8 }}
+        {{- end }}
     spec:
-      {{- include "senzing.imagePullSecrets" . | nindent 6 }}
-      {{- if .Values.hostAliases }}
-      # yamllint disable rule:indentation
-      hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.hostAliases "context" $) | nindent 8 }}
-      # yamllint enable rule:indentation
-      {{- end }}
-      {{- if .Values.affinity }}
-      affinity: {{- include "common.tplvalues.render" ( dict "value" .Values.affinity "context" $) | nindent 8 }}
+      {{- if .Values.main.affinity }}
+      affinity: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.affinity "context" $) | nindent 8 }}
       {{- else }}
       affinity:
-        podAffinity: {{- include "common.affinities.pods" (dict "type" .Values.podAffinityPreset "context" $) | nindent 10 }}
-        podAntiAffinity: {{- include "common.affinities.pods" (dict "type" .Values.podAntiAffinityPreset "context" $) | nindent 10 }}
-        nodeAffinity: {{- include "common.affinities.nodes" (dict "type" .Values.nodeAffinityPreset.type "key" .Values.nodeAffinityPreset.key "values" .Values.nodeAffinityPreset.values) | nindent 10 }}
-      {{- end }}
-      {{- if .Values.nodeSelector }}
-      nodeSelector: {{- include "common.tplvalues.render" ( dict "value" .Values.nodeSelector "context" $) | nindent 8 }}
-      {{- end }}
-      {{- if .Values.tolerations }}
-      tolerations: {{- include "common.tplvalues.render" (dict "value" .Values.tolerations "context" .) | nindent 8 }}
-      {{- end }}
-      {{- if .Values.podSecurityContext.enabled }}
-      securityContext: {{- omit .Values.podSecurityContext "enabled" | toYaml | nindent 8 }}
-      {{- end }}
-      {{- if .Values.initContainers }}
-      initContainers: {{- include "common.tplvalues.render" (dict "value" .Values.initContainers "context" $) | nindent 8 }}
+        podAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAffinityPreset "component" "phppgadmin-component" "context" $) | nindent 10 }}
+        podAntiAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAntiAffinityPreset "component" "phppgadmin-component" "context" $) | nindent 10 }}
+        nodeAffinity: {{- include "senzing-common.affinities.nodes" (dict "type" .Values.main.nodeAffinityPreset.type "key" .Values.main.nodeAffinityPreset.key "values" .Values.main.nodeAffinityPreset.values) | nindent 10 }}
       {{- end }}
       containers:
-        - name: {{ .Chart.Name }}
-          image: {{ template "senzing.image" . }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.containerSecurityContext.enabled }}
-          securityContext: {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+        - name: phppgadmin
+          {{- if .Values.diagnosticMode.enabled }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 12 }}
+          {{- else if .Values.main.args }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.args "context" $) | nindent 12 }}
           {{- end }}
-          {{- if .Values.command }}
-          command: {{- include "common.tplvalues.render" (dict "value" .Values.command "context" $) | nindent 12 }}
-          {{- end }}
-          {{- if .Values.args }}
-          args: {{- include "common.tplvalues.render" (dict "value" .Values.args "context" $) | nindent 12 }}
+          {{- if .Values.diagnosticMode.enabled }}
+          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 12 }}
+          {{- else if .Values.main.command }}
+          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.command "context" $) | nindent 12 }}
           {{- end }}
           env:
           - name: PHP_PG_ADMIN_SERVER_HOST
-            value: {{ .Values.phppgadmin.serverHost | quote }}
+            value: {{ .Values.main.phppgadmin.serverHost | quote }}
           - name: PHP_PG_ADMIN_SERVER_PORT
-            value: {{ .Values.phppgadmin.serverPort | quote }}
+            value: {{ .Values.main.phppgadmin.serverPort | quote }}
           - name: PHP_PG_ADMIN_SERVER_DESC
-            value: {{ .Values.phppgadmin.serverDesc | quote }}
+            value: {{ .Values.main.phppgadmin.serverDesc | quote }}
           - name: PHP_PG_ADMIN_SERVER_SSL_MODE
-            value : {{ .Values.phppgadmin.serverSslMode | quote }}
+            value : {{ .Values.main.phppgadmin.serverSslMode | quote }}
           - name: PHP_PG_ADMIN_SERVER_DEFAULT_DB
-            value: {{ .Values.phppgadmin.defaultDb | quote }}
+            value: {{ .Values.main.phppgadmin.defaultDb | quote }}
           - name: PHP_PG_ADMIN_SERVER_PG_DUMP_PATH
-            value: {{ .Values.phppgadmin.serverPgDumpPath | quote }}
+            value: {{ .Values.main.phppgadmin.serverPgDumpPath | quote }}
           - name: PHP_PG_ADMIN_SERVER_PG_DUMPALL_PATH
-            value: {{ .Values.phppgadmin.serverPgDumpAllPath | quote }}
+            value: {{ .Values.main.phppgadmin.serverPgDumpAllPath | quote }}
           - name: PHP_PG_ADMIN_DEFAULT_LANG
-            value: {{ .Values.phppgadmin.defaultLang | quote }}
+            value: {{ .Values.main.phppgadmin.defaultLang | quote }}
           - name: PHP_PG_ADMIN_AUTO_COMPLETE
-            value: {{ .Values.phppgadmin.autoComplete | quote }}
+            value: {{ .Values.main.phppgadmin.autoComplete | quote }}
           - name: PHP_PG_ADMIN_EXTRA_LOGIN_SECURITY
-            value: {{ .Values.phppgadmin.extraLoginSecurity | quote }}
+            value: {{ .Values.main.phppgadmin.extraLoginSecurity | quote }}
           - name: PHP_PG_ADMIN_OWNED_ONLY
-            value: {{ .Values.phppgadmin.ownedOnly | quote }}
+            value: {{ .Values.main.phppgadmin.ownedOnly | quote }}
           - name: PHP_PG_ADMIN_SHOW_COMMENTS
-            value: {{ .Values.phppgadmin.showComments | quote }}
+            value: {{ .Values.main.phppgadmin.showComments | quote }}
           - name: PHP_PG_ADMIN_SHOW_ADVANCED
-            value: {{ .Values.phppgadmin.showAdvanced | quote }}
+            value: {{ .Values.main.phppgadmin.showAdvanced | quote }}
           - name: PHP_PG_ADMIN_SHOW_SYSTEM
-            value: {{ .Values.phppgadmin.showSystem | quote }}
+            value: {{ .Values.main.phppgadmin.showSystem | quote }}
           - name: PHP_PG_ADMIN_MIN_PASSWORD_LENGTH
-            value: {{ .Values.phppgadmin.minPasswordLength | quote }}
+            value: {{ .Values.main.phppgadmin.minPasswordLength | quote }}
           - name: PHP_PG_ADMIN_LEFT_WIDTH
-            value: {{ .Values.phppgadmin.leftWidth | quote }}
+            value: {{ .Values.main.phppgadmin.leftWidth | quote }}
           - name: PHP_PG_ADMIN_THEME
-            value: {{ .Values.phppgadmin.theme | quote }}
+            value: {{ .Values.main.phppgadmin.theme | quote }}
           - name: PHP_PG_ADMIN_SHOW_OIDS
-            value: {{ .Values.phppgadmin.showOids | quote }}
+            value: {{ .Values.main.phppgadmin.showOids | quote }}
           - name: PHP_PG_ADMIN_MAX_ROWS
-            value: {{ .Values.phppgadmin.maxRows | quote }}
+            value: {{ .Values.main.phppgadmin.maxRows | quote }}
           - name: PHP_PG_ADMIN_MAX_CHARS
-            value: {{ .Values.phppgadmin.maxChars | quote }}
+            value: {{ .Values.main.phppgadmin.maxChars | quote }}
           - name: PHP_PG_ADMIN_USE_XHTML_STRICT
-            value: {{ .Values.phppgadmin.useXhtmlStrict | quote }}
+            value: {{ .Values.main.phppgadmin.useXhtmlStrict | quote }}
           - name: PHP_PG_ADMIN_HELP_BASE
-            value: {{ .Values.phppgadmin.helpBase | quote }}
+            value: {{ .Values.main.phppgadmin.helpBase | quote }}
           - name: PHP_PG_ADMIN_AJAX_REFRESH
-            value: {{ .Values.phppgadmin.ajaxRefresh | quote }}
-          {{- if or .Values.extraEnvVarsCM .Values.extraEnvVarsSecret }}
+            value: {{ .Values.main.phppgadmin.ajaxRefresh | quote }}
+            {{- if .Values.main.extraEnvVars }}
+            {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
           envFrom:
-            {{- if .Values.extraEnvVarsCM }}
+            {{- if .Values.main.extraEnvVarsCM }}
             - configMapRef:
-                name: {{ include "common.tplvalues.render" (dict "value" .Values.extraEnvVarsCM "context" $) }}
+                name: {{ include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVarsCM "context" $) }}
             {{- end }}
-            {{- if .Values.extraEnvVarsSecret }}
+            {{- if .Values.main.extraEnvVarsSecret }}
             - secretRef:
-                name: {{ include "common.tplvalues.render" (dict "value" .Values.extraEnvVarsSecret "context" $) }}
+                name: {{ include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVarsSecret "context" $) }}
             {{- end }}
+          image: {{ template "phppgadmin.image" . }}
+          imagePullPolicy: {{ .Values.main.image.pullPolicy }}
+          {{- if not .Values.diagnosticMode.enabled }}
+          {{- if .Values.main.lifecycleHooks }}
+          lifecycle: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.lifecycleHooks "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.main.livenessProbe.enabled }}
+          livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.livenessProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customLivenessProbe }}
+          livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customLivenessProbe "context" $) | nindent 12 }}
+          {{- end }}
           {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.containerPorts.http }}
+              containerPort: {{ .Values.main.containerPorts.http }}
               protocol: TCP
             - name: https
-              containerPort: {{ .Values.containerPorts.https }}
+              containerPort: {{ .Values.main.containerPorts.https }}
               protocol: TCP
-          {{- if .Values.livenessProbe.enabled }}
-          livenessProbe: {{- include "common.tplvalues.render" (dict "value" (omit .Values.livenessProbe "enabled") "context" $) | nindent 12 }}
-          {{- else if .Values.customLivenessProbe }}
-          livenessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.customLivenessProbe "context" $) | nindent 12 }}
+          {{- if not .Values.diagnosticMode.enabled }}
+          {{- if .Values.main.readinessProbe.enabled }}
+          readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customReadinessProbe }}
+          readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customReadinessProbe "context" $) | nindent 12 }}
           {{- end }}
-          {{- if .Values.readinessProbe.enabled }}
-          readinessProbe: {{- include "common.tplvalues.render" (dict "value" (omit .Values.readinessProbe "enabled") "context" $) | nindent 12 }}
-          {{- else if .Values.customReadinessProbe }}
-          readinessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.customReadinessProbe "context" $) | nindent 12 }}
           {{- end }}
-          {{- if .Values.resources }}
-          resources: {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .Values.main.resources }}
+          resources: {{- toYaml .Values.main.resources | nindent 12 }}
           {{- end }}
+          {{- if .Values.main.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+        {{- if .Values.main.sidecars }}
+        {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
+        {{- end }}
+      {{- if .Values.main.hostAliases }}
+      hostAliases: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.hostAliases "context" $) | nindent 8 }}
+      {{- end }}
+      {{- include "phppgadmin.imagePullSecrets" . | nindent 6 }}
+      {{- if .Values.main.nodeSelector }}
+      nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.main.priorityClassName }}
+      priorityClassName: {{ .Values.main.priorityClassName | quote }}
+      {{- end }}
+      {{- if .Values.main.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ template "phppgadmin.serviceAccountName" . }}
+      {{- if .Values.main.tolerations }}
+      tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
+      {{- end }}

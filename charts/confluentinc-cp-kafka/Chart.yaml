@@ -1,0 +1,22 @@
+# https://helm.sh/docs/topics/charts/#the-chartyaml-file
+
+apiVersion: v2
+appVersion: ""
+dependencies:
+  - name: senzing-common
+    repository: https://hub.senzing.com/charts/
+    version: 1.0.1
+description: Kafka test client
+engine: gotpl
+home: https://github.com/Senzing/charts/tree/master/charts/confluentinc-cp-kafka
+icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
+keywords:
+  - kafka
+maintainers:
+  - email: support@senzing.com
+    name: Senzing
+name: confluentinc-cp-kafka
+sources:
+  - https://hub.docker.com/r/confluentinc/cp-kafka/
+type: application
+version: 2.0.0

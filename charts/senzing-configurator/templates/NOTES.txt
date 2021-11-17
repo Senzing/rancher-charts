@@ -1,46 +1,52 @@
 ## Overview
 
-A job to run Senzing's Configurator.
+Simple overview.
 
 More information:
 
-- [GitHub](https://github.com/Senzing/configurator)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/configurator)
+- [GitHub](https://github.com/Senzing/XXXXX)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/XXXXXX)
 
 ## Command
 
 The command being run:
 
 ```console
-configurator.py {{ .Values.senzing.subcommand -}}
-  {{- if .Values.senzing.configPath }} \
-  --config-path "{{ .Values.senzing.configPath }}"
+command-name.py {{ .Values.main.senzing.subcommand -}}
+  {{- if .Values.main.senzing.debug }} \
+  --debug "{{ .Values.main.senzing.debug }}"
   {{- end }}
-  {{- if .Values.senzing.databaseUrl }} \
-  --database-url "{{ .Values.senzing.databaseUrl }}"
-  {{- end }}
-  {{- if .Values.senzing.debug }} \
-  --debug
-  {{- end }}
-  {{- if .Values.senzing.engineConfigurationJson }} \
-  --engine-configuration-json "{{ .Values.senzing.engineConfigurationJson }}"
-  {{- end }}
-  {{- if .Values.senzing.host }} \
-  --host "{{ .Values.senzing.host }}"
-  {{- end }}
-  {{- if .Values.senzing.logLevel }} \
-  --log-level "{{ .Values.senzing.logLevel }}"
-  {{- end }}
-  {{- if .Values.senzing.port }} \
-  --port "{{ .Values.senzing.port }}"
-  {{- end }}
-  {{- if .Values.senzing.sleepTimeInSeconds }} \
-  --sleep-time-in-seconds {{ .Values.senzing.sleepTimeInSeconds }}
-  {{- end }}
-  {{- if .Values.senzing.supportPath }} \
-  --support-path "{{ .Values.senzing.supportPath }}"
+  {{- if .Values.main.senzing.logLevel }} \
+  --log-level "{{ .Values.main.senzing.logLevel }}"
   {{- end }}
 ```
+
+## Metadata
+
+{{- if .Values.diagnosticMode.enabled }}
+The chart has been deployed in diagnostic mode. All probes have been disabled and the command has been overwritten with:
+
+  command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 4 }}
+  args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 4 }}
+
+Get the list of pods by executing:
+
+  kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+Access the pod you want to debug by executing
+
+  kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
+
+In order to replicate the container startup scripts execute this command:
+
+    %%ENTRYPOINT and CMD from main container%%
+
+{{- else }}
+
+%%Instructions to access the application depending on the serviceType and other considerations%%
+
+{{- end }}
+
 
 ## Metadata
 
@@ -54,15 +60,15 @@ configurator.py {{ .Values.senzing.subcommand -}}
 
 {{- else if contains "NodePort" .Values.service.type }}
 
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "senzing-configurator.fullname" . }})
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "senzing-common.names.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
   echo http://$NODE_IP:$NODE_PORT
 
 {{- else if contains "LoadBalancer" .Values.service.type }}
 
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "senzing-configurator.fullname" . }}'
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "senzing-configurator.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ template "senzing-common.names.fullname" . }}'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ template "senzing-common.names.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   echo http://$SERVICE_IP:{{ .Values.service.port }}
 
 {{- else if contains "ClusterIP" .Values.service.type }}
@@ -81,17 +87,8 @@ configurator.py {{ .Values.senzing.subcommand -}}
   kubectl exec -it --namespace {{ .Release.Namespace }} ${POD_NAME} -- /bin/bash
   ```
 
-## Port-forward
-
-1. Example:
-
-  ```console
-  export MY_PORT=8253
-
-  kubectl port-forward \
-    --address 0.0.0.0 \
-    --namespace {{ .Release.Namespace }} \
-    svc/{{ .Release.Name }} ${MY_PORT}:{{ .Values.service.port }}
-  ```
-
 {{- end }}
+
+
+{{- include "senzing-common.warnings.rollingTag" .Values.main.image }}
+{{- include "senzing-configurator.validateValues" . }}

@@ -1,19 +1,25 @@
 # https://helm.sh/docs/topics/charts/#the-chartyaml-file
 
 apiVersion: v2
+appVersion: ""
 dependencies:
-  - name: common
-    repository: https://charts.bitnami.com/bitnami
-    version: 1.6.1
+  - name: senzing-common
+    repository: https://hub.senzing.com/charts/
+    version: 1.0.1
 description: phpPgAdmin is a web-based administration tool for PostgreSQL. It is perfect for PostgreSQL DBAs, newbies, and hosting services.
-home: http://phppgadmin.sourceforge.net/doku.php
+engine: gotpl
+home: https://github.com/phppgadmin/phppgadmin
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
   - phppgadmin
   - postgresql
   - database
   - sql
+maintainers:
+  - email: support@senzing.com
+    name: Senzing
 name: phppgadmin
-source:
+sources:
   - https://github.com/Senzing/charts/tree/master/charts/phppgadmin
-version: "2.0.0"
+type: application
+version: 3.0.0

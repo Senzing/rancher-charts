@@ -1,40 +1,80 @@
+## Overview
 
-** Please be patient while the chart is being deployed **
+Simple overview.
 
-1. Get the application URL by running these commands:
+More information:
+
+- [GitHub](https://github.com/Senzing/XXXXX)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/XXXXXX)
+
+## Metadata
+
+{{- if .Values.diagnosticMode.enabled }}
+The chart has been deployed in diagnostic mode. All probes have been disabled and the command has been overwritten with:
+
+  command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 4 }}
+  args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 4 }}
+
+Get the list of pods by executing:
+
+  kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+Access the pod you want to debug by executing
+
+  kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
+
+In order to replicate the container startup scripts execute this command:
+
+    %%ENTRYPOINT and CMD from main container%%
+
+{{- else }}
+
+%%Instructions to access the application depending on the serviceType and other considerations%%
+
+{{- end }}
+
+
+## Metadata
 
 {{- if .Values.ingress.enabled }}
 
-  You should be able to access your new phppgadmin installation through
-
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .Values.ingress.hostname }}/
-
-{{- else if eq .Values.service.type "LoadBalancer" }}
-
-  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-        Watch the status with: 'kubectl get svc --namespace {{ .Release.Namespace }} -w {{ include "common.names.fullname" . }}'
-
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "common.names.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
-  {{- $port:=.Values.service.port | toString }}
-  echo "phppgadmin URL: http://$SERVICE_IP{{- if ne $port "80" }}:{{ .Values.service.port }}{{ end }}/"
+{{- range $host := .Values.ingress.hosts }}
+  {{- range .paths }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }}
+  {{- end }}
+{{- end }}
 
 {{- else if contains "NodePort" .Values.service.type }}
 
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "common.names.fullname" . }}'
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "senzing-common.names.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo "phppgadmin URL: http://$NODE_IP:$NODE_PORT"
+  echo http://$NODE_IP:$NODE_PORT
+
+{{- else if contains "LoadBalancer" .Values.service.type }}
+
+     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ template "senzing-common.names.fullname" . }}'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ template "senzing-common.names.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  echo http://$SERVICE_IP:{{ .Values.service.port }}
 
 {{- else if contains "ClusterIP" .Values.service.type }}
 
-  echo "phppgadmin URL: http://127.0.0.1:{{ .Values.service.port }}"
-  kubectl port-forward --namespace {{ .Release.Namespace }} svc/{{ template "common.names.fullname" . }} {{ .Values.service.port }}:{{ .Values.service.port }}
+## Logon
+
+1. Example:
+
+  ```console
+  export POD_NAME=$(kubectl get pods \
+    --namespace {{ .Release.Namespace }} \
+    --selector "app.kubernetes.io/name={{ include "senzing-phppgadmin.name" . }}, \
+                app.kubernetes.io/instance={{ .Release.Name }}" \
+    --output jsonpath="{.items[0].metadata.name}")
+
+  kubectl exec -it --namespace {{ .Release.Namespace }} ${POD_NAME} -- /bin/bash
+  ```
 
 {{- end }}
 
-2. How to log in
-{{- if .Values.phppgadmin.serverHost }}
 
-phppgadmin has been configured to connect to a database in {{.Values.phppgadmin.serverHost}}
-with port {{.Values.phppgadmin.serverPort}}
-Please login using a database username and password.
-{{- end }}
+{{- include "senzing-common.warnings.rollingTag" .Values.main.image }}
+{{- include "phppgadmin.validateValues" . }}

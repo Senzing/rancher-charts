@@ -100,8 +100,8 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
     builtInMetrics: []
     customMetrics: []
     enabled: false
-    maxReplicas: 2
-    minReplicas: 5
+    maxReplicas: 10
+    minReplicas: 2
     targetCPU: 50
     targetMemory: 60
 
@@ -111,12 +111,12 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
 
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.runAsUser Set ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context runAsUser
   ##
   containerSecurityContext:
-    enabled: true
-    runAsUser: 1001
+    privileged: true
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.customLivenessProbe Custom livenessProbe that overrides the default one
   ##
@@ -215,13 +215,13 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
   ##
   livenessProbe:
-    enabled: true
+    enabled: false
 #   %%httpGet || command || etc%%
-    failureThreshold: bar
-    initialDelaySeconds: foo
-    periodSeconds: bar
-    successThreshold: foo
-    timeoutSeconds: foo
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
 
   ## Node ${SENZING_HELM_MAIN_OBJECT_BLOCK}.affinity preset
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
@@ -271,12 +271,15 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
 
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} pods' Security Context
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.fsGroup Set ${SENZING_HELM_MAIN_CONTAINER_NAME} pod's Security Context fsGroup
   ##
   podSecurityContext:
     enabled: true
     fsGroup: 1001
+    runAsGroup: 1001
+    runAsUser: 1001
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.priorityClassName ${SENZING_HELM_MAIN_CONTAINER_NAME} pods' priorityClassName
   ##
@@ -290,13 +293,13 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
   ##
   readinessProbe:
-    enabled: true
+    enabled: false
 #   %%httpGet || command || etc%%
-    failureThreshold: bar
-    initialDelaySeconds: foo
-    periodSeconds: bar
-    successThreshold: foo
-    timeoutSeconds: foo
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.replicaCount Number of ${SENZING_HELM_MAIN_CONTAINER_NAME} replicas to deploy
   ##
@@ -412,7 +415,7 @@ ingress:
 
   ## @param ingress.hostname Default host for the ingress record
   ##
-  hostname: ${SENZING_HELM_COMPONENT_NAME}.local
+  hostname: ${SENZING_HELM_CHART_NAME}.local
 
   ## @param ingress.path Default path for the ingress record
   ## NOTE: May need to set this to '/*' in order to use this with ALB ingress controllers

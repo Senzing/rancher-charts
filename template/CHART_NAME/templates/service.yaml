@@ -22,9 +22,24 @@ spec:
   loadBalancerSourceRanges: {{ .Values.service.loadBalancerSourceRanges }}
   {{- end }}
   ports:
-    - name: ${SENZING_HELM_PORT_NAME}
-      port: 80
-      protocol: HTTP
+    - name: http
+      port: {{ .Values.service.port }}
+      protocol: TCP
+      targetPort: http
+      {{- if (and (or (eq .Values.service.type "NodePort") (eq .Values.service.type "LoadBalancer")) (not (empty .Values.service.nodePorts.http))) }}
+      nodePort: {{ .Values.service.nodePorts.http }}
+      {{- else if eq .Values.service.type "ClusterIP" }}
+      nodePort: null
+      {{- end }}
+    - name: https
+      port: {{ .Values.service.httpsPort }}
+      protocol: TCP
+      targetPort: https
+      {{- if (and (or (eq .Values.service.type "NodePort") (eq .Values.service.type "LoadBalancer")) (not (empty .Values.service.nodePorts.https))) }}
+      nodePort: {{ .Values.service.nodePorts.https }}
+      {{- else if eq .Values.service.type "ClusterIP" }}
+      nodePort: null
+      {{- end }}
   selector: {{- include "senzing-common.labels.matchLabels" . | nindent 4 }}
     app.kubernetes.io/component: ${SENZING_HELM_COMPONENT_NAME}
   type: {{ .Values.service.type }}

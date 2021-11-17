@@ -1,91 +1,117 @@
 # senzing-console
 
-## Overview
+## Credit
 
-This chart bootstraps a
-[Senzing environment for console access](https://github.com/Senzing/docker-senzing-console)
-a deployment on a
-[Kubernetes](http://kubernetes.io)
-cluster using the
-[Helm](https://helm.sh) package manager.
+[remove]
+This is based off of [Bitnami's README.md](https://github.com/bitnami/charts/blob/master/template/CHART_NAME/README.md)
+We appreciate Bitnami's leadership in Helm Chart creation.
+[/remove]
+
+## Synopsis
+
+%%DESCRIPTION%% (check existing examples)
+
+## Overview
 
 ### Contents
 
+1. [Preamble](#preamble)
 1. [Prerequisites](#prerequisites)
-1. [Installing the Chart](#installing-the-chart)
-1. [Uninstalling the Chart](#uninstalling-the-chart)
-1. [Configuration](#configuration)
-1. [CHANGELOG](CHANGELOG.md)
-1. [References](#references)
+1. [Install chart](#install-chart)
+1. [Uninistall chart](#uninstall-chart)
 
-### Related artifacts
+## Preamble
 
-1. [DockerHub](https://hub.docker.com/r/senzing/senzing-console)
-1. [GitHub](https://github.com/Senzing/docker-senzing-console)
+At [Senzing](http://senzing.com),
+we strive to create GitHub documentation in a
+"[don't make me think](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/dont-make-me-think.md)" style.
+For the most part, instructions are copy and paste.
+Whenever thinking is needed, it's marked with a "thinking" icon :thinking:.
+Whenever customization is needed, it's marked with a "pencil" icon :pencil2:.
+If the instructions are not clear, please let us know by opening a new
+[Documentation issue](https://github.com/Senzing/kubernetes-demo/issues/new?assignees=&labels=&template=documentation_request.md)
+describing where we can improve.   Now on with the show...
 
 ## Prerequisites
 
-1. Install Senzing helm charts. Example:
+1. [Kubernetes](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/kubernetes.md) 1.12+
+1. [Helm](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/helm.md) 3.1.0
+1. PV provisioner support in the underlying infrastructure
+1. ReadWriteMany volumes for deployment scaling
+
+## Install chart
+
+1. Add Senzing repository using
+   [helm repo add](https://helm.sh/docs/helm/helm_repo_add/).
+   Example:
 
     ```console
-    helm repo add senzing 'https://senzing.github.io/charts/'
+    helm repo add senzing https://hub.senzing.com/charts/
     ```
 
-## Installing the Chart
-
-1. Install into default namespace. Example:
+1. :thinking: **Optional:** Update repositories using
+   [helm repo update](https://helm.sh/docs/helm/helm_repo_update/).
+   Example:
 
     ```console
-    helm install \
-      --name my-senzing-console \
-      senzing/senzing-console
+    helm repo update
     ```
 
-## Uninstalling the Chart
-
-1. Uninstall/delete the deployment. Example:
+1. Install chart using
+   [helm install](https://helm.sh/docs/helm/helm_install/).
+   Example:
 
     ```console
-    helm delete my-senzing-console
+    helm install my-senzing-console senzing/senzing-console
     ```
 
-## Configuration
+    The command deploys `senzing-console` on the Kubernetes cluster in the default configuration.
+    The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `image.repository` | Image name | `senzing/senzing-console` |
-| `image.tag` | Image tag | `latest` |
-| `image.pullPolicy` | Image pull policy | `IfNotPresent` |
-| `senzing.engineConfigurationJson` | [SENZING_ENGINE_CONFIGURATION_JSON](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_engine_configuration_json) | None |
-| `senzing.mountOptIbm` | Mount `/opt/IBM` for use with Db2 SQL database driver | `false` |
-| `senzing.mountOptMicrosoft` | Mount `/opt/microsoft` for use with MS SQL database driver | `false` |
-| `senzing.persistentVolumeClaim` | A Persistent Volume Claim (PVC) that can store `/opt/senzing` data | `senzing-persistent-volume-claim` |
-
-1. Specify each parameter using the `--set key=value[,key=value]` argument to `helm install` or use multiple `--set` arguments. Example:
+1. :thinking: **Optional:** View deployed charts using
+   [helm list](https://helm.sh/docs/helm/helm_list/).
+   Example:
 
     ```console
-    helm install \
-      --name my-senzing-console \
-      --set senzing.persistentVolumeClaim="my-new-senzing-claim" \
-      senzing/senzing-console
+    helm list
     ```
 
-1. Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart.
+## Uninstall chart
 
-    `my-additional-values.yaml` YAML file example contents:
-
-    ```yaml
-    senzing:
-      persistentVolumeClaim: my-new-senzing-claim
-    ```
-
-    Install helm chart. Example:
+1. Uninstall/delete the deployment using
+   [helm uninstall](https://helm.sh/docs/helm/helm_uninstall/).
+   Example:
 
     ```console
-    helm install \
-      --name my-senzing-console \
-      --values my-additional-values.yaml \
-      senzing/senzing-console
+    helm uninstall my-senzing-console
     ```
 
-## References
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+## Parameters
+
+See [readme-generator-for-helm)](https://github.com/bitnami-labs/readme-generator-for-helm) to create the table
+
+The above parameters map to the env variables defined in [bitnami/senzing-console](http://github.com/bitnami/bitnami-docker-%%CHART_NAME%%). For more information please refer to the [bitnami/senzing-console](http://github.com/bitnami/bitnami-docker-%%CHART_NAME%%) image documentation.
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
+
+```console
+helm install my-release \
+  --set %%CHART_NAME%%Username=admin \
+  --set %%CHART_NAME%%Password=password \
+  --set mariadb.auth.rootPassword=secretpassword \
+    senzing/senzing-console
+```
+
+The above command sets the senzing-console administrator account username and password to `admin` and `password` respectively. Additionally, it sets the MariaDB `root` user password to `secretpassword`.
+
+> NOTE: Once this chart is deployed, it is not possible to change the application's access credentials, such as usernames or passwords, using Helm. To change these application credentials after deployment, delete any persistent volumes (PVs) used by the chart and re-deploy it, or use the application's built-in administrative tools if available.
+
+Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
+
+```console
+helm install my-senzing-console -f values.yaml senzing/senzing-console
+```
+
+> **Tip**: You can use the default [values.yaml](values.yaml)

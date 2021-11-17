@@ -1,0 +1,24 @@
+# https://helm.sh/docs/topics/charts/#the-chartyaml-file
+
+apiVersion: v2
+appVersion: ""
+dependencies:
+  - name: senzing-common
+    repository: https://hub.senzing.com/charts/
+    version: 1.0.1
+description: SwaggerAPI Swagger UI
+engine: gotpl
+home: https://github.com/Senzing/charts/tree/master/charts/swaggerapi-swagger-ui
+icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
+keywords:
+  - senzing
+maintainers:
+  - email: support@senzing.com
+    name: Senzing
+name: swaggerapi-swagger-ui
+sources:
+  - https://github.com/swagger-api/swagger-ui
+  - https://hub.docker.com/r/swaggerapi/swagger-ui
+  - https://github.com/Senzing/charts/tree/master/charts/swaggerapi-swagger-ui
+type: application
+version: 2.0.0

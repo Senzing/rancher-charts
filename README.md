@@ -26,7 +26,9 @@ Used by:
 
 ### Add helm repository
 
-1. Example:
+1. Using
+   [helm repo add](https://helm.sh/docs/helm/helm_repo_add/).
+   Example:
 
     ```console
     helm repo add senzing 'https://hub.senzing.com/charts/'
@@ -34,7 +36,9 @@ Used by:
 
 ### List helm repositories
 
-1. Example:
+1. Using
+   [helm repo list](https://helm.sh/docs/helm/helm_repo_list/).
+   Example:
 
     ```console
     helm repo list
@@ -42,7 +46,9 @@ Used by:
 
 ### View charts in Senzing Helm repository
 
-1. Example:
+1. Using
+   [helm search](https://helm.sh/docs/helm/helm_search/).
+   Example:
 
     ```console
     helm search senzing
@@ -50,7 +56,9 @@ Used by:
 
 ### Remove helm repository
 
-1. Example:
+1. Using
+   [helm repo remove](https://helm.sh/docs/helm/helm_repo_remove/)
+   Example:
 
     ```console
     helm repo remove senzing
@@ -116,14 +124,18 @@ Used by:
     export CHART_NAME=senzing-hello-world
     ```
 
-    Example:
+   Using
+   [helm lint](https://helm.sh/docs/helm/helm_lint/).
+   Example:
 
     ```console
     cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm lint
     ```
 
-1. Public charts. Example:
+1. Public charts using
+   [helm lint](https://helm.sh/docs/helm/helm_lint/).
+   Example:
 
     ```console
     for CHART_NAME in ${CHART_NAMES[@]}; \
@@ -144,14 +156,18 @@ Used by:
     export CHART_NAME=senzing-hello-world
     ```
 
-    Example:
+   Using
+   [helm template](https://helm.sh/docs/helm/helm_template/).
+   Example:
 
     ```console
     cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm template .
     ```
 
-1. Public charts. Example:
+1. Public charts using
+   [helm template](https://helm.sh/docs/helm/helm_template/).
+   Example:
 
     ```console
     for CHART_NAME in ${CHART_NAMES[@]}; \
@@ -175,21 +191,31 @@ Used by:
     export CHART_NAME=senzing-hello-world
     ```
 
-    Example:
+   Using
+   [helm dependency update](https://helm.sh/docs/helm/helm_dependency_update/),
+   [helm package](https://helm.sh/docs/helm/helm_package/), and
+   [helm repo index](https://helm.sh/docs/helm/helm_repo_index/).
+   Example:
 
     ```console
     cd ${GIT_REPOSITORY_DIR}/docs
+    helm dependency update ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm package ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm repo index .
     ```
 
-1. Public charts. Example:
+1. Public charts using
+   [helm dependency update](https://helm.sh/docs/helm/helm_dependency_update/),
+   [helm package](https://helm.sh/docs/helm/helm_package/), and
+   [helm repo index](https://helm.sh/docs/helm/helm_repo_index/).
+   Example:
 
     ```console
     cd ${GIT_REPOSITORY_DIR}/docs
 
     for CHART_NAME in ${CHART_NAMES[@]}; \
     do \
+      helm dependency update ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
       helm package ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
     done
 

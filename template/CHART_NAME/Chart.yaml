@@ -5,13 +5,13 @@ appVersion: "${SENZING_HELM_UPSTREAM_PROJECT_VERSION}"
 dependencies:
   - name: senzing-common
     repository: https://hub.senzing.com/charts/
-    version: 1.0.0
+    version: 1.0.1
 description: ${SENZING_HELM_DESCRIPTION}
 engine: gotpl
 home: ${SENZING_HELM_UPSTREAM_PROJECT_URL}
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
- - senzing
+  - senzing
 maintainers:
   - email: support@senzing.com
     name: Senzing

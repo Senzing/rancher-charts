@@ -77,6 +77,11 @@ spec:
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customLivenessProbe "context" $) | nindent 12 }}
           {{- end }}
           {{- end }}
+          ports:
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
           {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.enabled }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe "enabled") "context" $) | nindent 12 }}

@@ -1,87 +1,391 @@
-affinity: {}
+## ----------------------------------------------------------------------------
+## Global parameters
+## ----------------------------------------------------------------------------
 
-deployment:
-  metadata:
-    annotations:
-  spec:
-    template:
-      metadata:
-        annotations:
+## @section Global parameters
+## Global Docker image parameters
+## Please, note that this will override the image parameters, including dependencies, configured to use the global value
+## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
 
+## @param global.imagePullSecrets Global Docker registry secret names as an array
+## @param global.imageRegistry Global Docker image registry
+## @param global.storageClass Global StorageClass for Persistent Volume(s)
+##
+global:
+  ## E.g.
+  ## imagePullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  imagePullSecrets: []
+  imageRegistry: ""
+  storageClass: ""
+
+## ----------------------------------------------------------------------------
+## Common parameters
+## ----------------------------------------------------------------------------
+
+## @section Common parameters
+
+## @param commonAnnotations Annotations to add to all deployed objects
+##
+commonAnnotations: {}
+
+## @param commonLabels Labels to add to all deployed objects
+##
+commonLabels: {}
+
+## @param clusterDomain Kubernetes cluster domain name
+##
+clusterDomain: cluster.local
+
+## Enable diagnostic mode in the deployment'
+## @param diagnosticMode.args Args to override all containers in the deployment
+## @param diagnosticMode.command Command to override all containers in the deployment
+## @param diagnosticMode.enabled Enable diagnostic mode (all probes will be disabled and the command will be overridden)
+##
+diagnosticMode:
+  args:
+    - infinity
+  command:
+    - sleep
+  enabled: false
+
+## @param extraDeploy Array of extra objects to deploy with the release
+##
+extraDeploy: []
+
+## @param fullnameOverride String to fully override senzing-common.names.fullname
+##
 fullnameOverride: ""
 
-image:
-  pullPolicy: Always
-  registry: docker.io
-  repository: senzing/stream-producer
-  tag: latest
+## @param kubeVersion Override Kubernetes version
+##
+kubeVersion: ""
 
-imagePullSecrets: []
-
-ingress:
-  annotations: {}
-  enabled: false
-  hosts:
-    - host: chart-example.local
-      paths: []
-  tls: []
-
+## @param nameOverride String to partially override senzing-common.names.fullname
+##
 nameOverride: ""
-nodeSelector: {}
-replicaCount: 1
-resources: {}
 
-securityContext:
-  enabled: true
-  runAsUser: 1001
-  runAsGroup: 1001
-  fsGroup: 1001
+## ----------------------------------------------------------------------------
+## Container parameters
+## ----------------------------------------------------------------------------
 
-senzing:
-  awsAccessKeyId: ""
-  awsDefaultRegion: ""
-  awsSecretAccessKey: ""
-  awsSessionToken: ""
-  azureConnectionString: ""
-  azureQueueName: ""
-  csvDelimiter: ""
-  csvRowsInChunk: ""
-  debug: ""
-  defaultDataSource: ""
-  defaultEntityType: ""
-  delayInSeconds: ""
-  inputUrl: ""
-  kafkaBootstrapServerHost: ""
-  kafkaBootstrapServerPort: ""
-  kafkaGroup: ""
-  kafkaPollInterval: ""
-  kafkaTopic: ""
-  monitoringPeriodInSeconds: ""
-  password: ""
-  rabbitmqExchange: ""
-  rabbitmqHost: ""
-  rabbitmqPassword: ""
-  rabbitmqPort: ""
-  rabbitmqQueue: ""
-  rabbitmqRoutingKey: ""
-  rabbitmqUseExistingEntities: ""
-  rabbitmqUsername: ""
-  rabbitmqVirtualHost: ""
-  readQueueMaxSize: ""
-  recordIdentifier: ""
-  recordMax: ""
-  recordMin: ""
-  recordMonitor: ""
-  recordSizeMax: ""
-  recordsPerMessage: ""
-  sleepTimeInSeconds: ""
-  sqsDelaySeconds: ""
-  sqsQueueUrl: ""
-  subcommand: ""
-  threadsPerPrint: ""
+## @section senzing-stream-producer parameters
 
-service:
-  port: 80
-  type: ClusterIP
+## %%MAIN_CONTAINER/POD_DESCRIPTION%%
+##
+main:
 
-tolerations: []
+  ## Senzing senzing-stream-producer image
+  ## @param main.affinity Affinity for senzing-stream-producer pods assignment
+  ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  ## NOTE: `main.podAffinityPreset`, `main.podAntiAffinityPreset`, and `main.nodeAffinityPreset` will be ignored when it's set
+  ##
+  affinity: {}
+
+  ## @param main.args Override default container args (useful when using custom images)
+  ##
+  args: []
+
+  ## @param main.command Override default container command (useful when using custom images)
+  ##
+  command: []
+
+  ## Configure Container Security Context
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
+  ## @param main.containerSecurityContext.enabled Enabled senzing-stream-producer containers' Security Context
+  ## @param main.containerSecurityContext.runAsUser Set senzing-stream-producer containers' Security Context runAsUser
+  ##
+  containerSecurityContext:
+    privileged: true
+
+  ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
+  ##
+  customLivenessProbe: {}
+
+  ## @param main.customReadinessProbe Custom readinessProbe that overrides the default one
+  ##
+  customReadinessProbe: {}
+
+  ## @param main.existingConfigmap The name of an existing ConfigMap with custom configuration for senzing-stream-producer
+  ##
+  existingConfigmap:
+
+  ## @param main.extraEnvVars Array with extra environment variables to add to senzing-stream-producer nodes
+  ## e.g:
+  ## extraEnvVars:
+  ##   - name: FOO
+  ##     value: "bar"
+  ##
+  extraEnvVars: []
+
+  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for senzing-stream-producer nodes
+  ##
+  extraEnvVarsSecret:
+
+  ## @param main.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for senzing-stream-producer nodes
+  ##
+  extraEnvVarsCM:
+
+  ## @param main.extraVolumes Optionally specify extra list of additional volumes for the senzing-stream-producer pod(s)
+  ##
+  extraVolumes: []
+
+  ## @param main.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the senzing-stream-producer container(s)
+  ##
+  extraVolumeMounts: []
+
+  ## @param main.hostAliases senzing-stream-producer pods host aliases
+  ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
+  ##
+  hostAliases: []
+
+  ## @param main.image.debug Enable senzing-stream-producer image debug mode
+  ## @param main.image.pullPolicy senzing-stream-producer image pull policy
+  ## @param main.image.pullSecrets senzing-stream-producer image pull secrets
+  ## @param main.image.registry senzing-stream-producer image registry
+  ## @param main.image.repository senzing-stream-producer image repository
+  ## @param main.image.tag senzing-stream-producer image tag (immutable tags are recommended)
+  ##
+  image:
+
+    ## Enable debug mode
+    ##
+    debug: false
+
+    ## Specify a imagePullPolicy
+    ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+    ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+    ##
+    pullPolicy: IfNotPresent
+
+    ## Optionally specify an array of imagePullSecrets.
+    ## Secrets must be manually created in the namespace.
+    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    ## e.g:
+    ## pullSecrets:
+    ##   - myRegistryKeySecretName
+    ##
+    pullSecrets: []
+    registry: docker.io
+    repository: senzing/stream-producer
+    tag: latest
+
+  ## @param main.initContainers Add additional init containers to the senzing-stream-producer pod(s)
+  ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+  ## e.g:
+  ## initContainers:
+  ##  - name: your-image-name
+  ##    image: your-image
+  ##    imagePullPolicy: Always
+  ##    command: ['sh', '-c', 'echo "hello world"']
+  ##
+  initContainers: {}
+
+  ## @param main.lifecycleHooks for the senzing-stream-producer container(s) to automate configuration before or after startup
+  ##
+  lifecycleHooks: {}
+
+  ## Configure extra options for senzing-stream-producer containers' liveness and readiness probes
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
+  ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-stream-producer nodes
+  ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
+  ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
+  ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
+  ## @param main.livenessProbe.successThreshold Success threshold for livenessProbe
+  ## @param main.livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
+  ##
+  livenessProbe:
+    enabled: false
+#   %%httpGet || command || etc%%
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
+
+  ## Node main.affinity preset
+  ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
+  ##
+  nodeAffinityPreset:
+
+    ## @param main.nodeAffinityPreset.key Node label key to match. Ignored if `main.affinity` is set
+    ##
+    key: ""
+
+    ## @param main.nodeAffinityPreset.type Node affinity preset type. Ignored if `main.affinity` is set. Allowed values: `soft` or `hard`
+    ##
+    type: ""
+
+    ## @param main.nodeAffinityPreset.values Node label values to match. Ignored if `main.affinity` is set
+    ## E.g.
+    ## values:
+    ##   - e2e-az1
+    ##   - e2e-az2
+    ##
+    values: []
+
+  ## @param main.nodeSelector Node labels for senzing-stream-producer pods assignment
+  ## ref: https://kubernetes.io/docs/user-guide/node-selection/
+  ##
+  nodeSelector: {}
+
+  ## @param main.podAffinityPreset Pod affinity preset. Ignored if `main.affinity` is set. Allowed values: `soft` or `hard`
+  ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+  ##
+  podAffinityPreset: ""
+
+  ## @param main.podAnnotations Annotations for senzing-stream-producer pods
+  ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  ##
+  podAnnotations: {}
+
+  ## @param main.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `main.affinity` is set. Allowed values: `soft` or `hard`
+  ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+  ##
+  podAntiAffinityPreset: soft
+
+  ## @param main.podLabels Extra labels for senzing-stream-producer pods
+  ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+  ##
+  podLabels: {}
+
+  ## Configure Pods Security Context
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
+  ## @param main.podSecurityContext.enabled Enabled senzing-stream-producer pods' Security Context
+  ## @param main.podSecurityContext.fsGroup Set senzing-stream-producer pod's Security Context fsGroup
+  ##
+  podSecurityContext:
+    enabled: true
+    fsGroup: 1001
+    runAsGroup: 1001
+    runAsUser: 1001
+
+  ## @param main.priorityClassName senzing-stream-producer pods' priorityClassName
+  ##
+  priorityClassName: ""
+
+  ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-stream-producer nodes
+  ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
+  ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
+  ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
+  ## @param main.readinessProbe.successThreshold Success threshold for readinessProbe
+  ## @param main.readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
+  ##
+  readinessProbe:
+    enabled: false
+#   %%httpGet || command || etc%%
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
+
+  ## @param main.replicaCount Number of senzing-stream-producer replicas to deploy
+  ##
+  replicaCount: 1
+
+  ## senzing-stream-producer resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param main.resources.limits The resources limits for the senzing-stream-producer containers
+  ## @param main.resources.requests The requested resources for the senzing-stream-producer containers
+  ##
+  resources:
+    limits: {}
+    requests: {}
+
+  ## senzing-stream-producer Senzing environment variables
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param main.senzing.databaseUrl The normalized database connection URL
+  ## @param main.senzing.debug Debug?  Boolean.
+  ## @param main.senzing.logLevel The logging filter: DEBUG, INFO, WARNING, ERROR, CRITICAL, FATAL
+  ## @param main.senzing.subcommand CLI sub-command
+  ##
+  senzing:
+    awsAccessKeyId: ""
+    awsDefaultRegion: ""
+    awsSecretAccessKey: ""
+    awsSessionToken: ""
+    azureConnectionString: ""
+    azureQueueName: ""
+    csvDelimiter: ""
+    csvRowsInChunk: ""
+    debug: ""
+    defaultDataSource: ""
+    defaultEntityType: ""
+    delayInSeconds: ""
+    inputUrl: ""
+    kafkaBootstrapServerHost: ""
+    kafkaBootstrapServerPort: ""
+    kafkaGroup: ""
+    kafkaPollInterval: ""
+    kafkaTopic: ""
+    monitoringPeriodInSeconds: ""
+    password: ""
+    rabbitmqExchange: ""
+    rabbitmqHost: ""
+    rabbitmqPassword: ""
+    rabbitmqPort: ""
+    rabbitmqQueue: ""
+    rabbitmqRoutingKey: ""
+    rabbitmqUseExistingEntities: ""
+    rabbitmqUsername: ""
+    rabbitmqVirtualHost: ""
+    readQueueMaxSize: ""
+    recordIdentifier: ""
+    recordMax: ""
+    recordMin: ""
+    recordMonitor: ""
+    recordSizeMax: ""
+    recordsPerMessage: ""
+    sleepTimeInSeconds: ""
+    sqsDelaySeconds: ""
+    sqsQueueUrl: ""
+    subcommand: ""
+    threadsPerPrint: ""
+
+  ## @param main.sidecars Add additional sidecar containers to the senzing-stream-producer pod(s)
+  ## e.g:
+  ## sidecars:
+  ##   - name: your-image-name
+  ##     image: your-image
+  ##     imagePullPolicy: Always
+  ##     ports:
+  ##       - name: portname
+  ##         containerPort: 1234
+  ##
+  sidecars: {}
+
+  ## @param main.tolerations Tolerations for senzing-stream-producer pods assignment
+  ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+  ##
+  tolerations: []
+
+## ----------------------------------------------------------------------------
+## Other parameters
+## ----------------------------------------------------------------------------
+
+## @section Other Parameters
+
+## RBAC configuration
+##
+rbac:
+
+  ## @param rbac.create Specifies whether RBAC resources should be created
+  ##
+  create: false
+
+## ServiceAccount configuration
+##
+serviceAccount:
+
+  ## @param serviceAccount.create Specifies whether a ServiceAccount should be created
+  ##
+  create: true
+
+  ## @param serviceAccount.name The name of the ServiceAccount to use.
+  ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
+  ##
+  name: ""

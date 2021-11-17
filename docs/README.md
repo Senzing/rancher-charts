@@ -8,7 +8,7 @@ The repository of Senzing Helm Charts is located at
 1. Example:
 
     ```console
-    helm repo add senzing 'https://senzing.github.io/charts/'
+    helm repo add senzing 'https://hub.senzing.com/charts/'
     ```
 
 ## List helm repositories

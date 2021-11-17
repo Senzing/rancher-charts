@@ -2,12 +2,8 @@
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ template "senzing-redoer.fullname" . }}-endpoint-reader
-  labels:
-    app: {{ template "senzing-redoer.name" . }}
-    chart: {{ template "senzing-redoer.chart" .  }}
-    release: "{{ .Release.Name }}"
-    heritage: "{{ .Release.Service }}"
+  name: {{ template "senzing-common.names.fullname" . }}-endpoint-reader
+  labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
 rules:
 - apiGroups: [""]
   resources: ["endpoints"]

@@ -1,137 +1,52 @@
 ## Overview
 
-A service that implements the Senzing REST API.
+Simple overview.
 
 More information:
 
-- [GitHub](https://github.com/Senzing/senzing-api-server)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-api-server)
-- [Senzing REST API](https://github.com/Senzing/senzing-rest-api-specification)
+- [GitHub](https://github.com/Senzing/XXXXX)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/XXXXXX)
 
 ## Command
 
 The command being run:
 
 ```console
-java -jar senzing-api-server.jar \
-  {{- if .Values.senzing.allowedOrigins }} \
-  --allowedOrigins {{ .Values.senzing.allowedOrigins }}
+command-name.py {{ .Values.main.senzing.subcommand -}}
+  {{- if .Values.main.senzing.debug }} \
+  --debug "{{ .Values.main.senzing.debug }}"
   {{- end }}
-  {{- if .Values.senzing.autoRefreshPeriod }} \
-  --auto-refresh-period {{ .Values.senzing.autoRefreshPeriod }}
-  {{- end }}
-  {{- if .Values.senzing.bindAddr }} \
-  --bindAddr {{ .Values.senzing.bindAddr }}
-  {{- end }}
-  {{- if .Values.senzing.clientKeyStore }} \
-  --client-key-store {{ .Values.senzing.clientKeyStore }}
-  {{- end }}
-  {{- if .Values.senzing.clientKeyStorePasword }} \
-  --client-key-store-password {{ .Values.senzing.clientKeyStorePassword }}
-  {{- end }}
-  {{- if .Values.senzing.concurrency }} \
-  --concurrency {{ .Values.senzing.concurrency }}
-  {{- end }}
-  {{- if .Values.senzing.configId }} \
-  --config-id {{ .Values.senzing.configId }}
-  {{- end }}
-  {{- if .Values.senzing.debug }} \
-  --debug {{ .Values.senzing.debug }}
-  {{- end }}
-  {{- if .Values.senzing.enableAdmin }} \
-  --enable-admin {{ .Values.senzing.enableAdmin }}
-  {{- end }}
-  {{- if .Values.senzing.httpConcurrency }} \
-  --http-concurrency {{ .Values.senzing.httpConcurrency }}
-  {{- end }}
-  {{- if .Values.senzing.port }} \
-  --http-port {{ .Values.senzing.port }}
-  {{- end }}
-  {{- if .Values.senzing.securePort }} \
-  --https-port {{ .Values.senzing.securePort }}
-  {{- end }}
-  {{- if .Values.senzing.iniFile }} \
-  --ini-file {{ .Values.senzing.iniFile }}
-  {{- end }}
-  {{- if .Values.senzing.initEnvVar }} \
-  --init-env-var {{ .Values.senzing.initEnvVar }}
-  {{- end }}
-  {{- if .Values.senzing.initFile }} \
-  --init-file {{ .Values.senzing.initFile }}
-  {{- end }}
-  {{- if .Values.senzing.initJson }} \
-  --init-json {{ .Values.senzing.initJson }}
-  {{- end }}
-  {{- if .Values.senzing.kafkaInfoBootstrapServer }} \
-  --kafka-info-bootstrap-server {{ .Values.senzing.kafkaInfoBootstrapServer }}
-  {{- end }}
-  {{- if .Values.senzing.kafkaInfoGroup }} \
-  --kafka-info-group {{ .Values.senzing.kafkaInfoGroup }}
-  {{- end }}
-  {{- if .Values.senzing.kafkaInfoTopic }} \
-  --kafka-info-topic {{ .Values.senzing.kafkaInfoTopic }}
-  {{- end }}
-  {{- if .Values.senzing.keyAlias }} \
-  --key-alias {{ .Values.senzing.keyAlias }}
-  {{- end }}
-  {{- if .Values.senzing.keyStore }} \
-  --key-store {{ .Values.senzing.keyStore }}
-  {{- end }}
-  {{- if .Values.senzing.keyStorePassword }} \
-  --key-store-password {{ .Values.senzing.keyStorePassword }}
-  {{- end }}
-  {{- if .Values.senzing.moduleName }} \
-  --module-name {{ .Values.senzing.moduleName }}
-  {{- end }}
-  {{- if .Values.senzing.monitorFile }} \
-  --monitor-file {{ .Values.senzing.monitorFile }}
-  {{- end }}
-  {{- if .Values.senzing.quiet }} \
-  --quiet {{ .Values.senzing.quiet }}
-  {{- end }}
-  {{- if .Values.senzing.rabbitmqInfoExchange }} \
-  --rabbit-info-exchange {{ .Values.senzing.rabbitmqInfoExchange }}
-  {{- end }}
-  {{- if .Values.senzing.rabbitmqInfoHost }} \
-  --rabbit-info-host {{ .Values.senzing.rabbitmqInfoHost }}
-  {{- end }}
-  {{- if .Values.senzing.rabbitmqInfoPassword }} \
-  --rabbit-info-password {{ .Values.senzing.rabbitmqInfoPassword }}
-  {{- end }}
-  {{- if .Values.senzing.rabbitmqInfoPort }} \
-  --rabbit-info-port {{ .Values.senzing.rabbitmqInfoPort }}
-  {{- end }}
-  {{- if .Values.senzing.rabbitmqInfoRoutingKey }} \
-  --rabbit-info-routing-key {{ .Values.senzing.rabbitmqInfoRoutingKey }}
-  {{- end }}
-  {{- if .Values.senzing.rabbitmqInfoUsername }} \
-  --rabbit-info-user {{ .Values.senzing.rabbitmqInfoUsername }}
-  {{- end }}
-  {{- if .Values.senzing.rabbitmqInfoVirtualHost }} \
-  --rabbit-info-virtual-host {{ .Values.senzing.rabbitmqInfoVirtualHost }}
-  {{- end }}
-  {{- if .Values.senzing.readOnly }} \
-  --read-only {{ .Values.senzing.readOnly }}
-  {{- end }}
-  {{- if .Values.senzing.skipEnginePriming }} \
-  --skip-engine-priming {{ .Values.senzing.skipEnginePriming }}
-  {{- end }}
-  {{- if .Values.senzing.skipStartupPerf }} \
-  --skip-startup-perf {{ .Values.senzing.skipStartupPerf }}
-  {{- end }}
-  {{- if .Values.senzing.sqsInfoQueueUrl }} \
-  --sqs-info-url {{ .Values.senzing.sqsInfoQueueUrl }}
-  {{- end }}
-  {{- if .Values.senzing.statsInterval }} \
-  --stats-interval {{ .Values.senzing.statsInterval }}
-  {{- end }}
-  {{- if .Values.senzing.urlBasePath }} \
-  --url-base-path {{ .Values.senzing.urlBasePath }}
-  {{- end }}
-  {{- if .Values.senzing.verbose }} \
-  - -verbose
+  {{- if .Values.main.senzing.logLevel }} \
+  --log-level "{{ .Values.main.senzing.logLevel }}"
   {{- end }}
 ```
+
+## Metadata
+
+{{- if .Values.diagnosticMode.enabled }}
+The chart has been deployed in diagnostic mode. All probes have been disabled and the command has been overwritten with:
+
+  command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 4 }}
+  args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 4 }}
+
+Get the list of pods by executing:
+
+  kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+Access the pod you want to debug by executing
+
+  kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
+
+In order to replicate the container startup scripts execute this command:
+
+    %%ENTRYPOINT and CMD from main container%%
+
+{{- else }}
+
+%%Instructions to access the application depending on the serviceType and other considerations%%
+
+{{- end }}
+
 
 ## Metadata
 
@@ -145,15 +60,15 @@ java -jar senzing-api-server.jar \
 
 {{- else if contains "NodePort" .Values.service.type }}
 
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "senzing-api-server.fullname" . }})
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "senzing-common.names.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
   echo http://$NODE_IP:$NODE_PORT
 
 {{- else if contains "LoadBalancer" .Values.service.type }}
 
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "senzing-api-server.fullname" . }}'
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "senzing-api-server.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ template "senzing-common.names.fullname" . }}'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ template "senzing-common.names.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   echo http://$SERVICE_IP:{{ .Values.service.port }}
 
 {{- else if contains "ClusterIP" .Values.service.type }}
@@ -172,17 +87,8 @@ java -jar senzing-api-server.jar \
   kubectl exec -it --namespace {{ .Release.Namespace }} ${POD_NAME} -- /bin/bash
   ```
 
-## Port-forward
-
-1. Example:
-
-  ```console
-  export MY_PORT=8250
-
-  kubectl port-forward \
-    --address 0.0.0.0 \
-    --namespace {{ .Release.Namespace }} \
-    svc/{{ .Release.Name }} ${MY_PORT}:{{ .Values.senzing.port }}
-  ```
-
 {{- end }}
+
+
+{{- include "senzing-common.warnings.rollingTag" .Values.main.image }}
+{{- include "senzing-api-server.validateValues" . }}

@@ -62,7 +62,6 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
     export SENZING_HELM_MAIN_CONTAINER_NAME=senzing-nemo
     export SENZING_HELM_MAIN_OBJECT_BLOCK=main
     export SENZING_HELM_OTHER_OBJECT_BLOCK=OtherObjectBlock
-    export SENZING_HELM_PORT_NAME=nemoPort
     export SENZING_HELM_SECONDARY_OBJECT_BLOCK=SecondaryObjectBlock
     export SENZING_HELM_TEMPLATE_NAME=senzing-nemo
     export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/master/charts/senzing-nemo
@@ -86,8 +85,6 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
     1. `SENZING_HELM_MAIN_OBJECT_BLOCK`
        identifyies the primary container.
        For consistency, set value to "main".
-    1. `SENZING_HELM_PORT_NAME`
-       is used in `Service.spec.ports.name`.
     1. `SENZING_HELM_UPSTREAM_PROJECT_URL`
        is used in `Chart.home`.
     1. `SENZING_HELM_UPSTREAM_PROJECT_VERSION`
@@ -129,7 +126,6 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
         ${SENZING_HELM_MAIN_CONTAINER_NAME} \
         ${SENZING_HELM_MAIN_OBJECT_BLOCK} \
         ${SENZING_HELM_OTHER_OBJECT_BLOCK} \
-        ${SENZING_HELM_PORT_NAME} \
         ${SENZING_HELM_SECONDARY_OBJECT_BLOCK} \
         ${SENZING_HELM_TEMPLATE_NAME} \
         ${SENZING_HELM_UPSTREAM_PROJECT_URL} \

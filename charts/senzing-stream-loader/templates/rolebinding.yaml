@@ -2,17 +2,13 @@
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ template "senzing-stream-loader.fullname" . }}-endpoint-reader
-  labels:
-    app: {{ template "senzing-stream-loader.name" . }}
-    chart: {{ template "senzing-stream-loader.chart" .  }}
-    release: "{{ .Release.Name }}"
-    heritage: "{{ .Release.Service }}"
+  name: {{ template "senzing-common.names.fullname" . }}-endpoint-reader
+  labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
-  name: {{ template "senzing-stream-loader.fullname" . }}
+  name: {{ template "senzing-common.names.fullname" . }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ template "senzing-stream-loader.fullname" . }}-endpoint-reader
+  name: {{ template "senzing-common.names.fullname" . }}-endpoint-reader
 {{- end }}

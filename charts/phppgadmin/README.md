@@ -1,63 +1,117 @@
-# phpPgAdmin
+# phppgadmin
 
-**NOTE:** The credit for this work goes to [https://github.com/jjcollinge/phppgadmin-chart](https://github.com/jjcollinge/phppgadmin-chart).
-We'd prefer to use [https://github.com/jjcollinge/phppgadmin-chart](https://github.com/jjcollinge/phppgadmin-chart) directly,
-but it isn't friendly with
-[helm install](https://helm.sh/docs/helm/#helm-install)
-since there isn't an `index.yaml` nor a `*.tgz` file.
+## Credit
 
-This is a Helm chart that deploys a phpPgAdmin instance to your Kubernetes cluster.
+[remove]
+This is based off of [Bitnami's README.md](https://github.com/bitnami/charts/blob/master/template/CHART_NAME/README.md)
+We appreciate Bitnami's leadership in Helm Chart creation.
+[/remove]
 
-## Related artifacts
+## Synopsis
 
-1. [DockerHub](https://hub.docker.com/r/dockage/phppgadmin)
-1. [GitHub](https://www.github.com/dockage/phppgadmin)
+%%DESCRIPTION%% (check existing examples)
+
+## Overview
+
+### Contents
+
+1. [Preamble](#preamble)
+1. [Prerequisites](#prerequisites)
+1. [Install chart](#install-chart)
+1. [Uninistall chart](#uninstall-chart)
+
+## Preamble
+
+At [Senzing](http://senzing.com),
+we strive to create GitHub documentation in a
+"[don't make me think](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/dont-make-me-think.md)" style.
+For the most part, instructions are copy and paste.
+Whenever thinking is needed, it's marked with a "thinking" icon :thinking:.
+Whenever customization is needed, it's marked with a "pencil" icon :pencil2:.
+If the instructions are not clear, please let us know by opening a new
+[Documentation issue](https://github.com/Senzing/kubernetes-demo/issues/new?assignees=&labels=&template=documentation_request.md)
+describing where we can improve.   Now on with the show...
 
 ## Prerequisites
 
-This install assumes you have an existing Kubernetes cluster installed and a [postgresql](https://github.com/kubernetes/charts/tree/master/stable/postgresql) instance deployed.
+1. [Kubernetes](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/kubernetes.md) 1.12+
+1. [Helm](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/helm.md) 3.1.0
+1. PV provisioner support in the underlying infrastructure
+1. ReadWriteMany volumes for deployment scaling
 
-## Package
+## Install chart
 
-Once you've cloned this repo, you can create your helm package by running the following command in the repo's root directory:
+1. Add Senzing repository using
+   [helm repo add](https://helm.sh/docs/helm/helm_repo_add/).
+   Example:
+
+    ```console
+    helm repo add senzing https://hub.senzing.com/charts/
+    ```
+
+1. :thinking: **Optional:** Update repositories using
+   [helm repo update](https://helm.sh/docs/helm/helm_repo_update/).
+   Example:
+
+    ```console
+    helm repo update
+    ```
+
+1. Install chart using
+   [helm install](https://helm.sh/docs/helm/helm_install/).
+   Example:
+
+    ```console
+    helm install my-phppgadmin senzing/phppgadmin
+    ```
+
+    The command deploys `phppgadmin` on the Kubernetes cluster in the default configuration.
+    The [Parameters](#parameters) section lists the parameters that can be configured during installation.
+
+1. :thinking: **Optional:** View deployed charts using
+   [helm list](https://helm.sh/docs/helm/helm_list/).
+   Example:
+
+    ```console
+    helm list
+    ```
+
+## Uninstall chart
+
+1. Uninstall/delete the deployment using
+   [helm uninstall](https://helm.sh/docs/helm/helm_uninstall/).
+   Example:
+
+    ```console
+    helm uninstall my-phppgadmin
+    ```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+## Parameters
+
+See [readme-generator-for-helm)](https://github.com/bitnami-labs/readme-generator-for-helm) to create the table
+
+The above parameters map to the env variables defined in [bitnami/phppgadmin](http://github.com/bitnami/bitnami-docker-%%CHART_NAME%%). For more information please refer to the [bitnami/phppgadmin](http://github.com/bitnami/bitnami-docker-%%CHART_NAME%%) image documentation.
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
 ```console
-helm package .
+helm install my-release \
+  --set %%CHART_NAME%%Username=admin \
+  --set %%CHART_NAME%%Password=password \
+  --set mariadb.auth.rootPassword=secretpassword \
+    senzing/phppgadmin
 ```
 
-## Install
+The above command sets the phppgadmin administrator account username and password to `admin` and `password` respectively. Additionally, it sets the MariaDB `root` user password to `secretpassword`.
 
-You now need to grab the ClusterIP of your PostgreSQL service.
+> NOTE: Once this chart is deployed, it is not possible to change the application's access credentials, such as usernames or passwords, using Helm. To change these application credentials after deployment, delete any persistent volumes (PVs) used by the chart and re-deploy it, or use the application's built-in administrative tools if available.
 
-```consoel
-kubectl get svc
-```
-
-Filter through the list of services and grab the ClusterIP associated with your PostgreSQL service. Next you can install phpPgAdmin into your Kubernetes cluster by targeting your packaged archive:
+Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
 ```console
-helm install --set phppgadmin.serverHost={postgresql-clusterip},phppgadmin.serverPost={postgresql-port} phppgadmin-chart-0.1.0.tgz
+helm install my-phppgadmin -f values.yaml senzing/phppgadmin
 ```
 
-The deployment will take a little while to provision a public IP for the service. You can watch for this using the following command:
-
-```console
-kubectl get svc -w -l app=phppgadmin-chart
-```
-
-## Configure
-
-When the deployment has finished and you have an external IP for your phpPgAdmin service, you can go to the phpPgAdmin web portal at `http://{phpPgAdmin-externalip}:8080/`.
-
-Once web portal has loaded, you'll need to authenticate a new connection to your PostgreSQL database by clicking on the `Servers` tab.
-
-## Ingress
-
-The default behaviour of this helm chart is to create a new load balancer service.
-
-If you have an ingress controller deployed and would rather use ingress, you need to enable it in the `values.yaml` file.
-You will need to also provide values for hostname and configure a TLS secret or leverage Let's Encrypt using [Kube-Lego](https://github.com/jetstack/kube-lego). Once configured, change the `service.type` value to `ClusterIP`.
-
-Assuming the `host` header is correct in your HTTP request, you can hit the external ip of the ingress controller and it should route to your phppgadmin instance.
-
-![Image of web page]images/psql.PNG)
+> **Tip**: You can use the default [values.yaml](values.yaml)

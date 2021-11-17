@@ -1,33 +1,74 @@
 ## Overview
 
-A container for running command-line programs.
+Simple overview.
 
 More information:
 
-- [GitHub](https://github.com/Senzing/docker-senzing-console)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-console)
+- [GitHub](https://github.com/Senzing/XXXXX)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/XXXXXX)
+
+## Command
+
+The command being run:
+
+```console
+command-name.py {{ .Values.main.senzing.subcommand -}}
+  {{- if .Values.main.senzing.debug }} \
+  --debug "{{ .Values.main.senzing.debug }}"
+  {{- end }}
+  {{- if .Values.main.senzing.logLevel }} \
+  --log-level "{{ .Values.main.senzing.logLevel }}"
+  {{- end }}
+```
+
+## Metadata
+
+{{- if .Values.diagnosticMode.enabled }}
+The chart has been deployed in diagnostic mode. All probes have been disabled and the command has been overwritten with:
+
+  command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 4 }}
+  args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 4 }}
+
+Get the list of pods by executing:
+
+  kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+Access the pod you want to debug by executing
+
+  kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
+
+In order to replicate the container startup scripts execute this command:
+
+    %%ENTRYPOINT and CMD from main container%%
+
+{{- else }}
+
+%%Instructions to access the application depending on the serviceType and other considerations%%
+
+{{- end }}
+
 
 ## Metadata
 
 {{- if .Values.ingress.enabled }}
 
 {{- range $host := .Values.ingress.hosts }}
-  {{- range $.Values.ingress.paths }}
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host }}{{ . }}
+  {{- range .paths }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }}
   {{- end }}
 {{- end }}
 
 {{- else if contains "NodePort" .Values.service.type }}
 
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "senzing-console.fullname" . }})
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "senzing-common.names.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
   echo http://$NODE_IP:$NODE_PORT
 
 {{- else if contains "LoadBalancer" .Values.service.type }}
 
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch the status of by running 'kubectl get svc -w {{ include "senzing-console.fullname" . }}'
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "senzing-console.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ template "senzing-common.names.fullname" . }}'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ template "senzing-common.names.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   echo http://$SERVICE_IP:{{ .Values.service.port }}
 
 {{- else if contains "ClusterIP" .Values.service.type }}
@@ -36,14 +77,18 @@ More information:
 
 1. Example:
 
-   ```console
+  ```console
   export POD_NAME=$(kubectl get pods \
     --namespace {{ .Release.Namespace }} \
     --selector "app.kubernetes.io/name={{ include "senzing-console.name" . }}, \
                 app.kubernetes.io/instance={{ .Release.Name }}" \
     --output jsonpath="{.items[0].metadata.name}")
 
-  kubectl exec -it --namespace {{ .Release.Namespace }}  ${POD_NAME} -- /bin/bash
+  kubectl exec -it --namespace {{ .Release.Namespace }} ${POD_NAME} -- /bin/bash
   ```
 
 {{- end }}
+
+
+{{- include "senzing-common.warnings.rollingTag" .Values.main.image }}
+{{- include "senzing-console.validateValues" . }}

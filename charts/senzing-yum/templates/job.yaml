@@ -1,44 +1,96 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "senzing-yum.fullname" . }}
-  labels:
-    {{- include "senzing-yum.labels" . | nindent 4 }}
-  {{- with .Values.deployment.metadata.annotations }}
-  annotations:
-    {{ toYaml . | indent 4 }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
+  labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
+    app.kubernetes.io/component: senzing-yum-component
+    {{- if .Values.commonLabels }}
+    {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  name: {{ template "senzing-common.names.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
 spec:
   template:
     metadata:
-      {{- with .Values.deployment.spec.template.metadata.annotations }}
-      annotations:
-        {{ toYaml . | indent 8 }}
+      {{- if .Values.main.podAnnotations }}
+      annotations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podAnnotations "context" $) | nindent 8 }}
       {{- end }}
+      labels: {{- include "senzing-common.labels.standard" . | nindent 8 }}
+        app.kubernetes.io/component: senzing-yum-component
+        {{- if .Values.main.podLabels }}
+        {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podLabels "context" $) | nindent 8 }}
+        {{- end }}
     spec:
+      {{- if .Values.main.affinity }}
+      affinity: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.affinity "context" $) | nindent 8 }}
+      {{- else }}
+      affinity:
+        podAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAffinityPreset "component" "senzing-yum-component" "context" $) | nindent 10 }}
+        podAntiAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAntiAffinityPreset "component" "senzing-yum-component" "context" $) | nindent 10 }}
+        nodeAffinity: {{- include "senzing-common.affinities.nodes" (dict "type" .Values.main.nodeAffinityPreset.type "key" .Values.main.nodeAffinityPreset.key "values" .Values.main.nodeAffinityPreset.values) | nindent 10 }}
+      {{- end }}
       containers:
-        - name: {{ .Chart.Name }}
-          {{- if .Values.senzing.yumParameters }}
-          args:
-            {{- toYaml .Values.senzing.yumParameters | nindent 12 }}
+        - name: senzing-yum
+          {{- if .Values.diagnosticMode.enabled }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 12 }}
+          {{- else if .Values.main.args }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.args "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.diagnosticMode.enabled }}
+          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 12 }}
+          {{- else if .Values.main.command }}
+          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.command "context" $) | nindent 12 }}
           {{- end }}
           env:
-            {{- if .Values.senzing.acceptEula }}
+            {{- if .Values.main.senzing.acceptEula }}
             - name: "SENZING_ACCEPT_EULA"
-              value: {{ .Values.senzing.acceptEula | quote }}
+              value: {{ .Values.main.senzing.acceptEula | quote }}
             {{- end }}
-            {{- if .Values.mssql.acceptEula }}
+            {{- if .Values.main.mssql.acceptEula }}
             - name: "ACCEPT_EULA"
-              value: {{ .Values.mssql.acceptEula | quote }}
+              value: {{ .Values.main.mssql.acceptEula | quote }}
             {{- end }}
-          image: {{ template "senzing.image" . }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.rbacEnabled}}
-          securityContext:
-            privileged: true
+            {{- if .Values.main.extraEnvVars }}
+            {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          envFrom:
+            {{- if .Values.main.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.main.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          image: {{ template "senzing-yum.image" . }}
+          imagePullPolicy: {{ .Values.main.image.pullPolicy }}
+          {{- if not .Values.diagnosticMode.enabled }}
+          {{- if .Values.main.lifecycleHooks }}
+          lifecycle: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.lifecycleHooks "context" $) | nindent 12 }}
           {{- end }}
-          {{- if .Values.senzing.persistentVolumeClaim }}
+          {{- if .Values.main.livenessProbe.enabled }}
+          livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.livenessProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customLivenessProbe }}
+          livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customLivenessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          {{- if not .Values.diagnosticMode.enabled }}
+          {{- if .Values.main.readinessProbe.enabled }}
+          readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customReadinessProbe }}
+          readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customReadinessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.main.resources }}
+          resources: {{- toYaml .Values.main.resources | nindent 12 }}
+          {{- end }}
+          {{- if .Values.main.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
           volumeMounts:
+            {{- if .Values.main.senzing.persistentVolumeClaim }}
             - name: senzing-storage
               mountPath: /opt/senzing/data
               subPath: senzing-data
@@ -54,17 +106,24 @@ spec:
             - name: senzing-storage
               mountPath: /var/opt/senzing
               subPath: senzing-var
-            {{- if .Values.senzing.mountOptIbm }}
+            {{- if .Values.main.senzing.mountOptIbm }}
             - name: senzing-storage
               mountPath: /opt/IBM
               subPath: senzing-db2-drivers
             {{- end }}
-            {{- if .Values.senzing.mountOptMicrosoft }}
+            {{- if .Values.main.senzing.mountOptMicrosoft }}
             - name: senzing-storage
               mountPath: /opt/microsoft
               subPath: opt-microsoft
             {{- end }}
-          {{- end }}
+            {{- end }}
+            {{- if .Values.main.extraVolumeMounts }}
+            {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+        {{- if .Values.main.sidecars }}
+        {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
+        {{- end }}
+      {{- include "senzing-yum.imagePullSecrets" . | nindent 6 }}
       initContainers:
         - name: senzing-mount-maker
           image: busybox:1.28
@@ -72,66 +131,59 @@ spec:
           securityContext:
             privileged: true
           {{- end }}
-          {{- if .Values.senzing.persistentVolumeClaim }}
+          {{- if .Values.main.senzing.persistentVolumeClaim }}
           volumeMounts:
             - name:  senzing-storage
               mountPath: /opt/senzing
           {{- end }}
+        {{- if .Values.main.initContainers }}
+          {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.initContainers "context" $) | nindent 8 }}
+        {{- end }}
+      {{- if .Values.main.nodeSelector }}
+      nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.main.priorityClassName }}
+      priorityClassName: {{ .Values.main.priorityClassName | quote }}
+      {{- end }}
       restartPolicy: Never
-      {{- if .Values.rbacEnabled}}
-      serviceAccountName: {{ template "senzing-yum.fullname" . }}
+      {{- if .Values.main.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ template "senzing-yum.serviceAccountName" . }}
+      {{- if .Values.main.tolerations }}
+      tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
       {{- end }}
       volumes:
-        {{- if .Values.senzing.optMicrosoftDataClaim }}
+        {{- if .Values.main.senzing.optMicrosoftDataClaim }}
         - name: opt-microsoft
           persistentVolumeClaim:
-            claimName: {{ .Values.senzing.optMicrosoftDataClaim }}
+            claimName: {{ .Values.main.senzing.optMicrosoftDataClaim }}
         {{- end }}
-        {{- if .Values.senzing.senzingDataClaim }}
+        {{- if .Values.main.senzing.senzingDataClaim }}
         - name: senzing-data-storage
           persistentVolumeClaim:
-            claimName: {{ .Values.senzing.senzingDataClaim }}
+            claimName: {{ .Values.main.senzing.senzingDataClaim }}
         {{- end }}
-        {{- if .Values.senzing.senzingEtcClaim }}
+        {{- if .Values.main.senzing.senzingEtcClaim }}
         - name: senzing-etc-storage
           persistentVolumeClaim:
-            claimName: {{ .Values.senzing.senzingEtcClaim }}
+            claimName: {{ .Values.main.senzing.senzingEtcClaim }}
         {{- end }}
-        {{- if .Values.senzing.senzingG2Claim }}
+        {{- if .Values.main.senzing.senzingG2Claim }}
         - name: senzing-g2-storage
           persistentVolumeClaim:
-            claimName: {{ .Values.senzing.senzingG2Claim }}
+            claimName: {{ .Values.main.senzing.senzingG2Claim }}
         {{- end }}
-        {{- if .Values.senzing.persistentVolumeClaim }}
+        {{- if .Values.main.senzing.persistentVolumeClaim }}
         - name: senzing-storage
           persistentVolumeClaim:
-            claimName: {{ .Values.senzing.persistentVolumeClaim }}
+            claimName: {{ .Values.main.senzing.persistentVolumeClaim }}
         {{- end }}
-        {{- if .Values.senzing.senzingVarClaim }}
+        {{- if .Values.main.senzing.senzingVarClaim }}
         - name: senzing-var-storage
           persistentVolumeClaim:
-            claimName: {{ .Values.senzing.senzingVarClaim }}
+            claimName: {{ .Values.main.senzing.senzingVarClaim }}
         {{- end }}
-# --- Standard suffix ---
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- if .Values.securityContext.enabled }}
-      securityContext:
-        fsGroup: {{ .Values.securityContext.fsGroup }}
-        runAsGroup: {{ .Values.securityContext.runAsGroup }}
-        runAsUser: {{ .Values.securityContext.runAsUser }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        {{- if .Values.main.extraVolumes }}
+        {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}

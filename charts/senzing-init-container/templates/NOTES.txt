@@ -1,26 +1,54 @@
 ## Overview
 
-A job to perform all of the Senzing initializations which require root permission.
-The initializations are seen in the init-container.py script.
+Simple overview.
 
 More information:
 
-- [GitHub](https://github.com/Senzing/docker-init-container)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-init-container)
+- [GitHub](https://github.com/Senzing/XXXXX)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/XXXXXX)
 
 ## Command
 
 The command being run:
 
 ```console
-init-container.py
-  {{- if .Values.senzing.debug }} \
-  --debug "{{ .Values.senzing.debug }}"
+command-name.py {{ .Values.main.senzing.subcommand -}}
+  {{- if .Values.main.senzing.debug }} \
+  --debug "{{ .Values.main.senzing.debug }}"
   {{- end }}
-  {{- if .Values.senzing.databaseUrl }}
-  --database-url {{ .Values.senzing.databaseUrl }}
-  {{- end }}
-  {{- if .Values.senzing.engineConfigurationJson }}
-  --engine-configuration-json {{ .Values.senzing.engineConfigurationJson }}
+  {{- if .Values.main.senzing.logLevel }} \
+  --log-level "{{ .Values.main.senzing.logLevel }}"
   {{- end }}
 ```
+
+## Metadata
+
+{{- if .Values.diagnosticMode.enabled }}
+The chart has been deployed in diagnostic mode. All probes have been disabled and the command has been overwritten with:
+
+  command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 4 }}
+  args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 4 }}
+
+Get the list of pods by executing:
+
+  kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+
+Access the pod you want to debug by executing
+
+  kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
+
+In order to replicate the container startup scripts execute this command:
+
+    %%ENTRYPOINT and CMD from main container%%
+
+{{- else }}
+
+%%Instructions to access the application depending on the serviceType and other considerations%%
+
+{{- end }}
+
+
+## Metadata
+
+{{- include "senzing-common.warnings.rollingTag" .Values.main.image }}
+{{- include "senzing-init-container.validateValues" . }}

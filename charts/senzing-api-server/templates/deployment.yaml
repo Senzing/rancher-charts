@@ -1,37 +1,61 @@
-apiVersion: apps/v1
+apiVersion: {{ include "senzing-common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
-  name: {{ include "senzing-api-server.fullname" . }}
-  labels:
-    {{- include "senzing-api-server.labels" . | nindent 4 }}
-  {{- with .Values.deployment.metadata.annotations }}
-  annotations:
-    {{ toYaml . | indent 4 }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
+  labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
+    app.kubernetes.io/component: senzing-api-server-component
+    {{- if .Values.commonLabels }}
+    {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  name: {{ template "senzing-common.names.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.main.replicaCount }}
   selector:
-    matchLabels:
-      app.kubernetes.io/name: {{ include "senzing-api-server.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+    matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
+      app.kubernetes.io/component: senzing-api-server-component
+  {{- if .Values.main.updateStrategy }}
+  strategy: {{- toYaml .Values.main.updateStrategy | nindent 4 }}
+  {{- end }}
   template:
     metadata:
-      labels:
-        app.kubernetes.io/name: {{ include "senzing-api-server.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
-      {{- with .Values.deployment.spec.template.metadata.annotations }}
-      annotations:
-        {{ toYaml . | indent 8 }}
+      {{- if .Values.main.podAnnotations }}
+      annotations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podAnnotations "context" $) | nindent 8 }}
       {{- end }}
+      labels: {{- include "senzing-common.labels.standard" . | nindent 8 }}
+        app.kubernetes.io/component: senzing-api-server-component
+        {{- if .Values.main.podLabels }}
+        {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podLabels "context" $) | nindent 8 }}
+        {{- end }}
     spec:
+      {{- if .Values.main.affinity }}
+      affinity: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.affinity "context" $) | nindent 8 }}
+      {{- else }}
+      affinity:
+        podAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAffinityPreset "component" "senzing-api-server-component" "context" $) | nindent 10 }}
+        podAntiAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAntiAffinityPreset "component" "senzing-api-server-component" "context" $) | nindent 10 }}
+        nodeAffinity: {{- include "senzing-common.affinities.nodes" (dict "type" .Values.main.nodeAffinityPreset.type "key" .Values.main.nodeAffinityPreset.key "values" .Values.main.nodeAffinityPreset.values) | nindent 10 }}
+      {{- end }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: senzing-api-server
+          {{- if .Values.diagnosticMode.enabled }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 12 }}
+          {{- else if .Values.main.args }}
+          args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.args "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.diagnosticMode.enabled }}
+          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 12 }}
+          {{- else if .Values.main.command }}
+          command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.command "context" $) | nindent 12 }}
+          {{- end }}
           env:
-            {{- if .Values.senzing.mountOptIbm }}
+            {{- if .Values.main.senzing.mountOptIbm }}
             - name: LD_LIBRARY_PATH
               value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/IBM/db2/clidriver/lib
             {{- end }}
-            {{- if .Values.senzing.mountOptMicrosoft }}
+            {{- if .Values.main.senzing.mountOptMicrosoft }}
             - name: LD_LIBRARY_PATH
               value: /opt/senzing/g2/lib:/opt/senzing/g2/lib/debian:/opt/microsoft/msodbcsql17/lib64
             - name: ODBCINI
@@ -39,222 +63,258 @@ spec:
             - name: ODBCSYSINI
               value: /opt/microsoft/msodbcsql17/etc
             {{- end }}
-            {{- if .Values.senzing.allowedOrigins }}
+            {{- if .Values.main.senzing.allowedOrigins }}
             - name: SENZING_API_SERVER_ALLOWED_ORIGINS
-              value: {{ .Values.senzing.allowedOrigins | quote }}
+              value: {{ .Values.main.senzing.allowedOrigins | quote }}
             {{- end }}
-            {{- if .Values.senzing.autoRefreshPeriod }}
+            {{- if .Values.main.senzing.autoRefreshPeriod }}
             - name: SENZING_API_SERVER_AUTO_REFRESH_PERIOD
-              value: {{ .Values.senzing.autoRefreshPeriod | quote }}
+              value: {{ .Values.main.senzing.autoRefreshPeriod | quote }}
             {{- end }}
-            {{- if .Values.senzing.bindAddr }}
+            {{- if .Values.main.senzing.bindAddr }}
             - name: SENZING_API_SERVER_BIND_ADDR
-              value: {{ .Values.senzing.bindAddr | quote }}
+              value: {{ .Values.main.senzing.bindAddr | quote }}
             {{- end }}
-            {{- if .Values.senzing.clientKeyStore }}
+            {{- if .Values.main.senzing.clientKeyStore }}
             - name: SENZING_API_SERVER_CLIENT_KEY_STORE
-              value: {{ .Values.senzing.clientKeyStore }}
+              value: {{ .Values.main.senzing.clientKeyStore }}
             {{- end }}
-            {{- if .Values.senzing.clientKeyStorePassword }}
+            {{- if .Values.main.senzing.clientKeyStorePassword }}
             - name: SENZING_API_SERVER_CLIENT_KEY_STORE_PASSWORD
-              value: {{ .Values.senzing.clientKeyStorePassword }}
+              value: {{ .Values.main.senzing.clientKeyStorePassword }}
             {{- end }}
-            {{- if .Values.senzing.concurrency }}
+            {{- if .Values.main.senzing.concurrency }}
             - name: SENZING_API_SERVER_CONCURRENCY
-              value: {{ .Values.senzing.concurrency | quote }}
+              value: {{ .Values.main.senzing.concurrency | quote }}
             {{- end }}
-            {{- if .Values.senzing.configId }}
+            {{- if .Values.main.senzing.configId }}
             - name: SENZING_API_SERVER_CONFIG_ID
-              value: {{ .Values.senzing.configId | quote }}
+              value: {{ .Values.main.senzing.configId | quote }}
             {{- end }}
-            {{- if .Values.senzing.debug }}
+            {{- if .Values.main.senzing.debug }}
             - name: SENZING_API_SERVER_DEBUG
-              value: {{ .Values.senzing.debug | quote }}
+              value: {{ .Values.main.senzing.debug | quote }}
             {{- end }}
-            {{- if .Values.senzing.enableAdmin }}
+            {{- if .Values.main.senzing.enableAdmin }}
             - name: SENZING_API_SERVER_ENABLE_ADMIN
-              value: {{ .Values.senzing.enableAdmin | quote }}
+              value: {{ .Values.main.senzing.enableAdmin | quote }}
             {{- end }}
-            {{- if .Values.senzing.httpConcurrency }}
+            {{- if .Values.main.senzing.httpConcurrency }}
             - name: SENZING_API_SERVER_HTTP_CONCURRENCY
-              value: {{ .Values.senzing.httpConcurrency | quote }}
+              value: {{ .Values.main.senzing.httpConcurrency | quote }}
             {{- end }}
-            {{- if .Values.senzing.initEnvVar }}
+            {{- if .Values.main.senzing.initEnvVar }}
             - name: SENZING_API_SERVER_INIT_ENV_VAR
-              value: {{ .Values.senzing.initEnvVar | quote }}
+              value: {{ .Values.main.senzing.initEnvVar | quote }}
             {{- end }}
-            {{- if .Values.senzing.initFile }}
+            {{- if .Values.main.senzing.initFile }}
             - name: SENZING_API_SERVER_INIT_FILE
-              value: {{ .Values.senzing.initFile | quote }}
+              value: {{ .Values.main.senzing.initFile | quote }}
             {{- end }}
-            {{- if .Values.senzing.engineConfigurationJson }}
+            {{- if .Values.main.senzing.engineConfigurationJson }}
             - name: SENZING_API_SERVER_INIT_JSON
               value: >-
-              {{ .Values.senzing.engineConfigurationJson  | nindent 16 }}
-            {{- else if .Values.senzing.initJson }}
+              {{ .Values.main.senzing.engineConfigurationJson  | nindent 16 }}
+            {{- else if .Values.main.senzing.initJson }}
             - name: SENZING_API_SERVER_INIT_JSON
               value: >-
-              {{ .Values.senzing.initJson  | nindent 16 }}
+              {{ .Values.main.senzing.initJson  | nindent 16 }}
             {{- end }}
-            {{- if .Values.senzing.iniFile }}
+            {{- if .Values.main.senzing.iniFile }}
             - name: SENZING_API_SERVER_INI_FILE
-              value: {{ .Values.senzing.iniFile | quote }}
+              value: {{ .Values.main.senzing.iniFile | quote }}
             {{- end }}
-            {{- if .Values.senzing.keyAlias }}
+            {{- if .Values.main.senzing.keyAlias }}
             - name: SENZING_API_SERVER_KEY_ALIAS
-              value: {{ .Values.senzing.keyAlias }}
+              value: {{ .Values.main.senzing.keyAlias }}
             {{- end }}
-            {{- if .Values.senzing.keyStore }}
+            {{- if .Values.main.senzing.keyStore }}
             - name: SENZING_API_SERVER_KEY_STORE
-              value: {{ .Values.senzing.keyStore }}
+              value: {{ .Values.main.senzing.keyStore }}
             {{- end }}
-            {{- if .Values.senzing.keyStorePassword }}
+            {{- if .Values.main.senzing.keyStorePassword }}
             - name: SENZING_API_SERVER_KEY_STORE_PASSWORD
-              value: {{ .Values.senzing.keyStorePassword }}
+              value: {{ .Values.main.senzing.keyStorePassword }}
             {{- end }}
-            {{- if .Values.senzing.moduleName }}
+            {{- if .Values.main.senzing.moduleName }}
             - name: SENZING_API_SERVER_MODULE_NAME
-              value: {{ .Values.senzing.moduleName | quote }}
+              value: {{ .Values.main.senzing.moduleName | quote }}
             {{- end }}
-            {{- if .Values.senzing.monitorFile }}
+            {{- if .Values.main.senzing.monitorFile }}
             - name: SENZING_API_SERVER_MONITOR_FILE
-              value: {{ .Values.senzing.monitorFile | quote }}
+              value: {{ .Values.main.senzing.monitorFile | quote }}
             {{- end }}
-            {{- if .Values.senzing.port }}
+            {{- if .Values.main.senzing.port }}
             - name: SENZING_API_SERVER_PORT
-              value: {{ .Values.senzing.port | quote }}
+              value: {{ .Values.main.senzing.port | quote }}
             {{- end }}
-            {{- if .Values.senzing.quiet }}
+            {{- if .Values.main.senzing.quiet }}
             - name: SENZING_API_SERVER_QUIET
-              value: {{ .Values.senzing.quiet | quote }}
+              value: {{ .Values.main.senzing.quiet | quote }}
             {{- end }}
-            {{- if .Values.senzing.readOnly }}
+            {{- if .Values.main.senzing.readOnly }}
             - name: SENZING_API_SERVER_READ_ONLY
-              value: {{ .Values.senzing.readOnly | quote }}
+              value: {{ .Values.main.senzing.readOnly | quote }}
             {{- end }}
-            {{- if .Values.senzing.securePort }}
+            {{- if .Values.main.senzing.securePort }}
             - name: SENZING_API_SERVER_SECURE_PORT
-              value: {{ .Values.senzing.securePort | quote }}
+              value: {{ .Values.main.senzing.securePort | quote }}
             {{- end }}
-            {{- if .Values.senzing.skipEnginePriming }}
+            {{- if .Values.main.senzing.skipEnginePriming }}
             - name: SENZING_API_SERVER_SKIP_ENGINE_PRIMING
-              value: {{ .Values.senzing.skipEnginePriming | quote }}
+              value: {{ .Values.main.senzing.skipEnginePriming | quote }}
             {{- end }}
-            {{- if .Values.senzing.skipStartupPerf }}
+            {{- if .Values.main.senzing.skipStartupPerf }}
             - name: SENZING_API_SERVER_SKIP_STARTUP_PERF
-              value: {{ .Values.senzing.skipStartupPerf | quote }}
+              value: {{ .Values.main.senzing.skipStartupPerf | quote }}
             {{- end }}
-            {{- if .Values.senzing.statsInterval }}
+            {{- if .Values.main.senzing.statsInterval }}
             - name: SENZING_API_SERVER_STATS_INTERVAL
-              value: {{ .Values.senzing.statsInterval | quote }}
+              value: {{ .Values.main.senzing.statsInterval | quote }}
             {{- end }}
-            {{- if .Values.senzing.urlBasePath }}
+            {{- if .Values.main.senzing.urlBasePath }}
             - name: SENZING_API_SERVER_URL_BASE_PATH
-              value: {{ .Values.senzing.urlBasePath | quote }}
+              value: {{ .Values.main.senzing.urlBasePath | quote }}
             {{- end }}
-            {{- if .Values.senzing.verbose }}
+            {{- if .Values.main.senzing.verbose }}
             - name: SENZING_API_SERVER_VERBOSE
-              value: {{ .Values.senzing.verbose | quote }}
+              value: {{ .Values.main.senzing.verbose | quote }}
             {{- end }}
-            {{- if .Values.senzing.azureQueueConnectionString }}
+            {{- if .Values.main.senzing.azureQueueConnectionString }}
             - name: SENZING_AZURE_CONNECTION_STRING
-              value: "{{ .Values.senzing.azureQueueConnectionString }}"
+              value: "{{ .Values.main.senzing.azureQueueConnectionString }}"
             {{- end }}
-            {{- if .Values.senzing.azureQueueName }}
+            {{- if .Values.main.senzing.azureQueueName }}
             - name: SENZING_AZURE_QUEUE_NAME
-              value: "{{ .Values.senzing.azureQueueName }}"
+              value: "{{ .Values.main.senzing.azureQueueName }}"
             {{- end }}
-            {{- if .Values.senzing.engineConfigurationJson }}
+            {{- if .Values.main.senzing.engineConfigurationJson }}
             - name: SENZING_ENGINE_CONFIGURATION_JSON
               value: >-
-              {{ .Values.senzing.engineConfigurationJson  | nindent 16 }}
+              {{ .Values.main.senzing.engineConfigurationJson  | nindent 16 }}
             {{- end }}
-            {{- if .Values.senzing.kafkaBootstrapServer }}
+            {{- if .Values.main.senzing.kafkaBootstrapServer }}
             - name: SENZING_KAFKA_BOOTSTRAP_SERVER
-              value: {{ .Values.senzing.kafkaBootstrapServer | quote }}
+              value: {{ .Values.main.senzing.kafkaBootstrapServer | quote }}
             {{- end }}
-            {{- if .Values.senzing.kafkaGroup }}
+            {{- if .Values.main.senzing.kafkaGroup }}
             - name: SENZING_KAFKA_GROUP
-              value: {{ .Values.senzing.kafkaGroup | quote }}
+              value: {{ .Values.main.senzing.kafkaGroup | quote }}
             {{- end }}
-            {{- if .Values.senzing.kafkaInfoBootstrapServer }}
+            {{- if .Values.main.senzing.kafkaInfoBootstrapServer }}
             - name: SENZING_KAFKA_INFO_BOOTSTRAP_SERVER
-              value: {{ .Values.senzing.kafkaInfoBootstrapServer | quote }}
+              value: {{ .Values.main.senzing.kafkaInfoBootstrapServer | quote }}
             {{- end }}
-            {{- if .Values.senzing.kafkaInfoGroup }}
+            {{- if .Values.main.senzing.kafkaInfoGroup }}
             - name: SENZING_KAFKA_INFO_GROUP
-              value: {{ .Values.senzing.kafkaInfoGroup | quote }}
+              value: {{ .Values.main.senzing.kafkaInfoGroup | quote }}
             {{- end }}
-            {{- if .Values.senzing.kafkaInfoTopic }}
+            {{- if .Values.main.senzing.kafkaInfoTopic }}
             - name: SENZING_KAFKA_INFO_TOPIC
-              value: {{ .Values.senzing.kafkaInfoTopic | quote }}
+              value: {{ .Values.main.senzing.kafkaInfoTopic | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqExchange }}
+            {{- if .Values.main.senzing.rabbitmqExchange }}
             - name: SENZING_RABBITMQ_EXCHANGE
-              value: {{ .Values.senzing.rabbitmqExchange | quote }}
+              value: {{ .Values.main.senzing.rabbitmqExchange | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqHost }}
+            {{- if .Values.main.senzing.rabbitmqHost }}
             - name: SENZING_RABBITMQ_HOST
-              value: {{ .Values.senzing.rabbitmqHost | quote }}
+              value: {{ .Values.main.senzing.rabbitmqHost | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqInfoExchange }}
+            {{- if .Values.main.senzing.rabbitmqInfoExchange }}
             - name: SENZING_RABBITMQ_INFO_EXCHANGE
-              value: {{ .Values.senzing.rabbitmqInfoExchange | quote }}
+              value: {{ .Values.main.senzing.rabbitmqInfoExchange | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqInfoHost }}
+            {{- if .Values.main.senzing.rabbitmqInfoHost }}
             - name: SENZING_RABBITMQ_INFO_HOST
-              value: {{ .Values.senzing.rabbitmqInfoHost | quote }}
+              value: {{ .Values.main.senzing.rabbitmqInfoHost | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqInfoPassword }}
+            {{- if .Values.main.senzing.rabbitmqInfoPassword }}
             - name: SENZING_RABBITMQ_INFO_PASSWORD
-              value: {{ .Values.senzing.rabbitmqInfoPassword | quote }}
+              value: {{ .Values.main.senzing.rabbitmqInfoPassword | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqInfoPort }}
+            {{- if .Values.main.senzing.rabbitmqInfoPort }}
             - name: SENZING_RABBITMQ_INFO_PORT
-              value: {{ .Values.senzing.rabbitmqInfoPort | quote }}
+              value: {{ .Values.main.senzing.rabbitmqInfoPort | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqInfoRoutingKey }}
+            {{- if .Values.main.senzing.rabbitmqInfoRoutingKey }}
             - name: SENZING_RABBITMQ_INFO_ROUTING_KEY
-              value: {{ .Values.senzing.rabbitmqInfoRoutingKey | quote }}
+              value: {{ .Values.main.senzing.rabbitmqInfoRoutingKey | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqInfoUsername }}
+            {{- if .Values.main.senzing.rabbitmqInfoUsername }}
             - name: SENZING_RABBITMQ_INFO_USERNAME
-              value: {{ .Values.senzing.rabbitmqInfoUsername | quote }}
+              value: {{ .Values.main.senzing.rabbitmqInfoUsername | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqInfoVirtualHost }}
+            {{- if .Values.main.senzing.rabbitmqInfoVirtualHost }}
             - name: SENZING_RABBITMQ_INFO_VIRTUAL_HOST
-              value: {{ .Values.senzing.rabbitmqInfoVirtualHost | quote }}
+              value: {{ .Values.main.senzing.rabbitmqInfoVirtualHost | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqPassword }}
+            {{- if .Values.main.senzing.rabbitmqPassword }}
             - name: SENZING_RABBITMQ_PASSWORD
-              value: {{ .Values.senzing.rabbitmqPassword | quote }}
+              value: {{ .Values.main.senzing.rabbitmqPassword | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqPort }}
+            {{- if .Values.main.senzing.rabbitmqPort }}
             - name: SENZING_RABBITMQ_PORT
-              value: {{ .Values.senzing.rabbitmqPort | quote }}
+              value: {{ .Values.main.senzing.rabbitmqPort | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqUsername }}
+            {{- if .Values.main.senzing.rabbitmqUsername }}
             - name: SENZING_RABBITMQ_USERNAME
-              value: {{ .Values.senzing.rabbitmqUsername | quote }}
+              value: {{ .Values.main.senzing.rabbitmqUsername | quote }}
             {{- end }}
-            {{- if .Values.senzing.rabbitmqVirtualHost }}
+            {{- if .Values.main.senzing.rabbitmqVirtualHost }}
             - name: SENZING_RABBITMQ_VIRTUAL_HOST
-              value: {{ .Values.senzing.rabbitmqVirtualHost | quote }}
+              value: {{ .Values.main.senzing.rabbitmqVirtualHost | quote }}
             {{- end }}
-           {{- if .Values.senzing.sqsInfoQueueUrl }}
+           {{- if .Values.main.senzing.sqsInfoQueueUrl }}
             - name: SENZING_SQS_INFO_QUEUE_URL
-              value: {{ .Values.senzing.sqsInfoQueueUrl | quote }}
+              value: {{ .Values.main.senzing.sqsInfoQueueUrl | quote }}
             {{- end }}
-          image: {{ template "senzing.image" . }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{- if .Values.main.extraEnvVars }}
+            {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          envFrom:
+            {{- if .Values.main.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.main.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          image: {{ template "senzing-api-server.image" . }}
+          imagePullPolicy: {{ .Values.main.image.pullPolicy }}
+          {{- if not .Values.diagnosticMode.enabled }}
+          {{- if .Values.main.lifecycleHooks }}
+          lifecycle: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.lifecycleHooks "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.main.livenessProbe.enabled }}
+          livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.livenessProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customLivenessProbe }}
+          livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customLivenessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- end }}
           ports:
             - name: http
-              containerPort: 8080
-              protocol: TCP
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-          {{- if .Values.senzing.persistentVolumeClaim }}
+              containerPort: {{ .Values.main.senzing.port }}
+            {{- if .Values.main.senzing.securePort }}
+            - name: https
+              containerPort: {{ .Values.main.senzing.securePort }}
+            {{- end }}
+          {{- if not .Values.diagnosticMode.enabled }}
+          {{- if .Values.main.readinessProbe.enabled }}
+          readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customReadinessProbe }}
+          readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customReadinessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.main.resources }}
+          resources: {{- toYaml .Values.main.resources | nindent 12 }}
+          {{- end }}
+          {{- if .Values.main.containerSecurityContext.enabled }}
+          securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
           volumeMounts:
+            {{- if .Values.main.senzing.persistentVolumeClaim }}
             - name: senzing-storage
               mountPath: /opt/senzing/data
               subPath: senzing-data/2.0.0
@@ -267,47 +327,46 @@ spec:
             - name: senzing-storage
               mountPath: /var/opt/senzing
               subPath: senzing-var
-            {{- if .Values.senzing.mountOptIbm }}
+            {{- if .Values.main.senzing.mountOptIbm }}
             - name: senzing-storage
               mountPath: /opt/IBM
               subPath: senzing-db2-drivers
             {{- end }}
-            {{- if .Values.senzing.mountOptMicrosoft }}
+            {{- if .Values.main.senzing.mountOptMicrosoft }}
             - name: senzing-storage
               mountPath: /opt/microsoft
               subPath: opt-microsoft
             {{- end }}
-          {{- end }}
-          workingDir: /app
-      {{- if .Values.rbacEnabled}}
-      serviceAccountName: {{ template "senzing-api-server.fullname" . }}
+            {{- end }}
+            {{- if .Values.main.extraVolumeMounts }}
+            {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+        {{- if .Values.main.sidecars }}
+        {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
+        {{- end }}
+      {{- if .Values.main.hostAliases }}
+      hostAliases: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.hostAliases "context" $) | nindent 8 }}
       {{- end }}
-      {{- if .Values.senzing.persistentVolumeClaim }}
+      {{- include "senzing-api-server.imagePullSecrets" . | nindent 6 }}
+      {{- if .Values.main.nodeSelector }}
+      nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.main.priorityClassName }}
+      priorityClassName: {{ .Values.main.priorityClassName | quote }}
+      {{- end }}
+      {{- if .Values.main.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ template "senzing-api-server.serviceAccountName" . }}
+      {{- if .Values.main.tolerations }}
+      tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
+      {{- end }}
       volumes:
+        {{- if .Values.main.senzing.persistentVolumeClaim }}
         - name: senzing-storage
           persistentVolumeClaim:
-            claimName: {{ .Values.senzing.persistentVolumeClaim }}
-      {{- end }}
-# --- Standard suffix ---
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- if .Values.securityContext.enabled }}
-      securityContext:
-        fsGroup: {{ .Values.securityContext.fsGroup }}
-        runAsGroup: {{ .Values.securityContext.runAsGroup }}
-        runAsUser: {{ .Values.securityContext.runAsUser }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+            claimName: {{ .Values.main.senzing.persistentVolumeClaim }}
+        {{- end }}
+        {{- if .Values.main.extraVolumes }}
+        {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}
