@@ -1,6 +1,0 @@
-image.repository: "senzing/redoer"
-image.tag: "latest"
-senzing.subcommand: "redo"
-senzing.databaseUrl: "mysql://g2:g2@my-mysql-mysql:3306/G2"
-senzing.logLevel: "info"
-senzing.persistentVolumeClaim: "senzing-persistent-volume-claim"
