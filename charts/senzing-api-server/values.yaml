@@ -352,7 +352,7 @@ main:
     mountOptIbm: false
     mountOptMicrosoft: false
     persistentVolumeClaim: ""
-    port: "80"
+    port: "8080"
     quiet: ""
     rabbitmqExchange: ""
     rabbitmqHost: ""
@@ -532,7 +532,7 @@ service:
 
   ## @param service.httpsPort senzing-api-server service HTTPS port
   ##
-  httpsPort: 443
+  httpsPort:
 
   ## @param service.loadBalancerIP senzing-api-server service Load Balancer IP
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer

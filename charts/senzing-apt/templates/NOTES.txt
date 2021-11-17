@@ -1,18 +1,18 @@
 ## Overview
 
-Simple overview.
+Run apt to install DEB packages.
 
 More information:
 
-- [GitHub](https://github.com/Senzing/XXXXX)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/XXXXXX)
+- [GitHub](https://github.com/Senzing/docker-apt)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-apt)
 
 ## Command
 
 The command being run:
 
 ```console
-command-name.py {{ .Values.main.senzing.subcommand -}}
+apt {{ .Values.main.senzing.subcommand -}}
   {{- if .Values.main.senzing.debug }} \
   --debug "{{ .Values.main.senzing.debug }}"
   {{- end }}

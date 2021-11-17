@@ -344,7 +344,7 @@ main:
     webServerOperatorAuthMode: ""
     webServerOperatorAuthRedirect: ""
     webServerOperatorAuthStatus: ""
-    webServerPort: 80
+    webServerPort: 8080
     webServerProxyLoglevel: ""
     webServerSslCertPath: ""
     webServerSslKeyPath: ""
