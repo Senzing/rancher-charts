@@ -329,7 +329,7 @@ main:
     host: ""
     logLevel: ""
     persistentVolumeClaim: ""
-    port: "80"
+    port: "8253"
     sleepTimeInSeconds: ""
     subcommand: service
     supportPath: ""
