@@ -459,9 +459,9 @@ ingress:
   ##   - Relay on Helm to create self-signed certificates by setting `ingress.selfSigned=true`
   ##
   tls: false
-  
+
 ## ----- PodDisruptionBudget parameters ---------------------------------------
-  
+
 ## Pod disruption budget configuration
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
 ## @param podDisruptionBudget.enabled If true, create a pod disruption budget for pods.

@@ -447,6 +447,19 @@ ingress:
   ##
   tls: false
 
+## ----- PodDisruptionBudget parameters ---------------------------------------
+
+## Pod disruption budget configuration
+## ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
+## @param podDisruptionBudget.enabled If true, create a pod disruption budget for pods.
+## @param podDisruptionBudget.minAvailable Minimum number / percentage of pods that should remain scheduled
+## @param podDisruptionBudget.maxUnavailable Maximum number / percentage of pods that may be made unavailable
+##
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1
+  maxUnavailable: ""
+
 ## ----- service parameters ---------------------------------------------------
 
 ## arey-mysql-client service parameters

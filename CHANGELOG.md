@@ -6,6 +6,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2021-11-19
+
+### Changed in 1.1.1
+
+- Chart updates:
+  - arey-mysql-client:2.1.0
+  - confluentinc-cp-kafka:2.1.0
+  - microsoft-mssql-tools:2.1.0
+  - phppgadmin:3.1.0
+  - senzing-api-server:2.1.0
+  - senzing-apt:2.1.0
+  - senzing-base:2.1.0
+  - senzing-configurator:2.1.0
+  - senzing-console:2.1.0
+  - senzing-entity-search-web-app:2.1.0
+  - senzing-init-container:2.1.0
+  - senzing-postgresql-client:2.1.0
+  - senzing-redoer:2.1.0
+  - senzing-stream-loader:2.1.0
+  - senzing-stream-producer:2.1.0
+  - senzing-yum:2.1.0
+  - swaggerapi-swagger-ui:2.1.0
+
 ## [1.1.0] - 2021-11-18
 
 ### Added in 1.1.0
