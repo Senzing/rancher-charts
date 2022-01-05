@@ -603,7 +603,7 @@ volumePermissions:
   ## @param volumePermissions.image.tag Bitnami Shell image tag (immutable tags are recommended)
   ##
   image:
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
 
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
