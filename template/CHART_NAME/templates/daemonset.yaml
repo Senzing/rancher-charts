@@ -137,9 +137,6 @@ spec:
       {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.priorityClassName }}
       priorityClassName: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.priorityClassName | quote }}
       {{- end }}
-      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.schedulerName }}
-      schedulerName: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.schedulerName | quote }}
-      {{- end }}
       {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext "enabled" | toYaml | nindent 8 }}
       {{- end }}

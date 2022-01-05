@@ -223,7 +223,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
 
   ## Configure extra options for ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe.enabled Enable livenessProbe on ${SENZING_HELM_MAIN_CONTAINER_NAME} nodes
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe.enabled Enable livenessProbe on ${SENZING_HELM_MAIN_CONTAINER_NAME} containers
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe.failureThreshold Failure threshold for livenessProbe
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe.periodSeconds Period seconds for livenessProbe
@@ -298,7 +298,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   priorityClassName: ""
 
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.enabled Enable readinessProbe on ${SENZING_HELM_MAIN_CONTAINER_NAME} nodes
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.enabled Enable readinessProbe on ${SENZING_HELM_MAIN_CONTAINER_NAME} containers
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.failureThreshold Failure threshold for readinessProbe
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.periodSeconds Period seconds for readinessProbe
@@ -409,10 +409,6 @@ ingress:
   ##
   apiVersion:
 
-  ## @param ingress.certManager Add the corresponding annotations for cert-manager integration
-  ##
-  certManager: false
-
   ## @param ingress.enabled Enable ingress record generation for ${SENZING_HELM_MAIN_CONTAINER_NAME}
   ##
   enabled: false
@@ -487,7 +483,7 @@ ingress:
   ## TLS certificates will be retrieved from a TLS secret with name: `{{- printf "%s-tls" .Values.ingress.hostname }}`
   ## You can:
   ##   - Use the `ingress.secrets` parameter to create this TLS secret
-  ##   - Relay on cert-manager to create it by setting `ingress.certManager=true`
+  ##   - Relay on cert-manager to create it by setting the corresponding annotations
   ##   - Relay on Helm to create self-signed certificates by setting `ingress.selfSigned=true`
   ##
   tls: false
