@@ -1,3 +1,5 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#clusterrolebinding-v1-rbac-authorization-k8s-io
+
 apiVersion: {{ include "senzing-common.capabilities.rbac.apiVersion" . }}
 kind: ClusterRoleBinding
 metadata:

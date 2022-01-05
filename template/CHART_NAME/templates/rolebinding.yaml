@@ -1,3 +1,5 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#rolebinding-v1-rbac-authorization-k8s-io
+
 {{- if .Values.rbacEnabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
