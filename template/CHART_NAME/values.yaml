@@ -20,6 +20,7 @@ global:
   imageRegistry: ""
   storageClass: ""
 
+
 ## ----------------------------------------------------------------------------
 ## Common parameters
 ## ----------------------------------------------------------------------------
@@ -65,6 +66,7 @@ kubeVersion: ""
 ## @param nameOverride String to partially override senzing-common.names.fullname
 ##
 nameOverride: ""
+
 
 ## ----------------------------------------------------------------------------
 ## Container parameters
