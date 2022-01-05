@@ -230,7 +230,6 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   livenessProbe:
     enabled: false
-#   %%httpGet || command || etc%%
     failureThreshold: 3
     initialDelaySeconds: 0
     periodSeconds: 10
@@ -292,8 +291,6 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   podSecurityContext:
     enabled: true
     fsGroup: 1001
-    runAsGroup: 1001
-    runAsUser: 1001
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.priorityClassName ${SENZING_HELM_MAIN_CONTAINER_NAME} pods' priorityClassName
   ##
@@ -308,7 +305,6 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   readinessProbe:
     enabled: false
-#   %%httpGet || command || etc%%
     failureThreshold: 3
     initialDelaySeconds: 0
     periodSeconds: 10
