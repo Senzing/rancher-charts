@@ -109,14 +109,24 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   command: []
 
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerPorts.http ${SENZING_HELM_MAIN_CONTAINER_NAME} HTTP container port
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerPorts.https ${SENZING_HELM_MAIN_CONTAINER_NAME} HTTPS container port
+  ##
+  containerPorts:
+    http: 80
+    https: 443
+
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.runAsNonRoot Set ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context runAsNonRoot
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.runAsUser Set ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context runAsUser
   ##
   containerSecurityContext:
-    privileged: true
+    enabled: true
+    runAsNonRoot: true
+    runAsUser: 1001
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.customLivenessProbe Custom livenessProbe that overrides the default one
   ##
@@ -125,6 +135,10 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.customReadinessProbe Custom readinessProbe that overrides the default one
   ##
   customReadinessProbe: {}
+
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.customStartupProbe Custom startupProbe that overrides the default one
+  ##
+  customStartupProbe: {}
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.existingConfigmap The name of an existing ConfigMap with custom configuration for ${SENZING_HELM_MAIN_CONTAINER_NAME}
   ##
@@ -138,13 +152,13 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   extraEnvVars: []
 
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraEnvVarsSecret Name of existing Secret containing extra env vars for ${SENZING_HELM_MAIN_CONTAINER_NAME} nodes
-  ##
-  extraEnvVarsSecret:
-
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for ${SENZING_HELM_MAIN_CONTAINER_NAME} nodes
   ##
   extraEnvVarsCM:
+
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraEnvVarsSecret Name of existing Secret containing extra env vars for ${SENZING_HELM_MAIN_CONTAINER_NAME} nodes
+  ##
+  extraEnvVarsSecret:
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraVolumes Optionally specify extra list of additional volumes for the ${SENZING_HELM_MAIN_CONTAINER_NAME} pod(s)
   ##
@@ -314,6 +328,11 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
     limits: {}
     requests: {}
 
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.schedulerName Name of the k8s scheduler (other than default) for  ${SENZING_HELM_MAIN_CONTAINER_NAME} pods
+  ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
+  ##
+  schedulerName: ""
+
   ## ${SENZING_HELM_MAIN_CONTAINER_NAME} Senzing environment variables
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.databaseUrl The normalized database connection URL
@@ -338,6 +357,21 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##         containerPort: 1234
   ##
   sidecars: {}
+
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.enabled Enable startupProbe on ${SENZING_HELM_MAIN_CONTAINER_NAME} containers
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.periodSeconds Period seconds for startupProbe
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.timeoutSeconds Timeout seconds for startupProbe
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.failureThreshold Failure threshold for startupProbe
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.successThreshold Success threshold for startupProbe
+  ##
+  startupProbe:
+    enabled: false
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.tolerations Tolerations for ${SENZING_HELM_MAIN_CONTAINER_NAME} pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
@@ -494,9 +528,9 @@ service:
   ##
   externalTrafficPolicy: Cluster
 
-  ## @param service.httpsPort ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTPS port
+  ## @param service.extraPorts Extra ports to expose in ${SENZING_HELM_MAIN_CONTAINER_NAME} service (normally used with the `sidecars` value)
   ##
-  httpsPort: 443
+  extraPorts: []
 
   ## @param service.loadBalancerIP ${SENZING_HELM_MAIN_CONTAINER_NAME} service Load Balancer IP
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
@@ -520,9 +554,12 @@ service:
     http:
     https:
 
-  ## @param service.port ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTP port
+  ## @param service.ports.http ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTP port
+  ## @param service.ports.https ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTPS port
   ##
-  port: 80
+  ports:
+    http: 80
+    https: 443
 
   ## @param service.type ${SENZING_HELM_MAIN_CONTAINER_NAME} service type
   ##
