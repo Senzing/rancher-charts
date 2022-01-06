@@ -73,6 +73,7 @@ spec:
           {{- end }}
           {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe.enabled }}
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.livenessProbe "enabled") "context" $) | nindent 12 }}
+             %%httpGet || command || etc%%
           {{- else if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customLivenessProbe }}
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customLivenessProbe "context" $) | nindent 12 }}
           {{- end }}
@@ -85,6 +86,7 @@ spec:
           {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.enabled }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe "enabled") "context" $) | nindent 12 }}
+             %%httpGet || command || etc%%
           {{- else if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customReadinessProbe }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customReadinessProbe "context" $) | nindent 12 }}
           {{- end }}
