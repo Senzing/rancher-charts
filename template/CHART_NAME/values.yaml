@@ -232,6 +232,10 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   livenessProbe:
     enabled: false
+    exec:
+      command:
+      - stat
+      - /etc
     failureThreshold: 3
     initialDelaySeconds: 0
     periodSeconds: 10
@@ -307,6 +311,10 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   readinessProbe:
     enabled: false
+    exec:
+      command:
+      - stat
+      - /etc
     failureThreshold: 3
     initialDelaySeconds: 0
     periodSeconds: 10
@@ -365,6 +373,10 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   startupProbe:
     enabled: false
+    exec:
+      command:
+      - stat
+      - /etc
     failureThreshold: 3
     initialDelaySeconds: 0
     periodSeconds: 10
@@ -637,17 +649,17 @@ volumePermissions:
 ##
 rbac:
 
-  ## @param rbac.create Specifies whether RBAC resources should be created
+  ## @param rbac.enabled Specifies whether RBAC resources should be created
   ##
-  create: false
+  enabled: false
 
 ## ServiceAccount configuration
 ##
 serviceAccount:
 
-  ## @param serviceAccount.create Specifies whether a ServiceAccount should be created
+  ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
   ##
-  create: true
+  enabled: true
 
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template

@@ -119,10 +119,6 @@ spec:
           {{- end }}
           {{- if .Values.main.livenessProbe.enabled }}
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.livenessProbe "enabled") "context" $) | nindent 12 }}
-            exec:
-              command:
-              - stat
-              - /etc
           {{- else if .Values.main.customLivenessProbe }}
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customLivenessProbe "context" $) | nindent 12 }}
           {{- end }}
@@ -137,10 +133,6 @@ spec:
           {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.main.readinessProbe.enabled }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
-            exec:
-              command:
-              - stat
-              - /etc
           {{- else if .Values.main.customReadinessProbe }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customReadinessProbe "context" $) | nindent 12 }}
           {{- end }}
@@ -153,10 +145,6 @@ spec:
           {{- end }}
           {{- if .Values.main.startupProbe.enabled }}
           startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.startupProbe "enabled") "context" $) | nindent 12 }}
-            exec:
-              command:
-              - stat
-              - /etc
           {{- else if .Values.main.customStartupProbe }}
           startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customStartupProbe "context" $) | nindent 12 }}
           {{- end }}

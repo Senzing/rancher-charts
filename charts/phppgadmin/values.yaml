@@ -101,7 +101,7 @@ main:
   autoscaling:
     builtInMetrics: []
     customMetrics: []
-    enabled: false
+    enabled: true
     maxReplicas: 10
     minReplicas: 2
     targetCPU: 50
@@ -385,8 +385,11 @@ main:
   ## @param main.startupProbe.successThreshold Success threshold for startupProbe
   ##
   startupProbe:
-    enabled: false
+    enabled: true
     failureThreshold: 3
+    httpGet:
+      path: /
+      port: http
     initialDelaySeconds: 0
     periodSeconds: 10
     successThreshold: 1
@@ -437,7 +440,7 @@ ingress:
 
   ## @param ingress.enabled Enable ingress record generation for phppgadmin
   ##
-  enabled: false
+  enabled: true
 
   ## @param ingress.extraHosts An array with additional hostname(s) to be covered with the ingress record
   ## e.g:
@@ -512,7 +515,7 @@ ingress:
   ##   - Relay on cert-manager to create it by setting the corresponding annotations
   ##   - Relay on Helm to create self-signed certificates by setting `ingress.selfSigned=true`
   ##
-  tls: false
+  tls: true
 
 ## ----- PodDisruptionBudget parameters ---------------------------------------
 
@@ -523,7 +526,7 @@ ingress:
 ## @param podDisruptionBudget.maxUnavailable Maximum number / percentage of pods that may be made unavailable
 ##
 podDisruptionBudget:
-  enabled: false
+  enabled: true
   minAvailable: 1
   maxUnavailable: ""
 
@@ -612,7 +615,7 @@ volumePermissions:
 
   ## @param volumePermissions.enabled Enable init container that changes the owner/group of the PV mount point to `runAsUser:fsGroup`
   ##
-  enabled: false
+  enabled: true
 
   ## Bitnami Shell image
   ## ref: https://hub.docker.com/r/bitnami/bitnami-shell/tags/
@@ -660,7 +663,7 @@ rbac:
 
   ## @param rbac.create Specifies whether RBAC resources should be created
   ##
-  create: false
+  enabled: true
 
 ## ServiceAccount configuration
 ##
@@ -668,7 +671,7 @@ serviceAccount:
 
   ## @param serviceAccount.create Specifies whether a ServiceAccount should be created
   ##
-  create: true
+  enabled: true
 
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
