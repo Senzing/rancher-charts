@@ -360,7 +360,7 @@ main:
     limits: {}
     requests: {}
 
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.schedulerName Name of the k8s scheduler (other than default) for  ${SENZING_HELM_MAIN_CONTAINER_NAME} pods
+  ## @param main.schedulerName Name of the k8s scheduler (other than default) for  phppgadmin pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
   ##
   schedulerName: ""
