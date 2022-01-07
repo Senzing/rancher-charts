@@ -20,6 +20,7 @@ global:
   imageRegistry: ""
   storageClass: ""
 
+
 ## ----------------------------------------------------------------------------
 ## Common parameters
 ## ----------------------------------------------------------------------------
@@ -66,6 +67,7 @@ kubeVersion: ""
 ##
 nameOverride: ""
 
+
 ## ----------------------------------------------------------------------------
 ## Container parameters
 ## ----------------------------------------------------------------------------
@@ -109,14 +111,24 @@ main:
   ##
   command: []
 
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerPorts.http ${SENZING_HELM_MAIN_CONTAINER_NAME} HTTP container port
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerPorts.https ${SENZING_HELM_MAIN_CONTAINER_NAME} HTTPS container port
+  ##
+  containerPorts:
+    http: 80
+    https: 443
+
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ## @param main.containerSecurityContext.enabled Enabled arey-mysql-client containers' Security Context
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.runAsNonRoot Set ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context runAsNonRoot
   ## @param main.containerSecurityContext.runAsUser Set arey-mysql-client containers' Security Context runAsUser
   ##
   containerSecurityContext:
-    privileged: true
+    enabled: true
+    runAsNonRoot: true
+    runAsUser: 1001
 
   ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
   ##
@@ -125,6 +137,10 @@ main:
   ## @param main.customReadinessProbe Custom readinessProbe that overrides the default one
   ##
   customReadinessProbe: {}
+
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.customStartupProbe Custom startupProbe that overrides the default one
+  ##
+  customStartupProbe: {}
 
   ## @param main.existingConfigmap The name of an existing ConfigMap with custom configuration for arey-mysql-client
   ##
@@ -138,13 +154,13 @@ main:
   ##
   extraEnvVars: []
 
-  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for arey-mysql-client nodes
-  ##
-  extraEnvVarsSecret:
-
   ## @param main.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for arey-mysql-client nodes
   ##
   extraEnvVarsCM:
+
+  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for arey-mysql-client nodes
+  ##
+  extraEnvVarsSecret:
 
   ## @param main.extraVolumes Optionally specify extra list of additional volumes for the arey-mysql-client pod(s)
   ##
@@ -216,7 +232,6 @@ main:
   ##
   livenessProbe:
     enabled: false
-#   %%httpGet || command || etc%%
     failureThreshold: 3
     initialDelaySeconds: 0
     periodSeconds: 10
@@ -278,8 +293,6 @@ main:
   podSecurityContext:
     enabled: true
     fsGroup: 1001
-    runAsGroup: 1001
-    runAsUser: 1001
 
   ## @param main.priorityClassName arey-mysql-client pods' priorityClassName
   ##
@@ -294,7 +307,6 @@ main:
   ##
   readinessProbe:
     enabled: false
-#   %%httpGet || command || etc%%
     failureThreshold: 3
     initialDelaySeconds: 0
     periodSeconds: 10
@@ -314,6 +326,11 @@ main:
     limits: {}
     requests: {}
 
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.schedulerName Name of the k8s scheduler (other than default) for  ${SENZING_HELM_MAIN_CONTAINER_NAME} pods
+  ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
+  ##
+  schedulerName: ""
+
   ## @param main.sidecars Add additional sidecar containers to the arey-mysql-client pod(s)
   ## e.g:
   ## sidecars:
@@ -325,6 +342,21 @@ main:
   ##         containerPort: 1234
   ##
   sidecars: {}
+
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.enabled Enable startupProbe on ${SENZING_HELM_MAIN_CONTAINER_NAME} containers
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.periodSeconds Period seconds for startupProbe
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.timeoutSeconds Timeout seconds for startupProbe
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.failureThreshold Failure threshold for startupProbe
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.successThreshold Success threshold for startupProbe
+  ##
+  startupProbe:
+    enabled: false
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
 
   ## @param main.tolerations Tolerations for arey-mysql-client pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
@@ -355,18 +387,19 @@ main:
 ##
 ingress:
 
-  ## @param ingress.annotations Additional custom annotations for the ingress record
-  ## NOTE: If `ingress.certManager=true`, annotation `kubernetes.io/tls-acme: "true"` will automatically be added
+  ## @param ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
+  ## Use this parameter to set the required annotations for cert-manager, see
+  ## ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
+  ## e.g:
+  ## annotations:
+  ##   kubernetes.io/ingress.class: nginx
+  ##   cert-manager.io/cluster-issuer: cluster-issuer-name
   ##
   annotations: {}
 
   ## @param ingress.apiVersion Force Ingress API version (automatically detected if not set)
   ##
   apiVersion:
-
-  ## @param ingress.certManager Add the corresponding annotations for cert-manager integration
-  ##
-  certManager: false
 
   ## @param ingress.enabled Enable ingress record generation for arey-mysql-client
   ##
@@ -442,7 +475,7 @@ ingress:
   ## TLS certificates will be retrieved from a TLS secret with name: `{{- printf "%s-tls" .Values.ingress.hostname }}`
   ## You can:
   ##   - Use the `ingress.secrets` parameter to create this TLS secret
-  ##   - Relay on cert-manager to create it by setting `ingress.certManager=true`
+  ##   - Relay on cert-manager to create it by setting the corresponding annotations
   ##   - Relay on Helm to create self-signed certificates by setting `ingress.selfSigned=true`
   ##
   tls: false
@@ -481,9 +514,9 @@ service:
   ##
   externalTrafficPolicy: Cluster
 
-  ## @param service.httpsPort arey-mysql-client service HTTPS port
+  ## @param service.extraPorts Extra ports to expose in ${SENZING_HELM_MAIN_CONTAINER_NAME} service (normally used with the `sidecars` value)
   ##
-  httpsPort: 443
+  extraPorts: []
 
   ## @param service.loadBalancerIP arey-mysql-client service Load Balancer IP
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
@@ -507,9 +540,12 @@ service:
     http:
     https:
 
-  ## @param service.port arey-mysql-client service HTTP port
+  ## @param service.ports.http ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTP port
+  ## @param service.ports.https ${SENZING_HELM_MAIN_CONTAINER_NAME} service HTTPS port
   ##
-  port: 80
+  ports:
+    http: 80
+    https: 443
 
   ## @param service.type arey-mysql-client service type
   ##
@@ -553,7 +589,7 @@ volumePermissions:
   ## @param volumePermissions.image.tag Bitnami Shell image tag (immutable tags are recommended)
   ##
   image:
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
 
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
