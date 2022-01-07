@@ -238,6 +238,9 @@ main:
     successThreshold: 1
     timeoutSeconds: 1
 
+  mysql:
+    persistentVolumeClaim:
+
   ## Node main.affinity preset
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
   ##
