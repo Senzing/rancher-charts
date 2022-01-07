@@ -74,7 +74,7 @@ nameOverride: ""
 
 ## @section arey-mysql-client parameters
 
-## %%MAIN_CONTAINER/POD_DESCRIPTION%%
+## MAIN_CONTAINER/POD_DESCRIPTION
 ##
 main:
 
@@ -644,8 +644,8 @@ serviceAccount:
   ##
   name: ""
 
-## %%SUBCHART_CONTAINER/POD_DESCRIPTION%%
+## SUBCHART_CONTAINER/POD_DESCRIPTION
 ##
 ## SUBCHART_NAME:
 ##   enabled: false
-##   %%OTHER_PARAMETERS_RELATED_TO_THIS_SUBCHART%%
+##   OTHER_PARAMETERS_RELATED_TO_THIS_SUBCHART

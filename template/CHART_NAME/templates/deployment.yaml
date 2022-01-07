@@ -114,7 +114,6 @@ spec:
           {{- else if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customStartupProbe }}
           startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customStartupProbe "context" $) | nindent 12 }}
           {{- end }}
-          {{- end }}
           volumeMounts:
             - mountPath: bar
               name: foo

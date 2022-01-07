@@ -6,6 +6,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.1] - 2022-01-07
+
+### Added in 3.2.1
+
+- `main.containerPorts`
+- `main.containerSecurityContext.enabled`
+- `main.containerSecurityContext.runAsNonRoot`
+- `main.containerSecurityContext.runAsUser`
+- `main.customStartupProbe`
+- `main.schedulerName`
+- `main.service.extraPorts`
+- `main.service.ports`
+- `main.startupProbe`
+
+### Changed in 3.2.1
+
+- Update to template
+- `main.image.pullPolicy` default value
+
+### Removed in 3.2.1
+
+- `main.certManager`
+- `main.containerSecurityContext.privileged`
+- `main.podSecurityContext.runAsGroup`
+- `main.podSecurityContext.runAsUser`
+- `main.service.httpsPort`
+- `main.service.port`
+
 ## [3.2.0] - 2021-12-17
 
 ### Removed in 3.2.0

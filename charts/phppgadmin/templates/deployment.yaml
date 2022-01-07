@@ -1,3 +1,5 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#deployment-v1-apps
+
 apiVersion: {{ include "senzing-common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
@@ -117,6 +119,10 @@ spec:
           {{- end }}
           {{- if .Values.main.livenessProbe.enabled }}
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.livenessProbe "enabled") "context" $) | nindent 12 }}
+            exec:
+              command:
+              - stat
+              - /etc
           {{- else if .Values.main.customLivenessProbe }}
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customLivenessProbe "context" $) | nindent 12 }}
           {{- end }}
@@ -131,6 +137,10 @@ spec:
           {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.main.readinessProbe.enabled }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
+            exec:
+              command:
+              - stat
+              - /etc
           {{- else if .Values.main.customReadinessProbe }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customReadinessProbe "context" $) | nindent 12 }}
           {{- end }}
@@ -140,6 +150,15 @@ spec:
           {{- end }}
           {{- if .Values.main.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+          {{- if .Values.main.startupProbe.enabled }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.startupProbe "enabled") "context" $) | nindent 12 }}
+            exec:
+              command:
+              - stat
+              - /etc
+          {{- else if .Values.main.customStartupProbe }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customStartupProbe "context" $) | nindent 12 }}
           {{- end }}
         {{- if .Values.main.sidecars }}
         {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
@@ -153,6 +172,9 @@ spec:
       {{- end }}
       {{- if .Values.main.priorityClassName }}
       priorityClassName: {{ .Values.main.priorityClassName | quote }}
+      {{- end }}
+      {{- if .Values.main.schedulerName }}
+      schedulerName: {{ .Values.main.schedulerName | quote }}
       {{- end }}
       {{- if .Values.main.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}

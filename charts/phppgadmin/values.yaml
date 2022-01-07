@@ -20,6 +20,7 @@ global:
   imageRegistry: ""
   storageClass: ""
 
+
 ## ----------------------------------------------------------------------------
 ## Common parameters
 ## ----------------------------------------------------------------------------
@@ -66,13 +67,14 @@ kubeVersion: ""
 ##
 nameOverride: ""
 
+
 ## ----------------------------------------------------------------------------
 ## Container parameters
 ## ----------------------------------------------------------------------------
 
 ## @section phppgadmin parameters
 
-## %%MAIN_CONTAINER/POD_DESCRIPTION%%
+## MAIN_CONTAINER/POD_DESCRIPTION
 ##
 main:
 
@@ -109,8 +111,8 @@ main:
   ##
   command: []
 
-  ## Configure Container ports
-  ## @param main.containerPorts.http xxx
+  ## @param main.containerPorts.http phppgadmin HTTP container port
+  ## @param main.containerPorts.https phppgadmin HTTPS container port
   ##
   containerPorts:
     http: 80
@@ -120,12 +122,12 @@ main:
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ## @param main.containerSecurityContext.enabled Enabled phppgadmin containers' Security Context
+  ## @param main.containerSecurityContext.runAsNonRoot Set phppgadmin containers' Security Context runAsNonRoot
   ## @param main.containerSecurityContext.runAsUser Set phppgadmin containers' Security Context runAsUser
   ##
   containerSecurityContext:
     enabled: true
-    privileged: false
-    runAsGroup: 1001
+    runAsNonRoot: true
     runAsUser: 1001
 
   ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
@@ -135,6 +137,10 @@ main:
   ## @param main.customReadinessProbe Custom readinessProbe that overrides the default one
   ##
   customReadinessProbe: {}
+
+  ## @param main.customStartupProbe Custom startupProbe that overrides the default one
+  ##
+  customStartupProbe: {}
 
   ## @param main.existingConfigmap The name of an existing ConfigMap with custom configuration for phppgadmin
   ##
@@ -148,13 +154,13 @@ main:
   ##
   extraEnvVars: []
 
-  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for phppgadmin nodes
-  ##
-  extraEnvVarsSecret:
-
   ## @param main.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for phppgadmin nodes
   ##
   extraEnvVarsCM:
+
+  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for phppgadmin nodes
+  ##
+  extraEnvVarsSecret:
 
   ## @param main.extraVolumes Optionally specify extra list of additional volumes for the phppgadmin pod(s)
   ##
@@ -318,9 +324,6 @@ main:
   podSecurityContext:
     enabled: true
     fsGroup: 1001
-    privileged: false
-    runAsGroup: 1001
-    runAsUser: 1001
 
   ## @param main.priorityClassName phppgadmin pods' priorityClassName
   ##
@@ -357,6 +360,11 @@ main:
     limits: {}
     requests: {}
 
+  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.schedulerName Name of the k8s scheduler (other than default) for  ${SENZING_HELM_MAIN_CONTAINER_NAME} pods
+  ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
+  ##
+  schedulerName: ""
+
   ## @param main.sidecars Add additional sidecar containers to the phppgadmin pod(s)
   ## e.g:
   ## sidecars:
@@ -368,6 +376,21 @@ main:
   ##         containerPort: 1234
   ##
   sidecars: {}
+
+  ## @param main.startupProbe.enabled Enable startupProbe on phppgadmin containers
+  ## @param main.startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
+  ## @param main.startupProbe.periodSeconds Period seconds for startupProbe
+  ## @param main.startupProbe.timeoutSeconds Timeout seconds for startupProbe
+  ## @param main.startupProbe.failureThreshold Failure threshold for startupProbe
+  ## @param main.startupProbe.successThreshold Success threshold for startupProbe
+  ##
+  startupProbe:
+    enabled: false
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
 
   ## @param main.tolerations Tolerations for phppgadmin pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
@@ -398,18 +421,19 @@ main:
 ##
 ingress:
 
-  ## @param ingress.annotations Additional custom annotations for the ingress record
-  ## NOTE: If `ingress.certManager=true`, annotation `kubernetes.io/tls-acme: "true"` will automatically be added
+  ## @param ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
+  ## Use this parameter to set the required annotations for cert-manager, see
+  ## ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
+  ## e.g:
+  ## annotations:
+  ##   kubernetes.io/ingress.class: nginx
+  ##   cert-manager.io/cluster-issuer: cluster-issuer-name
   ##
   annotations: {}
 
   ## @param ingress.apiVersion Force Ingress API version (automatically detected if not set)
   ##
   apiVersion:
-
-  ## @param ingress.certManager Add the corresponding annotations for cert-manager integration
-  ##
-  certManager: false
 
   ## @param ingress.enabled Enable ingress record generation for phppgadmin
   ##
@@ -485,7 +509,7 @@ ingress:
   ## TLS certificates will be retrieved from a TLS secret with name: `{{- printf "%s-tls" .Values.ingress.hostname }}`
   ## You can:
   ##   - Use the `ingress.secrets` parameter to create this TLS secret
-  ##   - Relay on cert-manager to create it by setting `ingress.certManager=true`
+  ##   - Relay on cert-manager to create it by setting the corresponding annotations
   ##   - Relay on Helm to create self-signed certificates by setting `ingress.selfSigned=true`
   ##
   tls: false
@@ -524,9 +548,9 @@ service:
   ##
   externalTrafficPolicy: Cluster
 
-  ## @param service.httpsPort phppgadmin service HTTPS port
+  ## @param service.extraPorts Extra ports to expose in phppgadmin service (normally used with the `sidecars` value)
   ##
-  httpsPort: 443
+  extraPorts: []
 
   ## @param service.loadBalancerIP phppgadmin service Load Balancer IP
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
@@ -550,9 +574,12 @@ service:
     http:
     https:
 
-  ## @param service.port phppgadmin service HTTP port
+  ## @param service.ports.http phppgadmin service HTTP port
+  ## @param service.ports.https phppgadmin service HTTPS port
   ##
-  port: 80
+  ports:
+    http: 80
+    https: 443
 
   ## @param service.type phppgadmin service type
   ##
@@ -596,7 +623,7 @@ volumePermissions:
   ## @param volumePermissions.image.tag Bitnami Shell image tag (immutable tags are recommended)
   ##
   image:
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
 
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
@@ -648,8 +675,8 @@ serviceAccount:
   ##
   name: ""
 
-## %%SUBCHART_CONTAINER/POD_DESCRIPTION%%
+## SUBCHART_CONTAINER/POD_DESCRIPTION
 ##
 ## SUBCHART_NAME:
 ##   enabled: false
-##   %%OTHER_PARAMETERS_RELATED_TO_THIS_SUBCHART%%
+##   OTHER_PARAMETERS_RELATED_TO_THIS_SUBCHART
