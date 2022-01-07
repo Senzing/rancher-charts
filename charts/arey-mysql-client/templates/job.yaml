@@ -16,7 +16,7 @@ metadata:
 spec:
   selector:
     matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
-      app.kubernetes.io/component: ${SENZING_HELM_COMPONENT_NAME}
+      app.kubernetes.io/component: arey-mysql-client-component
   template:
     metadata:
       {{- if .Values.main.podAnnotations }}
@@ -50,7 +50,7 @@ spec:
           {{- end }}
           env:
             - name: SENZING_DEBUG
-              value: {{ ternary "true" "false" (or .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.image.debug .Values.diagnosticMode.enabled) | quote }}
+              value: {{ ternary "true" "false" (or .Values.main.image.debug .Values.diagnosticMode.enabled) | quote }}
             {{- if .Values.main.extraEnvVars }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}
@@ -78,9 +78,9 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerPorts.http }}
+              containerPort: {{ .Values.main.containerPorts.http }}
             - name: https
-              containerPort: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerPorts.https }}
+              containerPort: {{ .Values.main.containerPorts.https }}
           {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.main.readinessProbe.enabled }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
@@ -95,11 +95,11 @@ spec:
           {{- if .Values.main.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
-          {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.enabled }}
-          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe "enabled") "context" $) | nindent 12 }}
+          {{- if .Values.main.startupProbe.enabled }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.startupProbe "enabled") "context" $) | nindent 12 }}
             %%httpGet || command || etc%%
-          {{- else if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customStartupProbe }}
-          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customStartupProbe "context" $) | nindent 12 }}
+          {{- else if .Values.main.customStartupProbe }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customStartupProbe "context" $) | nindent 12 }}
           {{- end }}
           {{- end }}
           volumeMounts:
@@ -121,7 +121,7 @@ spec:
         {{- if .Values.volumePermissions.enabled }}
         - command:
             - %%commands%%
-          image: {{ include "${SENZING_HELM_TEMPLATE_NAME}.volumePermissions.image" . }}
+          image: {{ include "arey-mysql-client.volumePermissions.image" . }}
           imagePullPolicy: {{ .Values.volumePermissions.image.pullPolicy | quote }}
           name: volume-permissions
           {{- if .Values.volumePermissions.resources }}
@@ -132,8 +132,8 @@ spec:
             - mountPath: bar
               name: foo
         {{- end }}
-        {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.initContainers }}
-          {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.initContainers "context" $) | nindent 8 }}
+        {{- if .Values.main.initContainers }}
+          {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.initContainers "context" $) | nindent 8 }}
         {{- end }}
       {{- if .Values.main.nodeSelector }}
       nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.nodeSelector "context" $) | nindent 8 }}
@@ -142,8 +142,8 @@ spec:
       priorityClassName: {{ .Values.main.priorityClassName | quote }}
       {{- end }}
       restartPolicy: Never
-      {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.schedulerName }}
-      schedulerName: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.schedulerName | quote }}
+      {{- if .Values.main.schedulerName }}
+      schedulerName: {{ .Values.main.schedulerName | quote }}
       {{- end }}
       {{- if .Values.main.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}

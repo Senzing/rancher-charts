@@ -34,7 +34,7 @@ Create the name of the service account to use
 Return true if cert-manager required annotations for TLS signed certificates are set in the Ingress annotations
 Ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
 */}}
-{{- define "${SENZING_HELM_TEMPLATE_NAME}.ingress.certManagerRequest" -}}
+{{- define "arey-mysql-client.ingress.certManagerRequest" -}}
 {{ if or (hasKey . "cert-manager.io/cluster-issuer") (hasKey . "cert-manager.io/issuer") }}
     {{- true -}}
 {{- end -}}
