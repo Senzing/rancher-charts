@@ -1,3 +1,5 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#job-v1-batch
+
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -12,6 +14,9 @@ metadata:
   name: {{ template "senzing-common.names.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 spec:
+  selector:
+    matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
+      app.kubernetes.io/component: ${SENZING_HELM_COMPONENT_NAME}
   template:
     metadata:
       {{- if .Values.main.podAnnotations }}
