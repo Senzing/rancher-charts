@@ -3,6 +3,7 @@
 ## ----------------------------------------------------------------------------
 
 ## @section Global parameters
+
 ## Global Docker image parameters
 ## Please, note that this will override the image parameters, including dependencies, configured to use the global value
 ## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
@@ -69,10 +70,18 @@ nameOverride: ""
 
 
 ## ----------------------------------------------------------------------------
-## Container parameters
+## phppgadmin container parameters
+## - Used in the following files:
+##   - _helpers.tpl
+##   - daemonset.yaml
+##   - deployment.yaml
+##   - horizontalpodautoscaler.yaml
+##   - job.yaml
+##   - NOTES.txt
+##   - statefulset.yaml
 ## ----------------------------------------------------------------------------
 
-## @section phppgadmin parameters
+## @section phppgadmin container parameters
 
 ## MAIN_CONTAINER/POD_DESCRIPTION
 ##
@@ -413,6 +422,11 @@ main:
 
 ## ----------------------------------------------------------------------------
 ## Traffic Exposure Parameters
+## - Used in the following files:
+##   - _helpers.tpl
+##   - ingress.yaml
+##   - NOTES.txt
+##   - tls-secret.yaml
 ## ----------------------------------------------------------------------------
 
 ## @section Traffic Exposure Parameters
@@ -517,7 +531,14 @@ ingress:
   ##
   tls: false
 
-## ----- PodDisruptionBudget parameters ---------------------------------------
+
+## ----------------------------------------------------------------------------
+## Pod Disruption Budget Parameters
+## - Used in the following files:
+##   - poddisruptionbudget.yaml
+## ----------------------------------------------------------------------------
+
+## @section Pod Disruption Budget Parameters
 
 ## Pod disruption budget configuration
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
@@ -530,7 +551,33 @@ podDisruptionBudget:
   minAvailable: 1
   maxUnavailable: ""
 
-## ----- service parameters ---------------------------------------------------
+
+## ----------------------------------------------------------------------------
+## Role Based Access Control (RBAC) Parameters
+## - Used in the following files:
+##   - role.yaml
+##   - rolebinding.yaml
+## ----------------------------------------------------------------------------
+
+## @section Role Based Access Control (RBAC) Parameters
+
+## RBAC configuration
+##
+rbac:
+
+  ## @param rbac.enabled Specifies whether RBAC resources should be created
+  ##
+  enabled: false
+
+
+## ----------------------------------------------------------------------------
+## Service parameters
+## - Used in the following files:
+##   - NOTES.txt
+##   - service.yaml
+## ----------------------------------------------------------------------------
+
+## @section Service Parameters
 
 ## phppgadmin service parameters
 ##
@@ -590,7 +637,36 @@ service:
 
 
 ## ----------------------------------------------------------------------------
+## Service Account parameters
+## - Used in the following files:
+##   - _helpers.tpl
+##   - service-account.yaml
+## ----------------------------------------------------------------------------
+
+## @section Service Account Parameters
+
+## ServiceAccount configuration
+##
+serviceAccount:
+
+  ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
+  ##
+  enabled: true
+
+  ## @param serviceAccount.name The name of the ServiceAccount to use.
+  ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
+  ##
+  name: ""
+
+
+## ----------------------------------------------------------------------------
 ## Init container parameters
+## - Used in the following files:
+##   - _helpers.tpl
+##   - daemonset.yaml
+##   - deployment.yaml
+##   - job.yaml
+##   - statefulset.yaml
 ## ----------------------------------------------------------------------------
 
 ## @section Init Container Parameters
@@ -649,37 +725,3 @@ volumePermissions:
   resources:
     limits: {}
     requests: {}
-
-
-## ----------------------------------------------------------------------------
-## Other parameters
-## ----------------------------------------------------------------------------
-
-## @section Other Parameters
-
-## RBAC configuration
-##
-rbac:
-
-  ## @param rbac.enabled Specifies whether RBAC resources should be created
-  ##
-  enabled: false
-
-## ServiceAccount configuration
-##
-serviceAccount:
-
-  ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
-  ##
-  enabled: true
-
-  ## @param serviceAccount.name The name of the ServiceAccount to use.
-  ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
-  ##
-  name: ""
-
-## SUBCHART_CONTAINER/POD_DESCRIPTION
-##
-## SUBCHART_NAME:
-##   enabled: false
-##   OTHER_PARAMETERS_RELATED_TO_THIS_SUBCHART
