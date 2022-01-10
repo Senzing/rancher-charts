@@ -164,12 +164,11 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
    Example:
 
     ```console
-
     for IMAGE_AND_CHART in ${IMAGES_AND_CHARTS[@]}; \
     do \
-        IFS=";" read -r -a CONTAINER_DATA <<< "${DOCKER_CONTAINER}"
-        export SENZING_HELM_IMAGE_NAME="${IMAGE_AND_CHART[0]}"; \
-        export SENZING_HELM_CHART_NAME="${IMAGE_AND_CHART[1]}"; \
+        IFS=";" read -r -a IMAGE_AND_CHART_DATA <<< "${IMAGE_AND_CHART}"
+        export SENZING_HELM_IMAGE_NAME="${IMAGE_AND_CHART_DATA[0]}"; \
+        export SENZING_HELM_CHART_NAME="${IMAGE_AND_CHART_DATA[1]}"; \
         export SENZING_HELM_COMPONENT_NAME=${SENZING_HELM_CHART_NAME}-component; \
         export SENZING_HELM_CONTAINER_NAME=${SENZING_HELM_CHART_NAME}; \
         export SENZING_HELM_DESCRIPTION="FIXME:"; \
