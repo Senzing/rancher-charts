@@ -149,14 +149,34 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
     export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
     ```
 
-1. :pencil2: Identify Docker images and Helm Chart names.
+1. :pencil2: Identify Helm Chart names and Docker images.
    Example:
 
     ```console
-    export IMAGES_AND_CHARTS=( \
-      "arey-mysql-client;arey-mysql-client" \
-      "phppgadmin;phppgadmin" \
-      "apt;senzing-apt" \
+    export CHARTS_AND_IMAGES=( \
+      "arey-mysql-client;mysql-client" \
+      "coleifer-sqlite-web;sqlite-web" \
+      "confluentinc-cp-kafka;cp-kafka" \
+      "db2-client;db2-client" \
+      "ibm-db2-driver-installer;db2-driver-installer" \
+      "microsoft-mssql-tools;mssql-tools" \
+      "phppgadmin;phppgadmin;" \
+      "resolver;resolver" \
+      "senzing-api-server;senzing-api-server" \
+      "senzing-apt;apt" \
+      "senzing-base;senzing-base" \
+      "senzing-configurator;configurator" \
+      "senzing-console;console" \
+      "senzing-debug;debug" \
+      "senzing-entity-search-web-app;entity-search-web-app" \
+      "senzing-ibm-db2;ibm-db2" \
+      "senzing-init-container;init-container" \
+      "senzing-postgresql-client;postgresql-client" \
+      "senzing-redoer;redoer" \
+      "senzing-stream-loader;stream-loader" \
+      "senzing-stream-producer;stream-producer" \
+      "senzing-yum;yum" \
+      "swaggerapi-swagger-ui;swagger-ui" \
     )
     ```
 
@@ -164,11 +184,11 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
    Example:
 
     ```console
-    for IMAGE_AND_CHART in ${IMAGES_AND_CHARTS[@]}; \
+    for CHART_AND_IMAGE in ${CHARTS_AND_IMAGES[@]}; \
     do \
-      IFS=";" read -r -a IMAGE_AND_CHART_DATA <<< "${IMAGE_AND_CHART}"
-      export SENZING_HELM_IMAGE_NAME="${IMAGE_AND_CHART_DATA[0]}"; \
-      export SENZING_HELM_CHART_NAME="${IMAGE_AND_CHART_DATA[1]}"; \
+      IFS=";" read -r -a CHART_AND_IMAGE_DATA <<< "${CHART_AND_IMAGE}"
+      export SENZING_HELM_CHART_NAME="${CHART_AND_IMAGE_DATA[0]}"; \
+      export SENZING_HELM_IMAGE_NAME="${CHART_AND_IMAGE_DATA[1]}"; \
       export SENZING_HELM_COMPONENT_NAME=${SENZING_HELM_CHART_NAME}-component; \
       export SENZING_HELM_CONTAINER_NAME=${SENZING_HELM_CHART_NAME}; \
       export SENZING_HELM_DESCRIPTION="FIXME:"; \
@@ -221,11 +241,11 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
    Example:
 
     ```console
-    for IMAGE_AND_CHART in ${IMAGES_AND_CHARTS[@]}; \
+    for CHART_AND_IMAGE in ${CHARTS_AND_IMAGES[@]}; \
     do \
-      IFS=";" read -r -a IMAGE_AND_CHART_DATA <<< "${IMAGE_AND_CHART}"
-      export SENZING_HELM_IMAGE_NAME="${IMAGE_AND_CHART_DATA[0]}"; \
-      export SENZING_HELM_CHART_NAME="${IMAGE_AND_CHART_DATA[1]}"; \
+      IFS=";" read -r -a CHART_AND_IMAGE_DATA <<< "${CHART_AND_IMAGE}"
+      export SENZING_HELM_CHART_NAME="${CHART_AND_IMAGE_DATA[0]}"; \
+      export SENZING_HELM_IMAGE_NAME="${CHART_AND_IMAGE_DATA[1]}"; \
       export SENZING_HELM_COMPONENT_NAME=${SENZING_HELM_CHART_NAME}-component; \
       export SENZING_HELM_CONTAINER_NAME=${SENZING_HELM_CHART_NAME}; \
       export SENZING_HELM_DESCRIPTION="FIXME:"; \
