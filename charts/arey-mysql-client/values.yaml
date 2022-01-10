@@ -223,7 +223,7 @@ main:
 
   ## Configure extra options for arey-mysql-client containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
-  ## @param main.livenessProbe.enabled Enable livenessProbe on arey-mysql-client nodes
+  ## @param main.livenessProbe.enabled Enable livenessProbe on arey-mysql-client containers
   ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
   ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
   ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
@@ -305,7 +305,7 @@ main:
   ##
   priorityClassName: ""
 
-  ## @param main.readinessProbe.enabled Enable readinessProbe on arey-mysql-client nodes
+  ## @param main.readinessProbe.enabled Enable readinessProbe on arey-mysql-client containers
   ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
   ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
   ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
