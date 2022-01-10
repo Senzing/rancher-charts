@@ -355,7 +355,6 @@ main:
   ## @param main.senzing.logLevel The logging filter: DEBUG, INFO, WARNING, ERROR, CRITICAL, FATAL
   ## @param main.senzing.subcommand CLI sub-command
   ##
-
   senzing:
     awsAccessKeyId: ""
     awsDefaultRegion: ""
