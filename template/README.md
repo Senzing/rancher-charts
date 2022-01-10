@@ -206,6 +206,7 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
       INPUT_FILE="${SENZING_HELM_CHART_TEMPLATE_DIR}/values.yaml"; \
       EXISTING_FILE="${SENZING_HELM_CHART_SOURCE_DIR}/values.yaml"; \
       OUTPUT_FILE="${EXISTING_FILE}.fromTemplate.yaml"; \
+      echo "Processing: ${INPUT_FILE}" \
       envsubst '\
         ${SENZING_HELM_CHART_NAME} \
         ${SENZING_HELM_TEMPLATE_NAME} \
@@ -226,7 +227,7 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
       < "${INPUT_FILE}" \
       > "${OUTPUT_FILE}"; \
       if $(diff ${EXISTING_FILE} ${OUTPUT_FILE} > /dev/null); then \
-        echo "No changes in ${EXISTING_FILE}."; \
+        echo "            No changes."; \
         rm ${OUTPUT_FILE}; \
       fi
     done
