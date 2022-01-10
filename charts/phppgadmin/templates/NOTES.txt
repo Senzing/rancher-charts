@@ -70,7 +70,7 @@ In order to replicate the container startup scripts execute this command:
   ```console
   export POD_NAME=$(kubectl get pods \
     --namespace {{ .Release.Namespace }} \
-    --selector "app.kubernetes.io/name={{ include "senzing-phppgadmin.name" . }}, \
+    --selector "app.kubernetes.io/name={{ include "phppgadmin.name" . }}, \
                 app.kubernetes.io/instance={{ .Release.Name }}" \
     --output jsonpath="{.items[0].metadata.name}")
 
