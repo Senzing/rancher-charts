@@ -234,8 +234,8 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
       export SENZING_HELM_TEMPLATE_NAME=${SENZING_HELM_CHART_NAME}; \
       export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/master/charts/${SENZING_HELM_CHART_NAME}; \
       export SENZING_HELM_UPSTREAM_PROJECT_VERSION=""; \
-      export SENZING_HELM_CHART_TEMPLATE_DIR=${GIT_REPOSITORY_DIR}/template/CHART_NAME/templates; \
-      export SENZING_HELM_CHART_SOURCE_DIR=${GIT_REPOSITORY_DIR}/charts/${SENZING_HELM_CHART_NAME}/templates; \
+      export SENZING_HELM_CHART_TEMPLATE_DIR=${GIT_REPOSITORY_DIR}/CHART_NAME/templates; \
+      export SENZING_HELM_CHART_SOURCE_DIR=${GIT_REPOSITORY_DIR}/charts/${SENZING_HELM_CHART_NAME}; \
       INPUT_FILE="${SENZING_HELM_CHART_TEMPLATE_DIR}/values.yaml"; \
       EXISTING_FILE="${SENZING_HELM_CHART_SOURCE_DIR}/values.yaml"; \
       OUTPUT_FILE="${EXISTING_FILE}.fromTemplate.yaml"; \
