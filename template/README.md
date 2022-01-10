@@ -160,7 +160,7 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
     )
     ```
 
-1. XXX
+1. Create new `xxxx.fromTemplate.yaml` files in `CHART_NAME/templates` directory.
    Example:
 
     ```console
