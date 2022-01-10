@@ -139,9 +139,80 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
 
 ### Update templates
 
-#### configmap.yaml
+1. :pencil2: Locate git repository directory.
+   Example:
 
-1. If needed, modify `%%CONFIG_FILE_NAME%%: |`.
+    ```console
+    export GIT_ACCOUNT=senzing
+    export GIT_REPOSITORY=charts
+    export GIT_ACCOUNT_DIR=~/${GIT_ACCOUNT}.git
+    export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
+    ```
+
+1. :pencil2: Identify Docker images and Helm Chart names.
+   Example:
+
+    ```console
+    export IMAGES_AND_CHARTS=( \
+      "arey-mysql-client;arey-mysql-client" \
+      "phppgadmin;phppgadmin" \
+      "apt;senzing-apt" \
+    )
+    ```
+
+1. XXX
+   Example:
+
+    ```console
+
+    for IMAGE_AND_CHART in ${IMAGES_AND_CHARTS[@]}; \
+    do \
+        IFS=";" read -r -a CONTAINER_DATA <<< "${DOCKER_CONTAINER}"
+        export SENZING_HELM_IMAGE_NAME="${IMAGE_AND_CHART[0]}"; \
+        export SENZING_HELM_CHART_NAME="${IMAGE_AND_CHART[1]}"; \
+        export SENZING_HELM_COMPONENT_NAME=${SENZING_HELM_CHART_NAME}-component; \
+        export SENZING_HELM_CONTAINER_NAME=${SENZING_HELM_CHART_NAME}; \
+        export SENZING_HELM_DESCRIPTION="FIXME:"; \
+        export SENZING_HELM_MAIN_CONTAINER_NAME=${SENZING_HELM_CHART_NAME}; \
+        export SENZING_HELM_MAIN_OBJECT_BLOCK=main; \
+        export SENZING_HELM_TEMPLATE_NAME=${SENZING_HELM_CHART_NAME}; \
+        export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/master/charts/${SENZING_HELM_CHART_NAME}; \
+        export SENZING_HELM_UPSTREAM_PROJECT_VERSION=""; \
+        export SENZING_HELM_CHART_TEMPLATE_DIR=${GIT_REPOSITORY_DIR}/template/CHART_NAME/templates; \
+        export SENZING_HELM_CHART_SOURCE_DIR=${GIT_REPOSITORY_DIR}/charts/${SENZING_HELM_CHART_NAME}/templates; \
+        for FILE in $(find ${SENZING_HELM_CHART_SOURCE_DIR/} -type f); \
+        do \
+          echo "Processing: ${FILE}"
+          FILE_PATH=$(awk -F"${SENZING_HELM_CHART_SOURCE_DIR}/" '{print $2}' <<< "${FILE}")
+          INPUT_FILE="${SENZING_HELM_CHART_TEMPLATE_DIR}/${FILE_PATH}"
+          EXISTING_FILE="${SENZING_HELM_CHART_SOURCE_DIR}/${FILE_PATH}"
+          OUTPUT_FILE="${EXISTING_FILE}.new"
+          envsubst '\
+            ${SENZING_HELM_CHART_NAME} \
+            ${SENZING_HELM_TEMPLATE_NAME} \
+            ${SENZING_HELM_MAIN_OBJECT_BLOCK} \
+            ${SENZING_HELM_SECONDARY_OBJECT_BLOCK} \
+            ${SENZING_HELM_MAIN_CONTAINER} \
+            ${SENZING_HELM_MAIN_CONTAINER_NAME} \
+            ${SENZING_HELM_COMPONENT_NAME} \
+            ${SENZING_HELM_DESCRIPTION} \
+            ${SENZING_HELM_UPSTREAM_PROJECT_URL} \
+            ${SENZING_HELM_UPSTREAM_PROJECT_VERSION} \
+            ${SENZING_HELM_SECONDARY_OBJECT_BLOCK} \
+            ${SENZING_HELM_OTHER_OBJECT_BLOCK} \
+            ${SENZING_HELM_PORT_NAME} \
+            ${SENZING_HELM_CONTAINER_NAME} \
+            ${SENZING_HELM_IMAGE_NAME} \
+          ' \
+          < "${INPUT_FILE}" \
+          > "${OUTPUT_FILE}"; \
+          if $(diff ${EXISTING_FILE} ${OUTPUT_FILE} > /dev/null); then \
+            echo "            No changes."; \
+            rm ${OUTPUT_FILE}; \
+          fi \
+        done
+    done
+    ```
 
 ### Update values.yaml
 
