@@ -1,3 +1,5 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#configmap-v1-core
+
 apiVersion: v1
 data:
 # %%CONFIG_FILE_NAME%%: |

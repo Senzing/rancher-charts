@@ -2,6 +2,10 @@
 
 Simple overview.
 
+- Chart name: {{ .Chart.Name  }}
+- Chart version: {{ .Chart.Version  }}
+- App version: {{ .Chart.AppVersion  }}
+
 More information:
 
 - [GitHub](https://github.com/Senzing/XXXXX)

@@ -386,7 +386,6 @@ main:
     mountOptIbm: false
     mountOptMicrosoft: false
     persistentVolumeClaim: ""
-    port: "8080"
     quiet: ""
     rabbitmqExchange: ""
     rabbitmqHost: ""
@@ -402,7 +401,6 @@ main:
     rabbitmqUsername: ""
     rabbitmqVirtualHost: ""
     readOnly: ""
-    securePort: ""
     skipEnginePriming: ""
     skipStartupPerf: ""
     sqsInfoQueueUrl: ""

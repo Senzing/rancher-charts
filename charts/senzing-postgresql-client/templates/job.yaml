@@ -1,3 +1,5 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#job-v1-batch
+
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -12,6 +14,9 @@ metadata:
   name: {{ template "senzing-common.names.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 spec:
+  selector:
+    matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
+      app.kubernetes.io/component: senzing-postgresql-client-component
   template:
     metadata:
       {{- if .Values.main.podAnnotations }}
@@ -85,6 +90,11 @@ spec:
           {{- if .Values.main.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
+          {{- if .Values.main.startupProbe.enabled }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.startupProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customStartupProbe }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customStartupProbe "context" $) | nindent 12 }}
+          {{- end }}
           volumeMounts:
             {{- if .Values.main.postgresql.storageClaim }}
             - name: postgresql-storage
@@ -96,7 +106,14 @@ spec:
         {{- if .Values.main.sidecars }}
         {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
         {{- end }}
+      {{- if .Values.main.hostAliases }}
+      hostAliases: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.hostAliases "context" $) | nindent 8 }}
+      {{- end }}
       {{- include "senzing-postgresql-client.imagePullSecrets" . | nindent 6 }}
+      initContainers:
+        {{- if .Values.main.initContainers }}
+          {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.initContainers "context" $) | nindent 8 }}
+        {{- end }}
       {{- if .Values.main.nodeSelector }}
       nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.nodeSelector "context" $) | nindent 8 }}
       {{- end }}
@@ -104,6 +121,9 @@ spec:
       priorityClassName: {{ .Values.main.priorityClassName | quote }}
       {{- end }}
       restartPolicy: Never
+      {{- if .Values.main.schedulerName }}
+      schedulerName: {{ .Values.main.schedulerName | quote }}
+      {{- end }}
       {{- if .Values.main.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}
       {{- end }}
@@ -117,4 +137,6 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .Values.main.postgresql.storageClaim }}
         {{- end }}
-
+        {{- if .Values.main.extraVolumes }}
+        {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}

@@ -13,7 +13,6 @@ More information:
 
 ## Command
 
-
 ## Metadata
 
 {{- if .Values.diagnosticMode.enabled }}
