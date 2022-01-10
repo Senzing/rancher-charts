@@ -185,7 +185,7 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
           FILE_PATH=$(awk -F"${SENZING_HELM_CHART_SOURCE_DIR}/" '{print $2}' <<< "${FILE}")
           INPUT_FILE="${SENZING_HELM_CHART_TEMPLATE_DIR}/${FILE_PATH}"
           EXISTING_FILE="${SENZING_HELM_CHART_SOURCE_DIR}/${FILE_PATH}"
-          OUTPUT_FILE="${EXISTING_FILE}.new"
+          OUTPUT_FILE="${EXISTING_FILE}.fromTemplate.yaml"
           envsubst '\
             ${SENZING_HELM_CHART_NAME} \
             ${SENZING_HELM_TEMPLATE_NAME} \
