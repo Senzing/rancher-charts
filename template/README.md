@@ -155,6 +155,31 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
     ```console
     export CHARTS_AND_IMAGES=( \
       "arey-mysql-client;mysql-client" \
+      "confluentinc-cp-kafka;cp-kafka" \
+      "microsoft-mssql-tools;mssql-tools" \
+      "phppgadmin;phppgadmin;" \
+      "senzing-api-server;senzing-api-server" \
+      "senzing-apt;apt" \
+      "senzing-base;senzing-base" \
+      "senzing-configurator;configurator" \
+      "senzing-console;senzing-console" \
+      "senzing-entity-search-web-app;entity-search-web-app" \
+      "senzing-init-container;init-container" \
+      "senzing-postgresql-client;postgresql-client" \
+      "senzing-redoer;redoer" \
+      "senzing-stream-loader;stream-loader" \
+      "senzing-stream-producer;stream-producer" \
+      "senzing-yum;yum" \
+      "swaggerapi-swagger-ui;swagger-ui" \
+    )
+    ```
+
+1. :pencil2: Full list: Identify Helm Chart names and Docker images.
+   Example:
+
+    ```console
+    export CHARTS_AND_IMAGES=( \
+      "arey-mysql-client;mysql-client" \
       "coleifer-sqlite-web;sqlite-web" \
       "confluentinc-cp-kafka;cp-kafka" \
       "db2-client;db2-client" \

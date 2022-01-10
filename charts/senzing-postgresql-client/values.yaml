@@ -20,6 +20,7 @@ global:
   imageRegistry: ""
   storageClass: ""
 
+
 ## ----------------------------------------------------------------------------
 ## Common parameters
 ## ----------------------------------------------------------------------------
@@ -66,13 +67,14 @@ kubeVersion: ""
 ##
 nameOverride: ""
 
+
 ## ----------------------------------------------------------------------------
 ## Container parameters
 ## ----------------------------------------------------------------------------
 
 ## @section senzing-postgresql-client parameters
 
-## %%MAIN_CONTAINER/POD_DESCRIPTION%%
+## MAIN_CONTAINER/POD_DESCRIPTION
 ##
 main:
 
@@ -109,14 +111,24 @@ main:
   ##
   command: []
 
+  ## @param main.containerPorts.http senzing-postgresql-client HTTP container port
+  ## @param main.containerPorts.https senzing-postgresql-client HTTPS container port
+  ##
+  containerPorts:
+    http: 80
+    https: 443
+
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ## @param main.containerSecurityContext.enabled Enabled senzing-postgresql-client containers' Security Context
+  ## @param main.containerSecurityContext.runAsNonRoot Set senzing-postgresql-client containers' Security Context runAsNonRoot
   ## @param main.containerSecurityContext.runAsUser Set senzing-postgresql-client containers' Security Context runAsUser
   ##
   containerSecurityContext:
-    privileged: true
+    enabled: true
+    runAsNonRoot: true
+    runAsUser: 1001
 
   ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
   ##
@@ -125,6 +137,10 @@ main:
   ## @param main.customReadinessProbe Custom readinessProbe that overrides the default one
   ##
   customReadinessProbe: {}
+
+  ## @param main.customStartupProbe Custom startupProbe that overrides the default one
+  ##
+  customStartupProbe: {}
 
   ## @param main.existingConfigmap The name of an existing ConfigMap with custom configuration for senzing-postgresql-client
   ##
@@ -138,13 +154,13 @@ main:
   ##
   extraEnvVars: []
 
-  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for senzing-postgresql-client nodes
-  ##
-  extraEnvVarsSecret:
-
   ## @param main.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for senzing-postgresql-client nodes
   ##
   extraEnvVarsCM:
+
+  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for senzing-postgresql-client nodes
+  ##
+  extraEnvVarsSecret:
 
   ## @param main.extraVolumes Optionally specify extra list of additional volumes for the senzing-postgresql-client pod(s)
   ##
@@ -207,7 +223,7 @@ main:
 
   ## Configure extra options for senzing-postgresql-client containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
-  ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-postgresql-client nodes
+  ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-postgresql-client containers
   ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
   ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
   ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
@@ -216,7 +232,10 @@ main:
   ##
   livenessProbe:
     enabled: false
-#   %%httpGet || command || etc%%
+    exec:
+      command:
+      - stat
+      - /etc
     failureThreshold: 3
     initialDelaySeconds: 0
     periodSeconds: 10
@@ -278,8 +297,6 @@ main:
   podSecurityContext:
     enabled: true
     fsGroup: 1001
-    runAsGroup: 1001
-    runAsUser: 1001
 
   ## Configure PostgreSQL credentials
   ## @param main.postgresql.host Enabled senzing-postgresql-client pods' Security Context
@@ -293,7 +310,7 @@ main:
   ##
   priorityClassName: ""
 
-  ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-postgresql-client nodes
+  ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-postgresql-client containers
   ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
   ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
   ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
@@ -302,7 +319,10 @@ main:
   ##
   readinessProbe:
     enabled: false
-#   %%httpGet || command || etc%%
+    exec:
+      command:
+      - stat
+      - /etc
     failureThreshold: 3
     initialDelaySeconds: 0
     periodSeconds: 10
@@ -321,6 +341,11 @@ main:
   resources:
     limits: {}
     requests: {}
+
+  ## @param main.schedulerName Name of the k8s scheduler (other than default) for  senzing-postgresql-client pods
+  ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
+  ##
+  schedulerName: ""
 
   ## senzing-postgresql-client Senzing environment variables
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
@@ -346,6 +371,25 @@ main:
   ##         containerPort: 1234
   ##
   sidecars: {}
+
+  ## @param main.startupProbe.enabled Enable startupProbe on senzing-postgresql-client containers
+  ## @param main.startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
+  ## @param main.startupProbe.periodSeconds Period seconds for startupProbe
+  ## @param main.startupProbe.timeoutSeconds Timeout seconds for startupProbe
+  ## @param main.startupProbe.failureThreshold Failure threshold for startupProbe
+  ## @param main.startupProbe.successThreshold Success threshold for startupProbe
+  ##
+  startupProbe:
+    enabled: false
+    exec:
+      command:
+      - stat
+      - /etc
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
 
   ## @param main.tolerations Tolerations for senzing-postgresql-client pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
@@ -376,18 +420,19 @@ main:
 ##
 ingress:
 
-  ## @param ingress.annotations Additional custom annotations for the ingress record
-  ## NOTE: If `ingress.certManager=true`, annotation `kubernetes.io/tls-acme: "true"` will automatically be added
+  ## @param ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
+  ## Use this parameter to set the required annotations for cert-manager, see
+  ## ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
+  ## e.g:
+  ## annotations:
+  ##   kubernetes.io/ingress.class: nginx
+  ##   cert-manager.io/cluster-issuer: cluster-issuer-name
   ##
   annotations: {}
 
   ## @param ingress.apiVersion Force Ingress API version (automatically detected if not set)
   ##
   apiVersion:
-
-  ## @param ingress.certManager Add the corresponding annotations for cert-manager integration
-  ##
-  certManager: false
 
   ## @param ingress.enabled Enable ingress record generation for senzing-postgresql-client
   ##
@@ -396,7 +441,7 @@ ingress:
   ## @param ingress.extraHosts An array with additional hostname(s) to be covered with the ingress record
   ## e.g:
   ## extraHosts:
-  ##   - name: senzing-postgresql-client.local
+  ##   - name: senzing-postgresql-client-component.local
   ##     path: /
   ##
   extraHosts: []
@@ -416,8 +461,8 @@ ingress:
   ## e.g:
   ## extraTls:
   ## - hosts:
-  ##     - senzing-postgresql-client.local
-  ##   secretName: senzing-postgresql-client.local-tls
+  ##     - senzing-postgresql-client-component.local
+  ##   secretName: senzing-postgresql-client-component.local-tls
   ##
   extraTls: []
 
@@ -443,7 +488,7 @@ ingress:
   ## Please see README.md for more information
   ## e.g:
   ## secrets:
-  ##   - name: senzing-postgresql-client.local-tls
+  ##   - name: senzing-postgresql-client-component.local-tls
   ##     key: |-
   ##       -----BEGIN RSA PRIVATE KEY-----
   ##       ...
@@ -463,7 +508,7 @@ ingress:
   ## TLS certificates will be retrieved from a TLS secret with name: `{{- printf "%s-tls" .Values.ingress.hostname }}`
   ## You can:
   ##   - Use the `ingress.secrets` parameter to create this TLS secret
-  ##   - Relay on cert-manager to create it by setting `ingress.certManager=true`
+  ##   - Relay on cert-manager to create it by setting the corresponding annotations
   ##   - Relay on Helm to create self-signed certificates by setting `ingress.selfSigned=true`
   ##
   tls: false
@@ -502,9 +547,9 @@ service:
   ##
   externalTrafficPolicy: Cluster
 
-  ## @param service.httpsPort senzing-postgresql-client service HTTPS port
+  ## @param service.extraPorts Extra ports to expose in senzing-postgresql-client service (normally used with the `sidecars` value)
   ##
-  httpsPort: 443
+  extraPorts: []
 
   ## @param service.loadBalancerIP senzing-postgresql-client service Load Balancer IP
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
@@ -528,9 +573,12 @@ service:
     http:
     https:
 
-  ## @param service.port senzing-postgresql-client service HTTP port
+  ## @param service.ports.http senzing-postgresql-client service HTTP port
+  ## @param service.ports.https senzing-postgresql-client service HTTPS port
   ##
-  port: 80
+  ports:
+    http: 80
+    https: 443
 
   ## @param service.type senzing-postgresql-client service type
   ##
@@ -574,7 +622,7 @@ volumePermissions:
   ## @param volumePermissions.image.tag Bitnami Shell image tag (immutable tags are recommended)
   ##
   image:
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
 
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
@@ -609,25 +657,25 @@ volumePermissions:
 ##
 rbac:
 
-  ## @param rbac.create Specifies whether RBAC resources should be created
+  ## @param rbac.enabled Specifies whether RBAC resources should be created
   ##
-  create: false
+  enabled: false
 
 ## ServiceAccount configuration
 ##
 serviceAccount:
 
-  ## @param serviceAccount.create Specifies whether a ServiceAccount should be created
+  ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
   ##
-  create: false
+  enabled: true
 
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
   ##
   name: ""
 
-## %%SUBCHART_CONTAINER/POD_DESCRIPTION%%
+## SUBCHART_CONTAINER/POD_DESCRIPTION
 ##
 ## SUBCHART_NAME:
 ##   enabled: false
-##   %%OTHER_PARAMETERS_RELATED_TO_THIS_SUBCHART%%
+##   OTHER_PARAMETERS_RELATED_TO_THIS_SUBCHART

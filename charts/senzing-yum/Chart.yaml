@@ -21,4 +21,4 @@ sources:
  - https://github.com/Senzing/charts/tree/master/charts/senzing-yum
  - https://github.com/Senzing/docker-yum
 type: application
-version: 2.1.0
+version: 2.1.1

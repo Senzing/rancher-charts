@@ -20,4 +20,4 @@ sources:
   - https://github.com/Senzing/charts/tree/master/charts/senzing-base
   - https://github.com/Senzing/docker-senzing-base
 type: application
-version: 2.2.0
+version: 2.2.1

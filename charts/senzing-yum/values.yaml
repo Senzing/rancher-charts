@@ -20,6 +20,7 @@ global:
   imageRegistry: ""
   storageClass: ""
 
+
 ## ----------------------------------------------------------------------------
 ## Common parameters
 ## ----------------------------------------------------------------------------
@@ -66,13 +67,14 @@ kubeVersion: ""
 ##
 nameOverride: ""
 
+
 ## ----------------------------------------------------------------------------
 ## Container parameters
 ## ----------------------------------------------------------------------------
 
 ## @section senzing-yum parameters
 
-## %%MAIN_CONTAINER/POD_DESCRIPTION%%
+## MAIN_CONTAINER/POD_DESCRIPTION
 ##
 main:
 
@@ -95,10 +97,13 @@ main:
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ## @param main.containerSecurityContext.enabled Enabled senzing-yum containers' Security Context
+  ## @param main.containerSecurityContext.runAsNonRoot Set senzing-yum containers' Security Context runAsNonRoot
   ## @param main.containerSecurityContext.runAsUser Set senzing-yum containers' Security Context runAsUser
   ##
   containerSecurityContext:
-    privileged: true
+    enabled: true
+    runAsNonRoot: true
+    runAsUser: 1001
 
   ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
   ##
@@ -107,6 +112,10 @@ main:
   ## @param main.customReadinessProbe Custom readinessProbe that overrides the default one
   ##
   customReadinessProbe: {}
+
+  ## @param main.customStartupProbe Custom startupProbe that overrides the default one
+  ##
+  customStartupProbe: {}
 
   ## @param main.existingConfigmap The name of an existing ConfigMap with custom configuration for senzing-yum
   ##
@@ -120,13 +129,13 @@ main:
   ##
   extraEnvVars: []
 
-  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for senzing-yum nodes
-  ##
-  extraEnvVarsSecret:
-
   ## @param main.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for senzing-yum nodes
   ##
   extraEnvVarsCM:
+
+  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for senzing-yum nodes
+  ##
+  extraEnvVarsSecret:
 
   ## @param main.extraVolumes Optionally specify extra list of additional volumes for the senzing-yum pod(s)
   ##
@@ -189,7 +198,7 @@ main:
 
   ## Configure extra options for senzing-yum containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
-  ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-yum nodes
+  ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-yum containers
   ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
   ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
   ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
@@ -198,7 +207,10 @@ main:
   ##
   livenessProbe:
     enabled: false
-#   %%httpGet || command || etc%%
+    exec:
+      command:
+      - stat
+      - /etc
     failureThreshold: 3
     initialDelaySeconds: 0
     periodSeconds: 10
@@ -265,14 +277,12 @@ main:
   podSecurityContext:
     enabled: true
     fsGroup: 1001
-    runAsGroup: 1001
-    runAsUser: 1001
 
   ## @param main.priorityClassName senzing-yum pods' priorityClassName
   ##
   priorityClassName: ""
 
-  ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-yum nodes
+  ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-yum containers
   ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
   ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
   ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
@@ -281,7 +291,10 @@ main:
   ##
   readinessProbe:
     enabled: false
-#   %%httpGet || command || etc%%
+    exec:
+      command:
+      - stat
+      - /etc
     failureThreshold: 3
     initialDelaySeconds: 0
     periodSeconds: 10
@@ -300,6 +313,11 @@ main:
   resources:
     limits: {}
     requests: {}
+
+  ## @param main.schedulerName Name of the k8s scheduler (other than default) for  senzing-yum pods
+  ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
+  ##
+  schedulerName: ""
 
   ## senzing-yum Senzing environment variables
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
@@ -332,6 +350,25 @@ main:
   ##
   sidecars: {}
 
+  ## @param main.startupProbe.enabled Enable startupProbe on senzing-yum containers
+  ## @param main.startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
+  ## @param main.startupProbe.periodSeconds Period seconds for startupProbe
+  ## @param main.startupProbe.timeoutSeconds Timeout seconds for startupProbe
+  ## @param main.startupProbe.failureThreshold Failure threshold for startupProbe
+  ## @param main.startupProbe.successThreshold Success threshold for startupProbe
+  ##
+  startupProbe:
+    enabled: false
+    exec:
+      command:
+      - stat
+      - /etc
+    failureThreshold: 3
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
+
   ## @param main.tolerations Tolerations for senzing-yum pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
   ##
@@ -360,19 +397,25 @@ podDisruptionBudget:
 ##
 rbac:
 
-  ## @param rbac.create Specifies whether RBAC resources should be created
+  ## @param rbac.enabled Specifies whether RBAC resources should be created
   ##
-  create: false
+  enabled: false
 
 ## ServiceAccount configuration
 ##
 serviceAccount:
 
-  ## @param serviceAccount.create Specifies whether a ServiceAccount should be created
+  ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
   ##
-  create: true
+  enabled: true
 
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
   ##
   name: ""
+
+## SUBCHART_CONTAINER/POD_DESCRIPTION
+##
+## SUBCHART_NAME:
+##   enabled: false
+##   OTHER_PARAMETERS_RELATED_TO_THIS_SUBCHART

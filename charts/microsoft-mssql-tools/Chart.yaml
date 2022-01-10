@@ -19,4 +19,4 @@ name: microsoft-mssql-tools
 sources:
   - https://github.com/Senzing/charts/tree/master/charts/microsoft-mssql-tools
 type: application
-version: 2.2.0
+version: 2.2.1

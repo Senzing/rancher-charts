@@ -19,4 +19,4 @@ name: confluentinc-cp-kafka
 sources:
   - https://hub.docker.com/r/confluentinc/cp-kafka/
 type: application
-version: 2.1.0
+version: 2.1.1
