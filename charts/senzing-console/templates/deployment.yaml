@@ -148,20 +148,6 @@ spec:
       {{- end }}
       {{- include "senzing-console.imagePullSecrets" . | nindent 6 }}
       initContainers:
-        {{- if .Values.volumePermissions.enabled }}
-        - command:
-            - %%commands%%
-          image: {{ include "senzing-console.volumePermissions.image" . }}
-          imagePullPolicy: {{ .Values.volumePermissions.image.pullPolicy | quote }}
-          name: volume-permissions
-          {{- if .Values.volumePermissions.resources }}
-          resources: {{- toYaml .Values.volumePermissions.resources | nindent 12 }}
-          {{- end }}
-          securityContext: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.volumePermissions.containerSecurityContext "context" $) | nindent 12 }}
-          volumeMounts:
-            - mountPath: bar
-              name: foo
-        {{- end }}
         {{- if .Values.main.initContainers }}
           {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.initContainers "context" $) | nindent 8 }}
         {{- end }}
