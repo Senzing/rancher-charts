@@ -16,23 +16,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `main.containerSecurityContext.runAsUser`
 - `main.customStartupProbe`
 - `main.schedulerName`
-- `main.service.extraPorts`
-- `main.service.ports`
 - `main.startupProbe`
+- `service.extraPorts`
 
 ### Changed in 3.2.1
 
 - Update to template
 - `main.image.pullPolicy` default value
+- `rbac.create` to `rbac.enabled`
+- `service.httpsPort` and `service.port` are now in `service.ports`
+- `serviceAccount.create` to `serviceAccount.enabled`
 
 ### Removed in 3.2.1
 
-- `main.certManager`
+- `ingress.certManager`
 - `main.containerSecurityContext.privileged`
 - `main.podSecurityContext.runAsGroup`
 - `main.podSecurityContext.runAsUser`
-- `main.service.httpsPort`
-- `main.service.port`
 
 ## [3.2.0] - 2021-12-17
 
