@@ -140,7 +140,7 @@ spec:
       initContainers:
         - name: senzing-mount-maker
           image: busybox:1.28
-          {{- if .Values.rbacEnabled}}
+          {{- if .Values.rbac.enabled}}
           securityContext:
             privileged: true
           {{- end }}
