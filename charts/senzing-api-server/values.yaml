@@ -164,7 +164,7 @@ main:
 
     ## @param main.containerSecurityContext.enabled Enabled senzing-api-server containers' Security Context
     ##
-    enabled: true
+    enabled: false
 
     ## @param main.containerSecurityContext.runAsNonRoot Set senzing-api-server containers' Security Context runAsNonRoot
     ##
@@ -362,7 +362,7 @@ main:
 
     ## @param main.podSecurityContext.enabled Enabled senzing-api-server pods' Security Context
     ##
-    enabled: true
+    enabled: false
 
     ## @param main.podSecurityContext.fsGroup Set senzing-api-server pod's Security Context fsGroup
     ##
@@ -948,7 +948,7 @@ serviceAccount:
 
   ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
   ##
-  enabled: true
+  enabled: false
 
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template

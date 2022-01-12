@@ -264,9 +264,12 @@ main:
     ##
     timeoutSeconds: 1
 
-  ## senzing-apt Senzing environment variables
-  ## @param main.mssql.acceptEula End User License agreement.
+  ## microsoft-mssql-tools
+  ##
   mssql:
+
+    ## @param main.mssql.acceptEula End User License agreement.
+    ##
     acceptEula: ""
 
   ## Node main.affinity preset

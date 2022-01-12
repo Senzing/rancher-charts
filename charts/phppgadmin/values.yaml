@@ -164,7 +164,7 @@ main:
 
     ## @param main.containerSecurityContext.enabled Enabled phppgadmin containers' Security Context
     ##
-    enabled: true
+    enabled: false
 
     ## @param main.containerSecurityContext.runAsNonRoot Set phppgadmin containers' Security Context runAsNonRoot
     ##
@@ -458,7 +458,7 @@ main:
 
     ## @param main.podSecurityContext.enabled Enabled phppgadmin pods' Security Context
     ##
-    enabled: true
+    enabled: false
 
     ## @param main.podSecurityContext.fsGroup Set phppgadmin pod's Security Context fsGroup
     ##
@@ -835,7 +835,7 @@ serviceAccount:
 
   ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
   ##
-  enabled: true
+  enabled: false
 
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template

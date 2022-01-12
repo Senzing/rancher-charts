@@ -482,8 +482,8 @@ main:
   ## swaggerapi-swagger-ui Senzing environment variables
   ##
   swaggerui:
-  
-    ## @param main.swaggerui.openApiSpecUrl  
+
+    ## @param main.swaggerui.openApiSpecUrl
     ##
     openApiSpecUrl: ""
 

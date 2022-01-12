@@ -164,7 +164,7 @@ main:
 
     ## @param main.containerSecurityContext.enabled Enabled microsoft-mssql-tools containers' Security Context
     ##
-    enabled: true
+    enabled: false
 
     ## @param main.containerSecurityContext.runAsNonRoot Set microsoft-mssql-tools containers' Security Context runAsNonRoot
     ##
@@ -308,10 +308,12 @@ main:
     ##
     timeoutSeconds: 1
 
-  ## microsoft-mssql-tools...
-  ## @param main.mssql.storageClaim ...
+  ## microsoft-mssql-tools
   ##
   mssql:
+
+    ##  @param main.mssql.storageClaim
+    ##
     storageClaim: ""
 
   ## Node main.affinity preset
@@ -368,7 +370,7 @@ main:
 
     ## @param main.podSecurityContext.enabled Enabled microsoft-mssql-tools pods' Security Context
     ##
-    enabled: true
+    enabled: false
 
     ## @param main.podSecurityContext.fsGroup Set microsoft-mssql-tools pod's Security Context fsGroup
     ##
@@ -559,7 +561,7 @@ serviceAccount:
 
   ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
   ##
-  enabled: true
+  enabled: false
 
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template

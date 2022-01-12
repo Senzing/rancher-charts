@@ -164,7 +164,7 @@ main:
 
     ## @param main.containerSecurityContext.enabled Enabled confluentinc-cp-kafka containers' Security Context
     ##
-    enabled: true
+    enabled: false
 
     ## @param main.containerSecurityContext.runAsNonRoot Set confluentinc-cp-kafka containers' Security Context runAsNonRoot
     ##
@@ -362,7 +362,7 @@ main:
 
     ## @param main.podSecurityContext.enabled Enabled confluentinc-cp-kafka pods' Security Context
     ##
-    enabled: true
+    enabled: false
 
     ## @param main.podSecurityContext.fsGroup Set confluentinc-cp-kafka pod's Security Context fsGroup
     ##
@@ -665,7 +665,7 @@ serviceAccount:
 
   ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
   ##
-  enabled: true
+  enabled: false
 
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
