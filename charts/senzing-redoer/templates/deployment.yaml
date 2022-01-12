@@ -206,9 +206,9 @@ spec:
             - name: SENZING_RABBITMQ_FAILURE_VIRTUAL_HOST
               value: "{{ .Values.main.senzing.rabbitmqFailureVirtualHost }}"
             {{- end }}
-            {{- if .Values.main.senzing.rabbitmqHearbeatInSeconds }}
+            {{- if .Values.main.senzing.rabbitmqHeartbeatInSeconds }}
             - name: SENZING_RABBITMQ_HEARTBEAT_IN_SECONDS
-              value: "{{ .Values.main.senzing.rabbitmqHearbeatInSeconds }}"
+              value: "{{ .Values.main.senzing.rabbitmqHeartbeatInSeconds }}"
             {{- end }}
             {{- if .Values.main.senzing.rabbitmqHost }}
             - name: SENZING_RABBITMQ_HOST

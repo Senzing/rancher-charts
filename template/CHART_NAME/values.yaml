@@ -164,7 +164,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
 
     ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context
     ##
-    enabled: true
+    enabled: false
 
     ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.runAsNonRoot Set ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context runAsNonRoot
     ##
@@ -362,7 +362,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
 
     ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} pods' Security Context
     ##
-    enabled: true
+    enabled: false
 
     ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.fsGroup Set ${SENZING_HELM_MAIN_CONTAINER_NAME} pod's Security Context fsGroup
     ##
@@ -808,7 +808,7 @@ serviceAccount:
 
   ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
   ##
-  enabled: true
+  enabled: false
 
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template

@@ -8,17 +8,21 @@
 ## Please, note that this will override the image parameters, including dependencies, configured to use the global value
 ## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
 
-## @param global.imagePullSecrets Global Docker registry secret names as an array
-## @param global.imageRegistry Global Docker image registry
-## @param global.storageClass Global StorageClass for Persistent Volume(s)
-##
 global:
+
+  ## @param global.imagePullSecrets Global Docker registry secret names as an array
   ## E.g.
   ## imagePullSecrets:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: []
+
+  ## @param global.imageRegistry Global Docker image registry
+  ##
   imageRegistry: ""
+
+  ## @param global.storageClass Global StorageClass for Persistent Volume(s)
+  ##
   storageClass: ""
 
 
@@ -40,16 +44,22 @@ commonLabels: {}
 ##
 clusterDomain: cluster.local
 
-## Enable diagnostic mode in the deployment'
-## @param diagnosticMode.args Args to override all containers in the deployment
-## @param diagnosticMode.command Command to override all containers in the deployment
-## @param diagnosticMode.enabled Enable diagnostic mode (all probes will be disabled and the command will be overridden)
+## Enable diagnostic mode in the deployment.
 ##
 diagnosticMode:
+
+  ## @param diagnosticMode.args Args to override all containers in the deployment
+  ##
   args:
     - infinity
+
+  ## @param diagnosticMode.command Command to override all containers in the deployment
+  ##
   command:
     - sleep
+
+  ## @param diagnosticMode.enabled Enable diagnostic mode (all probes will be disabled and the command will be overridden)
+  ##
   enabled: false
 
 ## @param extraDeploy Array of extra objects to deploy with the release
@@ -87,8 +97,8 @@ nameOverride: ""
 ##
 main:
 
-  ## Senzing senzing-stream-producer image
   ## @param main.affinity Affinity for senzing-stream-producer pods assignment
+  ## Senzing senzing-stream-producer image
   ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   ## NOTE: `main.podAffinityPreset`, `main.podAntiAffinityPreset`, and `main.nodeAffinityPreset` will be ignored when it's set
   ##
@@ -105,13 +115,19 @@ main:
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
-  ## @param main.containerSecurityContext.enabled Enabled senzing-stream-producer containers' Security Context
-  ## @param main.containerSecurityContext.runAsNonRoot Set senzing-stream-producer containers' Security Context runAsNonRoot
-  ## @param main.containerSecurityContext.runAsUser Set senzing-stream-producer containers' Security Context runAsUser
   ##
   containerSecurityContext:
-    enabled: true
+
+    ## @param main.containerSecurityContext.enabled Enabled senzing-stream-producer containers' Security Context
+    ##
+    enabled: false
+
+    ## @param main.containerSecurityContext.runAsNonRoot Set senzing-stream-producer containers' Security Context runAsNonRoot
+    ##
     runAsNonRoot: true
+
+    ## @param main.containerSecurityContext.runAsUser Set senzing-stream-producer containers' Security Context runAsUser
+    ##
     runAsUser: 1001
 
   ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
@@ -159,25 +175,23 @@ main:
   ##
   hostAliases: []
 
-  ## @param main.image.debug Enable senzing-stream-producer image debug mode
-  ## @param main.image.pullPolicy senzing-stream-producer image pull policy
-  ## @param main.image.pullSecrets senzing-stream-producer image pull secrets
-  ## @param main.image.registry senzing-stream-producer image registry
-  ## @param main.image.repository senzing-stream-producer image repository
-  ## @param main.image.tag senzing-stream-producer image tag (immutable tags are recommended)
+  ## Image parameters
   ##
   image:
 
+    ## @param main.image.debug Enable senzing-stream-producer image debug mode
     ## Enable debug mode
     ##
     debug: false
 
+    ## @param main.image.pullPolicy senzing-stream-producer image pull policy
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
     ##
     pullPolicy: IfNotPresent
 
+    ## @param main.image.pullSecrets senzing-stream-producer image pull secrets
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
     ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -186,8 +200,17 @@ main:
     ##   - myRegistryKeySecretName
     ##
     pullSecrets: []
+
+    ## @param main.image.registry senzing-stream-producer image registry
+    ##
     registry: docker.io
+
+    ## @param main.image.repository senzing-stream-producer image repository
+    ##
     repository: senzing/stream-producer
+
+    ## @param main.image.tag senzing-stream-producer image tag (immutable tags are recommended)
+    ##
     tag: latest
 
   ## @param main.initContainers Add additional init containers to the senzing-stream-producer pod(s)
@@ -205,25 +228,40 @@ main:
   ##
   lifecycleHooks: {}
 
-  ## Configure extra options for senzing-stream-producer containers' liveness and readiness probes
-  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
-  ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-stream-producer containers
-  ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
-  ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
-  ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
-  ## @param main.livenessProbe.successThreshold Success threshold for livenessProbe
-  ## @param main.livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
+  ## Configure extra options for senzing-stream-producer containers' liveness probe.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
   livenessProbe:
+
+    ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-stream-producer containers
+    ##
     enabled: false
+
+    ## @param main.livenessProbe.exec Action to "exec" a program on senzing-stream-producer containers
+    ##
     exec:
       command:
       - stat
       - /etc
+
+    ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
+    ##
     failureThreshold: 3
+
+    ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
+    ##
     initialDelaySeconds: 0
+
+    ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
+    ##
     periodSeconds: 10
+
+    ## @param main.livenessProbe.successThreshold Success threshold for livenessProbe
+    ##
     successThreshold: 1
+
+    ## @param main.livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
+    ##
     timeoutSeconds: 1
 
   ## Node main.affinity preset
@@ -275,34 +313,55 @@ main:
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
-  ## @param main.podSecurityContext.enabled Enabled senzing-stream-producer pods' Security Context
-  ## @param main.podSecurityContext.fsGroup Set senzing-stream-producer pod's Security Context fsGroup
   ##
   podSecurityContext:
-    enabled: true
+
+    ## @param main.podSecurityContext.enabled Enabled senzing-stream-producer pods' Security Context
+    ##
+    enabled: false
+
+    ## @param main.podSecurityContext.fsGroup Set senzing-stream-producer pod's Security Context fsGroup
+    ##
     fsGroup: 1001
 
   ## @param main.priorityClassName senzing-stream-producer pods' priorityClassName
   ##
   priorityClassName: ""
 
-  ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-stream-producer containers
-  ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
-  ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
-  ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
-  ## @param main.readinessProbe.successThreshold Success threshold for readinessProbe
-  ## @param main.readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
+  ## Configure extra options for senzing-stream-producer containers' readiness probe.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
   readinessProbe:
+
+    ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-stream-producer containers
+    ##
     enabled: false
+
+    ## @param main.readinessProbe.exec Action to "exec" a program on senzing-stream-producer containers
+    ##
     exec:
       command:
       - stat
       - /etc
+
+    ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
+    ##
     failureThreshold: 3
+
+    ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
+    ##
     initialDelaySeconds: 0
+
+    ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
+    ##
     periodSeconds: 10
+
+    ## @param main.readinessProbe.successThreshold Success threshold for readinessProbe
+    ##
     successThreshold: 1
+
+    ## @param main.readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
+    ##
     timeoutSeconds: 1
 
   ## @param main.replicaCount Number of senzing-stream-producer replicas to deploy
@@ -311,66 +370,188 @@ main:
 
   ## senzing-stream-producer resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-  ## @param main.resources.limits The resources limits for the senzing-stream-producer containers
-  ## @param main.resources.requests The requested resources for the senzing-stream-producer containers
   ##
   resources:
+
+    ## @param main.resources.limits The resources limits for the senzing-stream-producer containers
+    ##
     limits: {}
+
+    ## @param main.resources.requests The requested resources for the senzing-stream-producer containers
+    ##
     requests: {}
 
   ## @param main.schedulerName Name of the k8s scheduler (other than default) for  senzing-stream-producer pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
-  ##
   schedulerName: ""
 
   ## senzing-stream-producer Senzing environment variables
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-  ## @param main.senzing.databaseUrl The normalized database connection URL
-  ## @param main.senzing.debug Debug?  Boolean.
-  ## @param main.senzing.logLevel The logging filter: DEBUG, INFO, WARNING, ERROR, CRITICAL, FATAL
-  ## @param main.senzing.subcommand CLI sub-command
   ##
   senzing:
+
+    ## @param main.senzing.awsAccessKeyId
+    ##
     awsAccessKeyId: ""
+
+    ## @param main.senzing.awsDefaultRegion
+    ##
     awsDefaultRegion: ""
+
+    ## @param main.senzing.awsSecretAccessKey
+    ##
     awsSecretAccessKey: ""
+
+    ## @param main.senzing.awsSessionToken
+    ##
     awsSessionToken: ""
+
+    ## @param main.senzing.azureConnectionString
+    ##
     azureConnectionString: ""
+
+    ## @param main.senzing.azureQueueName
+    ##
     azureQueueName: ""
+
+    ## @param main.senzing.csvDelimiter
+    ##
     csvDelimiter: ""
+
+    ## @param main.senzing.csvRowsInChunk
+    ##
     csvRowsInChunk: ""
+
+    ## @param main.senzing.debug
+    ##
     debug: ""
+
+    ## @param main.senzing.defaultDataSource
+    ##
     defaultDataSource: ""
+
+    ## @param main.senzing.defaultEntityType
+    ##
     defaultEntityType: ""
+
+    ## @param main.senzing.delayInSeconds
+    ##
     delayInSeconds: ""
+
+    ## @param main.senzing.inputUrl
+    ##
     inputUrl: ""
+
+    ## @param main.senzing.kafkaBootstrapServerHost
+    ##
     kafkaBootstrapServerHost: ""
+
+    ## @param main.senzing.kafkaBootstrapServerPort
+    ##
     kafkaBootstrapServerPort: ""
+
+    ## @param main.senzing.kafkaGroup
+    ##
     kafkaGroup: ""
+
+    ## @param main.senzing.kafkaPollInterval
+    ##
     kafkaPollInterval: ""
+
+    ## @param main.senzing.kafkaTopic
+    ##
     kafkaTopic: ""
+
+    ## @param main.senzing.monitoringPeriodInSeconds
+    ##
     monitoringPeriodInSeconds: ""
+
+    ## @param main.senzing.password
+    ##
     password: ""
+
+    ## @param main.senzing.rabbitmqExchange
+    ##
     rabbitmqExchange: ""
+
+    ## @param main.senzing.rabbitmqHost
+    ##
     rabbitmqHost: ""
+
+    ## @param main.senzing.rabbitmqPassword
+    ##
     rabbitmqPassword: ""
+
+    ## @param main.senzing.rabbitmqPort
+    ##
     rabbitmqPort: ""
+
+    ## @param main.senzing.rabbitmqQueue
+    ##
     rabbitmqQueue: ""
+
+    ## @param main.senzing.rabbitmqRoutingKey
+    ##
     rabbitmqRoutingKey: ""
+
+    ## @param main.senzing.rabbitmqUseExistingEntities
+    ##
     rabbitmqUseExistingEntities: ""
+
+    ## @param main.senzing.rabbitmqUsername
+    ##
     rabbitmqUsername: ""
+
+    ## @param main.senzing.rabbitmqVirtualHost
+    ##
     rabbitmqVirtualHost: ""
+
+    ## @param main.senzing.readQueueMaxSize
+    ##
     readQueueMaxSize: ""
+
+    ## @param main.senzing.recordIdentifier
+    ##
     recordIdentifier: ""
+
+    ## @param main.senzing.recordMax
+    ##
     recordMax: ""
+
+    ## @param main.senzing.recordMin
+    ##
     recordMin: ""
+
+    ## @param main.senzing.recordMonitor
+    ##
     recordMonitor: ""
+
+    ## @param main.senzing.recordSizeMax
+    ##
     recordSizeMax: ""
+
+    ## @param main.senzing.recordsPerMessage
+    ##
     recordsPerMessage: ""
+
+    ## @param main.senzing.sleepTimeInSeconds
+    ##
     sleepTimeInSeconds: ""
+
+    ## @param main.senzing.sqsDelaySeconds
+    ##
     sqsDelaySeconds: ""
+
+    ## @param main.senzing.sqsQueueUrl
+    ##
     sqsQueueUrl: ""
+
+    ## @param main.senzing.subcommand
+    ##
     subcommand: ""
+
+    ## @param main.senzing.threadsPerPrint
+    ##
     threadsPerPrint: ""
 
   ## @param main.sidecars Add additional sidecar containers to the senzing-stream-producer pod(s)
@@ -385,23 +566,40 @@ main:
   ##
   sidecars: {}
 
-  ## @param main.startupProbe.enabled Enable startupProbe on senzing-stream-producer containers
-  ## @param main.startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
-  ## @param main.startupProbe.periodSeconds Period seconds for startupProbe
-  ## @param main.startupProbe.timeoutSeconds Timeout seconds for startupProbe
-  ## @param main.startupProbe.failureThreshold Failure threshold for startupProbe
-  ## @param main.startupProbe.successThreshold Success threshold for startupProbe
+  ## Configure extra options for senzing-stream-producer containers' start up probe
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
   startupProbe:
+
+    ## @param main.startupProbe.enabled Enable startupProbe on senzing-stream-producer containers
+    ##
     enabled: false
+
+    ## @param main.startupProbe.exec Action to "exec" a program on senzing-stream-producer containers
+    ##
     exec:
       command:
       - stat
       - /etc
+
+    ## @param main.startupProbe.failureThreshold Failure threshold for startupProbe
+    ##
     failureThreshold: 3
+
+    ## @param main.startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
+    ##
     initialDelaySeconds: 0
+
+    ## @param main.startupProbe.periodSeconds Period seconds for startupProbe
+    ##
     periodSeconds: 10
+
+    ## @param main.startupProbe.successThreshold Success threshold for startupProbe
+    ##
     successThreshold: 1
+
+    ## @param main.startupProbe.timeoutSeconds Timeout seconds for startupProbe
+    ##
     timeoutSeconds: 1
 
   ## @param main.tolerations Tolerations for senzing-stream-producer pods assignment
@@ -420,13 +618,19 @@ main:
 
 ## Pod disruption budget configuration
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
-## @param podDisruptionBudget.enabled If true, create a pod disruption budget for pods.
-## @param podDisruptionBudget.minAvailable Minimum number / percentage of pods that should remain scheduled
-## @param podDisruptionBudget.maxUnavailable Maximum number / percentage of pods that may be made unavailable
 ##
 podDisruptionBudget:
+
+  ## @param podDisruptionBudget.enabled If true, create a pod disruption budget for pods.
+  ##
   enabled: false
+
+  ## @param podDisruptionBudget.minAvailable Minimum number / percentage of pods that should remain scheduled
+  ##
   minAvailable: 1
+
+  ## @param podDisruptionBudget.maxUnavailable Maximum number / percentage of pods that may be made unavailable
+  ##
   maxUnavailable: ""
 
 
@@ -463,7 +667,7 @@ serviceAccount:
 
   ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
   ##
-  enabled: true
+  enabled: false
 
   ## @param serviceAccount.name The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template

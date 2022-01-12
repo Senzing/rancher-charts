@@ -125,9 +125,9 @@ spec:
             - name: SENZING_WEB_SERVER_CORS_ALLOWED_ORIGIN
               value: "{{ .Values.main.senzing.webServerCorsAllowedOrigin }}"
             {{- end }}
-            {{- if .Values.main.senzing.webServerHosname }}
+            {{- if .Values.main.senzing.webServerHostname }}
             - name: SENZING_WEB_SERVER_HOSTNAME
-              value: "{{ .Values.main.senzing.webServerHosname }}"
+              value: "{{ .Values.main.senzing.webServerHostname }}"
             {{- end }}
             {{- if .Values.main.senzing.webServerOperatorAuthMode }}
             - name: SENZING_WEB_SERVER_OPERATOR_AUTH_MODE

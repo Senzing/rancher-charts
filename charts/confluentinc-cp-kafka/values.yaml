@@ -8,17 +8,21 @@
 ## Please, note that this will override the image parameters, including dependencies, configured to use the global value
 ## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
 
-## @param global.imagePullSecrets Global Docker registry secret names as an array
-## @param global.imageRegistry Global Docker image registry
-## @param global.storageClass Global StorageClass for Persistent Volume(s)
-##
 global:
+
+  ## @param global.imagePullSecrets Global Docker registry secret names as an array
   ## E.g.
   ## imagePullSecrets:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: []
+
+  ## @param global.imageRegistry Global Docker image registry
+  ##
   imageRegistry: ""
+
+  ## @param global.storageClass Global StorageClass for Persistent Volume(s)
+  ##
   storageClass: ""
 
 
@@ -40,16 +44,22 @@ commonLabels: {}
 ##
 clusterDomain: cluster.local
 
-## Enable diagnostic mode in the deployment'
-## @param diagnosticMode.args Args to override all containers in the deployment
-## @param diagnosticMode.command Command to override all containers in the deployment
-## @param diagnosticMode.enabled Enable diagnostic mode (all probes will be disabled and the command will be overridden)
+## Enable diagnostic mode in the deployment.
 ##
 diagnosticMode:
+
+  ## @param diagnosticMode.args Args to override all containers in the deployment
+  ##
   args:
     - infinity
+
+  ## @param diagnosticMode.command Command to override all containers in the deployment
+  ##
   command:
     - sleep
+
+  ## @param diagnosticMode.enabled Enable diagnostic mode (all probes will be disabled and the command will be overridden)
+  ##
   enabled: false
 
 ## @param extraDeploy Array of extra objects to deploy with the release
@@ -87,8 +97,8 @@ nameOverride: ""
 ##
 main:
 
-  ## Senzing confluentinc-cp-kafka image
   ## @param main.affinity Affinity for confluentinc-cp-kafka pods assignment
+  ## Senzing confluentinc-cp-kafka image
   ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   ## NOTE: `main.podAffinityPreset`, `main.podAntiAffinityPreset`, and `main.nodeAffinityPreset` will be ignored when it's set
   ##
@@ -99,44 +109,69 @@ main:
   args: []
 
   ## main deployment autoscaling
-  ## @param main.autoscaling.builtInMetrics Autoscaling list of built-in metrics
-  ## @param main.autoscaling.customMetrics Autoscaling list of custom metrics
-  ## @param main.autoscaling.enabled Enable deployment autoscaling
-  ## @param main.autoscaling.maxReplicas Autoscaling maximum number of replicas
-  ## @param main.autoscaling.minReplicas Autoscaling minimum number of replicas
-  ## @param main.autoscaling.targetCPU Autoscaling target CPU percentage
-  ## @param main.autoscaling.targetMemory Autoscaling target CPU memory
   ##
   autoscaling:
+
+    ## @param main.autoscaling.builtInMetrics Autoscaling list of built-in metrics
+    ##
     builtInMetrics: []
+
+    ## @param main.autoscaling.customMetrics Autoscaling list of custom metrics
+    ##
     customMetrics: []
+
+    ## @param main.autoscaling.enabled Enable deployment autoscaling
+    ##
     enabled: false
+
+    ## @param main.autoscaling.maxReplicas Autoscaling maximum number of replicas
+    ##
     maxReplicas: 10
+
+    ## @param main.autoscaling.minReplicas Autoscaling minimum number of replicas
+    ##
     minReplicas: 2
+
+    ## @param main.autoscaling.targetCPU Autoscaling target CPU percentage
+    ##
     targetCPU: 50
+
+    ## @param main.autoscaling.targetMemory Autoscaling target CPU memory
+    ##
     targetMemory: 60
 
   ## @param main.command Override default container command (useful when using custom images)
   ##
   command: []
 
-  ## @param main.containerPorts.http confluentinc-cp-kafka HTTP container port
-  ## @param main.containerPorts.https confluentinc-cp-kafka HTTPS container port
+  ## Ports for container
   ##
   containerPorts:
+
+    ## @param main.containerPorts.http confluentinc-cp-kafka HTTP container port
+    ##
     http: 80
+
+    ## @param main.containerPorts.https confluentinc-cp-kafka HTTPS container port
+    ##
     https: 443
 
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
-  ## @param main.containerSecurityContext.enabled Enabled confluentinc-cp-kafka containers' Security Context
-  ## @param main.containerSecurityContext.runAsNonRoot Set confluentinc-cp-kafka containers' Security Context runAsNonRoot
-  ## @param main.containerSecurityContext.runAsUser Set confluentinc-cp-kafka containers' Security Context runAsUser
   ##
   containerSecurityContext:
+
+    ## @param main.containerSecurityContext.enabled Enabled confluentinc-cp-kafka containers' Security Context
+    ##
     enabled: true
+
+    ## @param main.containerSecurityContext.runAsNonRoot Set confluentinc-cp-kafka containers' Security Context runAsNonRoot
+    ##
     runAsNonRoot: true
+
+    ## @param main.containerSecurityContext.runAsUser Set confluentinc-cp-kafka containers' Security Context runAsUser
+    ##
     runAsUser: 1001
 
   ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
@@ -184,25 +219,23 @@ main:
   ##
   hostAliases: []
 
-  ## @param main.image.debug Enable confluentinc-cp-kafka image debug mode
-  ## @param main.image.pullPolicy confluentinc-cp-kafka image pull policy
-  ## @param main.image.pullSecrets confluentinc-cp-kafka image pull secrets
-  ## @param main.image.registry confluentinc-cp-kafka image registry
-  ## @param main.image.repository confluentinc-cp-kafka image repository
-  ## @param main.image.tag confluentinc-cp-kafka image tag (immutable tags are recommended)
+  ## Image parameters
   ##
   image:
 
+    ## @param main.image.debug Enable confluentinc-cp-kafka image debug mode
     ## Enable debug mode
     ##
     debug: false
 
+    ## @param main.image.pullPolicy confluentinc-cp-kafka image pull policy
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
     ##
     pullPolicy: IfNotPresent
 
+    ## @param main.image.pullSecrets confluentinc-cp-kafka image pull secrets
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
     ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -211,8 +244,17 @@ main:
     ##   - myRegistryKeySecretName
     ##
     pullSecrets: []
+
+    ## @param main.image.registry confluentinc-cp-kafka image registry
+    ##
     registry: docker.io
+
+    ## @param main.image.repository confluentinc-cp-kafka image repository
+    ##
     repository: confluentinc/cp-kafka
+
+    ## @param main.image.tag confluentinc-cp-kafka image tag (immutable tags are recommended)
+    ##
     tag: latest
 
   ## @param main.initContainers Add additional init containers to the confluentinc-cp-kafka pod(s)
@@ -230,25 +272,40 @@ main:
   ##
   lifecycleHooks: {}
 
-  ## Configure extra options for confluentinc-cp-kafka containers' liveness and readiness probes
-  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
-  ## @param main.livenessProbe.enabled Enable livenessProbe on confluentinc-cp-kafka containers
-  ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
-  ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
-  ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
-  ## @param main.livenessProbe.successThreshold Success threshold for livenessProbe
-  ## @param main.livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
+  ## Configure extra options for confluentinc-cp-kafka containers' liveness probe.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
   livenessProbe:
+
+    ## @param main.livenessProbe.enabled Enable livenessProbe on confluentinc-cp-kafka containers
+    ##
     enabled: false
+
+    ## @param main.livenessProbe.exec Action to "exec" a program on confluentinc-cp-kafka containers
+    ##
     exec:
       command:
       - stat
       - /etc
+
+    ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
+    ##
     failureThreshold: 3
+
+    ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
+    ##
     initialDelaySeconds: 0
+
+    ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
+    ##
     periodSeconds: 10
+
+    ## @param main.livenessProbe.successThreshold Success threshold for livenessProbe
+    ##
     successThreshold: 1
+
+    ## @param main.livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
+    ##
     timeoutSeconds: 1
 
   ## Node main.affinity preset
@@ -300,34 +357,55 @@ main:
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
-  ## @param main.podSecurityContext.enabled Enabled confluentinc-cp-kafka pods' Security Context
-  ## @param main.podSecurityContext.fsGroup Set confluentinc-cp-kafka pod's Security Context fsGroup
   ##
   podSecurityContext:
+
+    ## @param main.podSecurityContext.enabled Enabled confluentinc-cp-kafka pods' Security Context
+    ##
     enabled: true
+
+    ## @param main.podSecurityContext.fsGroup Set confluentinc-cp-kafka pod's Security Context fsGroup
+    ##
     fsGroup: 1001
 
   ## @param main.priorityClassName confluentinc-cp-kafka pods' priorityClassName
   ##
   priorityClassName: ""
 
-  ## @param main.readinessProbe.enabled Enable readinessProbe on confluentinc-cp-kafka containers
-  ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
-  ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
-  ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
-  ## @param main.readinessProbe.successThreshold Success threshold for readinessProbe
-  ## @param main.readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
+  ## Configure extra options for confluentinc-cp-kafka containers' readiness probe.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
   readinessProbe:
+
+    ## @param main.readinessProbe.enabled Enable readinessProbe on confluentinc-cp-kafka containers
+    ##
     enabled: false
+
+    ## @param main.readinessProbe.exec Action to "exec" a program on confluentinc-cp-kafka containers
+    ##
     exec:
       command:
       - stat
       - /etc
+
+    ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
+    ##
     failureThreshold: 3
+
+    ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
+    ##
     initialDelaySeconds: 0
+
+    ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
+    ##
     periodSeconds: 10
+
+    ## @param main.readinessProbe.successThreshold Success threshold for readinessProbe
+    ##
     successThreshold: 1
+
+    ## @param main.readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
+    ##
     timeoutSeconds: 1
 
   ## @param main.replicaCount Number of confluentinc-cp-kafka replicas to deploy
@@ -336,11 +414,15 @@ main:
 
   ## confluentinc-cp-kafka resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-  ## @param main.resources.limits The resources limits for the confluentinc-cp-kafka containers
-  ## @param main.resources.requests The requested resources for the confluentinc-cp-kafka containers
   ##
   resources:
+
+    ## @param main.resources.limits The resources limits for the confluentinc-cp-kafka containers
+    ##
     limits: {}
+
+    ## @param main.resources.requests The requested resources for the confluentinc-cp-kafka containers
+    ##
     requests: {}
 
   ## @param main.schedulerName Name of the k8s scheduler (other than default) for  confluentinc-cp-kafka pods
@@ -360,23 +442,40 @@ main:
   ##
   sidecars: {}
 
-  ## @param main.startupProbe.enabled Enable startupProbe on confluentinc-cp-kafka containers
-  ## @param main.startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
-  ## @param main.startupProbe.periodSeconds Period seconds for startupProbe
-  ## @param main.startupProbe.timeoutSeconds Timeout seconds for startupProbe
-  ## @param main.startupProbe.failureThreshold Failure threshold for startupProbe
-  ## @param main.startupProbe.successThreshold Success threshold for startupProbe
+  ## Configure extra options for confluentinc-cp-kafka containers' start up probe
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
   startupProbe:
+
+    ## @param main.startupProbe.enabled Enable startupProbe on confluentinc-cp-kafka containers
+    ##
     enabled: false
+
+    ## @param main.startupProbe.exec Action to "exec" a program on confluentinc-cp-kafka containers
+    ##
     exec:
       command:
       - stat
       - /etc
+
+    ## @param main.startupProbe.failureThreshold Failure threshold for startupProbe
+    ##
     failureThreshold: 3
+
+    ## @param main.startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
+    ##
     initialDelaySeconds: 0
+
+    ## @param main.startupProbe.periodSeconds Period seconds for startupProbe
+    ##
     periodSeconds: 10
+
+    ## @param main.startupProbe.successThreshold Success threshold for startupProbe
+    ##
     successThreshold: 1
+
+    ## @param main.startupProbe.timeoutSeconds Timeout seconds for startupProbe
+    ##
     timeoutSeconds: 1
 
   ## @param main.tolerations Tolerations for confluentinc-cp-kafka pods assignment
@@ -384,12 +483,12 @@ main:
   ##
   tolerations: []
 
-  ## @param main.updateStrategy.type confluentinc-cp-kafka statefulset strategy type
+  ## Update Strategy
   ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
   ##
   updateStrategy:
 
-    ## StrategyType
+    ## @param main.updateStrategy.type confluentinc-cp-kafka statefulset strategy type
     ## Can be set to RollingUpdate or OnDelete
     ##
     type: RollingUpdate
@@ -517,13 +616,19 @@ ingress:
 
 ## Pod disruption budget configuration
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
-## @param podDisruptionBudget.enabled If true, create a pod disruption budget for pods.
-## @param podDisruptionBudget.minAvailable Minimum number / percentage of pods that should remain scheduled
-## @param podDisruptionBudget.maxUnavailable Maximum number / percentage of pods that may be made unavailable
 ##
 podDisruptionBudget:
+
+  ## @param podDisruptionBudget.enabled If true, create a pod disruption budget for pods.
+  ##
   enabled: false
+
+  ## @param podDisruptionBudget.minAvailable Minimum number / percentage of pods that should remain scheduled
+  ##
   minAvailable: 1
+
+  ## @param podDisruptionBudget.maxUnavailable Maximum number / percentage of pods that may be made unavailable
+  ##
   maxUnavailable: ""
 
 
@@ -588,9 +693,9 @@ serviceAccount:
 ##
 volumePermissions:
 
+  ## @param volumePermissions.containerSecurityContext.runAsUser Set init container's Security Context runAsUser
   ## Init container Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
-  ## @param volumePermissions.containerSecurityContext.runAsUser Set init container's Security Context runAsUser
   ## NOTE: when runAsUser is set to special value "auto", init container will try to chown the
   ##   data folder to auto-determined user&group, using commands: `id -u`:`id -G | cut -d" " -f2`
   ##   "auto" is especially useful for OpenShift which has scc with dynamic user ids (and 0 is not allowed)
@@ -604,15 +709,14 @@ volumePermissions:
 
   ## Bitnami Shell image
   ## ref: https://hub.docker.com/r/bitnami/bitnami-shell/tags/
-  ## @param volumePermissions.image.pullPolicy Bitnami Shell image pull policy
-  ## @param volumePermissions.image.pullSecrets Bitnami Shell image pull secrets
-  ## @param volumePermissions.image.registry Bitnami Shell image registry
-  ## @param volumePermissions.image.repository Bitnami Shell image repository
-  ## @param volumePermissions.image.tag Bitnami Shell image tag (immutable tags are recommended)
   ##
   image:
+
+    ## @param volumePermissions.image.pullPolicy Bitnami Shell image pull policy
+    ##
     pullPolicy: IfNotPresent
 
+    ## @param volumePermissions.image.pullSecrets Bitnami Shell image pull secrets
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
     ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -622,15 +726,27 @@ volumePermissions:
     ##
     pullSecrets: []
 
+    ## @param volumePermissions.image.registry Bitnami Shell image registry
+    ##
     registry: docker.io
+
+    ## @param volumePermissions.image.repository Bitnami Shell image repository
+    ##
     repository: bitnami/bitnami-shell
+
+    ## @param volumePermissions.image.tag Bitnami Shell image tag (immutable tags are recommended)
+    ##
     tag: "10"
 
   ## Init container's resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-  ## @param volumePermissions.resources.limits The resources limits for the init container
-  ## @param volumePermissions.resources.requests The requested resources for the init container
   ##
   resources:
+
+    ## @param volumePermissions.resources.limits The resources limits for the init container
+    ##
     limits: {}
+
+    ## @param volumePermissions.resources.requests The requested resources for the init container
+    ##
     requests: {}
