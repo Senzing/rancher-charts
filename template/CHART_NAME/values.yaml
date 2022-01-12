@@ -272,7 +272,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   lifecycleHooks: {}
 
-  ## Configure extra options for ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' liveness probe
+  ## Configure extra options for ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' liveness probe.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
   livenessProbe:
@@ -372,7 +372,7 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   priorityClassName: ""
 
-  ## Configure extra options for ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' readiness probe
+  ## Configure extra options for ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' readiness probe.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
   readinessProbe:
@@ -504,12 +504,12 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   tolerations: []
 
-  ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.updateStrategy.type ${SENZING_HELM_MAIN_CONTAINER_NAME} statefulset strategy type
+  ## Update Strategy
   ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
   ##
   updateStrategy:
 
-    ## StrategyType
+    ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.updateStrategy.type ${SENZING_HELM_MAIN_CONTAINER_NAME} statefulset strategy type
     ## Can be set to RollingUpdate or OnDelete
     ##
     type: RollingUpdate
