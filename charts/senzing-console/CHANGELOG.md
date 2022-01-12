@@ -6,6 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1] - 2022-01-12
+
+### Added in 2.1.1
+
+- `xmain.containerPorts`
+- `xmain.containerSecurityContext.enabled`
+- `xmain.containerSecurityContext.runAsNonRoot`
+- `xmain.containerSecurityContext.runAsUser`
+- `xmain.customStartupProbe`
+- `xmain.schedulerName`
+- `xmain.startupProbe`
+
+### Changed in 2.1.1
+
+- Update to template
+- `xmain.image.pullPolicy` default value
+- `xrbac.create` to `rbac.enabled`
+
+### Removed in 2.1.1
+
+- `ingress`
+- `xmain.containerSecurityContext.privileged`
+- `xmain.podSecurityContext.runAsGroup`
+- `xmain.podSecurityContext.runAsUser`
+- `service`
+
 ## [2.1.0] - 2021-11-19
 
 ### Added in 2.1.0

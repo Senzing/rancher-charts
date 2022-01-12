@@ -1,9 +1,18 @@
 # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#configmap-v1-core
 
+{{- if .Values.configMap.enabled }}
 apiVersion: v1
+{{- if .Values.configMap.binaryData }}
+binaryData:
+    {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.configMap.binaryData "context" $ ) | nindent 4 }}
+{{- end }}
+{{- if .Values.configMap.data }}
 data:
-# %%CONFIG_FILE_NAME%%: |
-#   Config file
+    {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.configMap.data "context" $ ) | nindent 4 }}
+{{- end }}
+{{- if .Values.configMap.immutable }}
+immutable: {{ .Values.configMap.immutable }}
+{{- end }}
 kind: ConfigMap
 metadata:
   {{- if .Values.commonAnnotations }}
@@ -16,3 +25,4 @@ metadata:
     {{- end }}
   name: {{ template "senzing-common.names.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
+{{- end }}
