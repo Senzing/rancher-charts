@@ -8,8 +8,8 @@ Simple overview.
 
 More information:
 
-- [GitHub](https://github.com/Senzing/XXXXX)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/XXXXXX)
+- [DockerHub](https://hub.docker.com/r/senzing/phppgadmin)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/phppgadmin)
 
 ## Metadata
 

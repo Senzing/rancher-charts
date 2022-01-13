@@ -8,8 +8,9 @@ Simple overview.
 
 More information:
 
-- [GitHub](https://github.com/Senzing/XXXXX)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/XXXXXX)
+- [DockerHub](https://hub.docker.com/r/senzing/postgresql-client)
+- [GitHub](https://github.com/Senzing/postgresql-client)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-postgresql-client)
 
 ## Command
 

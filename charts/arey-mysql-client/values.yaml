@@ -296,7 +296,12 @@ main:
     ##
     timeoutSeconds: 1
 
+  ## Mysql specific
+  ##
   mysql:
+
+    ## @param main.mysql.persistentVolumeClaim
+    ##
     persistentVolumeClaim:
 
   ## Node main.affinity preset

@@ -8,8 +8,9 @@ Simple overview.
 
 More information:
 
-- [GitHub](https://github.com/Senzing/XXXXX)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/XXXXXX)
+- [DockerHub](https://hub.docker.com/r/senzing/configurator)
+- [GitHub](https://github.com/Senzing/configurator)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-configurator)
 
 ## Command
 
