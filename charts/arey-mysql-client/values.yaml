@@ -144,18 +144,6 @@ main:
   ##
   command: []
 
-  ## Ports for container
-  ##
-  containerPorts:
-
-    ## @param main.containerPorts.http arey-mysql-client HTTP container port
-    ##
-    http: 80
-
-    ## @param main.containerPorts.https arey-mysql-client HTTPS container port
-    ##
-    https: 443
-
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
