@@ -35,6 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - configmap.yaml
 - tls-secret.yaml
 
+## [2.2.0] - 2021-12-17
+
+### Removed in 2.2.0
+
+- Deleted clusterrolebinding.yaml
+
 ## [2.1.0] - 2021-11-19
 
 ### Added in 2.1.0
