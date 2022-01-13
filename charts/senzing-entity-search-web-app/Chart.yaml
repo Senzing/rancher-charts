@@ -20,4 +20,4 @@ sources:
   - https://github.com/Senzing/charts/tree/master/charts/senzing-entity-search-web-app
   - https://github.com/Senzing/entity-search-web-app
 type: application
-version: 2.2.1
+version: 2.3.0

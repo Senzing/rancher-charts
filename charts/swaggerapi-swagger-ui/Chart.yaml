@@ -21,4 +21,4 @@ sources:
   - https://hub.docker.com/r/swaggerapi/swagger-ui
   - https://github.com/Senzing/charts/tree/master/charts/swaggerapi-swagger-ui
 type: application
-version: 2.2.1
+version: 2.3.0

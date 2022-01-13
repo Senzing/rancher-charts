@@ -475,9 +475,17 @@ main:
     ##
     configPath: ""
 
+    ## @param main.senzing.configurationCheckFrequency
+    ##
+    configurationCheckFrequency: ""
+
     ## @param main.senzing.databaseUrl
     ##
     databaseUrl: ""
+
+    ## @param main.senzing.dataSource
+    ##
+    dataSource: ""
 
     ## @param main.senzing.debug
     ##
@@ -534,6 +542,10 @@ main:
     ## @param main.senzing.kafkaFailureTopic
     ##
     kafkaFailureTopic: ""
+
+    ## @param main.senzing.kafkaGroup
+    ##
+    kafkaGroup: ""
 
     ## @param main.senzing.kafkaInfoBootstrapServer
     ##
@@ -659,9 +671,17 @@ main:
     ##
     rabbitmqPassword: ""
 
+    ## @param main.senzing.rabbitmqPort
+    ##
+    rabbitmqPort: ""
+
     ## @param main.senzing.rabbitmqPrefetchCount
     ##
     rabbitmqPrefetchCount: ""
+
+    ## @param main.senzing.rabbitmqQueue
+    ##
+    rabbitmqQueue: ""
 
     ## @param main.senzing.rabbitmqReconnectDelayInSeconds
     ##
@@ -706,6 +726,10 @@ main:
     ## @param main.senzing.sqsFailureQueueUrl
     ##
     sqsFailureQueueUrl: ""
+
+    ## @param main.senzing.sqsInfoQueueDelaySeconds
+    ##
+    sqsInfoQueueDelaySeconds: ""
 
     ## @param main.senzing.sqsInfoQueueUrl
     ##

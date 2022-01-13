@@ -21,4 +21,4 @@ sources:
   - https://github.com/Senzing/charts/tree/master/charts/senzing-configurator
   - https://github.com/Senzing/configurator
 type: application
-version: 2.2.1
+version: 2.3.0
