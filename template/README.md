@@ -337,6 +337,15 @@ using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readm
 
 #### Cleanup README.md
 
+### Remove fromTemplate files
+
+1. Remove `*.fromTemplate.yaml` files.
+   Example:
+
+   ```console
+   find ${GIT_REPOSITORY_DIR}/charts/ -name "*.fromTemplate.yaml" | xargs rm
+   ```
+
 ## Test Helm Chart
 
 ### Lint Helm Chart
