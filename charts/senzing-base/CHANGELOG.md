@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed in 2.2.1
 
-- `ingress.certManager`
+- `ingress`
 - `main.containerSecurityContext.privileged`
 - `main.podSecurityContext.runAsGroup`
 - `main.podSecurityContext.runAsUser`
