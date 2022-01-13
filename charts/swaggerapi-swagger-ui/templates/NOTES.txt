@@ -9,7 +9,7 @@ Simple overview.
 More information:
 
 - [DockerHub](https://hub.docker.com/r/swaggerapi/swagger-ui)
-- [GitHub](https://www.github.com/swagger-api/swagger-ui)
+- [GitHub](https://github.com/swagger-api/swagger-ui)
 - [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/swaggerapi-swagger-ui)
 
 ## Metadata
