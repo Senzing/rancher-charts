@@ -12,20 +12,6 @@ More information:
 - [GitHub](https://github.com/Senzing/docker-init-container)
 - [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-init-container)
 
-## Command
-
-The command being run:
-
-```console
-command-name.py {{ .Values.main.senzing.subcommand -}}
-  {{- if .Values.main.senzing.debug }} \
-  --debug "{{ .Values.main.senzing.debug }}"
-  {{- end }}
-  {{- if .Values.main.senzing.logLevel }} \
-  --log-level "{{ .Values.main.senzing.logLevel }}"
-  {{- end }}
-```
-
 ## Access pod
 
 {{- if .Values.diagnosticMode.enabled }}
