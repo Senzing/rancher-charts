@@ -26,7 +26,7 @@ command-name.py {{ .Values.main.senzing.subcommand -}}
   {{- end }}
 ```
 
-## Metadata
+## Access pod
 
 {{- if .Values.diagnosticMode.enabled }}
 The chart has been deployed in diagnostic mode. All probes have been disabled and the command has been overwritten with:
@@ -34,13 +34,17 @@ The chart has been deployed in diagnostic mode. All probes have been disabled an
   command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 4 }}
   args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 4 }}
 
-Get the list of pods by executing:
+1. Get the list of pods by executing:
 
-  kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+    ```console
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+    ```
 
-Access the pod you want to debug by executing
+2. Access the pod you want to debug by executing
 
-  kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
+    ```console
+    kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
+    ```
 
 In order to replicate the container startup scripts execute this command:
 
@@ -48,12 +52,20 @@ In order to replicate the container startup scripts execute this command:
 
 {{- else }}
 
-%%Instructions to access the application depending on the serviceType and other considerations%%
+1. Access the pod.
+   Example:
+
+    ```console
+    export POD_NAME=$(kubectl get pods \
+      --namespace {{ .Release.Namespace }} \
+      --selector "app.kubernetes.io/name={{ include "senzing-yum.name" . }}, \
+                  app.kubernetes.io/instance={{ .Release.Name }}" \
+      --output jsonpath="{.items[0].metadata.name}")
+
+    kubectl exec -it --namespace {{ .Release.Namespace }} ${POD_NAME} -- /bin/bash
+    ```
 
 {{- end }}
-
-
-## Metadata
 
 {{- include "senzing-common.warnings.rollingTag" .Values.main.image }}
 {{- include "senzing-yum.validateValues" . }}
