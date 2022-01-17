@@ -157,22 +157,15 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
     https: 443
 
   ## Configure Container Security Context
+  ## Takes precedence over podSecurityContext.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
-  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#securitycontext-v1-core
   ##
   containerSecurityContext:
 
     ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context
     ##
     enabled: false
-
-    ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.runAsNonRoot Set ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context runAsNonRoot
-    ##
-    runAsNonRoot: true
-
-    ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.runAsUser Set ${SENZING_HELM_MAIN_CONTAINER_NAME} containers' Security Context runAsUser
-    ##
-    runAsUser: 1001
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.customLivenessProbe Custom livenessProbe that overrides the default one
   ##
@@ -360,13 +353,25 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   podSecurityContext:
 
-    ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} pods' Security Context
+    ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.enabled Enabled ${SENZING_HELM_MAIN_CONTAINER_NAME} pod's Security Context
     ##
     enabled: false
 
     ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.fsGroup Set ${SENZING_HELM_MAIN_CONTAINER_NAME} pod's Security Context fsGroup
     ##
     fsGroup: 1001
+
+    ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.runAsGroup Set ${SENZING_HELM_MAIN_CONTAINER_NAME} pod's Security Context runAsGroup
+    ##
+    runAsGroup: 1001
+
+    ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.runAsNonRoot Set ${SENZING_HELM_MAIN_CONTAINER_NAME} pod's Security Context runAsNonRoot
+    ##
+    runAsNonRoot: true
+
+    ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.runAsUser Set ${SENZING_HELM_MAIN_CONTAINER_NAME} pod's Security Context runAsUser
+    ##
+    runAsUser: 1001
 
   ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.priorityClassName ${SENZING_HELM_MAIN_CONTAINER_NAME} pods' priorityClassName
   ##

@@ -113,22 +113,15 @@ main:
   command: []
 
   ## Configure Container Security Context
+  ## Takes precedence over podSecurityContext.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
-  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#securitycontext-v1-core
   ##
   containerSecurityContext:
 
     ## @param main.containerSecurityContext.enabled Enabled senzing-yum containers' Security Context
     ##
     enabled: false
-
-    ## @param main.containerSecurityContext.runAsNonRoot Set senzing-yum containers' Security Context runAsNonRoot
-    ##
-    runAsNonRoot: true
-
-    ## @param main.containerSecurityContext.runAsUser Set senzing-yum containers' Security Context runAsUser
-    ##
-    runAsUser: 1001
 
   ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
   ##
@@ -324,13 +317,25 @@ main:
   ##
   podSecurityContext:
 
-    ## @param main.podSecurityContext.enabled Enabled senzing-yum pods' Security Context
+    ## @param main.podSecurityContext.enabled Enabled senzing-yum pod's Security Context
     ##
     enabled: false
 
     ## @param main.podSecurityContext.fsGroup Set senzing-yum pod's Security Context fsGroup
     ##
     fsGroup: 1001
+
+    ## @param main.podSecurityContext.runAsGroup Set senzing-yum pod's Security Context runAsGroup
+    ##
+    runAsGroup: 1001
+
+    ## @param main.podSecurityContext.runAsNonRoot Set senzing-yum pod's Security Context runAsNonRoot
+    ##
+    runAsNonRoot: true
+
+    ## @param main.podSecurityContext.runAsUser Set senzing-yum pod's Security Context runAsUser
+    ##
+    runAsUser: 1001
 
   ## @param main.priorityClassName senzing-yum pods' priorityClassName
   ##
