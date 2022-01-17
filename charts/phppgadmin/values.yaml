@@ -430,9 +430,9 @@ main:
     ##
     theme: default
 
-    ## @param main.phppgadmin.userXhtmlStrict
+    ## @param main.phppgadmin.useXhtmlStrict
     ##
-    userXhtmlStrict: false
+    useXhtmlStrict: false
 
   ## @param main.podAffinityPreset Pod affinity preset. Ignored if `main.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
