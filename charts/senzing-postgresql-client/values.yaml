@@ -361,6 +361,14 @@ main:
   ##
   postgresql:
 
+    ## @param main.postgresql.database
+    ##
+    database: ""
+
+    ## @param main.postgresql.file
+    ##
+    file: ""
+
     ## @param main.postgresql.host
     ##
     host: ""
@@ -368,6 +376,10 @@ main:
     ## @param main.postgresql.password
     ##
     password: ""
+
+    ## @param main.postgresql.storageClaim
+    ##
+    storageClaim: ""
 
     ## @param main.postgresql.username
     ##
