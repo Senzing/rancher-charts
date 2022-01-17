@@ -38,17 +38,16 @@ In order to replicate the container startup scripts execute this command:
 
 {{- else }}
 
-1. Access the pod.
-   Example:
+1. Get the list of pods by executing:
 
     ```console
-    export POD_NAME=$(kubectl get pods \
-      --namespace {{ .Release.Namespace }} \
-      --selector "app.kubernetes.io/name={{ include "swaggerapi-swagger-ui.name" . }}, \
-                  app.kubernetes.io/instance={{ .Release.Name }}" \
-      --output jsonpath="{.items[0].metadata.name}")
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+    ```
 
-    kubectl exec -it --namespace {{ .Release.Namespace }} ${POD_NAME} -- /bin/bash
+2. Access the pod you want to debug by executing
+
+    ```console
+    kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
     ```
 
 {{- end }}
