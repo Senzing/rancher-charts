@@ -383,6 +383,7 @@ main:
 
   ## @param main.schedulerName Name of the k8s scheduler (other than default) for  senzing-stream-producer pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
+  ##
   schedulerName: ""
 
   ## senzing-stream-producer Senzing environment variables
@@ -462,6 +463,10 @@ main:
     ##
     kafkaTopic: ""
 
+    ## @param main.senzing.logLevel
+    ##
+    logLevel: ""
+
     ## @param main.senzing.monitoringPeriodInSeconds
     ##
     monitoringPeriodInSeconds: ""
@@ -469,6 +474,10 @@ main:
     ## @param main.senzing.password
     ##
     password: ""
+
+    ## @param main.senzing.persistentVolumeClaim
+    ##
+    persistentVolumeClaim: ""
 
     ## @param main.senzing.rabbitmqExchange
     ##
