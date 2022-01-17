@@ -395,6 +395,18 @@ main:
     ##
     databaseUrl: ""
 
+    ## @param main.senzing.debug
+    ##
+    debug: ""
+
+    ## @param main.senzing.engineConfigurationJson
+    ##
+    engineConfigurationJson: ""
+
+    ## @param main.senzing.persistentVolumeClaim
+    ##
+    persistentVolumeClaim: ""
+
   ## @param main.sidecars Add additional sidecar containers to the senzing-init-container pod(s)
   ## e.g:
   ## sidecars:
