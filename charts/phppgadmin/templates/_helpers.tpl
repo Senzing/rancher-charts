@@ -23,7 +23,7 @@ Return the proper Docker Image Registry Secret Names
 Create the name of the service account to use
 */}}
 {{- define "phppgadmin.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create -}}
+{{- if .Values.serviceAccount.enabled -}}
     {{ default (printf "%s-serviceaccount" (include "senzing-common.names.fullname" .)) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
