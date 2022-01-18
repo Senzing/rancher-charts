@@ -452,27 +452,6 @@ main:
   ##
   schedulerName: ""
 
-  ## senzing-postgresql-client Senzing environment variables
-  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-  ##
-  senzing:
-
-    ## @param main.senzing.databaseUrl The normalized database connection URL
-    ##
-    databaseUrl: ""
-
-    ## @param main.senzing.debug Debug?  Boolean.
-    ##
-    debug: "False"
-
-    ## @param main.senzing.logLevel The logging filter: DEBUG, INFO, WARNING, ERROR, CRITICAL, FATAL
-    ##
-    logLevel: "INFO"
-
-    ## @param main.senzing.subcommand CLI sub-command
-    ##
-    subcommand: ""
-
   ## @param main.sidecars Add additional sidecar containers to the senzing-postgresql-client pod(s)
   ## e.g:
   ## sidecars:
