@@ -150,11 +150,11 @@ main:
 
     ## @param main.containerPorts.http swaggerapi-swagger-ui HTTP container port
     ##
-    http: 80
+    http: 8080
 
     ## @param main.containerPorts.https swaggerapi-swagger-ui HTTPS container port
     ##
-    https: 443
+    https: 8443
 
   ## Configure Container Security Context
   ## Takes precedence over podSecurityContext.
