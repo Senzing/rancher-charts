@@ -14,9 +14,6 @@ metadata:
   name: {{ template "senzing-common.names.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 spec:
-  selector:
-    matchLabels: {{- include "senzing-common.labels.matchLabels" . | nindent 6 }}
-      app.kubernetes.io/component: senzing-apt-component
   template:
     metadata:
       {{- if .Values.main.podAnnotations }}
