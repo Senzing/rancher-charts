@@ -150,7 +150,7 @@ main:
 
     ## @param main.containerPorts.http senzing-configurator HTTP container port
     ##
-    http: 80
+    http: 8253
 
     ## @param main.containerPorts.https senzing-configurator HTTPS container port
     ##
