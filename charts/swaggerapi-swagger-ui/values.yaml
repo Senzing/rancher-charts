@@ -488,6 +488,10 @@ main:
   ##
   swaggerui:
 
+    ## @param main.swaggerui.baseUrl
+    ##
+    baseUrl: ""
+
     ## @param main.swaggerui.openApiSpecUrl
     ##
     openApiSpecUrl: ""

@@ -53,6 +53,10 @@ spec:
           command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.command "context" $) | nindent 12 }}
           {{- end }}
           env:
+            {{- if .Values.main.swaggerui.baseUrl }}
+            - name: BASE_URL
+              value: "{{ .Values.main.swaggerui.baseUrl }}"
+            {{- end }}
             {{- if .Values.main.swaggerui.openApiSpecUrl }}
             - name: URL
               value: "{{ .Values.main.swaggerui.openApiSpecUrl }}"
