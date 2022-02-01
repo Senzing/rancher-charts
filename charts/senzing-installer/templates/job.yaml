@@ -72,11 +72,6 @@ spec:
           livenessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customLivenessProbe "context" $) | nindent 12 }}
           {{- end }}
           {{- end }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.main.containerPorts.http }}
-            - name: https
-              containerPort: {{ .Values.main.containerPorts.https }}
           {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.main.readinessProbe.enabled }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
