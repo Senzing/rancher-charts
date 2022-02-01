@@ -540,9 +540,17 @@ main:
     ##
     kafkaBootstrapServerPort: ""
 
+    ## @param main.senzing.kafkaConfiguration
+    ##
+    kafkaConfiguration: ""
+
     ## @param main.senzing.kafkaFailureBootstrapServer
     ##
     kafkaFailureBootstrapServer: ""
+
+    ## @param main.senzing.kafkaFailureConfiguration
+    ##
+    kafkaFailureConfiguration:
 
     ## @param main.senzing.kafkaFailureTopic
     ##
@@ -555,6 +563,10 @@ main:
     ## @param main.senzing.kafkaInfoBootstrapServer
     ##
     kafkaInfoBootstrapServer: ""
+
+    ## @param main.senzing.kafkaInfoConfiguration
+    ##
+    kafkaInfoConfiguration: ""
 
     ## @param main.senzing.kafkaInfoTopic
     ##

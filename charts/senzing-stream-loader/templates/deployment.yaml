@@ -174,9 +174,17 @@ spec:
             - name: SENZING_KAFKA_BOOTSTRAP_SERVER
               value: "{{ .Values.main.senzing.kafkaBootstrapServerHost }}:{{ .Values.main.senzing.kafkaBootstrapServerPort }}"
             {{- end }}
+            {{- if .Values.main.senzing.kafkaConfiguration }}
+            - name: SENZING_KAFKA_CONFIGURATION
+              value: "{{ .Values.main.senzing.kafkaConfiguration }}"
+            {{- end }}
             {{- if .Values.main.senzing.kafkaFailureBootstrapServer }}
             - name: SENZING_KAFKA_FAILURE_BOOTSTRAP_SERVER
               value: "{{ .Values.main.senzing.kafkaFailureBootstrapServer }}"
+            {{- end }}
+            {{- if .Values.main.senzing.kafkaFailureConfiguration }}
+            - name: SENZING_KAFKA_FAILURE_CONFIGURATION
+              value: "{{ .Values.main.senzing.kafkaFailureConfiguration }}"
             {{- end }}
             {{- if .Values.main.senzing.kafkaFailureTopic }}
             - name: SENZING_KAFKA_FAILURE_TOPIC
@@ -189,6 +197,10 @@ spec:
             {{- if .Values.main.senzing.kafkaInfoBootstrapServer }}
             - name: SENZING_KAFKA_INFO_BOOTSTRAP_SERVER
               value: "{{ .Values.main.senzing.kafkaInfoBootstrapServer }}"
+            {{- end }}
+            {{- if .Values.main.senzing.kafkaInfoConfiguration }}
+            - name: SENZING_KAFKA_INFO_CONFIGURATION
+              value: "{{ .Values.main.senzing.kafkaInfoConfiguration }}"
             {{- end }}
             {{- if .Values.main.senzing.kafkaInfoTopic }}
             - name: SENZING_KAFKA_INFO_TOPIC

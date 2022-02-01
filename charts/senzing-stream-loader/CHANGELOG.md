@@ -35,6 +35,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - configmap.yaml
 - tls-secret.yaml
 
+## [2.2.1] - 2022-01-28
+
+### Added in 2.2.1
+
+1. Added support for:
+   - `senzing.kafkaConfiguration`
+   - `senzing.kafkaFailureConfiguration`
+   - `senzing.kafkaInfoConfiguration`
+
 ## [2.2.0] - 2021-12-17
 
 ### Removed in 2.2.0
