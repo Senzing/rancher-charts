@@ -1,6 +1,6 @@
 # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#job-v1-batch
 
-apiVersion: {{ include "senzing-common.capabilities.job.apiVersion" . }}
+apiVersion: batch/v1
 kind: Job
 metadata:
   {{- if .Values.commonAnnotations }}
