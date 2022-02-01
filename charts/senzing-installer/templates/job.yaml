@@ -96,8 +96,30 @@ spec:
           startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customStartupProbe "context" $) | nindent 12 }}
           {{- end }}
           volumeMounts:
-            - mountPath: bar
-              name: foo
+            {{- if .Values.main.senzing.persistentVolumeClaim }}
+            - name: senzing-storage
+              mountPath: /opt/senzing/data
+              subPath: senzing-data/2.0.0
+            - name: senzing-storage
+              mountPath: /etc/opt/senzing
+              subPath: senzing-etc
+            - name: senzing-storage
+              mountPath: /opt/senzing/g2
+              subPath: senzing-g2
+            - name: senzing-storage
+              mountPath: /var/opt/senzing
+              subPath: senzing-var
+            {{- if .Values.main.senzing.mountOptIbm }}
+            - name: senzing-storage
+              mountPath: /opt/IBM
+              subPath: senzing-db2-drivers
+            {{- end }}
+            {{- if .Values.main.senzing.mountOptMicrosoft }}
+            - name: senzing-storage
+              mountPath: /opt/microsoft
+              subPath: opt-microsoft
+            {{- end }}
+            {{- end }}
             {{- if .Values.main.extraVolumeMounts }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
             {{- end }}
@@ -144,9 +166,11 @@ spec:
       tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
       {{- end }}
       volumes:
-        - name: foo
-          hostPath:
-            path: bar
+        {{- if .Values.main.senzing.persistentVolumeClaim }}
+        - name: senzing-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.main.senzing.persistentVolumeClaim }}
+        {{- end }}
         {{- if .Values.main.extraVolumes }}
         {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumes "context" $) | nindent 8 }}
         {{- end }}
