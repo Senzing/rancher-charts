@@ -35,6 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - configmap.yaml
 - tls-secret.yaml
 
+## [2.2.2] - 2022-02-15
+
+### Fixed in 2.2.2
+
+- Parsing Kafka JSON
+
 ## [2.2.1] - 2022-01-28
 
 ### Added in 2.2.1
