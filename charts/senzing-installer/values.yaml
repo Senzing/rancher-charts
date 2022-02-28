@@ -403,6 +403,12 @@ main:
   ##
   sidecars: {}
 
+  ## senzing-installer Senzing environment variables
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param main.senzing.persistentVolumeClaim Name of PVC
+  senzing:
+    persistentVolumeClaim: ""
+
   ## Configure extra options for senzing-installer containers' start up probe
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
