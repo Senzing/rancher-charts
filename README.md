@@ -86,13 +86,13 @@ Used by:
     ```console
     export CHART_NAMES=( \
       "coleifer-sqlite-web" \
+      "confluentinc-cp-kafka" \
       "db2-client" \
       "helm-create-example" \
       "ibm-db2-driver-installer" \
       "kafka-test-client" \
       "mysql-client" \
       "phppgadmin" \
-      "postgresql-client" \
       "resolver" \
       "senzing-api-server" \
       "senzing-apt" \
@@ -107,10 +107,12 @@ Used by:
       "senzing-init-container" \
       "senzing-mock-data-generator" \
       "senzing-package" \
+      "senzing-postgresql-client" \
       "senzing-redoer" \
       "senzing-stream-loader" \
       "senzing-stream-producer" \
       "senzing-yum" \
+      "swaggerapi-swagger-ui" \
     )
     ```
 
@@ -142,6 +144,7 @@ Used by:
     do \
       cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
       pwd; \
+      helm dependency update ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
       helm lint; \
     done
     ```

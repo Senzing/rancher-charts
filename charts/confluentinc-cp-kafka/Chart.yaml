@@ -5,7 +5,7 @@ appVersion: ""
 dependencies:
   - name: senzing-common
     repository: https://hub.senzing.com/charts/
-    version: 1.0.1
+    version: 1.0.2
 description: Kafka test client
 engine: gotpl
 home: https://github.com/Senzing/charts/tree/master/charts/confluentinc-cp-kafka
@@ -19,4 +19,4 @@ name: confluentinc-cp-kafka
 sources:
   - https://hub.docker.com/r/confluentinc/cp-kafka/
 type: application
-version: 2.1.0
+version: 2.1.1
