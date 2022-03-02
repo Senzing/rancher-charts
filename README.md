@@ -144,6 +144,7 @@ Used by:
     do \
       cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
       pwd; \
+      helm dependency update ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
       helm lint; \
     done
     ```

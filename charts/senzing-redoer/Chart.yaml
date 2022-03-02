@@ -5,7 +5,7 @@ appVersion: ""
 dependencies:
   - name: senzing-common
     repository: https://hub.senzing.com/charts/
-    version: 1.0.1
+    version: 1.0.2
 description: Processes Senzing redo records
 engine: gotpl
 home: https://github.com/Senzing/charts/tree/master/charts/senzing-redoer

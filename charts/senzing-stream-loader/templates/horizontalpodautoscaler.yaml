@@ -1,5 +1,4 @@
-# https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/horizontal-pod-autoscaler-v2beta2/
-# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#horizontalpodautoscaler-v1-autoscaling
+# https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/horizontal-pod-autoscaler-v2/
 
 {{- if .Values.main.autoscaling.enabled }}
 apiVersion: {{ include "senzing-common.capabilities.horizontalpodautoscaler.apiVersion" . }}

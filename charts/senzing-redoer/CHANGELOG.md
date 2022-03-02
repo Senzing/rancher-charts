@@ -35,6 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - configmap.yaml
 - ingress.yaml
 
+## [2.2.1] - 2022-03-02
+
+### Changed in 2.2.1
+
+- Updated to senzing-common 1.0.2
+
 ## [2.2.0] - 2021-12-17
 
 ### Removed in 2.2.0
