@@ -9,7 +9,6 @@
 ## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
 
 global:
-
   ## @param global.imagePullSecrets Global Docker registry secret names as an array
   ## E.g.
   ## imagePullSecrets:
@@ -24,7 +23,6 @@ global:
   ## @param global.storageClass Global StorageClass for Persistent Volume(s)
   ##
   storageClass: ""
-
 
 ## ----------------------------------------------------------------------------
 ## Common parameters
@@ -47,7 +45,6 @@ clusterDomain: cluster.local
 ## Enable diagnostic mode in the deployment.
 ##
 diagnosticMode:
-
   ## @param diagnosticMode.args Args to override all containers in the deployment
   ##
   args:
@@ -78,7 +75,6 @@ kubeVersion: ""
 ##
 nameOverride: ""
 
-
 ## ----------------------------------------------------------------------------
 ## phppgadmin container parameters
 ## - Used in the following files:
@@ -96,7 +92,6 @@ nameOverride: ""
 ## MAIN_CONTAINER/POD_DESCRIPTION
 ##
 main:
-
   ## @param main.affinity Affinity for phppgadmin pods assignment
   ## Senzing phppgadmin image
   ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
@@ -111,7 +106,6 @@ main:
   ## main deployment autoscaling
   ##
   autoscaling:
-
     ## @param main.autoscaling.builtInMetrics Autoscaling list of built-in metrics
     ##
     builtInMetrics: []
@@ -147,7 +141,6 @@ main:
   ## Ports for container
   ##
   containerPorts:
-
     ## @param main.containerPorts.http phppgadmin HTTP container port
     ##
     http: 80
@@ -162,7 +155,6 @@ main:
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#securitycontext-v1-core
   ##
   containerSecurityContext:
-
     ## @param main.containerSecurityContext.enabled Enabled phppgadmin containers' Security Context
     ##
     enabled: false
@@ -215,7 +207,6 @@ main:
   ## Image parameters
   ##
   image:
-
     ## @param main.image.debug Enable phppgadmin image debug mode
     ## Enable debug mode
     ##
@@ -269,7 +260,6 @@ main:
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
   livenessProbe:
-
     ## @param main.livenessProbe.enabled Enable livenessProbe on phppgadmin containers
     ##
     enabled: false
@@ -278,8 +268,8 @@ main:
     ##
     exec:
       command:
-      - stat
-      - /etc
+        - stat
+        - /etc
 
     ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
     ##
@@ -305,7 +295,6 @@ main:
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
   ##
   nodeAffinityPreset:
-
     ## @param main.nodeAffinityPreset.key Node label key to match. Ignored if `main.affinity` is set
     ##
     key: ""
@@ -330,7 +319,6 @@ main:
   ## Configure phpPgAdmin
   ##
   phppgadmin:
-
     ## @param main.phppgadmin.ajaxRefresh
     ##
     ajaxRefresh: 3
@@ -423,6 +411,10 @@ main:
     ##
     theme: default
 
+    ## @param main.phppgadmin.urlPrefix
+    ##
+    urlPrefix:
+
     ## @param main.phppgadmin.useXhtmlStrict
     ##
     useXhtmlStrict: false
@@ -452,7 +444,6 @@ main:
   ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
   ##
   podSecurityContext:
-
     ## @param main.podSecurityContext.enabled Enabled phppgadmin pod's Security Context
     ##
     enabled: false
@@ -481,7 +472,6 @@ main:
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
   readinessProbe:
-
     ## @param main.readinessProbe.enabled Enable readinessProbe on phppgadmin containers
     ##
     enabled: false
@@ -490,8 +480,8 @@ main:
     ##
     exec:
       command:
-      - stat
-      - /etc
+        - stat
+        - /etc
 
     ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
     ##
@@ -521,7 +511,6 @@ main:
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ##
   resources:
-
     ## @param main.resources.limits The resources limits for the phppgadmin containers
     ##
     limits: {}
@@ -551,7 +540,6 @@ main:
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
   ##
   startupProbe:
-
     ## @param main.startupProbe.enabled Enable startupProbe on phppgadmin containers
     ##
     enabled: false
@@ -560,8 +548,8 @@ main:
     ##
     exec:
       command:
-      - stat
-      - /etc
+        - stat
+        - /etc
 
     ## @param main.startupProbe.failureThreshold Failure threshold for startupProbe
     ##
@@ -592,12 +580,10 @@ main:
   ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
   ##
   updateStrategy:
-
     ## @param main.updateStrategy.type phppgadmin statefulset strategy type
     ## Can be set to RollingUpdate or OnDelete
     ##
     type: RollingUpdate
-
 
 ## ----------------------------------------------------------------------------
 ## Traffic Exposure Parameters
@@ -616,7 +602,6 @@ main:
 ## ref: http://kubernetes.io/docs/user-guide/ingress/
 ##
 ingress:
-
   ## @param ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
   ## Use this parameter to set the required annotations for cert-manager, see
   ## ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
@@ -710,7 +695,6 @@ ingress:
   ##
   tls: false
 
-
 ## ----------------------------------------------------------------------------
 ## Pod Disruption Budget Parameters
 ## - Used in the following files:
@@ -723,7 +707,6 @@ ingress:
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
 ##
 podDisruptionBudget:
-
   ## @param podDisruptionBudget.enabled If true, create a pod disruption budget for pods.
   ##
   enabled: false
@@ -735,7 +718,6 @@ podDisruptionBudget:
   ## @param podDisruptionBudget.maxUnavailable Maximum number / percentage of pods that may be made unavailable
   ##
   maxUnavailable: ""
-
 
 ## ----------------------------------------------------------------------------
 ## Role Based Access Control (RBAC) Parameters
@@ -749,11 +731,9 @@ podDisruptionBudget:
 ## RBAC configuration
 ##
 rbac:
-
   ## @param rbac.enabled Specifies whether RBAC resources should be created
   ##
   enabled: false
-
 
 ## ----------------------------------------------------------------------------
 ## Service parameters
@@ -767,7 +747,6 @@ rbac:
 ## phppgadmin service parameters
 ##
 service:
-
   ## @param service.annotations Additional custom annotations for phppgadmin service
   ##
   annotations: {}
@@ -803,7 +782,6 @@ service:
   ## Node ports to expose
   ##
   nodePorts:
-
     ## @param service.nodePorts.http Node port for HTTP NOTE: choose port between <30000-32767>
     ##
     http:
@@ -815,7 +793,6 @@ service:
   ## Service ports to expose
   ##
   ports:
-
     ## @param service.ports.http phppgadmin service HTTP port
     ##
     http: 80
@@ -827,7 +804,6 @@ service:
   ## @param service.type phppgadmin service type
   ##
   type: LoadBalancer
-
 
 ## ----------------------------------------------------------------------------
 ## Service Account parameters
@@ -841,7 +817,6 @@ service:
 ## ServiceAccount configuration
 ##
 serviceAccount:
-
   ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
   ##
   enabled: false
@@ -850,7 +825,6 @@ serviceAccount:
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
   ##
   name: ""
-
 
 ## ----------------------------------------------------------------------------
 ## Init container parameters
@@ -871,7 +845,6 @@ serviceAccount:
 ##   based on the *podSecurityContext/*containerSecurityContext parameters
 ##
 volumePermissions:
-
   ## @param volumePermissions.containerSecurityContext.runAsUser Set init container's Security Context runAsUser
   ## Init container Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
@@ -890,7 +863,6 @@ volumePermissions:
   ## ref: https://hub.docker.com/r/bitnami/bitnami-shell/tags/
   ##
   image:
-
     ## @param volumePermissions.image.pullPolicy Bitnami Shell image pull policy
     ##
     pullPolicy: IfNotPresent
@@ -921,7 +893,6 @@ volumePermissions:
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ##
   resources:
-
     ## @param volumePermissions.resources.limits The resources limits for the init container
     ##
     limits: {}
