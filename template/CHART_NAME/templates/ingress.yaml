@@ -19,6 +19,8 @@ metadata:
     {{- if .Values.commonLabels }}
     {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
+  name: {{ template "senzing-common.names.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
 spec:
   rules:
     {{- if .Values.ingress.hostname }}
