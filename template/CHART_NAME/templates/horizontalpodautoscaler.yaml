@@ -4,16 +4,16 @@
 apiVersion: {{ include "senzing-common.capabilities.horizontalpodautoscaler.apiVersion" . }}
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ template "senzing-common.names.fullname" . }}
-  namespace: {{ .Release.Namespace | quote }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
   labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
     app.kubernetes.io/component: ${SENZING_HELM_COMPONENT_NAME}
     {{- if .Values.commonLabels }}
     {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
-  {{- if .Values.commonAnnotations }}
-  annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-  {{- end }}
+  name: {{ template "senzing-common.names.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
 spec:
   scaleTargetRef:
     apiVersion: {{ include "senzing-common.capabilities.deployment.apiVersion" . }}
