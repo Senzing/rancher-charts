@@ -7,6 +7,7 @@ metadata:
   name: {{ template "senzing-common.names.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
+    app.kubernetes.io/component: ${SENZING_HELM_COMPONENT_NAME}
     {{- if .Values.commonLabels }}
     {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
