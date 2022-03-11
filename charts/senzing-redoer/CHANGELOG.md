@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed in 2.3.0
 
+- In `horizontalpodscaler.yaml`: `labels`
+- In `poddisruptionbudget.yaml`: `labels`, `matchLabels`
+- In `role.yaml`: `labels`
+- In `rolebinding.yaml`: `labels`, `name`
+- In `service-account.yaml`: `name`
 - Update to template
 - `main.image.pullPolicy` default value
 - `main.podsecurityContext.enabled` default value

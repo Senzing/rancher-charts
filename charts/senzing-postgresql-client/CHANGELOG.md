@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed in 2.2.0
 
+- In `poddisruptionbudget.yaml`: `labels`, `matchLabels`
 - Update to template
 - `main.image.pullPolicy` default value
 - `main.podsecurityContext.enabled` default value
