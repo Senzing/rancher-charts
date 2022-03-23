@@ -16,7 +16,7 @@ metadata:
   namespace: {{ .Release.Namespace | quote }}
 subjects:
 - kind: ServiceAccount
-  name: {{ template "senzing-common.names.fullname" . }}
+  name: {{ template "senzing-configurator.serviceAccountName" . }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role

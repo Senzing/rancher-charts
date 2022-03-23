@@ -30,6 +30,17 @@ Ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
 {{- end -}}
 
 {{/*
+Create the name of the service account to use
+*/}}
+{{- define "senzing-postgresql-client.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "senzing-common.names.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Compile all warnings into a single message.
 */}}
 {{- define "senzing-postgresql-client.validateValues" -}}

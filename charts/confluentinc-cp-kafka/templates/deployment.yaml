@@ -124,7 +124,7 @@ spec:
       {{- if .Values.main.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ template "senzing-common.names.fullname" . }}
+      serviceAccountName: {{ template "confluentinc-cp-kafka.serviceAccountName" . }}
       {{- if .Values.main.tolerations }}
       tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
       {{- end }}
