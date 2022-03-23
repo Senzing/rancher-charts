@@ -563,3 +563,82 @@ serviceAccount:
   ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
   ##
   name: ""
+
+
+## ----------------------------------------------------------------------------
+## Init container parameters
+## - Used in the following files:
+##   - _helpers.tpl
+##   - daemonset.yaml
+##   - deployment.yaml
+##   - job.yaml
+##   - statefulset.yaml
+## ----------------------------------------------------------------------------
+
+## @section Init Container Parameters
+
+## ----- volumePermissions parameters -----------------------------------------
+
+## 'volumePermissions' init container parameters
+## Changes the owner and group of the persistent volume mount point to runAsUser:fsGroup values
+##   based on the *podSecurityContext/*containerSecurityContext parameters
+##
+volumePermissions:
+
+  ## @param volumePermissions.containerSecurityContext.runAsUser Set init container's Security Context runAsUser
+  ## Init container Container Security Context
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
+  ## NOTE: when runAsUser is set to special value "auto", init container will try to chown the
+  ##   data folder to auto-determined user&group, using commands: `id -u`:`id -G | cut -d" " -f2`
+  ##   "auto" is especially useful for OpenShift which has scc with dynamic user ids (and 0 is not allowed)
+  ##
+  containerSecurityContext:
+    runAsUser: 0
+
+  ## @param volumePermissions.enabled Enable init container that changes the owner/group of the PV mount point to `runAsUser:fsGroup`
+  ##
+  enabled: false
+
+  ## Bitnami Shell image
+  ## ref: https://hub.docker.com/r/bitnami/bitnami-shell/tags/
+  ##
+  image:
+
+    ## @param volumePermissions.image.pullPolicy Bitnami Shell image pull policy
+    ##
+    pullPolicy: IfNotPresent
+
+    ## @param volumePermissions.image.pullSecrets Bitnami Shell image pull secrets
+    ## Optionally specify an array of imagePullSecrets.
+    ## Secrets must be manually created in the namespace.
+    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    ## e.g:
+    ## pullSecrets:
+    ##   - myRegistryKeySecretName
+    ##
+    pullSecrets: []
+
+    ## @param volumePermissions.image.registry Bitnami Shell image registry
+    ##
+    registry: docker.io
+
+    ## @param volumePermissions.image.repository Bitnami Shell image repository
+    ##
+    repository: bitnami/bitnami-shell
+
+    ## @param volumePermissions.image.tag Bitnami Shell image tag (immutable tags are recommended)
+    ##
+    tag: "10"
+
+  ## Init container's resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ##
+  resources:
+
+    ## @param volumePermissions.resources.limits The resources limits for the init container
+    ##
+    limits: {}
+
+    ## @param volumePermissions.resources.requests The requested resources for the init container
+    ##
+    requests: {}
