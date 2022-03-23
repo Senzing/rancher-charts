@@ -20,6 +20,6 @@ roleRef:
   name: {{ template "senzing-common.names.fullname" . }}
 subjects:
   - kind: ServiceAccount
-    name: {{ template "senzing-common.names.fullname" . }}
+    name: {{ template "${SENZING_HELM_TEMPLATE_NAME}.serviceAccountName" . }}
     namespace: {{ .Release.Namespace }}
 {{- end }}
