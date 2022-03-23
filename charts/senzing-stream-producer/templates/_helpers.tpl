@@ -16,18 +16,7 @@ Return the proper image name (for the init container volume-permissions image)
 Return the proper Docker Image Registry Secret Names
 */}}
 {{- define "senzing-stream-producer.imagePullSecrets" -}}
-{{- include "senzing-common.images.pullSecrets" (dict "images" (list .Values.main.image) "global" .Values.global) -}}
-{{- end -}}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "senzing-stream-producer.serviceAccountName" -}}
-{{- if .Values.serviceAccount.enabled -}}
-    {{ default (printf "%s-serviceaccount" (include "senzing-common.names.fullname" .)) .Values.serviceAccount.name }}
-{{- else -}}
-    {{ default "default" .Values.serviceAccount.name }}
-{{- end -}}
+{{- include "senzing-common.images.pullSecrets" (dict "images" (list .Values.main.image .Values.volumePermissions.image) "global" .Values.global) -}}
 {{- end -}}
 
 {{/*
