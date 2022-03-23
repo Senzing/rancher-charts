@@ -139,7 +139,7 @@ spec:
       {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.podSecurityContext "enabled" | toYaml | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ template "${SENZING_HELM_TEMPLATE_NAME}.serviceAccountName" . }}
+      serviceAccountName: {{ template "senzing-common.names.fullname" . }}
       {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.tolerations }}
       tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.tolerations "context" .) | nindent 8 }}
       {{- end }}
