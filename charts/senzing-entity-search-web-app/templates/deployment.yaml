@@ -155,6 +155,14 @@ spec:
             - name: SENZING_WEB_SERVER_SSL_KEY_PATH
               value: "{{ .Values.main.senzing.webServerSslKeyPath }}"
             {{- end }}
+            {{- if .Values.main.senzing.webServerUrl }}
+            - name: SENZING_WEB_SERVER_URL
+              value: {{ .Values.main.senzing.webServerUrl | quote }}
+            {{- end }}
+            {{- if .Values.main.senzing.webServerVirtualPath }}
+            - name: SENZING_WEB_SERVER_VIRTUAL_PATH
+              value: "{{ .Values.main.senzing.webServerVirtualPath }}"
+            {{- end }}
             {{- if .Values.main.extraEnvVars }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}
