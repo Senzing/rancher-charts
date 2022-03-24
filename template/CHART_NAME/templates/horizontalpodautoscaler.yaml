@@ -26,12 +26,16 @@ spec:
     - type: Resource
       resource:
         name: cpu
-        targetAverageUtilization: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetCPU }}
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetCPU }}
     {{- end }}
     {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetMemory }}
     - type: Resource
       resource:
         name: memory
-        targetAverageUtilization: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetMemory  }}
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.autoscaling.targetMemory  }}
     {{- end }}
 {{- end }}
