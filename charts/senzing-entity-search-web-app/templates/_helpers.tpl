@@ -33,7 +33,7 @@ Ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
 Create the name of the service account to use
 */}}
 {{- define "senzing-entity-search-web-app.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create -}}
+{{- if .Values.serviceAccount.enabled -}}
     {{ default (include "senzing-common.names.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
