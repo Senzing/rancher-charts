@@ -405,8 +405,14 @@ main:
 
   ## senzing-installer Senzing environment variables
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ## @param main.senzing.deployEtcOptSenzing Copy /etc/opt/senzing to PVC
+  ## @param main.senzing.deployOptMicrosoft Copy /opt/microsoft to PVC
+  ## @param main.senzing.mountOptMicrosoft Create an /opt/microsoft PVC mount
   ## @param main.senzing.persistentVolumeClaim Name of PVC
   senzing:
+    deployEtcOptSenzing: false
+    deployOptMicrosoft: false
+    mountOptMicrosoft: false
     persistentVolumeClaim: ""
 
   ## Configure extra options for senzing-installer containers' start up probe
