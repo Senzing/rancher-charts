@@ -48,6 +48,12 @@ spec:
           env:
             - name: SENZING_DEBUG
               value: {{ ternary "true" "false" (or .Values.main.image.debug .Values.diagnosticMode.enabled) | quote }}
+            - name: SENZING_DEPLOY_ETC_OPT_SENZING
+              value: "{{ .Values.main.senzing.deployEtcOptSenzing }}"
+            - name: SENZING_DEPLOY_OPT_MICROSOFT
+              value: "{{ .Values.main.senzing.deployOptMicrosoft }}"
+            - name: SENZING_DEPLOY_POSTGRESQL_GOVERNOR
+              value: "{{ .Values.main.senzing.deployPostgresqlGovernor }}"
             {{- if .Values.main.extraEnvVars }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}
