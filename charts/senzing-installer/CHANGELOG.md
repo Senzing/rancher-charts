@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 1. Added `main.senzing.deployEtcOptSenzing`
 1. Added `main.senzing.deployOptMicrosoft`
+1. Added `main.senzing.deployPostgresqlGovernor `
 1. Added `main.senzing.mountOptMicrosoft`
 
 ## [1.0.0] - 2022-02-01

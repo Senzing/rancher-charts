@@ -412,6 +412,7 @@ main:
   senzing:
     deployEtcOptSenzing: false
     deployOptMicrosoft: false
+    deployPostgresqlGovernor: false
     mountOptMicrosoft: false
     persistentVolumeClaim: ""
 
