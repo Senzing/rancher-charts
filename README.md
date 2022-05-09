@@ -105,6 +105,7 @@ Used by:
       "senzing-hello-world-on-hub-docker-com" \
       "senzing-ibm-db2" \
       "senzing-init-container" \
+      "senzing-installer" \
       "senzing-mock-data-generator" \
       "senzing-package" \
       "senzing-postgresql-client" \
