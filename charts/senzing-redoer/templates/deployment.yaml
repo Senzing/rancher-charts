@@ -384,7 +384,7 @@ spec:
             {{- if .Values.main.senzing.persistentVolumeClaim }}
             - name: senzing-storage
               mountPath: /opt/senzing/data
-              subPath: senzing-data/2.0.0
+              subPath: senzing-data/3.0.0
             - name: senzing-storage
               mountPath: /etc/opt/senzing
               subPath: senzing-etc

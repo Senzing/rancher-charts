@@ -6,9 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.3.0] - 2022-01-14
+## [2.4.0] - 2022-06-01
 
-### Added in 2.3.0
+### Added in 2.4.0
 
 - `main.containerSecurityContext.enabled`
 - `main.containerSecurityContext.runAsNonRoot`
@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `main.schedulerName`
 - `main.startupProbe`
 
-### Changed in 2.3.0
+### Changed in 2.4.0
 
 - In `horizontalpodscaler.yaml`: `labels`
 - In `poddisruptionbudget.yaml`: `labels`, `matchLabels`
@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `rbacEnabled` to `rbac.enabled`
 - `serviceAccount.create` to `serviceAccount.enabled`
 
-### Removed in 2.3.0
+### Removed in 2.4.0
 
 - `ingress`
 - `main.containerSecurityContext.privileged`
@@ -40,6 +40,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - configmap.yaml
 - ingress.yaml
 - tls-secret.yaml
+
+## [2.3.0] - 2022-05-09
+
+### Changed in 2.3.0
+
+1. Support for senzingdata v3.0.0
 
 ## [2.2.1] - 2022-03-02
 
