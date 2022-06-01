@@ -1,13 +1,16 @@
 apiVersion: v1
-kind: ServiceAccount
+data:
+# %%CONFIG_FILE_NAME%%: |
+#   Config file
+kind: ConfigMap
 metadata:
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
   labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
-    app.kubernetes.io/component: ${SENZING_HELM_COMPONENT_NAME}
+    app.kubernetes.io/component: senzing-resolver-component
     {{- if .Values.commonLabels }}
     {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
-  name: {{ template "${SENZING_HELM_TEMPLATE_NAME}.serviceAccountName" . }}
+  name: {{ template "senzing-common.names.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}

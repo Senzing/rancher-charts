@@ -93,7 +93,6 @@ Used by:
       "kafka-test-client" \
       "mysql-client" \
       "phppgadmin" \
-      "resolver" \
       "senzing-api-server" \
       "senzing-apt" \
       "senzing-base" \
@@ -110,6 +109,7 @@ Used by:
       "senzing-package" \
       "senzing-postgresql-client" \
       "senzing-redoer" \
+      "senzing-resolver" \
       "senzing-stream-loader" \
       "senzing-stream-producer" \
       "senzing-yum" \

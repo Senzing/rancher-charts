@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2022-06-02
+
+### Changed in 1.1.2
+
+- Migrate from Senzing `data/2.0.0` to `data/3.0.0`
+- Chart updates:
+  - senzing-resolver:2.0.0 (replaces resolver:1.4.0)
+  - senzing-api-server:2.3.0
+  - senzing-base:2.3.0
+  - senzing-configurator:2.3.0
+  - senzing-console:2.2.0
+  - senzing-installer:1.2.0
+  - senzing-redoer:2.3.0
+  - senzing-stream-loader:2.3.0
+
 ## [1.1.1] - 2021-11-19
 
 ### Changed in 1.1.1
