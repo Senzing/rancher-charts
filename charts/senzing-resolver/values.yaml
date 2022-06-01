@@ -323,9 +323,21 @@ main:
   ##
   senzing:
     databaseUrl: ""
-    debug: "False"
-    logLevel: "INFO"
-    subcommand: ""
+    dataSource: ""
+    debug: ""
+    engineConfigurationJson: ""
+    entityType: ""
+    host: ""
+    inputFile: ""
+    internalDatabase: ""
+    logLevel: ""
+    mountOptIbm: false
+    mountOptMicrosoft: false
+    outputFile: ""
+    persistentVolumeClaim: ""
+    port: "80"
+    sleepTimeInSeconds: ""
+    subcommand: service
 
   ## @param main.sidecars Add additional sidecar containers to the senzing-resolver pod(s)
   ## e.g:
