@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   arey-mysql-client:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.103871532-04:00"
+    created: "2022-06-02T10:33:11.067955498-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -25,7 +25,7 @@ entries:
     - arey-mysql-client-2.2.0.tgz
     version: 2.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.102798001-04:00"
+    created: "2022-06-02T10:33:11.066917052-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -48,7 +48,7 @@ entries:
     - arey-mysql-client-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.101725195-04:00"
+    created: "2022-06-02T10:33:11.065905306-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -73,7 +73,7 @@ entries:
   coleifer-sqlite-web:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.106261009-04:00"
+    created: "2022-06-02T10:33:11.069922005-04:00"
     description: A Helm chart for github.com/coleifer/sqlite-web
     digest: 579b02138845f7cf53c2cbaf4747fba02d9791bb7ca0c0e96b2926d2ac2616f9
     home: http://senzing.com
@@ -88,7 +88,7 @@ entries:
     version: 1.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.105903748-04:00"
+    created: "2022-06-02T10:33:11.069603304-04:00"
     description: A Helm chart for github.com/coleifer/sqlite-web
     digest: 7afd227755dc82b28af6516071d355f69bda4b17a340fd57fe47102b4c7153ed
     home: http://senzing.com
@@ -103,7 +103,7 @@ entries:
     version: 1.1.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.105520283-04:00"
+    created: "2022-06-02T10:33:11.069284502-04:00"
     description: A Helm chart for github.com/coleifer/sqlite-web
     digest: 23e72345198aa6c6eee41cfc32dc3eeefc084a7553fa5477a1cf9fce604bea8d
     home: http://senzing.com
@@ -118,7 +118,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.105117964-04:00"
+    created: "2022-06-02T10:33:11.06895521-04:00"
     description: A Helm chart for github.com/coleifer/sqlite-web
     digest: d0caa3b9aba4e04000b936175af25d15ccf909a2fa8f5aba53d4407e0b4ceadf
     home: http://senzing.com
@@ -133,7 +133,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.104734226-04:00"
+    created: "2022-06-02T10:33:11.068234643-04:00"
     description: A Helm chart for github.com/coleifer/sqlite-web
     digest: f4d90c59debfb2273fa63ee1f31b067f8fbd66a8370e532989c26d7025046862
     home: http://senzing.com
@@ -148,7 +148,7 @@ entries:
     version: 0.1.0
   confluentinc-cp-kafka:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.109551819-04:00"
+    created: "2022-06-02T10:33:11.073754151-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -170,7 +170,7 @@ entries:
     - confluentinc-cp-kafka-2.1.1.tgz
     version: 2.1.1
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.108466762-04:00"
+    created: "2022-06-02T10:33:11.071851633-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -192,7 +192,7 @@ entries:
     - confluentinc-cp-kafka-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.107326685-04:00"
+    created: "2022-06-02T10:33:11.070886036-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -216,7 +216,7 @@ entries:
   db2-client:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.110720476-04:00"
+    created: "2022-06-02T10:33:11.075028075-04:00"
     description: Support for DB2 command line interface (CLI)
     digest: de01d72675c2f8790a21c3d241f438ffcfa4a78fb4b6d0a9dbc6bc49432575b9
     home: http://senzing.com
@@ -229,7 +229,7 @@ entries:
     version: 0.2.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.110409017-04:00"
+    created: "2022-06-02T10:33:11.074201541-04:00"
     description: Support for DB2 command line interface (CLI)
     digest: d497eaf378f2c48c82581147f55ac51b655e3b6dbfe0f2f48a7a0c7545bea69e
     home: http://senzing.com
@@ -243,7 +243,7 @@ entries:
   helm-create-example:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.111081863-04:00"
+    created: "2022-06-02T10:33:11.075953132-04:00"
     description: A Helm chart for Kubernetes
     digest: 4da9f7c551fce1f55f5caccae2de63ad3124e93d670d399e007a41a9bc914bdf
     icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
@@ -253,7 +253,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.110897586-04:00"
+    created: "2022-06-02T10:33:11.075619648-04:00"
     description: A Helm chart for Kubernetes
     digest: 9ea620d20b366187f25d267d8e81321602cf1c16b9446b5437f88de7bbd072d9
     icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
@@ -264,7 +264,7 @@ entries:
   ibm-db2-driver-installer:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.112774792-04:00"
+    created: "2022-06-02T10:33:11.078438263-04:00"
     description: Install IBM Db2 client drivers
     digest: d8796c04ccfa82e1bdbfa04366979b23802d51d4d90d8cc2098484cdbe52304c
     home: http://senzing.com
@@ -282,7 +282,7 @@ entries:
     version: 1.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.112481303-04:00"
+    created: "2022-06-02T10:33:11.078019633-04:00"
     description: Install IBM Db2 client drivers
     digest: f042edf078e86f6c53b5a4a4554df7ebc7551c15f2e584a788ad989cbfd91fe2
     home: http://senzing.com
@@ -300,7 +300,7 @@ entries:
     version: 1.1.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.112188774-04:00"
+    created: "2022-06-02T10:33:11.077601026-04:00"
     description: Install IBM Db2 client drivers
     digest: 92376e0d022e5e1e2034042b6cf7aea1ec32afdca6042c0c84e1aa50596ba08a
     home: http://senzing.com
@@ -318,7 +318,7 @@ entries:
     version: 1.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.111907997-04:00"
+    created: "2022-06-02T10:33:11.077195652-04:00"
     description: Install IBM Db2 client drivers
     digest: e1bcea6264205d6ce44ad30125237b7ae3a07f0d35bf3989971d64fc924f850a
     home: http://senzing.com
@@ -336,7 +336,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.111620637-04:00"
+    created: "2022-06-02T10:33:11.076767907-04:00"
     description: Install IBM Db2 client drivers
     digest: 20142233bb94093741f024834c46ec3593b41042f5a3f1fa163c3dad54057059
     home: http://senzing.com
@@ -354,7 +354,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.11135023-04:00"
+    created: "2022-06-02T10:33:11.07634796-04:00"
     description: Install IBM Db2 client drivers
     digest: cd16a74e9127946ac9eb89cb56e05811f0e5033ecfaeb53e23c1d0ea58c82440
     home: http://senzing.com
@@ -373,7 +373,7 @@ entries:
   kafka-test-client:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.113630573-04:00"
+    created: "2022-06-02T10:33:11.079713133-04:00"
     description: Kafka test client
     digest: 9aa47fda7c24bb08c72b60c82655f45ca59b2c8c5fca38e18d971bad9ea193c6
     home: http://senzing.com
@@ -386,7 +386,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.113351784-04:00"
+    created: "2022-06-02T10:33:11.079209215-04:00"
     description: Kafka test client
     digest: d1bc83b2d28045e2bd0eea7ac8c5ae0fb444be79e9a4de4b099a8b7752396f3a
     home: http://senzing.com
@@ -399,7 +399,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.113070263-04:00"
+    created: "2022-06-02T10:33:11.078786418-04:00"
     description: Kafka test client
     digest: 33a331cfa984e78f823b2a3621d55ccd83b45972f5a922b86e8103c81001f910
     home: http://senzing.com
@@ -412,7 +412,7 @@ entries:
     version: 0.2.0
   microsoft-mssql-tools:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.118196608-04:00"
+    created: "2022-06-02T10:33:11.085828382-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -434,7 +434,7 @@ entries:
     - microsoft-mssql-tools-2.2.0.tgz
     version: 2.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.116773642-04:00"
+    created: "2022-06-02T10:33:11.084041845-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -456,7 +456,7 @@ entries:
     - microsoft-mssql-tools-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.115309748-04:00"
+    created: "2022-06-02T10:33:11.081610543-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -480,7 +480,7 @@ entries:
   mssql-tools:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.118608563-04:00"
+    created: "2022-06-02T10:33:11.086263882-04:00"
     description: MS-SQL tools
     digest: 5a8bfbe3698d9f10c5517fc72151fce6772d81bc11d80cf3a2fcf55e1078b8be
     home: http://senzing.com
@@ -494,7 +494,7 @@ entries:
   mysql-client:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.119740338-04:00"
+    created: "2022-06-02T10:33:11.087662184-04:00"
     description: MySQL client
     digest: f19eb68dd17be2fa636de21e0783271b8a1dbe96a3e6410cb03d4fb38e00057b
     home: http://senzing.com
@@ -509,7 +509,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.119330773-04:00"
+    created: "2022-06-02T10:33:11.087073469-04:00"
     description: MySQL client
     digest: 3afac12c6fe94d9cb41579e12359538e5ed1433a167232fc32851bc97aa3a682
     home: http://senzing.com
@@ -524,7 +524,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.118941328-04:00"
+    created: "2022-06-02T10:33:11.086624242-04:00"
     description: MySQL client
     digest: 7d7344265ab19b5ceab7b65f23d88a9a8b54c2772fd1b854a27a8db1646e0ae6
     home: http://senzing.com
@@ -540,7 +540,7 @@ entries:
   phpmyadmin:
   - apiVersion: v1
     appVersion: 4.8.5
-    created: "2022-05-09T10:05:33.121171202-04:00"
+    created: "2022-06-02T10:33:11.089660774-04:00"
     description: phpMyAdmin, an mysql administration frontend
     digest: d4327dcdb158fd15cc163c8a3df851b1ab7ef6ac2244de395f743050738a3bc4
     home: https://www.phpmyadmin.net/
@@ -559,7 +559,7 @@ entries:
     version: 2.0.6
   - apiVersion: v1
     appVersion: 4.8.5
-    created: "2022-05-09T10:05:33.120714132-04:00"
+    created: "2022-06-02T10:33:11.089020671-04:00"
     description: phpMyAdmin, an mysql administration frontend
     digest: 87b5370230d77febeed287c3e7cca523a36546d721149ca47a94b23eac3d3c27
     home: https://www.phpmyadmin.net/
@@ -578,7 +578,7 @@ entries:
     version: 2.0.5
   - apiVersion: v1
     appVersion: 4.8.5
-    created: "2022-05-09T10:05:33.12023977-04:00"
+    created: "2022-06-02T10:33:11.088372875-04:00"
     description: phpMyAdmin, an mysql administration frontend
     digest: 71a8dbfa434d5030ea4a6fc90abb3f5714acdea4e446fe742fffc40c0b875d4d
     home: https://www.phpmyadmin.net/
@@ -597,7 +597,7 @@ entries:
     version: 2.0.4
   phppgadmin:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.132976095-04:00"
+    created: "2022-06-02T10:33:11.106451572-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -623,7 +623,7 @@ entries:
     - phppgadmin-3.2.1.tgz
     version: 3.2.1
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.131613137-04:00"
+    created: "2022-06-02T10:33:11.103454197-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -649,7 +649,7 @@ entries:
     - phppgadmin-3.2.0.tgz
     version: 3.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.130277028-04:00"
+    created: "2022-06-02T10:33:11.10010089-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -675,7 +675,7 @@ entries:
     - phppgadmin-3.1.0.tgz
     version: 3.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.128323878-04:00"
+    created: "2022-06-02T10:33:11.09808694-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -701,7 +701,7 @@ entries:
     - phppgadmin-3.0.0.tgz
     version: 3.0.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.126898035-04:00"
+    created: "2022-06-02T10:33:11.096349501-04:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -721,7 +721,7 @@ entries:
     - phppgadmin-2.0.0.tgz
     version: 2.0.0
   - apiVersion: v1
-    created: "2022-05-09T10:05:33.125179729-04:00"
+    created: "2022-06-02T10:33:11.094409946-04:00"
     description: phpPgAdmin is a web-based administration tool for PostgreSQL. It
       is perfect for PostgreSQL DBAs, newbies, and hosting services.
     digest: 443a8da5c8600d99a03bd5c50352ba9e41b3813d2711ce5a7b34af28f3db73ca
@@ -737,7 +737,7 @@ entries:
     - phppgadmin-1.0.1.tgz
     version: 1.0.1
   - apiVersion: v1
-    created: "2022-05-09T10:05:33.124036605-04:00"
+    created: "2022-06-02T10:33:11.092994906-04:00"
     description: phpPgAdmin is a web-based administration tool for PostgreSQL. It
       is perfect for PostgreSQL DBAs, newbies, and hosting services.
     digest: 4294f4538c1862b97a486292161d2f15832f21ac6a1111444121aaec8888b7e4
@@ -753,7 +753,7 @@ entries:
     - phppgadmin-1.0.0.tgz
     version: 1.0.0
   - apiVersion: v1
-    created: "2022-05-09T10:05:33.122843462-04:00"
+    created: "2022-06-02T10:33:11.091277089-04:00"
     description: phpPgAdmin is a web-based administration tool for PostgreSQL. It
       is perfect for PostgreSQL DBAs, newbies, and hosting services.
     digest: fe046733f67c1a1d8e0d8a7f2dc64898b93d6b2820503a16bab4094156b8ca41
@@ -771,7 +771,7 @@ entries:
   postgresql-client:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.134438166-04:00"
+    created: "2022-06-02T10:33:11.110404279-04:00"
     description: Postgresql client
     digest: c207caa5f9a561663a4f7c8800cb2df1cae4818b96d8b03ed943b0a336473e99
     home: http://senzing.com
@@ -784,7 +784,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.134092844-04:00"
+    created: "2022-06-02T10:33:11.109475169-04:00"
     description: Postgresql client
     digest: 01d52c6ec96b816a82bd236f089e7f7567a338eec421377c48745efe9d509617
     home: http://senzing.com
@@ -797,7 +797,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.133758794-04:00"
+    created: "2022-06-02T10:33:11.108612321-04:00"
     description: Postgresql client
     digest: c5f1ef026c6b787ff9556d2fb2f420680975d9ea78277f0ab249e54872fd38d4
     home: http://senzing.com
@@ -810,7 +810,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.133470412-04:00"
+    created: "2022-06-02T10:33:11.107763798-04:00"
     description: Postgresql client
     digest: d0b68f50ebb40b88560341d733ddc3e610442813c0e48998826581a7e197a93f
     home: http://senzing.com
@@ -823,7 +823,7 @@ entries:
     version: 0.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.13323192-04:00"
+    created: "2022-06-02T10:33:11.10708087-04:00"
     description: Postgresql client
     digest: b50060dafdf41943b741c2077f03f1f700c31be40825445d0c567830e3a88f00
     home: http://senzing.com
@@ -837,7 +837,7 @@ entries:
   resolver:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.140479474-04:00"
+    created: "2022-06-02T10:33:11.123799752-04:00"
     description: A Senzing environment for ephemeral entity resolution.
     digest: d68747a2dd46644f92cb487c2911f1d552b0a44a3a60c884131ba2f4e061970e
     home: http://senzing.com
@@ -852,7 +852,7 @@ entries:
     version: 1.4.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.13983297-04:00"
+    created: "2022-06-02T10:33:11.122412556-04:00"
     description: A Senzing environment for ephemeral entity resolution.
     digest: bdfa6b5ce40d85efd2cb1a77cbaa9957deee9e5571804210c9894a946c7eff44
     home: http://senzing.com
@@ -867,7 +867,7 @@ entries:
     version: 1.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.139200884-04:00"
+    created: "2022-06-02T10:33:11.121263747-04:00"
     description: A Senzing environment for ephemeral entity resolution.
     digest: 8d63170b63dfab495cf1c7c447584aea97187f783d16f8f25dbfa7862b36ad13
     home: http://senzing.com
@@ -882,7 +882,7 @@ entries:
     version: 1.2.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.138574605-04:00"
+    created: "2022-06-02T10:33:11.120103109-04:00"
     description: A Senzing environment for ephemeral entity resolution.
     digest: 4497ebd63e08659efa7311c1b79872e976cc910d32721cbacc8a6aead7d1449d
     home: http://senzing.com
@@ -897,7 +897,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.138097163-04:00"
+    created: "2022-06-02T10:33:11.119044982-04:00"
     description: A Senzing environment for ephemeral entity resolution.
     digest: 53f07c8b549bfa6f142635a26573ec7cf8e7624f8b6927dca8ec399718704029
     home: http://senzing.com
@@ -912,7 +912,7 @@ entries:
     version: 1.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.1376298-04:00"
+    created: "2022-06-02T10:33:11.117833303-04:00"
     description: A Senzing environment for ephemeral entity resolution.
     digest: 1e3af7997c65c6f4940e673d137c7ab3c83b0340cb2d1bc6fcfd460a9f4b7230
     home: http://senzing.com
@@ -927,7 +927,7 @@ entries:
     version: 1.1.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.137159131-04:00"
+    created: "2022-06-02T10:33:11.115877672-04:00"
     description: A Senzing environment for ephemeral entity resolution.
     digest: 2e7f40ec6525d9cab1e3eab1ca3a8e6bb495db3a80ddbe04706249bb65f388a9
     home: http://senzing.com
@@ -942,7 +942,7 @@ entries:
     version: 1.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.13670115-04:00"
+    created: "2022-06-02T10:33:11.114914828-04:00"
     description: A Senzing environment for ephemeral entity resolution.
     digest: 4a545e534f10a9609b8585bd2292e336d0c743f0c4186daafc0cbc7c7013523a
     home: http://senzing.com
@@ -957,7 +957,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.136231742-04:00"
+    created: "2022-06-02T10:33:11.113936817-04:00"
     description: A Senzing environment for ephemeral entity resolution.
     digest: 4c9397ca087e86659c1f9c3a3656bc3a4654a1bbbdf079b74620611be5e34076
     home: http://senzing.com
@@ -972,7 +972,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.135736569-04:00"
+    created: "2022-06-02T10:33:11.112737952-04:00"
     description: A Senzing environment for ephemeral entity resolution.
     digest: c86ba66bd1d2fdb118e871369d2133433faf5c5ffcaf4f14de566c61b9e248ad
     home: http://senzing.com
@@ -987,7 +987,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.13475395-04:00"
+    created: "2022-06-02T10:33:11.111490384-04:00"
     description: A Senzing environment for ephemeral entity resolution.
     digest: bf243f6a6b80fb59e9ac448b73d42e70872cd3cff4b31b95f13083e1718c8fae
     home: http://senzing.com
@@ -1002,7 +1002,7 @@ entries:
     version: 1.0.0
   senzing-api-server:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.159658018-04:00"
+    created: "2022-06-02T10:33:11.148111327-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1029,7 +1029,7 @@ entries:
     - senzing-api-server-2.3.0.tgz
     version: 2.3.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.157346709-04:00"
+    created: "2022-06-02T10:33:11.146894225-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1056,7 +1056,7 @@ entries:
     - senzing-api-server-2.2.1.tgz
     version: 2.2.1
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.155402409-04:00"
+    created: "2022-06-02T10:33:11.145087523-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1083,7 +1083,7 @@ entries:
     - senzing-api-server-2.2.0.tgz
     version: 2.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.153370073-04:00"
+    created: "2022-06-02T10:33:11.143496376-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1110,7 +1110,7 @@ entries:
     - senzing-api-server-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.150508897-04:00"
+    created: "2022-06-02T10:33:11.141078901-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1138,7 +1138,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.147936276-04:00"
+    created: "2022-06-02T10:33:11.138420546-04:00"
     description: Senzing API server
     digest: 76824a794f620dcf70033339f7fd5357e75845a80abfb91b0c4119a9f00b9643
     home: http://senzing.com
@@ -1157,7 +1157,7 @@ entries:
     version: 1.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.147027553-04:00"
+    created: "2022-06-02T10:33:11.137022518-04:00"
     description: Senzing API server
     digest: d2d1703baf0c636ae9ea7ffe6a4940f6215da9a4a047a56877bb145234a60d92
     home: http://senzing.com
@@ -1173,7 +1173,7 @@ entries:
     version: 1.2.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.146458916-04:00"
+    created: "2022-06-02T10:33:11.135815752-04:00"
     description: Senzing API server
     digest: 687ce98ba0614597b3589a2fa618120af16de7b4cea41590660ca578bb89b146
     home: http://senzing.com
@@ -1189,7 +1189,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.145818282-04:00"
+    created: "2022-06-02T10:33:11.133955822-04:00"
     description: Senzing API server
     digest: 3644892a75570ab77c046c4ad97cc69ed0f22894f1c6bdbb19c322ff01c5d0f0
     home: http://senzing.com
@@ -1205,7 +1205,7 @@ entries:
     version: 1.0.6
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.1452656-04:00"
+    created: "2022-06-02T10:33:11.13247291-04:00"
     description: Senzing API server
     digest: b67f05cec5840fd942b6a76b0795dafde940921f9e54ac4c169b5579d6614bd6
     home: http://senzing.com
@@ -1221,7 +1221,7 @@ entries:
     version: 1.0.5
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.144627832-04:00"
+    created: "2022-06-02T10:33:11.131328091-04:00"
     description: Senzing API server
     digest: 91e78359d3f0b0243db94acebc9ee6c368812c710a9ab2859a116f836cd9e77c
     home: http://senzing.com
@@ -1237,7 +1237,7 @@ entries:
     version: 1.0.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.144024159-04:00"
+    created: "2022-06-02T10:33:11.130300972-04:00"
     description: Senzing API server
     digest: 20bed6219fbacebc2ebad6271f7f853c64b82ed03b8cc6d3ff517a805f91bb29
     home: http://senzing.com
@@ -1253,7 +1253,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.143338236-04:00"
+    created: "2022-06-02T10:33:11.129142833-04:00"
     description: Senzing API server
     digest: 7b58b9601c62d7a0d406e50db377cfeb777c50958aafc7ee48593c0fd816305b
     home: http://senzing.com
@@ -1269,7 +1269,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.142081821-04:00"
+    created: "2022-06-02T10:33:11.127641346-04:00"
     description: Senzing API server
     digest: 76145c659a4badde87b0e25e8a2813056710f885f0ff91be1fdfa0292516f0a7
     home: http://senzing.com
@@ -1285,7 +1285,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.141499424-04:00"
+    created: "2022-06-02T10:33:11.12641685-04:00"
     description: Senzing API server
     digest: df27a8b5b42740f2e741f5b4e8cbfcc7a31aeae2aad0607bca1570ac66c7a315
     home: http://senzing.com
@@ -1301,7 +1301,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.140976163-04:00"
+    created: "2022-06-02T10:33:11.124951375-04:00"
     description: Senzing API server
     digest: 524b075808a6c29903697dec3bc5fc00e5ec8127b7d99531a6af4aa04d8b228f
     home: http://senzing.com
@@ -1317,7 +1317,7 @@ entries:
     version: 0.2.0
   senzing-apt:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.163460585-04:00"
+    created: "2022-06-02T10:33:11.150084909-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1341,7 +1341,7 @@ entries:
     - senzing-apt-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.16218132-04:00"
+    created: "2022-06-02T10:33:11.149256115-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1366,7 +1366,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.16024736-04:00"
+    created: "2022-06-02T10:33:11.148409121-04:00"
     description: A wrapper over apt package installer prepared for Senzing installs
     digest: 517b9ab03eb6bb24a450694b8adde5067f581da433f66a235e2615ad7915a1ee
     home: http://senzing.com
@@ -1383,7 +1383,7 @@ entries:
     version: 1.0.0
   senzing-base:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.175918056-04:00"
+    created: "2022-06-02T10:33:11.159125664-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1406,7 +1406,7 @@ entries:
     - senzing-base-2.3.0.tgz
     version: 2.3.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.174636683-04:00"
+    created: "2022-06-02T10:33:11.158053066-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1429,7 +1429,7 @@ entries:
     - senzing-base-2.2.1.tgz
     version: 2.2.1
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.173229112-04:00"
+    created: "2022-06-02T10:33:11.157010942-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1452,7 +1452,7 @@ entries:
     - senzing-base-2.2.0.tgz
     version: 2.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.171600146-04:00"
+    created: "2022-06-02T10:33:11.155558106-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1475,7 +1475,7 @@ entries:
     - senzing-base-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.169784367-04:00"
+    created: "2022-06-02T10:33:11.15453873-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1499,7 +1499,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.167392761-04:00"
+    created: "2022-06-02T10:33:11.15348461-04:00"
     description: A Senzing environment
     digest: 7cce7659ff24f30ef7dd74bb1105597021aa43233d0f382fd44cd0d99b0bc270
     home: http://senzing.com
@@ -1514,7 +1514,7 @@ entries:
     version: 1.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.166888726-04:00"
+    created: "2022-06-02T10:33:11.153163004-04:00"
     description: A Senzing environment
     digest: 53956fdd569103519f128a8f377f2d438bdb7b8d7dd31c7864f05926d227aa50
     home: http://senzing.com
@@ -1529,7 +1529,7 @@ entries:
     version: 1.2.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.166409855-04:00"
+    created: "2022-06-02T10:33:11.15285682-04:00"
     description: A Senzing environment
     digest: 5dbe76ac5a0d0c11abfc20f58ba88ea099579ccec3ec274913ffa67494516621
     home: http://senzing.com
@@ -1544,7 +1544,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.166015827-04:00"
+    created: "2022-06-02T10:33:11.152511459-04:00"
     description: A Senzing environment
     digest: 32faff2889551feefec9889ab3b561477e2adf88debf64382b11f94e8889160f
     home: http://senzing.com
@@ -1559,7 +1559,7 @@ entries:
     version: 1.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.165639812-04:00"
+    created: "2022-06-02T10:33:11.152193557-04:00"
     description: A Senzing environment
     digest: ee388897aaf030f850d922aa45dc5b41eebdc5c449aba204d424fd55d7fa21f8
     home: http://senzing.com
@@ -1574,7 +1574,7 @@ entries:
     version: 1.1.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.165255284-04:00"
+    created: "2022-06-02T10:33:11.151884253-04:00"
     description: A Senzing environment
     digest: 7b6924e88b60c6d6e89685c56aba63e3cdd26cddcbf9a6e621a0bb4599e247db
     home: http://senzing.com
@@ -1589,7 +1589,7 @@ entries:
     version: 1.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.164900147-04:00"
+    created: "2022-06-02T10:33:11.151593006-04:00"
     description: A Senzing environment
     digest: c44f541fff15533fd3c989d3c0fd57f7f53e5e1a64e0aab72ead899b4c52e4f7
     home: http://senzing.com
@@ -1604,7 +1604,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.164538515-04:00"
+    created: "2022-06-02T10:33:11.151286246-04:00"
     description: A Senzing environment
     digest: 58514326c1cfc983012514c92ccccad71685b858a98ccefe4636b077351b01c6
     home: http://senzing.com
@@ -1619,7 +1619,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.164203631-04:00"
+    created: "2022-06-02T10:33:11.150731237-04:00"
     description: A Senzing environment
     digest: 9fbdb5331c60ff7fc3c2006164ef0012558308fbae4aaa7892a599541b64a850
     home: http://senzing.com
@@ -1634,7 +1634,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.163857832-04:00"
+    created: "2022-06-02T10:33:11.150345197-04:00"
     description: A Senzing environment
     digest: 8b7c46f2be3de60516e74e29ffba9c530edcd8d0a9c4f427ee687ba0b0896a70
     home: http://senzing.com
@@ -1652,7 +1652,7 @@ entries:
       category: Infrastructure
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2022-05-09T10:05:33.177356717-04:00"
+    created: "2022-06-02T10:33:11.15994709-04:00"
     description: Common templates shared by Senzing charts.
     digest: 8268322b2e3d01fa0ba8efd9b6394ecea027bb8234d4dc742e0ca196da29e47b
     home: https://github.com/Senzing/charts/tree/master/charts/senzing-common
@@ -1673,7 +1673,7 @@ entries:
       category: Infrastructure
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2022-05-09T10:05:33.176973663-04:00"
+    created: "2022-06-02T10:33:11.159676418-04:00"
     description: Common templates shared by Senzing charts.
     digest: 154b8cbc71955cb79e1d7edfbb99a3aed2255f0d7e750259ffb0c825ededdfcd
     home: https://github.com/Senzing/charts/tree/master/charts/senzing-common
@@ -1694,7 +1694,7 @@ entries:
       category: Infrastructure
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2022-05-09T10:05:33.176208902-04:00"
+    created: "2022-06-02T10:33:11.159398413-04:00"
     description: Common templates shared by Senzing charts.
     digest: 28ad65e71c706857e0f3b00d98efb3f6e8044557c74dbb413139c5838c802600
     home: https://github.com/Senzing/charts/tree/master/charts/senzing-common
@@ -1713,7 +1713,7 @@ entries:
     version: 1.0.0
   senzing-configurator:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.188439014-04:00"
+    created: "2022-06-02T10:33:11.173474106-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1737,7 +1737,7 @@ entries:
     - senzing-configurator-2.3.0.tgz
     version: 2.3.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.187284002-04:00"
+    created: "2022-06-02T10:33:11.172373663-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1761,7 +1761,7 @@ entries:
     - senzing-configurator-2.2.1.tgz
     version: 2.2.1
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.185839636-04:00"
+    created: "2022-06-02T10:33:11.170747462-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1785,7 +1785,7 @@ entries:
     - senzing-configurator-2.2.0.tgz
     version: 2.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.184358054-04:00"
+    created: "2022-06-02T10:33:11.167970215-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1809,7 +1809,7 @@ entries:
     - senzing-configurator-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.182934201-04:00"
+    created: "2022-06-02T10:33:11.166068729-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -1834,7 +1834,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.181161616-04:00"
+    created: "2022-06-02T10:33:11.164401983-04:00"
     description: A Senzing configuration micro service.
     digest: b6516ce728e1749f3cc7379b5c737e87701d71d8f636f009c763ba167767fd7e
     home: http://senzing.com
@@ -1850,7 +1850,7 @@ entries:
     version: 1.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.180770525-04:00"
+    created: "2022-06-02T10:33:11.163958895-04:00"
     description: A Senzing configuration micro service.
     digest: baf4ea5ff957f3821f0f3a5f5bbe5cc76112c61e18be9a581f1fdc70b5ea4840
     home: http://senzing.com
@@ -1866,7 +1866,7 @@ entries:
     version: 1.2.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.180452878-04:00"
+    created: "2022-06-02T10:33:11.163553798-04:00"
     description: A Senzing configuration micro service.
     digest: 57adb55ffc19d36bc120cb937fdb4e3413a1f56240c2688b0a82f10353fe378e
     home: http://senzing.com
@@ -1882,7 +1882,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.180126233-04:00"
+    created: "2022-06-02T10:33:11.163156906-04:00"
     description: A Senzing configuration micro service.
     digest: 7a63b94bf8bd34dd04d194e379d6db4ab59e13efc7fbbb2a41e149d45a31020a
     home: http://senzing.com
@@ -1898,7 +1898,7 @@ entries:
     version: 1.0.6
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.179757389-04:00"
+    created: "2022-06-02T10:33:11.162753308-04:00"
     description: A Senzing configuration micro service.
     digest: df164bccaeea95e54b4760c819f7501f1c04abb5ea79ac1c14eea5a37b2cab8c
     home: http://senzing.com
@@ -1914,7 +1914,7 @@ entries:
     version: 1.0.5
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.179403839-04:00"
+    created: "2022-06-02T10:33:11.162355646-04:00"
     description: A Senzing configuration micro service.
     digest: 04f4fa7616233ddf67c3f80500cfc3fa0ea8c8d849e1e91cce12a2f08f73b513
     home: http://senzing.com
@@ -1930,7 +1930,7 @@ entries:
     version: 1.0.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.179065895-04:00"
+    created: "2022-06-02T10:33:11.161978493-04:00"
     description: A Senzing configuration micro service.
     digest: 59086e3f123c27d55413b4b70a9b28551d2273c49a128fad61c7775960aa8e5f
     home: http://senzing.com
@@ -1946,7 +1946,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.178715206-04:00"
+    created: "2022-06-02T10:33:11.161569078-04:00"
     description: A Senzing configuration micro service.
     digest: 92d896cdd2096b5233c44a5831216df942b4347ec44345110abc3085fe5e745f
     home: http://senzing.com
@@ -1962,7 +1962,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.178371405-04:00"
+    created: "2022-06-02T10:33:11.160799011-04:00"
     description: A Senzing configuration micro service.
     digest: 84c63573a28cd0aaad9a9a6c7e980fdebaeb4d08c116e767057cd6c0eed55687
     home: http://senzing.com
@@ -1978,7 +1978,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.178044081-04:00"
+    created: "2022-06-02T10:33:11.160513749-04:00"
     description: A Senzing configuration micro service.
     digest: dc8be6e539dc2f460a28c3e149b64fec56bafa8ac9ad69535f8dedda5c20c36a
     home: http://senzing.com
@@ -1994,7 +1994,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.177699939-04:00"
+    created: "2022-06-02T10:33:11.160215379-04:00"
     description: A Senzing configuration micro service.
     digest: ee4ecb32ab3b7462c326542cd2cdf880def77412a96126b2f5274ac2a4938c7b
     home: http://senzing.com
@@ -2010,7 +2010,7 @@ entries:
     version: 0.1.0
   senzing-console:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.194250481-04:00"
+    created: "2022-06-02T10:33:11.178996027-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2034,7 +2034,7 @@ entries:
     - senzing-console-2.2.0.tgz
     version: 2.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.193205521-04:00"
+    created: "2022-06-02T10:33:11.177937517-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2058,7 +2058,7 @@ entries:
     - senzing-console-2.1.1.tgz
     version: 2.1.1
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.192061576-04:00"
+    created: "2022-06-02T10:33:11.176857256-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2082,7 +2082,7 @@ entries:
     - senzing-console-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.191013218-04:00"
+    created: "2022-06-02T10:33:11.175546542-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2107,7 +2107,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.189959355-04:00"
+    created: "2022-06-02T10:33:11.174496566-04:00"
     description: A Senzing environment for console access
     digest: 185d07bae78b8cdd0ee48bd64b1f26d0b4702a2a5d9b0dcb283461cfe13e519c
     home: http://senzing.com
@@ -2124,7 +2124,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.189586912-04:00"
+    created: "2022-06-02T10:33:11.174156328-04:00"
     description: A Senzing environment for console access
     digest: 76ed3f67fccf0251e19df466659c2eb0154ccd61ca1ba136b31fb45b168b6f0a
     home: http://senzing.com
@@ -2140,7 +2140,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.188815796-04:00"
+    created: "2022-06-02T10:33:11.173811327-04:00"
     description: A Senzing environment for console access
     digest: 7d24e160c3456524ff590c1220cbb4b4c5dbb5275990771c0223fac64120bf89
     home: http://senzing.com
@@ -2157,7 +2157,7 @@ entries:
   senzing-debug:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.198349093-04:00"
+    created: "2022-06-02T10:33:11.182631375-04:00"
     description: A Senzing environment for debugging
     digest: 15b774cc7a727ca2034f01279edac0d1793373d18d6b0546517746c19529334e
     home: http://senzing.com
@@ -2173,7 +2173,7 @@ entries:
     version: 1.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.198030762-04:00"
+    created: "2022-06-02T10:33:11.182321729-04:00"
     description: A Senzing environment for debugging
     digest: f750b60a51086ca82d3cbe70059f1c9e557810afb7d4431c5ee04341cebfd712
     home: http://senzing.com
@@ -2189,7 +2189,7 @@ entries:
     version: 1.2.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.197724587-04:00"
+    created: "2022-06-02T10:33:11.181997692-04:00"
     description: A Senzing environment for debugging
     digest: 21ac2ab7b546c62cec799b5b4f2497dae6b84ef27479139fb47fe5ddeef45b1c
     home: http://senzing.com
@@ -2205,7 +2205,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.197390805-04:00"
+    created: "2022-06-02T10:33:11.181682824-04:00"
     description: A Senzing environment for debugging
     digest: 482f5ff6325a49f6db4b5a9790d5005e2819144372ab9143a374a0c3a6892e5a
     home: http://senzing.com
@@ -2221,7 +2221,7 @@ entries:
     version: 1.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.197032611-04:00"
+    created: "2022-06-02T10:33:11.181302323-04:00"
     description: A Senzing environment for debugging
     digest: 2832f5055bc83daa695e9022785dbb14536aca9e220e1115b2ae065d85bc935a
     home: http://senzing.com
@@ -2237,7 +2237,7 @@ entries:
     version: 1.1.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.196669144-04:00"
+    created: "2022-06-02T10:33:11.180680986-04:00"
     description: A Senzing environment for debugging
     digest: 2e13be2345ec5c883e9aba381035f62576d1ea7615f6274772fde8d68c01c256
     home: http://senzing.com
@@ -2253,7 +2253,7 @@ entries:
     version: 1.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.19633747-04:00"
+    created: "2022-06-02T10:33:11.180368443-04:00"
     description: A Senzing environment for debugging
     digest: cea3b45817b5a5aaa17193a9619a95b07b059dcbabd5e91e055721d02079909d
     home: http://senzing.com
@@ -2269,7 +2269,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.196036362-04:00"
+    created: "2022-06-02T10:33:11.180078415-04:00"
     description: A Senzing environment for debugging
     digest: 7ff3452644699b68fb8327a4c90bbc1f9a784fbaff53d333a174a7df022c930f
     home: http://senzing.com
@@ -2285,7 +2285,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.195755054-04:00"
+    created: "2022-06-02T10:33:11.179807139-04:00"
     description: A Senzing environment for debugging
     digest: a346e059161414b18e6632d8521e0e7b49399174b1c56f2532aa9c8810c35a73
     home: http://senzing.com
@@ -2301,7 +2301,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.195428708-04:00"
+    created: "2022-06-02T10:33:11.179531024-04:00"
     description: A Senzing environment for debugging
     digest: 4e77cba4cbfbaaaae2f7b9f9011672d47deff9ad3aaf1f235b243f03faeabd79
     home: http://senzing.com
@@ -2317,7 +2317,7 @@ entries:
     version: 0.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.194931782-04:00"
+    created: "2022-06-02T10:33:11.179262386-04:00"
     description: A Senzing environment for debugging
     digest: 9336e4df3b0129f0553fb463b2e5494d83c5c04182bab31dfd08b78d120f3a91
     home: http://senzing.com
@@ -2333,7 +2333,7 @@ entries:
     version: 0.2.0
   senzing-entity-search-web-app:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.20696879-04:00"
+    created: "2022-06-02T10:33:11.190315396-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2356,7 +2356,7 @@ entries:
     - senzing-entity-search-web-app-2.2.1.tgz
     version: 2.2.1
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.205391018-04:00"
+    created: "2022-06-02T10:33:11.189236134-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2379,7 +2379,7 @@ entries:
     - senzing-entity-search-web-app-2.2.0.tgz
     version: 2.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.204205829-04:00"
+    created: "2022-06-02T10:33:11.188121225-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2402,7 +2402,7 @@ entries:
     - senzing-entity-search-web-app-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.203033913-04:00"
+    created: "2022-06-02T10:33:11.187004059-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2426,7 +2426,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.201867724-04:00"
+    created: "2022-06-02T10:33:11.185406572-04:00"
     description: The Senzing Entity Search WebApp
     digest: ffd300ff0a740442feab488ad777bdc65290735f2c6ec56982b659143a0381fb
     home: http://senzing.com
@@ -2441,7 +2441,7 @@ entries:
     version: 1.2.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.201467041-04:00"
+    created: "2022-06-02T10:33:11.185052212-04:00"
     description: The Senzing Entity Search WebApp
     digest: 16f5a0cee13fd706ab09df99d5468e9f369fa84bc94dfda51e4ca7d3496528ed
     home: http://senzing.com
@@ -2456,7 +2456,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.201099897-04:00"
+    created: "2022-06-02T10:33:11.184724257-04:00"
     description: The Senzing Entity Search WebApp
     digest: 5a758d11977fceca0b16ef35cb56f2a8c8bbd85015078a87dab4ba18a53714ba
     home: http://senzing.com
@@ -2471,7 +2471,7 @@ entries:
     version: 1.0.5
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.200714046-04:00"
+    created: "2022-06-02T10:33:11.18432849-04:00"
     description: The Senzing Entity Search WebApp
     digest: b798fa816e7893c7d90da197dc7718a7fb5900935047b08db0011cd33a27b0ae
     home: http://senzing.com
@@ -2486,7 +2486,7 @@ entries:
     version: 1.0.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.200318507-04:00"
+    created: "2022-06-02T10:33:11.184006582-04:00"
     description: The Senzing Entity Search WebApp
     digest: 4f21b05dcd0382e759f59af616e33442a4534017557ebf88233828defae52ae0
     home: http://senzing.com
@@ -2501,7 +2501,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.199447872-04:00"
+    created: "2022-06-02T10:33:11.18371417-04:00"
     description: The Senzing Entity Search WebApp
     digest: b051c396310086ed7cd335ff7ece229bef63e431e9b51225e04c2ced426f51d3
     home: http://senzing.com
@@ -2516,7 +2516,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.199168076-04:00"
+    created: "2022-06-02T10:33:11.183437182-04:00"
     description: The Senzing Entity Search WebApp
     digest: 6e7a159cad3103870529ad78a1cddc7bd5b20ac71e57e4de3d4780242da68a61
     home: http://senzing.com
@@ -2531,7 +2531,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.198890291-04:00"
+    created: "2022-06-02T10:33:11.183162276-04:00"
     description: The Senzing Entity Search WebApp
     digest: 99de4357c02649677d3b6f0aea93c3942ced50e2e8457042a20a45bec1ed41ba
     home: http://senzing.com
@@ -2546,7 +2546,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.198621476-04:00"
+    created: "2022-06-02T10:33:11.182894878-04:00"
     description: The Senzing Entity Search WebApp
     digest: f7d0000397937a8874eaf5b9e11335fefb325ce206de5d4d4181daba9ff0dcac
     home: http://senzing.com
@@ -2562,7 +2562,7 @@ entries:
   senzing-hello-world:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.207711153-04:00"
+    created: "2022-06-02T10:33:11.191003345-04:00"
     description: Prints timestamped hello-world messages
     digest: 643c76c438502cfbd576156116933b9550ed0f814b65ada15bf8e075c8b780c0
     home: http://senzing.com
@@ -2577,7 +2577,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.207447259-04:00"
+    created: "2022-06-02T10:33:11.190757199-04:00"
     description: Prints timestamped hello-world messages
     digest: b2a036e61969c677f7491146f6cde1a2e9d76c37274b2f20ac447b0d52edd4b9
     home: http://senzing.com
@@ -2592,7 +2592,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.207180959-04:00"
+    created: "2022-06-02T10:33:11.190519962-04:00"
     description: Prints timestamped hello-world messages
     digest: be59cec267907ffabfe53b20308de3443a5c0d09392edea0b64145c0c1247274
     home: http://senzing.com
@@ -2608,7 +2608,7 @@ entries:
   senzing-hello-world-on-hub-docker-com:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.208505348-04:00"
+    created: "2022-06-02T10:33:11.192063161-04:00"
     description: Prints timestamped hello-world messages
     digest: c55f79397b317b99d73bc89260453c908e1ef578aa12edacae09ee5dc5a9a3d9
     home: http://senzing.com
@@ -2623,7 +2623,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.208210974-04:00"
+    created: "2022-06-02T10:33:11.191773457-04:00"
     description: Prints timestamped hello-world messages
     digest: 36a765414d09f9afeb144cf106b528fcb31c1adf444ea1aa344e2a0519c4ec29
     home: http://senzing.com
@@ -2638,7 +2638,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.207937055-04:00"
+    created: "2022-06-02T10:33:11.191342006-04:00"
     description: Prints timestamped hello-world messages
     digest: 12e2076d252b19dbbe162c535d95a2777be3b47f18dd788fc14153c7803456df
     home: http://senzing.com
@@ -2654,7 +2654,7 @@ entries:
   senzing-ibm-db2:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.210403408-04:00"
+    created: "2022-06-02T10:33:11.193793738-04:00"
     description: IBM Db2 with Senzing customization.
     digest: a4258a49a2a31ba965a4ab473bc782bc213d254ae00758f9ab66f1bd66338f53
     home: http://senzing.com
@@ -2670,7 +2670,7 @@ entries:
     version: 1.0.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.210089772-04:00"
+    created: "2022-06-02T10:33:11.193490238-04:00"
     description: IBM Db2 with Senzing customization.
     digest: 9185996553bce1cbb82b092386e157af006fb6262e90ea9c8a7e269adc570c85
     home: http://senzing.com
@@ -2686,7 +2686,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.209785989-04:00"
+    created: "2022-06-02T10:33:11.193201487-04:00"
     description: IBM Db2 with Senzing customization.
     digest: facc259554358d4578009d0097b9216ecb182f723e0129f6325752fa23d1eb5e
     home: http://senzing.com
@@ -2702,7 +2702,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.209501634-04:00"
+    created: "2022-06-02T10:33:11.192911769-04:00"
     description: IBM Db2 with Senzing customization.
     digest: 07a0c0e7d38d8e3ff40a94f6a91aa792a90452346dd7805c43b26257a4fb37d8
     home: http://senzing.com
@@ -2718,7 +2718,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.209202078-04:00"
+    created: "2022-06-02T10:33:11.192634226-04:00"
     description: IBM Db2 with Senzing customization.
     digest: 5583a2427aab74b1e09414acd0794ca5bc29a8a4add210ede35a8bdde4fe21a6
     home: http://senzing.com
@@ -2734,7 +2734,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.208879401-04:00"
+    created: "2022-06-02T10:33:11.192332743-04:00"
     description: IBM Db2 with Senzing customization.
     digest: 10715ac6a1da0abdbe8e57602c85b12f86c5e4a0100505daf768f409a6a72509
     home: http://senzing.com
@@ -2750,7 +2750,7 @@ entries:
     version: 0.1.0
   senzing-init-container:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.215935529-04:00"
+    created: "2022-06-02T10:33:11.1986304-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2773,7 +2773,7 @@ entries:
     - senzing-init-container-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.215043146-04:00"
+    created: "2022-06-02T10:33:11.197822277-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2797,7 +2797,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.214161697-04:00"
+    created: "2022-06-02T10:33:11.197005439-04:00"
     description: Performs all of the Senzing initialization requiring "root" authority.
     digest: edac56b4f4adfa9b227966fb4797d346129201deb8f934c0d78d88a366a977d0
     home: http://senzing.com
@@ -2812,7 +2812,7 @@ entries:
     version: 1.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.213837373-04:00"
+    created: "2022-06-02T10:33:11.196623426-04:00"
     description: Performs all of the Senzing initialization requiring "root" authority.
     digest: 5470ddeaa6fe86ee98fe3e5678ab84eb7eb28be52a5460e617a530346893e1f1
     home: http://senzing.com
@@ -2827,7 +2827,7 @@ entries:
     version: 1.2.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.213509196-04:00"
+    created: "2022-06-02T10:33:11.196074653-04:00"
     description: Performs all of the Senzing initialization requiring "root" authority.
     digest: 5735856fba8b27dba99de645d7a2e830dd5e057e437b250cfc4acd76b6cad8f6
     home: http://senzing.com
@@ -2842,7 +2842,7 @@ entries:
     version: 1.2.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.21320443-04:00"
+    created: "2022-06-02T10:33:11.195720728-04:00"
     description: Performs all of the Senzing initialization requiring "root" authority.
     digest: f043ddbeac066ea5eadda5c31606fe58d55cda470c6e7126f475fcfdf7424ce6
     home: http://senzing.com
@@ -2857,7 +2857,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.212858368-04:00"
+    created: "2022-06-02T10:33:11.195423351-04:00"
     description: Performs all of the Senzing initialization requiring "root" authority.
     digest: 15d2cc9c1a377b8ff70d9e17a333d4d94be1547be916b3200400c95346e96102
     home: http://senzing.com
@@ -2872,7 +2872,7 @@ entries:
     version: 1.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.212512869-04:00"
+    created: "2022-06-02T10:33:11.195140642-04:00"
     description: Performs all of the Senzing initialization requiring "root" authority.
     digest: f2169d7d1c7b8a3fcebb24ac16dff731b66ae8c7ee999debe596683e40a7ac0e
     home: http://senzing.com
@@ -2887,7 +2887,7 @@ entries:
     version: 1.1.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.212140441-04:00"
+    created: "2022-06-02T10:33:11.194853098-04:00"
     description: Performs all of the Senzing initialization requiring "root" authority.
     digest: 1358bf2ef18adaba94fe4865ee8e88bcfb7518d88e02d6cee42378b91e8a8df7
     home: http://senzing.com
@@ -2902,7 +2902,7 @@ entries:
     version: 1.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.211801502-04:00"
+    created: "2022-06-02T10:33:11.194579686-04:00"
     description: Performs all of the Senzing initialization requiring "root" authority.
     digest: 7b3d30d22a49414986eb638321189f1a3fcf792e51d0a8d16187847dea3ff8b5
     home: http://senzing.com
@@ -2917,7 +2917,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.211461763-04:00"
+    created: "2022-06-02T10:33:11.194313267-04:00"
     description: Performs all of the Senzing initialization requiring "root" authority.
     digest: fc5b8f73fb62254379faa2286123db01a1f5dfea21c7e753e9493999cb9d0db9
     home: http://senzing.com
@@ -2932,7 +2932,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.211134428-04:00"
+    created: "2022-06-02T10:33:11.194045549-04:00"
     description: Performs all of the Senzing initialization requiring "root" authority.
     digest: 5327f4895ef80866677b9cf32a70eabd9f434e27bc0e9999ec4c8ac5379c592e
     home: http://senzing.com
@@ -2947,7 +2947,7 @@ entries:
     version: 0.1.0
   senzing-installer:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.219825719-04:00"
+    created: "2022-06-02T10:33:11.201961773-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2969,7 +2969,7 @@ entries:
     - senzing-installer-1.2.0.tgz
     version: 1.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.218636569-04:00"
+    created: "2022-06-02T10:33:11.200528003-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -2991,7 +2991,7 @@ entries:
     - senzing-installer-1.1.0.tgz
     version: 1.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.217447748-04:00"
+    created: "2022-06-02T10:33:11.199571047-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3015,7 +3015,7 @@ entries:
   senzing-mock-data-generator:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.221486743-04:00"
+    created: "2022-06-02T10:33:11.20349189-04:00"
     description: A generator of Senzing data to feed Kafka
     digest: 1e9ffc23782f7487e3634947059842302d7ea331902631ba41748e81962c45ab
     home: http://senzing.com
@@ -3031,7 +3031,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.221152517-04:00"
+    created: "2022-06-02T10:33:11.203171056-04:00"
     description: A generator of Senzing data to feed Kafka
     digest: b4958a754a9e9fabba3c0933dd499169f6a6021eadd819ed239b262842b636d5
     home: http://senzing.com
@@ -3047,7 +3047,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.220834199-04:00"
+    created: "2022-06-02T10:33:11.202876912-04:00"
     description: A generator of Senzing data to feed Kafka
     digest: 078e4a4681a4285464e584b28383a3f0def7790e29954dc3f4ec6485c4013bc1
     home: http://senzing.com
@@ -3063,7 +3063,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.220491695-04:00"
+    created: "2022-06-02T10:33:11.202567559-04:00"
     description: A generator of Senzing data to feed Kafka
     digest: a00cb8d0c6280c93cf2026818c5c5bf8637d9708c8d6f7617b0dedad4a95ef74
     home: http://senzing.com
@@ -3079,7 +3079,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.220146073-04:00"
+    created: "2022-06-02T10:33:11.202233004-04:00"
     description: A generator of Senzing data to feed Kafka
     digest: ab50feb920e0e8da63d0dd42d51ccfa138c657b2fcd5fca2d482b2a31236bf16
     home: http://senzing.com
@@ -3096,7 +3096,7 @@ entries:
   senzing-package:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.22285732-04:00"
+    created: "2022-06-02T10:33:11.204304488-04:00"
     description: A package manager for Senzing_API.tgz
     digest: be23e77ce08d906ccd3b5876e2f1607407fc0169a64da3662bef171061be5247
     home: http://senzing.com
@@ -3111,7 +3111,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.222255598-04:00"
+    created: "2022-06-02T10:33:11.204036799-04:00"
     description: A package manager for Senzing_API.tgz
     digest: 846e7c34c0d9307bd001b187feafedddf6b14ae7e2f87e02f5a8b5fa4050820c
     home: http://senzing.com
@@ -3126,7 +3126,7 @@ entries:
     version: 0.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.221741223-04:00"
+    created: "2022-06-02T10:33:11.203749115-04:00"
     description: A package manager for Senzing_API.tgz
     digest: ed015f3e51a3239f2455b338790add4463d5220dfa6f04ac91f442b5fbb38e9c
     home: http://senzing.com
@@ -3141,7 +3141,7 @@ entries:
     version: 0.2.0
   senzing-postgresql-client:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.225190002-04:00"
+    created: "2022-06-02T10:33:11.206296048-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3164,7 +3164,7 @@ entries:
     - senzing-postgresql-client-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.223994032-04:00"
+    created: "2022-06-02T10:33:11.205303957-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3188,7 +3188,7 @@ entries:
     version: 2.0.0
   senzing-redoer:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.236440845-04:00"
+    created: "2022-06-02T10:33:11.215430599-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3215,7 +3215,7 @@ entries:
     - senzing-redoer-2.3.0.tgz
     version: 2.3.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.234183934-04:00"
+    created: "2022-06-02T10:33:11.214237946-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3242,7 +3242,7 @@ entries:
     - senzing-redoer-2.2.1.tgz
     version: 2.2.1
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.232400752-04:00"
+    created: "2022-06-02T10:33:11.213075169-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3269,7 +3269,7 @@ entries:
     - senzing-redoer-2.2.0.tgz
     version: 2.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.230995849-04:00"
+    created: "2022-06-02T10:33:11.211761051-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3296,7 +3296,7 @@ entries:
     - senzing-redoer-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.229598058-04:00"
+    created: "2022-06-02T10:33:11.2104119-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3324,7 +3324,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.228122919-04:00"
+    created: "2022-06-02T10:33:11.20923907-04:00"
     description: Processes Senzing redo records
     digest: e55feb8f83fbfc0e8b722876ddf21a0f775df9069c8f5d496c8d7273edb04caa
     home: http://senzing.com
@@ -3343,7 +3343,7 @@ entries:
     version: 1.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.227266707-04:00"
+    created: "2022-06-02T10:33:11.208746557-04:00"
     description: Processes Senzing redo records
     digest: 1efe169b433ad50c628a74ac51a83ca18a09b8d9c0aa63be06ac5a99e074feb9
     home: http://senzing.com
@@ -3359,7 +3359,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.226877849-04:00"
+    created: "2022-06-02T10:33:11.208319371-04:00"
     description: Processes Senzing redo records
     digest: d8fabddff7286be8a4e7c6921bf522154d2463943a94efa555d37f6e74c667ca
     home: http://senzing.com
@@ -3375,7 +3375,7 @@ entries:
     version: 1.0.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.22652169-04:00"
+    created: "2022-06-02T10:33:11.207972901-04:00"
     description: Processes Senzing redo records
     digest: daa38fcdfcabbba9284b38dcabeb6840eb48ff4eba72c6aa789664e63415d9b5
     home: http://senzing.com
@@ -3391,7 +3391,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.226186871-04:00"
+    created: "2022-06-02T10:33:11.207621105-04:00"
     description: Processes Senzing redo records
     digest: da409accd555454fc38c4b7b8386ab2e6d239efdff4c13673e448051c5c63912
     home: http://senzing.com
@@ -3407,7 +3407,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.225863079-04:00"
+    created: "2022-06-02T10:33:11.207269945-04:00"
     description: Processes Senzing redo records
     digest: 66f1e86d4c33479f287cea0185795a99ccde458d134d57c3e24f99a164f8d6e5
     home: http://senzing.com
@@ -3423,7 +3423,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.225499616-04:00"
+    created: "2022-06-02T10:33:11.206593327-04:00"
     description: Processes Senzing redo records
     digest: ccf216aa8d61cc056b15c5337dfe68ca961a0c5e227f1ad1242bc3b484507acb
     home: http://senzing.com
@@ -3437,9 +3437,33 @@ entries:
     urls:
     - senzing-redoer-1.0.0.tgz
     version: 1.0.0
+  senzing-resolver:
+  - apiVersion: v2
+    created: "2022-06-02T10:33:11.216531066-04:00"
+    dependencies:
+    - name: senzing-common
+      repository: https://hub.senzing.com/charts/
+      version: 1.0.2
+    description: A Senzing environment for ephemeral entity resolution.
+    digest: 582a47d9273a0fc6aeb729bbd02f12bbe2161865f49496c602ed691318eca8e1
+    home: https://github.com/Senzing/charts/tree/master/charts/senzing-resolver
+    icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
+    keywords:
+    - senzing
+    maintainers:
+    - email: support@senzing.com
+      name: Senzing
+    name: senzing-resolver
+    sources:
+    - https://github.com/Senzing/charts/tree/master/charts/senzing-template
+    - https://github.com/Senzing/resolver
+    type: application
+    urls:
+    - senzing-resolver-2.0.0.tgz
+    version: 2.0.0
   senzing-stream-loader:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.254522096-04:00"
+    created: "2022-06-02T10:33:11.235516551-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3464,7 +3488,7 @@ entries:
     - senzing-stream-loader-2.3.0.tgz
     version: 2.3.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.253143176-04:00"
+    created: "2022-06-02T10:33:11.233173605-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3489,7 +3513,7 @@ entries:
     - senzing-stream-loader-2.2.3.tgz
     version: 2.2.3
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.251664831-04:00"
+    created: "2022-06-02T10:33:11.230982205-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3514,7 +3538,7 @@ entries:
     - senzing-stream-loader-2.2.2.tgz
     version: 2.2.2
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.250067152-04:00"
+    created: "2022-06-02T10:33:11.22874542-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3539,7 +3563,7 @@ entries:
     - senzing-stream-loader-2.2.1.tgz
     version: 2.2.1
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.24826606-04:00"
+    created: "2022-06-02T10:33:11.226999391-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3564,7 +3588,7 @@ entries:
     - senzing-stream-loader-2.2.0.tgz
     version: 2.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.246305711-04:00"
+    created: "2022-06-02T10:33:11.22562416-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3589,7 +3613,7 @@ entries:
     - senzing-stream-loader-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.244950353-04:00"
+    created: "2022-06-02T10:33:11.224220791-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3615,7 +3639,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.243543759-04:00"
+    created: "2022-06-02T10:33:11.22273427-04:00"
     description: A stream-based loader for Senzing
     digest: a85a59349e402d0655956466a45d58aa1818f794adb33a14547b3a6d9c451f3f
     home: http://senzing.com
@@ -3633,7 +3657,7 @@ entries:
     version: 1.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.242948135-04:00"
+    created: "2022-06-02T10:33:11.221615809-04:00"
     description: A stream-based loader for Senzing
     digest: 31af2ea33088f45e4c401a7e4b1ac199c2a580c4e84e31923fe9b0d9110a6143
     home: http://senzing.com
@@ -3649,7 +3673,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.238388732-04:00"
+    created: "2022-06-02T10:33:11.218500595-04:00"
     description: A stream-based loader for Senzing
     digest: ecda46de932de9220fe16533eb2f330e529edff2c3f21387cbe45ce362ec58ae
     home: http://senzing.com
@@ -3665,7 +3689,7 @@ entries:
     version: 1.0.10
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.242520148-04:00"
+    created: "2022-06-02T10:33:11.221221735-04:00"
     description: A stream-based loader for Senzing
     digest: 2db2d93520091275da8170b18174f014a4cfbdd51255018ccd7629c4befab494
     home: http://senzing.com
@@ -3681,7 +3705,7 @@ entries:
     version: 1.0.9
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.241637773-04:00"
+    created: "2022-06-02T10:33:11.220871403-04:00"
     description: A stream-based loader for Senzing
     digest: c72108f9fa278bcd80730a7be0c6bda0880c1004362c96f2c1820fb24c61dc5d
     home: http://senzing.com
@@ -3697,7 +3721,7 @@ entries:
     version: 1.0.8
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.241143466-04:00"
+    created: "2022-06-02T10:33:11.220519634-04:00"
     description: A stream-based loader for Senzing
     digest: baf94f74a383005267cbf0beed889bfb73d48c29000576c5983fc5ea5e90968c
     home: http://senzing.com
@@ -3713,7 +3737,7 @@ entries:
     version: 1.0.7
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.240675265-04:00"
+    created: "2022-06-02T10:33:11.220147972-04:00"
     description: A stream-based loader for Senzing
     digest: 7c0c99cc52a14245ffcafa82aff526d16559bc68cd46aa80eaa7e7cf164c529f
     home: http://senzing.com
@@ -3729,7 +3753,7 @@ entries:
     version: 1.0.6
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.240172875-04:00"
+    created: "2022-06-02T10:33:11.219803424-04:00"
     description: A stream-based loader for Senzing
     digest: f64b74b5968d360848b5f201ae73ac29019ec6fbeffbebba05ceaa0cd550680f
     home: http://senzing.com
@@ -3745,7 +3769,7 @@ entries:
     version: 1.0.5
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.239691693-04:00"
+    created: "2022-06-02T10:33:11.219468568-04:00"
     description: A stream-based loader for Senzing
     digest: a0b3c656f0c8a55825e9d6e241c60340dafea15f56a4520936afbf7a2ef02205
     home: http://senzing.com
@@ -3761,7 +3785,7 @@ entries:
     version: 1.0.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.239248348-04:00"
+    created: "2022-06-02T10:33:11.219137442-04:00"
     description: A stream-based loader for Senzing
     digest: c7626cd8ec403a4c043c3f892ec3e7abc3c6905dc6c0da23b059a3e8d9318bf1
     home: http://senzing.com
@@ -3777,7 +3801,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.238787131-04:00"
+    created: "2022-06-02T10:33:11.218830922-04:00"
     description: A stream-based loader for Senzing
     digest: a339d612f311f8d865ce843e26071615417bcb0de19dabcdf330db4aa6c93724
     home: http://senzing.com
@@ -3793,7 +3817,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.237949939-04:00"
+    created: "2022-06-02T10:33:11.218143262-04:00"
     description: A stream-based loader for Senzing
     digest: e0ef1a5e636272e8e8cdddc692c00b255acf5f45654702c7969a3de54cb4ff89
     home: http://senzing.com
@@ -3809,7 +3833,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.23753592-04:00"
+    created: "2022-06-02T10:33:11.217821417-04:00"
     description: A stream-based loader for Senzing
     digest: 2536061d872b511387c7282e0a51d03892de9c0330be9320f7fa147485bf0e71
     home: http://senzing.com
@@ -3825,7 +3849,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.237190634-04:00"
+    created: "2022-06-02T10:33:11.217096873-04:00"
     description: A stream-based loader for Senzing
     digest: 64eb7e36ce3d2fff51f1f1556da8c2d06c66b8a2a533a60e9dd7514a0afef64b
     home: http://senzing.com
@@ -3841,7 +3865,7 @@ entries:
     version: 0.3.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.236772534-04:00"
+    created: "2022-06-02T10:33:11.216814267-04:00"
     description: A stream-based loader for Senzing
     digest: dc05ad77631ca46b7456641246f50d4d5ab4f78f6cf10f6f47319b4ad85cab4a
     home: http://senzing.com
@@ -3857,7 +3881,7 @@ entries:
     version: 0.2.0
   senzing-stream-producer:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.258667419-04:00"
+    created: "2022-06-02T10:33:11.244750657-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3883,7 +3907,7 @@ entries:
     - senzing-stream-producer-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.257734025-04:00"
+    created: "2022-06-02T10:33:11.242252808-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -3910,7 +3934,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.256783924-04:00"
+    created: "2022-06-02T10:33:11.238794507-04:00"
     description: A generator of Senzing data to feed a queue
     digest: f044b6fe0803f509f90de9e175f7b4923d83e4bb9439c8472d008af55a346812
     home: http://senzing.com
@@ -3928,7 +3952,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.256384579-04:00"
+    created: "2022-06-02T10:33:11.237748903-04:00"
     description: A generator of Senzing data to feed a queue
     digest: de5ac5e28a435212463c8779de44972a5ea63f4439a7f5dfb4296ecb8a67184f
     home: http://senzing.com
@@ -3944,7 +3968,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.255976461-04:00"
+    created: "2022-06-02T10:33:11.236931727-04:00"
     description: A generator of Senzing data to feed a queue
     digest: 004afae88925e1cbd79e53a94cccef300aedebe912005672946c3aa4ec9a4089
     home: http://senzing.com
@@ -3960,7 +3984,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.255032472-04:00"
+    created: "2022-06-02T10:33:11.236220232-04:00"
     description: A generator of Senzing data to feed a queue
     digest: 7548bc13c6cd99697b3320b3ce7d9e62ef517a2b5b04941f8fbfb790b628d672
     home: http://senzing.com
@@ -3976,7 +4000,7 @@ entries:
     version: 1.0.0
   senzing-yum:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.263584431-04:00"
+    created: "2022-06-02T10:33:11.252418649-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -4000,7 +4024,7 @@ entries:
     - senzing-yum-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.26268408-04:00"
+    created: "2022-06-02T10:33:11.25102019-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -4025,7 +4049,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.261825752-04:00"
+    created: "2022-06-02T10:33:11.249717093-04:00"
     description: A wrapper over yum package installer prepared for Senzing installs
     digest: 5909d08c49177dd764591ec7f81c056a2f9644b3af2caab5422493c0fa6b19bb
     home: http://senzing.com
@@ -4042,7 +4066,7 @@ entries:
     version: 1.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.261493285-04:00"
+    created: "2022-06-02T10:33:11.249337341-04:00"
     description: A wrapper over yum package installer prepared for Senzing installs
     digest: 511bb4784901037d6e31fc0de2631d3b7a9aea9b2369448e75cc257b65153004
     home: http://senzing.com
@@ -4058,7 +4082,7 @@ entries:
     version: 1.1.6
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.261204039-04:00"
+    created: "2022-06-02T10:33:11.248855196-04:00"
     description: A wrapper over yum package installer prepared for Senzing installs
     digest: ad2b8fd24e4d3c4468cfc5c1cdc5dbcfe210a658e47e55bc0dc6c72ecf55e925
     home: http://senzing.com
@@ -4074,7 +4098,7 @@ entries:
     version: 1.1.5
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.260858799-04:00"
+    created: "2022-06-02T10:33:11.24833478-04:00"
     description: A wrapper over yum package installer prepared for Senzing installs
     digest: 793679b1b995eee52225866e5b3ba3239a09a2ea68837509e6b447bd6ee20cf7
     home: http://senzing.com
@@ -4090,7 +4114,7 @@ entries:
     version: 1.1.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.260314327-04:00"
+    created: "2022-06-02T10:33:11.24781049-04:00"
     description: A wrapper over yum package installer prepared for Senzing installs
     digest: 52405dfd09a6ed3c0b24236a045c2b501721734fb7d34ffdd43eaaece9134fc5
     home: http://senzing.com
@@ -4106,7 +4130,7 @@ entries:
     version: 1.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.259900285-04:00"
+    created: "2022-06-02T10:33:11.247320034-04:00"
     description: A wrapper over yum package installer prepared for Senzing installs
     digest: dc25302c29b3a1da1d514b857bb79f32b18e434da7a4432e1004b485501cd9f2
     home: http://senzing.com
@@ -4122,7 +4146,7 @@ entries:
     version: 1.1.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.259651663-04:00"
+    created: "2022-06-02T10:33:11.246864637-04:00"
     description: A wrapper over yum package installer prepared for Senzing installs
     digest: 0ce3eca8542a470367f25c3aaa1bb2f44711fe73e50fa1e975c9df2010ee900a
     home: http://senzing.com
@@ -4138,7 +4162,7 @@ entries:
     version: 1.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.259397841-04:00"
+    created: "2022-06-02T10:33:11.246391652-04:00"
     description: A wrapper over yum package installer prepared for Senzing installs
     digest: db47fe204cf775ee7603884d6fd9a680786359691b51cfccf31eaafc3696c2ce
     home: http://senzing.com
@@ -4154,7 +4178,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.25912392-04:00"
+    created: "2022-06-02T10:33:11.245893132-04:00"
     description: A wrapper over yum package installer prepared for Senzing installs
     digest: 4d39315d7ce81a6131ed53f184e2c0408899f91f3972d628734a1b5a3ae0137a
     home: http://senzing.com
@@ -4170,7 +4194,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-05-09T10:05:33.258889705-04:00"
+    created: "2022-06-02T10:33:11.245303787-04:00"
     description: A wrapper over yum package installer prepared for Senzing installs
     digest: 2648a58df8ce7e2149bff327b8b826693ddd3bce1f2fe25dec4fc5388cdfd4d0
     home: http://senzing.com
@@ -4186,7 +4210,7 @@ entries:
     version: 0.1.0
   swaggerapi-swagger-ui:
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.269181654-04:00"
+    created: "2022-06-02T10:33:11.257627612-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -4210,7 +4234,7 @@ entries:
     - swaggerapi-swagger-ui-2.2.1.tgz
     version: 2.2.1
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.267686307-04:00"
+    created: "2022-06-02T10:33:11.256042377-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -4234,7 +4258,7 @@ entries:
     - swaggerapi-swagger-ui-2.2.0.tgz
     version: 2.2.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.265900065-04:00"
+    created: "2022-06-02T10:33:11.25473638-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -4258,7 +4282,7 @@ entries:
     - swaggerapi-swagger-ui-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
-    created: "2022-05-09T10:05:33.264677789-04:00"
+    created: "2022-06-02T10:33:11.253592592-04:00"
     dependencies:
     - name: senzing-common
       repository: https://hub.senzing.com/charts/
@@ -4281,4 +4305,4 @@ entries:
     urls:
     - swaggerapi-swagger-ui-2.0.0.tgz
     version: 2.0.0
-generated: "2022-05-09T10:05:33.100383433-04:00"
+generated: "2022-06-02T10:33:11.064710782-04:00"
