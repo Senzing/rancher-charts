@@ -63,58 +63,58 @@ spec:
             - name: ODBCSYSINI
               value: /opt/microsoft/msodbcsql17/etc
             {{- end }}
-            {{- if .Values.senzing.dataSource }}
+            {{- if .Values.main.senzing.dataSource }}
             - name: SENZING_DATA_SOURCE
-              value: "{{ .Values.senzing.dataSource }}"
+              value: "{{ .Values.main.senzing.dataSource }}"
             {{- end }}
-            {{- if .Values.senzing.databaseUrl }}
+            {{- if .Values.main.senzing.databaseUrl }}
             - name: SENZING_DATABASE_URL
-              value: "{{ .Values.senzing.databaseUrl }}"
+              value: "{{ .Values.main.senzing.databaseUrl }}"
             {{- end }}
-            {{- if .Values.senzing.debug }}
+            {{- if .Values.main.senzing.debug }}
             - name: SENZING_DEBUG
-              value: "{{ .Values.senzing.debug }}"
+              value: "{{ .Values.main.senzing.debug }}"
             {{- end }}
-            {{- if .Values.senzing.engineConfigurationJson }}
+            {{- if .Values.main.senzing.engineConfigurationJson }}
             - name: SENZING_ENGINE_CONFIGURATION_JSON
               value: >-
-              {{ .Values.senzing.engineConfigurationJson  | nindent 16 }}
+              {{ .Values.main.senzing.engineConfigurationJson  | nindent 16 }}
             {{- end }}
-            {{- if .Values.senzing.entityType }}
+            {{- if .Values.main.senzing.entityType }}
             - name: SENZING_ENTITY_TYPE
-              value: "{{ .Values.senzing.entityType }}"
+              value: "{{ .Values.main.senzing.entityType }}"
             {{- end }}
-            {{- if .Values.senzing.internalDatabase }}
+            {{- if .Values.main.senzing.internalDatabase }}
             - name: SENZING_INTERNAL_DATABASE
-              value: "{{ .Values.senzing.internalDatabase }}"
+              value: "{{ .Values.main.senzing.internalDatabase }}"
             {{- end }}
-            {{- if .Values.senzing.host }}
+            {{- if .Values.main.senzing.host }}
             - name: SENZING_HOST
-              value: "{{ .Values.senzing.host }}"
+              value: "{{ .Values.main.senzing.host }}"
             {{- end }}
-            {{- if .Values.senzing.inputFile }}
+            {{- if .Values.main.senzing.inputFile }}
             - name: SENZING_INPUT_FILE
-              value: "{{ .Values.senzing.inputFile }}"
+              value: "{{ .Values.main.senzing.inputFile }}"
             {{- end }}
-            {{- if .Values.senzing.logLevel }}
+            {{- if .Values.main.senzing.logLevel }}
             - name: SENZING_LOG_LEVEL
-              value: "{{ .Values.senzing.logLevel }}"
+              value: "{{ .Values.main.senzing.logLevel }}"
             {{- end }}
-            {{- if .Values.senzing.outputFile }}
+            {{- if .Values.main.senzing.outputFile }}
             - name: SENZING_OUTPUT_FILE
-              value: "{{ .Values.senzing.outputFile }}"
+              value: "{{ .Values.main.senzing.outputFile }}"
             {{- end }}
-            {{- if .Values.senzing.port }}
+            {{- if .Values.main.senzing.port }}
             - name: SENZING_PORT
-              value: "{{ .Values.senzing.port }}"
+              value: "{{ .Values.main.senzing.port }}"
             {{- end }}
-            {{- if .Values.senzing.sleepTimeInSeconds }}
+            {{- if .Values.main.senzing.sleepTimeInSeconds }}
             - name: SENZING_SLEEP_TIME_IN_SECONDS
-              value: "{{ .Values.senzing.sleepTimeInSeconds }}"
+              value: "{{ .Values.main.senzing.sleepTimeInSeconds }}"
             {{- end }}
-            {{- if .Values.senzing.subcommand }}
+            {{- if .Values.main.senzing.subcommand }}
             - name: SENZING_SUBCOMMAND
-              value: "{{ .Values.senzing.subcommand }}"
+              value: "{{ .Values.main.senzing.subcommand }}"
             {{- end }}
             {{- if .Values.main.extraEnvVars }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
