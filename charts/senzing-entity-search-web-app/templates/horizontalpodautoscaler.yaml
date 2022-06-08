@@ -1,18 +1,19 @@
-# https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/horizontal-pod-autoscaler-v/
+# https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/horizontal-pod-autoscaler-v2/
 
 {{- if .Values.main.autoscaling.enabled }}
 apiVersion: {{ include "senzing-common.capabilities.horizontalpodautoscaler.apiVersion" . }}
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ template "senzing-common.names.fullname" . }}
-  namespace: {{ .Release.Namespace | quote }}
-  labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
-    {{- if .Values.commonLabels }}
-    {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
+  labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
+    app.kubernetes.io/component: senzing-entity-search-web-app-component
+    {{- if .Values.commonLabels }}
+    {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  name: {{ template "senzing-common.names.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
 spec:
   scaleTargetRef:
     apiVersion: {{ include "senzing-common.capabilities.deployment.apiVersion" . }}
@@ -25,12 +26,16 @@ spec:
     - type: Resource
       resource:
         name: cpu
-        targetAverageUtilization: {{ .Values.main.autoscaling.targetCPU }}
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.main.autoscaling.targetCPU }}
     {{- end }}
     {{- if .Values.main.autoscaling.targetMemory }}
     - type: Resource
       resource:
         name: memory
-        targetAverageUtilization: {{ .Values.main.autoscaling.targetMemory  }}
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.main.autoscaling.targetMemory  }}
     {{- end }}
 {{- end }}

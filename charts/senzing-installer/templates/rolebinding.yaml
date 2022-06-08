@@ -8,13 +8,17 @@ metadata:
   annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
   labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
-  name: {{ template "senzing-common.names.fullname" . }}-rolebinding
+    app.kubernetes.io/component: senzing-installer-component
+    {{- if .Values.commonLabels }}
+    {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  name: {{ template "senzing-common.names.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 subjects:
 - kind: ServiceAccount
-  name: {{ template "senzing-common.names.fullname" . }}
+  name: {{ template "senzing-installer.serviceAccountName" . }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ template "senzing-common.names.fullname" . }}-role
+  name: {{ template "senzing-common.names.fullname" . }}
 {{- end }}

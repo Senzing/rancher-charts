@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2022-06-10
+
+### Changed in 1.3.0
+
+- In `poddisruptionbudget.yaml`: `labels`, `matchLabels`
+- In `role.yaml`: `labels`
+- In `rolebinding.yaml`: `labels`, `name`
+- In `service-account.yaml`: `name`
+
 ## [1.2.0] - 2022-05-09
 
 ### Changed in 1.2.0

@@ -1,3 +1,5 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#deployment-v1-apps
+
 apiVersion: {{ include "senzing-common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
@@ -51,6 +53,8 @@ spec:
           command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.command "context" $) | nindent 12 }}
           {{- end }}
           env:
+            - name: SENZING_DEBUG
+              value: {{ ternary "true" "false" (or .Values.main.image.debug .Values.diagnosticMode.enabled) | quote }}
             {{- if .Values.main.extraEnvVars }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}
@@ -88,10 +92,15 @@ spec:
           {{- if .Values.main.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
-          volumeMounts:
-          {{- if .Values.main.extraVolumeMounts }}
-          {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
+          {{- if .Values.main.startupProbe.enabled }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.startupProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customStartupProbe }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customStartupProbe "context" $) | nindent 12 }}
           {{- end }}
+          volumeMounts:
+            {{- if .Values.main.extraVolumeMounts }}
+            {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
         {{- if .Values.main.sidecars }}
         {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
         {{- end }}
@@ -108,6 +117,9 @@ spec:
       {{- end }}
       {{- if .Values.main.priorityClassName }}
       priorityClassName: {{ .Values.main.priorityClassName | quote }}
+      {{- end }}
+      {{- if .Values.main.schedulerName }}
+      schedulerName: {{ .Values.main.schedulerName | quote }}
       {{- end }}
       {{- if .Values.main.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}

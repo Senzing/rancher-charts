@@ -2,15 +2,19 @@
 
 Simple overview.
 
+- Chart name: {{ .Chart.Name  }}
+- Chart version: {{ .Chart.Version  }}
+- App version: {{ .Chart.AppVersion  }}
+
 More information:
 
-- [GitHub](https://github.com/Senzing/XXXXX)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/XXXXXX)
+- [DockerHub](https://hub.docker.com/r/arey/mysql-client)
+- [GitHub](https://github.com/arey/mysql-client)
+- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/arey-mysql-client)
 
 ## Command
 
-
-## Metadata
+## Access pod
 
 {{- if .Values.diagnosticMode.enabled }}
 The chart has been deployed in diagnostic mode. All probes have been disabled and the command has been overwritten with:
@@ -18,13 +22,17 @@ The chart has been deployed in diagnostic mode. All probes have been disabled an
   command: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.command "context" $) | nindent 4 }}
   args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 4 }}
 
-Get the list of pods by executing:
+1. Get the list of pods by executing:
 
-  kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+    ```console
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+    ```
 
-Access the pod you want to debug by executing
+2. Access the pod you want to debug by executing
 
-  kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
+    ```console
+    kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
+    ```
 
 In order to replicate the container startup scripts execute this command:
 
@@ -32,12 +40,19 @@ In order to replicate the container startup scripts execute this command:
 
 {{- else }}
 
-%%Instructions to access the application depending on the serviceType and other considerations%%
+1. Get the list of pods by executing:
+
+    ```console
+    kubectl get pods --namespace {{ .Release.Namespace }} -l app.kubernetes.io/instance={{ .Release.Name }}
+    ```
+
+2. Access the pod you want to debug by executing
+
+    ```console
+    kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
+    ```
 
 {{- end }}
-
-
-## Metadata
 
 {{- include "senzing-common.warnings.rollingTag" .Values.main.image }}
 {{- include "arey-mysql-client.validateValues" . }}

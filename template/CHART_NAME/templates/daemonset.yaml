@@ -1,3 +1,5 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#daemonset-v1-apps
+
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -74,8 +76,10 @@ spec:
           {{- end }}
           {{- end }}
           ports:
-            - containerPort: foo
-              protocol: bar
+            - name: http
+              containerPort: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerPorts.http }}
+            - name: https
+              containerPort: {{ .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerPorts.https }}
           {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe.enabled }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.readinessProbe "enabled") "context" $) | nindent 12 }}
@@ -89,10 +93,14 @@ spec:
           {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
+          {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe.enabled }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.startupProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customStartupProbe }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.customStartupProbe "context" $) | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - mountPath: bar
               name: foo
-              readOnly: true
             {{- if .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraVolumeMounts }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.${SENZING_HELM_MAIN_OBJECT_BLOCK}.extraVolumeMounts "context" $) | nindent 12 }}
             {{- end }}
@@ -113,8 +121,7 @@ spec:
           {{- if .Values.volumePermissions.resources }}
           resources: {{- toYaml .Values.volumePermissions.resources | nindent 12 }}
           {{- end }}
-          securityContext:
-            runAsUser: 0
+          securityContext: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.volumePermissions.containerSecurityContext "context" $) | nindent 12 }}
           volumeMounts:
             - mountPath: bar
               name: foo

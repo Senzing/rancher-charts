@@ -85,17 +85,17 @@ Used by:
 
     ```console
     export CHART_NAMES=( \
+      "arey-mysql-client" \
       "coleifer-sqlite-web" \
       "confluentinc-cp-kafka" \
       "db2-client" \
-      "helm-create-example" \
       "ibm-db2-driver-installer" \
-      "kafka-test-client" \
-      "mysql-client" \
+      "microsoft-mssql-tools" \
       "phppgadmin" \
       "senzing-api-server" \
       "senzing-apt" \
       "senzing-base" \
+      "senzing-common" \
       "senzing-configurator" \
       "senzing-console" \
       "senzing-debug" \

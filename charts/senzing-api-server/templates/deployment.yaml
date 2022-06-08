@@ -1,3 +1,5 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#deployment-v1-apps
+
 apiVersion: {{ include "senzing-common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
@@ -144,10 +146,8 @@ spec:
             - name: SENZING_API_SERVER_MONITOR_FILE
               value: {{ .Values.main.senzing.monitorFile | quote }}
             {{- end }}
-            {{- if .Values.main.senzing.port }}
             - name: SENZING_API_SERVER_PORT
-              value: {{ .Values.main.senzing.port | quote }}
-            {{- end }}
+              value: {{ .Values.main.containerPorts.http | quote }}
             {{- if .Values.main.senzing.quiet }}
             - name: SENZING_API_SERVER_QUIET
               value: {{ .Values.main.senzing.quiet | quote }}
@@ -158,7 +158,7 @@ spec:
             {{- end }}
             {{- if .Values.main.senzing.securePort }}
             - name: SENZING_API_SERVER_SECURE_PORT
-              value: {{ .Values.main.senzing.securePort | quote }}
+              value: {{ .Values.main.containerPorts.https | quote }}
             {{- end }}
             {{- if .Values.main.senzing.skipEnginePriming }}
             - name: SENZING_API_SERVER_SKIP_ENGINE_PRIMING
@@ -295,11 +295,9 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.main.senzing.port }}
-            {{- if .Values.main.senzing.securePort }}
+              containerPort: {{ .Values.main.containerPorts.http }}
             - name: https
-              containerPort: {{ .Values.main.senzing.securePort }}
-            {{- end }}
+              containerPort: {{ .Values.main.containerPorts.https }}
           {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.main.readinessProbe.enabled }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
@@ -312,6 +310,11 @@ spec:
           {{- end }}
           {{- if .Values.main.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- end }}
+          {{- if .Values.main.startupProbe.enabled }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.startupProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customStartupProbe }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customStartupProbe "context" $) | nindent 12 }}
           {{- end }}
           volumeMounts:
             {{- if .Values.main.senzing.persistentVolumeClaim }}
@@ -348,11 +351,18 @@ spec:
       hostAliases: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.hostAliases "context" $) | nindent 8 }}
       {{- end }}
       {{- include "senzing-api-server.imagePullSecrets" . | nindent 6 }}
+      initContainers:
+        {{- if .Values.main.initContainers }}
+          {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.initContainers "context" $) | nindent 8 }}
+        {{- end }}
       {{- if .Values.main.nodeSelector }}
       nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.nodeSelector "context" $) | nindent 8 }}
       {{- end }}
       {{- if .Values.main.priorityClassName }}
       priorityClassName: {{ .Values.main.priorityClassName | quote }}
+      {{- end }}
+      {{- if .Values.main.schedulerName }}
+      schedulerName: {{ .Values.main.schedulerName | quote }}
       {{- end }}
       {{- if .Values.main.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}

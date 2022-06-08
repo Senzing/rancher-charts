@@ -20,11 +20,21 @@ Return the proper Docker Image Registry Secret Names
 {{- end -}}
 
 {{/*
+Return true if cert-manager required annotations for TLS signed certificates are set in the Ingress annotations
+Ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
+*/}}
+{{- define "swaggerapi-swagger-ui.ingress.certManagerRequest" -}}
+{{ if or (hasKey . "cert-manager.io/cluster-issuer") (hasKey . "cert-manager.io/issuer") }}
+    {{- true -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create the name of the service account to use
 */}}
 {{- define "swaggerapi-swagger-ui.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create -}}
-    {{ default (printf "%s-foo" (include "senzing-common.names.fullname" .)) .Values.serviceAccount.name }}
+{{- if .Values.serviceAccount.enabled -}}
+    {{ default (include "senzing-common.names.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}

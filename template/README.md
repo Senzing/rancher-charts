@@ -61,8 +61,6 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
     export SENZING_HELM_IMAGE_NAME=nemo
     export SENZING_HELM_MAIN_CONTAINER_NAME=senzing-nemo
     export SENZING_HELM_MAIN_OBJECT_BLOCK=main
-    export SENZING_HELM_OTHER_OBJECT_BLOCK=OtherObjectBlock
-    export SENZING_HELM_SECONDARY_OBJECT_BLOCK=SecondaryObjectBlock
     export SENZING_HELM_TEMPLATE_NAME=senzing-nemo
     export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/master/charts/senzing-nemo
     export SENZING_HELM_UPSTREAM_PROJECT_VERSION=""
@@ -89,9 +87,6 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
        is used in `Chart.home`.
     1. `SENZING_HELM_UPSTREAM_PROJECT_VERSION`
        is used in `Chart.appVersion`.
-    1. `SENZING_HELM_OTHER_OBJECT_BLOCK` and
-       `SENZING_HELM_SECONDARY_OBJECT_BLOCK`
-       ...FIXME:
 
 1. Identify source and target directories.
    Example:
@@ -125,8 +120,6 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
         ${SENZING_HELM_IMAGE_NAME} \
         ${SENZING_HELM_MAIN_CONTAINER_NAME} \
         ${SENZING_HELM_MAIN_OBJECT_BLOCK} \
-        ${SENZING_HELM_OTHER_OBJECT_BLOCK} \
-        ${SENZING_HELM_SECONDARY_OBJECT_BLOCK} \
         ${SENZING_HELM_TEMPLATE_NAME} \
         ${SENZING_HELM_UPSTREAM_PROJECT_URL} \
         ${SENZING_HELM_UPSTREAM_PROJECT_VERSION} \
@@ -138,19 +131,175 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
 
 ## Update Helm Chart package
 
+### Specify repository location
+
+1. :pencil2: Locate git repository directory.
+   Example:
+
+    ```console
+    export GIT_ACCOUNT=senzing
+    export GIT_REPOSITORY=charts
+    export GIT_ACCOUNT_DIR=~/${GIT_ACCOUNT}.git
+    export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
+    ```
+
+### Specify charts
+
+1. Identify Helm Chart names and Docker images.
+
+    ```console
+    export CHARTS_AND_IMAGES=( \
+      "arey-mysql-client;mysql-client" \
+      "confluentinc-cp-kafka;cp-kafka" \
+      "microsoft-mssql-tools;mssql-tools" \
+      "phppgadmin;phppgadmin;" \
+      "senzing-api-server;senzing-api-server" \
+      "senzing-apt;apt" \
+      "senzing-base;senzing-base" \
+      "senzing-configurator;configurator" \
+      "senzing-console;senzing-console" \
+      "senzing-entity-search-web-app;entity-search-web-app" \
+      "senzing-init-container;init-container" \
+      "senzing-installer;installer" \
+      "senzing-postgresql-client;postgresql-client" \
+      "senzing-redoer;redoer" \
+      "senzing-stream-loader;stream-loader" \
+      "senzing-stream-producer;stream-producer" \
+      "senzing-yum;yum" \
+      "swaggerapi-swagger-ui;swagger-ui" \
+    )
+    ```
+
+1. These Helm Charts that have not been standardized.
+
+    ```console
+    export CHARTS_AND_IMAGES=( \
+      "coleifer-sqlite-web;sqlite-web" \
+      "db2-client;db2-client" \
+      "ibm-db2-driver-installer;db2-driver-installer" \
+      "resolver;resolver" \
+      "senzing-debug;debug" \
+      "senzing-ibm-db2;ibm-db2" \
+    )
+    ```
+
+### Update values.yaml
+
+1. For each `CHART_NAME/values.yaml` file, create a `values.yaml.fromTemplate.yaml` files.
+   Example:
+
+    ```console
+    for CHART_AND_IMAGE in ${CHARTS_AND_IMAGES[@]}; \
+    do \
+      IFS=";" read -r -a CHART_AND_IMAGE_DATA <<< "${CHART_AND_IMAGE}"
+      export SENZING_HELM_CHART_NAME="${CHART_AND_IMAGE_DATA[0]}"; \
+      export SENZING_HELM_IMAGE_NAME="${CHART_AND_IMAGE_DATA[1]}"; \
+      export SENZING_HELM_COMPONENT_NAME=${SENZING_HELM_CHART_NAME}-component; \
+      export SENZING_HELM_CONTAINER_NAME=${SENZING_HELM_CHART_NAME}; \
+      export SENZING_HELM_DESCRIPTION="FIXME:"; \
+      export SENZING_HELM_MAIN_CONTAINER_NAME=${SENZING_HELM_CHART_NAME}; \
+      export SENZING_HELM_MAIN_OBJECT_BLOCK=main; \
+      export SENZING_HELM_TEMPLATE_NAME=${SENZING_HELM_CHART_NAME}; \
+      export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/master/charts/${SENZING_HELM_CHART_NAME}; \
+      export SENZING_HELM_UPSTREAM_PROJECT_VERSION=""; \
+      export SENZING_HELM_CHART_TEMPLATE_DIR=${GIT_REPOSITORY_DIR}/template/CHART_NAME; \
+      export SENZING_HELM_CHART_SOURCE_DIR=${GIT_REPOSITORY_DIR}/charts/${SENZING_HELM_CHART_NAME}; \
+      INPUT_FILE="${SENZING_HELM_CHART_TEMPLATE_DIR}/values.yaml"; \
+      EXISTING_FILE="${SENZING_HELM_CHART_SOURCE_DIR}/values.yaml"; \
+      OUTPUT_FILE="${EXISTING_FILE}.fromTemplate.yaml"; \
+      echo "Processing: ${EXISTING_FILE}"; \
+      envsubst '\
+        ${SENZING_HELM_CHART_NAME} \
+        ${SENZING_HELM_TEMPLATE_NAME} \
+        ${SENZING_HELM_MAIN_OBJECT_BLOCK} \
+        ${SENZING_HELM_SECONDARY_OBJECT_BLOCK} \
+        ${SENZING_HELM_MAIN_CONTAINER} \
+        ${SENZING_HELM_MAIN_CONTAINER_NAME} \
+        ${SENZING_HELM_COMPONENT_NAME} \
+        ${SENZING_HELM_DESCRIPTION} \
+        ${SENZING_HELM_UPSTREAM_PROJECT_URL} \
+        ${SENZING_HELM_UPSTREAM_PROJECT_VERSION} \
+        ${SENZING_HELM_SECONDARY_OBJECT_BLOCK} \
+        ${SENZING_HELM_OTHER_OBJECT_BLOCK} \
+        ${SENZING_HELM_PORT_NAME} \
+        ${SENZING_HELM_CONTAINER_NAME} \
+        ${SENZING_HELM_IMAGE_NAME} \
+      ' \
+      < "${INPUT_FILE}" \
+      > "${OUTPUT_FILE}"; \
+      if $(diff ${EXISTING_FILE} ${OUTPUT_FILE} > /dev/null); then \
+        echo "            No changes."; \
+        rm ${OUTPUT_FILE}; \
+      fi
+    done
+    ```
+
+1. Compare `values.yaml` and `values.yaml.fromTemplate.yaml` files to see what changes are needed in `values.yaml`.
+
+### Update templates
+
+1. In each `CHART_NAME/templates` directory, create `xxxx.fromTemplate.yaml` files.
+   Example:
+
+    ```console
+    for CHART_AND_IMAGE in ${CHARTS_AND_IMAGES[@]}; \
+    do \
+      IFS=";" read -r -a CHART_AND_IMAGE_DATA <<< "${CHART_AND_IMAGE}"
+      export SENZING_HELM_CHART_NAME="${CHART_AND_IMAGE_DATA[0]}"; \
+      export SENZING_HELM_IMAGE_NAME="${CHART_AND_IMAGE_DATA[1]}"; \
+      export SENZING_HELM_COMPONENT_NAME=${SENZING_HELM_CHART_NAME}-component; \
+      export SENZING_HELM_CONTAINER_NAME=${SENZING_HELM_CHART_NAME}; \
+      export SENZING_HELM_DESCRIPTION="FIXME:"; \
+      export SENZING_HELM_MAIN_CONTAINER_NAME=${SENZING_HELM_CHART_NAME}; \
+      export SENZING_HELM_MAIN_OBJECT_BLOCK=main; \
+      export SENZING_HELM_TEMPLATE_NAME=${SENZING_HELM_CHART_NAME}; \
+      export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/master/charts/${SENZING_HELM_CHART_NAME}; \
+      export SENZING_HELM_UPSTREAM_PROJECT_VERSION=""; \
+      export SENZING_HELM_CHART_TEMPLATE_DIR=${GIT_REPOSITORY_DIR}/template/CHART_NAME/templates; \
+      export SENZING_HELM_CHART_SOURCE_DIR=${GIT_REPOSITORY_DIR}/charts/${SENZING_HELM_CHART_NAME}/templates; \
+      for FILE in $(find ${SENZING_HELM_CHART_SOURCE_DIR/} -type f); \
+      do \
+        echo "Processing: ${FILE}"
+        FILE_PATH=$(awk -F"${SENZING_HELM_CHART_SOURCE_DIR}/" '{print $2}' <<< "${FILE}")
+        INPUT_FILE="${SENZING_HELM_CHART_TEMPLATE_DIR}/${FILE_PATH}"
+        EXISTING_FILE="${SENZING_HELM_CHART_SOURCE_DIR}/${FILE_PATH}"
+        OUTPUT_FILE="${EXISTING_FILE}.fromTemplate.yaml"
+        envsubst '\
+          ${SENZING_HELM_CHART_NAME} \
+          ${SENZING_HELM_TEMPLATE_NAME} \
+          ${SENZING_HELM_MAIN_OBJECT_BLOCK} \
+          ${SENZING_HELM_SECONDARY_OBJECT_BLOCK} \
+          ${SENZING_HELM_MAIN_CONTAINER} \
+          ${SENZING_HELM_MAIN_CONTAINER_NAME} \
+          ${SENZING_HELM_COMPONENT_NAME} \
+          ${SENZING_HELM_DESCRIPTION} \
+          ${SENZING_HELM_UPSTREAM_PROJECT_URL} \
+          ${SENZING_HELM_UPSTREAM_PROJECT_VERSION} \
+          ${SENZING_HELM_SECONDARY_OBJECT_BLOCK} \
+          ${SENZING_HELM_OTHER_OBJECT_BLOCK} \
+          ${SENZING_HELM_PORT_NAME} \
+          ${SENZING_HELM_CONTAINER_NAME} \
+          ${SENZING_HELM_IMAGE_NAME} \
+        ' \
+        < "${INPUT_FILE}" \
+        > "${OUTPUT_FILE}"; \
+        if $(diff ${EXISTING_FILE} ${OUTPUT_FILE} > /dev/null); then \
+          echo "            No changes."; \
+          rm ${OUTPUT_FILE}; \
+        fi \
+      done
+    done
+    ```
+
+1. Compare original files with the associated `.fromTemplate.yaml` file.
+
 ### Update Chart.yaml
 
 1. Update `description`.
 1. If needed, add `keywords`.
 1. Modify `sources`.
 
-### Update templates
-
-#### configmap.yaml
-
-1. If needed, modify `%%CONFIG_FILE_NAME%%: |`.
-
-### Update values.yaml
+### Update CHANGELOG.md
 
 ### Update README.md
 
@@ -188,6 +337,15 @@ using Bitami's [readme-generator-for-helm](https://github.com/bitnami-labs/readm
     ```
 
 #### Cleanup README.md
+
+### Remove fromTemplate files
+
+1. Remove `*.fromTemplate.yaml` files.
+   Example:
+
+   ```console
+   find ${GIT_REPOSITORY_DIR}/charts/ -name "*.fromTemplate.yaml" | xargs rm
+   ```
 
 ## Test Helm Chart
 

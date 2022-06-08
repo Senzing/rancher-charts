@@ -20,4 +20,4 @@ sources:
   - https://github.com/Senzing/charts/tree/master/charts/senzing-init-container
   - https://github.com/Senzing/docker-init-container
 type: application
-version: 2.1.0
+version: 2.2.0

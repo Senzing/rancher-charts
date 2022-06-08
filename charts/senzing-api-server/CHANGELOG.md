@@ -6,6 +6,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2022-06-10
+
+### Added in 2.4.0
+
+- `main.containerPorts`
+- `main.containerSecurityContext.enabled`
+- `main.containerSecurityContext.runAsNonRoot`
+- `main.containerSecurityContext.runAsUser`
+- `main.customStartupProbe`
+- `main.schedulerName`
+- `main.startupProbe`
+- `service.extraPorts`
+
+### Changed in 2.4.0
+
+- In `horizontalpodscaler.yaml`: `labels`
+- In `ingress.yaml`: `labels`
+- In `poddisruptionbudget.yaml`: `labels`, `matchLabels`
+- In `role.yaml`: `labels`
+- In `rolebinding.yaml`: `labels`, `name`
+- In `service-account.yaml`: `name`
+- Update to template
+- `main.image.pullPolicy` default value
+- `main.podsecurityContext.enabled` default value
+- `rbac.create` to `rbac.enabled`
+- `service.httpsPort` and `service.port` are now in `service.ports`
+- `serviceAccount.create` to `serviceAccount.enabled`
+
+### Removed in 2.4.0
+
+- `ingress.certManager`
+- `main.containerSecurityContext.privileged`
+- `main.podSecurityContext.runAsGroup`
+- `main.podSecurityContext.runAsUser`
+- `main.senzing.port` - using `main.containerPorts.http` instead
+- `main.senzing.securePort` - using `main.containerPorts.https` instead
+- configmap.yaml
+
 ## [2.3.0] - 2022-05-09
 
 ### Changed in 2.3.0

@@ -1,3 +1,5 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#deployment-v1-apps
+
 apiVersion: {{ include "senzing-common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
@@ -53,107 +55,113 @@ spec:
           env:
             {{- if .Values.main.senzing.apiServerUrl }}
             - name: SENZING_API_SERVER_URL
-              value: "{{ .Values.main.senzing.apiServerUrl }}"
+              value: {{ .Values.main.senzing.apiServerUrl | quote }}
             {{- end }}
             {{- if .Values.main.senzing.authServerAdminJwpathRewrite }}
             - name: SENZING_AUTH_SERVER_ADMIN_JWTPATH_REWRITE
-              value: "{{ .Values.main.senzing.authServerAdminJwpathRewrite }}"
+              value: {{ .Values.main.senzing.authServerAdminJwpathRewrite | quote }}
             {{- end }}
             {{- if .Values.main.senzing.authServerAdminSsopathRewrite }}
             - name: SENZING_AUTH_SERVER_ADMIN_SSOPATH_REWRITE
-              value: "{{ .Values.main.senzing.authServerAdminSsopathRewrite }}"
+              value: {{ .Values.main.senzing.authServerAdminSsopathRewrite | quote }}
             {{- end }}
             {{- if .Values.main.senzing.authServerHostname }}
             - name: SENZING_AUTH_SERVER_HOSTNAME
-              value: "{{ .Values.main.senzing.authServerHostname }}"
+              value: {{ .Values.main.senzing.authServerHostname | quote }}
             {{- end }}
             {{- if .Values.main.senzing.authServerJwpathRewrite }}
             - name: SENZING_AUTH_SERVER_JWTPATH_REWRITE
-              value: "{{ .Values.main.senzing.authServerJwpathRewrite }}"
+              value: {{ .Values.main.senzing.authServerJwpathRewrite | quote }}
             {{- end }}
             {{- if .Values.main.senzing.authServerPort }}
             - name: SENZING_AUTH_SERVER_PORT
-              value: "{{ .Values.main.senzing.authServerPort }}"
+              value: {{ .Values.main.senzing.authServerPort | quote }}
             {{- end }}
             {{- if .Values.main.senzing.authServerSsopathRewrite }}
             - name: SENZING_AUTH_SERVER_SSOPATH_REWRITE
-              value: "{{ .Values.main.senzing.authServerSsopathRewrite }}"
+              value: {{ .Values.main.senzing.authServerSsopathRewrite | quote }}
             {{- end }}
             {{- if .Values.main.senzing.authServerWriteConfigToFile }}
             - name: SENZING_AUTH_SERVER_WRITE_CONFIG_TO_FILE
-              value: "{{ .Values.main.senzing.authServerWriteConfigToFile }}"
+              value: {{ .Values.main.senzing.authServerWriteConfigToFile | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerAdminAuthMode }}
             - name: SENZING_WEB_SERVER_ADMIN_AUTH_MODE
-              value: "{{ .Values.main.senzing.webServerAdminAuthMode }}"
+              value: {{ .Values.main.senzing.webServerAdminAuthMode | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerAdminAuthPath }}
             - name: SENZING_WEB_SERVER_ADMIN_AUTH_PATH
-              value: "{{ .Values.main.senzing.webServerAdminAuthPath }}"
+              value: {{ .Values.main.senzing.webServerAdminAuthPath | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerAdminAuthRedirect }}
             - name: SENZING_WEB_SERVER_ADMIN_AUTH_REDIRECT
-              value: "{{ .Values.main.senzing.webServerAdminAuthRedirect }}"
+              value: {{ .Values.main.senzing.webServerAdminAuthRedirect | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerAdminAuthStatus }}
             - name: SENZING_WEB_SERVER_ADMIN_AUTH_STATUS
-              value: "{{ .Values.main.senzing.webServerAdminAuthStatus }}"
+              value: {{ .Values.main.senzing.webServerAdminAuthStatus | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerAdminSecret }}
             - name: SENZING_WEB_SERVER_ADMIN_SECRET
-              value: "{{ .Values.main.senzing.webServerAdminSecret }}"
+              value: {{ .Values.main.senzing.webServerAdminSecret | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerAdminSeed }}
             - name: SENZING_WEB_SERVER_ADMIN_SEED
-              value: "{{ .Values.main.senzing.webServerAdminSeed }}"
+              value: {{ .Values.main.senzing.webServerAdminSeed | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerApiPath }}
             - name: SENZING_WEB_SERVER_API_PATH
-              value: "{{ .Values.main.senzing.webServerApiPath }}"
+              value: {{ .Values.main.senzing.webServerApiPath | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerAuthPath }}
             - name: SENZING_WEB_SERVER_AUTH_PATH
-              value: "{{ .Values.main.senzing.webServerAuthPath }}"
+              value: {{ .Values.main.senzing.webServerAuthPath | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerBasicAuthJson }}
             - name: SENZING_WEB_SERVER_BASIC_AUTH_JSON
-              value: "{{ .Values.main.senzing.webServerBasicAuthJson }}"
+              value: {{ .Values.main.senzing.webServerBasicAuthJson | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerCorsAllowedOrigin }}
             - name: SENZING_WEB_SERVER_CORS_ALLOWED_ORIGIN
-              value: "{{ .Values.main.senzing.webServerCorsAllowedOrigin }}"
+              value: {{ .Values.main.senzing.webServerCorsAllowedOrigin | quote }}
             {{- end }}
-            {{- if .Values.main.senzing.webServerHosname }}
+            {{- if .Values.main.senzing.webServerHostname }}
             - name: SENZING_WEB_SERVER_HOSTNAME
-              value: "{{ .Values.main.senzing.webServerHosname }}"
+              value: {{ .Values.main.senzing.webServerHostname | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerOperatorAuthMode }}
             - name: SENZING_WEB_SERVER_OPERATOR_AUTH_MODE
-              value: "{{ .Values.main.senzing.webServerOperatorAuthMode }}"
+              value: {{ .Values.main.senzing.webServerOperatorAuthMode | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerOperatorAuthRedirect }}
             - name: SENZING_WEB_SERVER_OPERATOR_AUTH_REDIRECT
-              value: "{{ .Values.main.senzing.webServerOperatorAuthRedirect }}"
+              value: {{ .Values.main.senzing.webServerOperatorAuthRedirect | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerOperatorAuthStatus }}
             - name: SENZING_WEB_SERVER_OPERATOR_AUTH_STATUS
-              value: "{{ .Values.main.senzing.webServerOperatorAuthStatus }}"
+              value: {{ .Values.main.senzing.webServerOperatorAuthStatus | quote }}
             {{- end }}
-            {{- if .Values.main.senzing.webServerPort }}
             - name: SENZING_WEB_SERVER_PORT
-              value: "{{ .Values.main.senzing.webServerPort }}"
-            {{- end }}
+              value: {{ .Values.main.containerPorts.http | quote }}
             {{- if .Values.main.senzing.webServerProxyLoglevel }}
             - name: SENZING_WEB_SERVER_PROXY_LOGLEVEL
-              value: "{{ .Values.main.senzing.webServerProxyLoglevel }}"
+              value: {{ .Values.main.senzing.webServerProxyLoglevel | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerSslCertPath }}
             - name: SENZING_WEB_SERVER_SSL_CERT_PATH
-              value: "{{ .Values.main.senzing.webServerSslCertPath }}"
+              value: {{ .Values.main.senzing.webServerSslCertPath | quote }}
             {{- end }}
             {{- if .Values.main.senzing.webServerSslKeyPath }}
             - name: SENZING_WEB_SERVER_SSL_KEY_PATH
-              value: "{{ .Values.main.senzing.webServerSslKeyPath }}"
+              value: {{ .Values.main.senzing.webServerSslKeyPath | quote }}
+            {{- end }}
+            {{- if .Values.main.senzing.webServerUrl }}
+            - name: SENZING_WEB_SERVER_URL
+              value: {{ .Values.main.senzing.webServerUrl | quote }}
+            {{- end }}
+            {{- if .Values.main.senzing.webServerVirtualPath }}
+            - name: SENZING_WEB_SERVER_VIRTUAL_PATH
+              value: {{ .Values.main.senzing.webServerVirtualPath | quote }}
             {{- end }}
             {{- if .Values.main.extraEnvVars }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
@@ -181,11 +189,9 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.main.senzing.webServerPort }}
-            {{- if .Values.main.senzing.securePort }}
+              containerPort: {{ .Values.main.containerPorts.http }}
             - name: https
-              containerPort: {{ .Values.main.senzing.securePort }}
-            {{- end }}
+              containerPort: {{ .Values.main.containerPorts.https }}
           {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.main.readinessProbe.enabled }}
           readinessProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.readinessProbe "enabled") "context" $) | nindent 12 }}
@@ -199,6 +205,15 @@ spec:
           {{- if .Values.main.containerSecurityContext.enabled }}
           securityContext: {{- omit .Values.main.containerSecurityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
+          {{- if .Values.main.startupProbe.enabled }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" (omit .Values.main.startupProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.main.customStartupProbe }}
+          startupProbe: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.customStartupProbe "context" $) | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            {{- if .Values.main.extraVolumeMounts }}
+            {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
         {{- if .Values.main.sidecars }}
         {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.sidecars "context" $) | nindent 8 }}
         {{- end }}
@@ -206,11 +221,18 @@ spec:
       hostAliases: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.hostAliases "context" $) | nindent 8 }}
       {{- end }}
       {{- include "senzing-entity-search-web-app.imagePullSecrets" . | nindent 6 }}
+      initContainers:
+        {{- if .Values.main.initContainers }}
+          {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.initContainers "context" $) | nindent 8 }}
+        {{- end }}
       {{- if .Values.main.nodeSelector }}
       nodeSelector: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.nodeSelector "context" $) | nindent 8 }}
       {{- end }}
       {{- if .Values.main.priorityClassName }}
       priorityClassName: {{ .Values.main.priorityClassName | quote }}
+      {{- end }}
+      {{- if .Values.main.schedulerName }}
+      schedulerName: {{ .Values.main.schedulerName | quote }}
       {{- end }}
       {{- if .Values.main.podSecurityContext.enabled }}
       securityContext: {{- omit .Values.main.podSecurityContext "enabled" | toYaml | nindent 8 }}
@@ -219,3 +241,7 @@ spec:
       {{- if .Values.main.tolerations }}
       tolerations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.tolerations "context" .) | nindent 8 }}
       {{- end }}
+      volumes:
+        {{- if .Values.main.extraVolumes }}
+        {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}
