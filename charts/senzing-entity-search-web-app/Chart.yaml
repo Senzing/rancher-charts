@@ -8,7 +8,7 @@ dependencies:
     version: 1.0.2
 description: The Senzing Entity Search WebApp
 engine: gotpl
-home: https://github.com/Senzing/charts/tree/master/charts/senzing-entity-search-web-app
+home: https://github.com/Senzing/charts/tree/main/charts/senzing-entity-search-web-app
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
   - senzing
@@ -17,7 +17,7 @@ maintainers:
     name: Senzing
 name: senzing-entity-search-web-app
 sources:
-  - https://github.com/Senzing/charts/tree/master/charts/senzing-entity-search-web-app
+  - https://github.com/Senzing/charts/tree/main/charts/senzing-entity-search-web-app
   - https://github.com/Senzing/entity-search-web-app
 type: application
 version: 2.3.0

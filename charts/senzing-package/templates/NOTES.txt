@@ -7,7 +7,7 @@ Normally, /opt/senzing is a Persistent Volume.
 More information:
 
 - [GitHub](https://github.com/Senzing/senzing-package)
-- [Helm Charts](https://github.com/Senzing/charts/tree/master/charts/senzing-package)
+- [Helm Charts](https://github.com/Senzing/charts/tree/main/charts/senzing-package)
 
 ## Command
 

@@ -10,7 +10,7 @@ More information:
 
 - [DockerHub](https://hub.docker.com/r/senzing/init-container)
 - [GitHub](https://github.com/Senzing/docker-init-container)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-init-container)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/senzing-init-container)
 
 ## Access pod
 

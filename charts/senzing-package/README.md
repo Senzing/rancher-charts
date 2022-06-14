@@ -3,7 +3,7 @@
 ## Overview
 
 A job to install
-[Senzing_API.tgz](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/senzing-api-tgz.md)
+[Senzing_API.tgz](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/senzing-api-tgz.md)
 package onto `/opt/senzing`.
 Normally, `/opt/senzing` is a Persistent Volume.
 

@@ -10,7 +10,7 @@ More information:
 
 - [DockerHub](https://hub.docker.com/r/senzing/stream-loader)
 - [GitHub](https://github.com/Senzing/stream-loader)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-stream-loader)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/senzing-stream-loader)
 
 ## Command
 

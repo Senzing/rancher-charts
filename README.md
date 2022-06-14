@@ -2,11 +2,11 @@
 
 ## Overview
 
-Charts used with [Kubernetes](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/kubernetes.md).
+Charts used with [Kubernetes](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/kubernetes.md).
 
 Used by:
 
-- [Helm](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/helm.md)
+- [Helm](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/helm.md)
 
 ### Contents
 
@@ -77,7 +77,7 @@ Used by:
     export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
     ```
 
-   Then follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/clone-repository.md).
+   Then follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/clone-repository.md).
 
 ### Identify public charts
 

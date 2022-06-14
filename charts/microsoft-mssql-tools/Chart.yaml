@@ -8,7 +8,7 @@ dependencies:
     version: 1.0.1
 description: MS-SQL tools
 engine: gotpl
-home: https://github.com/Senzing/charts/tree/master/charts/microsoft-mssql-tools
+home: https://github.com/Senzing/charts/tree/main/charts/microsoft-mssql-tools
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
   - mssql
@@ -17,6 +17,6 @@ maintainers:
     name: Senzing
 name: microsoft-mssql-tools
 sources:
-  - https://github.com/Senzing/charts/tree/master/charts/microsoft-mssql-tools
+  - https://github.com/Senzing/charts/tree/main/charts/microsoft-mssql-tools
 type: application
 version: 2.3.0

@@ -8,7 +8,7 @@ dependencies:
     version: 1.0.1
 description: A wrapper over apt package installer prepared for Senzing installs
 engine: gotpl
-home: https://github.com/Senzing/charts/tree/master/charts/senzing-apt
+home: https://github.com/Senzing/charts/tree/main/charts/senzing-apt
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
   - senzing
@@ -18,7 +18,7 @@ maintainers:
     name: Senzing
 name: senzing-apt
 sources:
-  - https://github.com/Senzing/charts/tree/master/charts/senzing-apt
+  - https://github.com/Senzing/charts/tree/main/charts/senzing-apt
   - https://github.com/Senzing/docker-apt
 type: application
 version: 2.2.0

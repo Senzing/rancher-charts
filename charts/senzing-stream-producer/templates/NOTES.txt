@@ -10,7 +10,7 @@ More information:
 
 - [DockerHub](https://hub.docker.com/r/senzing/stream-producer)
 - [GitHub](https://github.com/Senzing/stream-producer)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-stream-producer)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/senzing-stream-producer)
 
 ## Command
 

@@ -8,7 +8,7 @@ dependencies:
     version: 1.0.2
 description: Processes Senzing redo records
 engine: gotpl
-home: https://github.com/Senzing/charts/tree/master/charts/senzing-redoer
+home: https://github.com/Senzing/charts/tree/main/charts/senzing-redoer
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
   - senzing
@@ -21,7 +21,7 @@ maintainers:
     name: Senzing
 name: senzing-redoer
 sources:
-  - https://github.com/Senzing/charts/tree/master/charts/senzing-redoer
+  - https://github.com/Senzing/charts/tree/main/charts/senzing-redoer
   - https://github.com/Senzing/redoer
 type: application
 version: 2.4.0
