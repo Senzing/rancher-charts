@@ -62,7 +62,7 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
     export SENZING_HELM_MAIN_CONTAINER_NAME=senzing-nemo
     export SENZING_HELM_MAIN_OBJECT_BLOCK=main
     export SENZING_HELM_TEMPLATE_NAME=senzing-nemo
-    export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/master/charts/senzing-nemo
+    export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/main/charts/senzing-nemo
     export SENZING_HELM_UPSTREAM_PROJECT_VERSION=""
     ```
 
@@ -200,7 +200,7 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
       export SENZING_HELM_MAIN_CONTAINER_NAME=${SENZING_HELM_CHART_NAME}; \
       export SENZING_HELM_MAIN_OBJECT_BLOCK=main; \
       export SENZING_HELM_TEMPLATE_NAME=${SENZING_HELM_CHART_NAME}; \
-      export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/master/charts/${SENZING_HELM_CHART_NAME}; \
+      export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/main/charts/${SENZING_HELM_CHART_NAME}; \
       export SENZING_HELM_UPSTREAM_PROJECT_VERSION=""; \
       export SENZING_HELM_CHART_TEMPLATE_DIR=${GIT_REPOSITORY_DIR}/template/CHART_NAME; \
       export SENZING_HELM_CHART_SOURCE_DIR=${GIT_REPOSITORY_DIR}/charts/${SENZING_HELM_CHART_NAME}; \
@@ -253,7 +253,7 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
       export SENZING_HELM_MAIN_CONTAINER_NAME=${SENZING_HELM_CHART_NAME}; \
       export SENZING_HELM_MAIN_OBJECT_BLOCK=main; \
       export SENZING_HELM_TEMPLATE_NAME=${SENZING_HELM_CHART_NAME}; \
-      export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/master/charts/${SENZING_HELM_CHART_NAME}; \
+      export SENZING_HELM_UPSTREAM_PROJECT_URL=https://github.com/Senzing/charts/tree/main/charts/${SENZING_HELM_CHART_NAME}; \
       export SENZING_HELM_UPSTREAM_PROJECT_VERSION=""; \
       export SENZING_HELM_CHART_TEMPLATE_DIR=${GIT_REPOSITORY_DIR}/template/CHART_NAME/templates; \
       export SENZING_HELM_CHART_SOURCE_DIR=${GIT_REPOSITORY_DIR}/charts/${SENZING_HELM_CHART_NAME}/templates; \

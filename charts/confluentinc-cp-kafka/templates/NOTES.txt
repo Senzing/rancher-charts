@@ -10,7 +10,7 @@ More information:
 
 - [DockerHub](https://hub.docker.com/r/confluentinc/cp-kafka)
 - [GitHub](https://github.com/confluentinc)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/confluentinc-cp-kafka)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/confluentinc-cp-kafka)
 
 ## Access pod
 

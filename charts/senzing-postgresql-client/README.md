@@ -24,7 +24,7 @@ We appreciate Bitnami's leadership in Helm Chart creation.
 
 At [Senzing](http://senzing.com),
 we strive to create GitHub documentation in a
-"[don't make me think](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/dont-make-me-think.md)" style.
+"[don't make me think](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/dont-make-me-think.md)" style.
 For the most part, instructions are copy and paste.
 Whenever thinking is needed, it's marked with a "thinking" icon :thinking:.
 Whenever customization is needed, it's marked with a "pencil" icon :pencil2:.
@@ -34,8 +34,8 @@ describing where we can improve.   Now on with the show...
 
 ## Prerequisites
 
-1. [Kubernetes](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/kubernetes.md) 1.12+
-1. [Helm](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/helm.md) 3.1.0
+1. [Kubernetes](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/kubernetes.md) 1.12+
+1. [Helm](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/helm.md) 3.1.0
 1. PV provisioner support in the underlying infrastructure
 1. ReadWriteMany volumes for deployment scaling
 

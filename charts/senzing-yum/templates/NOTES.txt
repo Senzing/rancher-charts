@@ -10,7 +10,7 @@ More information:
 
 - [DockerHub](https://hub.docker.com/r/senzing/yum)
 - [GitHub](https://github.com/Senzing/docker-yum)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-yum)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/senzing-yum)
 
 ## Access pod
 

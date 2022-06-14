@@ -10,7 +10,7 @@ More information:
 
 - [DockerHub](https://hub.docker.com/r/senzing/configurator)
 - [GitHub](https://github.com/Senzing/configurator)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-configurator)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/senzing-configurator)
 
 ## Command
 

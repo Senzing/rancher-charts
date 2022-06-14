@@ -8,7 +8,7 @@ dependencies:
     version: 1.0.1
 description: A generator of Senzing data to feed a queue
 engine: gotpl
-home: https://github.com/Senzing/charts/tree/master/charts/senzing-stream-producer
+home: https://github.com/Senzing/charts/tree/main/charts/senzing-stream-producer
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
   - senzing
@@ -20,7 +20,7 @@ maintainers:
     name: Senzing
 name: senzing-stream-producer
 sources:
-  - https://github.com/Senzing/charts/tree/master/charts/senzing-stream-producer
+  - https://github.com/Senzing/charts/tree/main/charts/senzing-stream-producer
   - https://github.com/Senzing/stream-producer
 type: application
 version: 2.2.0

@@ -8,7 +8,7 @@ Simple overview.
 
 More information:
 
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/microsoft-mssql-tools)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/microsoft-mssql-tools)
 
 ## Access pod
 

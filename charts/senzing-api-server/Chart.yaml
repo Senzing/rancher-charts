@@ -8,7 +8,7 @@ dependencies:
     version: 1.0.2
 description: Senzing API server
 engine: gotpl
-home: https://github.com/Senzing/charts/tree/master/charts/senzing-api-server
+home: https://github.com/Senzing/charts/tree/main/charts/senzing-api-server
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
   - senzing
@@ -21,7 +21,7 @@ maintainers:
     name: Senzing
 name: senzing-api-server
 sources:
-  - https://github.com/Senzing/charts/tree/master/charts/senzing-api-server
+  - https://github.com/Senzing/charts/tree/main/charts/senzing-api-server
   - https://github.com/Senzing/senzing-api-server
 type: application
 version: 2.4.0

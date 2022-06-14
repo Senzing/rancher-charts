@@ -8,7 +8,7 @@ dependencies:
     version: 1.0.1
 description: Install Senzing binaries via Docker image populated with the binaries
 engine: gotpl
-home: https://github.com/Senzing/charts/tree/master/charts/senzing-installer
+home: https://github.com/Senzing/charts/tree/main/charts/senzing-installer
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
   - senzing
@@ -17,6 +17,6 @@ maintainers:
     name: Senzing
 name: senzing-installer
 sources:
-  - https://github.com/Senzing/charts/tree/master/charts/senzing-template
+  - https://github.com/Senzing/charts/tree/main/charts/senzing-template
 type: application
 version: 1.3.0

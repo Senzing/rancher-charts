@@ -5,7 +5,7 @@ A job to run Senzing's Resolver.
 More information:
 
 - [GitHub](https://github.com/Senzing/resolver)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/resolver)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/resolver)
 
 ## Command
 

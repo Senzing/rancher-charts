@@ -10,7 +10,7 @@ More information:
 
 - [DockerHub](https://hub.docker.com/r/senzing/redoer)
 - [GitHub](https://github.com/Senzing/redoer)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-redoer)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/senzing-redoer)
 
 ## Command
 

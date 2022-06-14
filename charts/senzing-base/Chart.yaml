@@ -8,7 +8,7 @@ dependencies:
     version: 1.0.2
 description: A Senzing environment
 engine: gotpl
-home: https://github.com/Senzing/charts/tree/master/charts/senzing-base
+home: https://github.com/Senzing/charts/tree/main/charts/senzing-base
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
   - senzing
@@ -17,7 +17,7 @@ maintainers:
     name: Senzing
 name: senzing-base
 sources:
-  - https://github.com/Senzing/charts/tree/master/charts/senzing-base
+  - https://github.com/Senzing/charts/tree/main/charts/senzing-base
   - https://github.com/Senzing/docker-senzing-base
 type: application
 version: 2.4.0

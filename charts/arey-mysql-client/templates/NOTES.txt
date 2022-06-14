@@ -10,7 +10,7 @@ More information:
 
 - [DockerHub](https://hub.docker.com/r/arey/mysql-client)
 - [GitHub](https://github.com/arey/mysql-client)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/arey-mysql-client)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/arey-mysql-client)
 
 ## Command
 

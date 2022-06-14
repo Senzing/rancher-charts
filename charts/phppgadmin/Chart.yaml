@@ -20,6 +20,6 @@ maintainers:
     name: Senzing
 name: phppgadmin
 sources:
-  - https://github.com/Senzing/charts/tree/master/charts/phppgadmin
+  - https://github.com/Senzing/charts/tree/main/charts/phppgadmin
 type: application
 version: 3.3.0

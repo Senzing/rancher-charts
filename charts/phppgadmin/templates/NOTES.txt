@@ -9,7 +9,7 @@ Simple overview.
 More information:
 
 - [DockerHub](https://hub.docker.com/r/senzing/phppgadmin)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/phppgadmin)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/phppgadmin)
 
 ## Access pod
 

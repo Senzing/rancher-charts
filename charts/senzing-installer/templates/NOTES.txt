@@ -9,7 +9,7 @@ Simple overview.
 More information:
 
 - [GitHub](https://github.com/Senzing/docker-installer)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-installer)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/senzing-installer)
 
 ## Access pod
 

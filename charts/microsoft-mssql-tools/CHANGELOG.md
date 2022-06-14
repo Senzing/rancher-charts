@@ -55,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed in 2.0.0
 
-- Migrated to new structure in [template](https://github.com/Senzing/charts/tree/master/template)
+- Migrated to new structure in [template](https://github.com/Senzing/charts/tree/main/template)
 
 ## [1.0.0] - yyyy-mm-dd
 

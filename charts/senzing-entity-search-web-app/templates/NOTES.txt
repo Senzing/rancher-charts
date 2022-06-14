@@ -10,7 +10,7 @@ More information:
 
 - [DockerHub](https://hub.docker.com/r/senzing/entity-search-web-app)
 - [GitHub](https://github.com/Senzing/entity-search-web-app)
-- [Helm Chart](https://github.com/Senzing/charts/tree/master/charts/senzing-entity-search-web-app)
+- [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/senzing-entity-search-web-app)
 
 ## Command
 

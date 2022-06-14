@@ -8,7 +8,7 @@ dependencies:
     version: 1.0.2
 description: A stream-based loader for Senzing
 engine: gotpl
-home: https://github.com/Senzing/charts/tree/master/charts/senzing-stream-loader
+home: https://github.com/Senzing/charts/tree/main/charts/senzing-stream-loader
 icon: https://avatars2.githubusercontent.com/u/43552726?s=200&v=4
 keywords:
   - senzing
@@ -20,6 +20,6 @@ maintainers:
     name: Senzing
 name: senzing-stream-loader
 sources:
-  - https://github.com/Senzing/charts/tree/master/charts/senzing-template
+  - https://github.com/Senzing/charts/tree/main/charts/senzing-template
 type: application
 version: 2.4.0
