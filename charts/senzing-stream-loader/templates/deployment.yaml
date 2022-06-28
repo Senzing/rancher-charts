@@ -125,10 +125,6 @@ spec:
             - name: SENZING_DATABASE_URL
               value: "{{ .Values.main.senzing.databaseUrl }}"
             {{- end }}
-            {{- if .Values.main.senzing.dataSource }}
-            - name: SENZING_DATA_SOURCE
-              value: "{{ .Values.main.senzing.dataSource }}"
-            {{- end }}
             {{- if .Values.main.senzing.debug }}
             - name: SENZING_DEBUG
               value: "{{ .Values.main.senzing.debug }}"
@@ -145,10 +141,6 @@ spec:
             - name: SENZING_ENGINE_CONFIGURATION_JSON
               value: >-
               {{ .Values.main.senzing.engineConfigurationJson  | nindent 16 }}
-            {{- end }}
-            {{- if .Values.main.senzing.entityType }}
-            - name: SENZING_ENTITY_TYPE
-              value: "{{ .Values.main.senzing.entityType }}"
             {{- end }}
             {{- if .Values.main.senzing.exitOnEmptyQueue }}
             - name: SENZING_EXIT_ON_EMPTY_QUEUE

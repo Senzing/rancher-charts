@@ -488,10 +488,6 @@ main:
     ##
     databaseUrl: ""
 
-    ## @param main.senzing.dataSource
-    ##
-    dataSource: ""
-
     ## @param main.senzing.debug
     ##
     debug: ""
@@ -507,10 +503,6 @@ main:
     ## @param main.senzing.engineConfigurationJson
     ##
     engineConfigurationJson: ""
-
-    ## @param main.senzing.entityType
-    ##
-    entityType: ""
 
     ## @param main.senzing.exitOnEmptyQueue
     ##
