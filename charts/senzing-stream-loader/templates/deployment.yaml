@@ -162,6 +162,10 @@ spec:
             - name: SENZING_INPUT_URL
               value: "{{ .Values.main.senzing.inputUrl }}"
             {{- end }}
+            {{- if .Values.main.senzing.licenseStringBase64 }}
+            - name: SENZING_LICENSE_BASE64_ENCODED
+              value: "{{ .Values.main.senzing.licenseStringBase64 }}"
+            {{- end }}
             {{- if .Values.main.senzing.kafkaBootstrapServerHost }}
             - name: SENZING_KAFKA_BOOTSTRAP_SERVER
               value: "{{ .Values.main.senzing.kafkaBootstrapServerHost }}:{{ .Values.main.senzing.kafkaBootstrapServerPort }}"

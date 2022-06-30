@@ -20,4 +20,4 @@ sources:
   - https://github.com/Senzing/charts/tree/main/charts/senzing-template
   - https://github.com/Senzing/resolver
 type: application
-version: 2.0.0
+version: 2.0.1

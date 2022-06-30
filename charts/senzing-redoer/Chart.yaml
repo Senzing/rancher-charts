@@ -24,4 +24,4 @@ sources:
   - https://github.com/Senzing/charts/tree/main/charts/senzing-redoer
   - https://github.com/Senzing/redoer
 type: application
-version: 2.4.0
+version: 2.4.1

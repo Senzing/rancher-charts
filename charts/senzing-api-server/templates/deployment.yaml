@@ -213,6 +213,10 @@ spec:
             - name: SENZING_KAFKA_INFO_TOPIC
               value: {{ .Values.main.senzing.kafkaInfoTopic | quote }}
             {{- end }}
+            {{- if .Values.main.senzing.licenseStringBase64 }}
+            - name: SENZING_LICENSE_BASE64_ENCODED
+              value: "{{ .Values.main.senzing.licenseStringBase64 }}"
+            {{- end }}
             {{- if .Values.main.senzing.rabbitmqExchange }}
             - name: SENZING_RABBITMQ_EXCHANGE
               value: {{ .Values.main.senzing.rabbitmqExchange | quote }}

@@ -330,6 +330,7 @@ main:
     host: ""
     inputFile: ""
     internalDatabase: ""
+    licenseStringBase64: ""
     logLevel: ""
     mountOptIbm: false
     mountOptMicrosoft: false
