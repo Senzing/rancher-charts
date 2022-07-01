@@ -86,6 +86,10 @@ spec:
             - name: SENZING_HOST
               value: {{ .Values.main.senzing.host | quote }}
             {{- end }}
+            {{- if .Values.main.senzing.licenseStringBase64 }}
+            - name: SENZING_LICENSE_BASE64_ENCODED
+              value: "{{ .Values.main.senzing.licenseStringBase64 }}"
+            {{- end }}
             {{- if .Values.main.senzing.logLevel }}
             - name: SENZING_LOG_LEVEL
               value: {{ .Values.main.senzing.logLevel | quote }}

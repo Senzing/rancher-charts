@@ -154,6 +154,10 @@ spec:
             - name: SENZING_KAFKA_REDO_TOPIC
               value: "{{ .Values.main.senzing.kafkaRedoTopic }}"
             {{- end }}
+            {{- if .Values.main.senzing.licenseStringBase64 }}
+            - name: SENZING_LICENSE_BASE64_ENCODED
+              value: "{{ .Values.main.senzing.licenseStringBase64 }}"
+            {{- end }}
             {{- if .Values.main.senzing.logLevel }}
             - name: SENZING_LOG_LEVEL
               value: "{{ .Values.main.senzing.logLevel }}"

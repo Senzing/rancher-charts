@@ -70,6 +70,10 @@ spec:
               value: >-
               {{ .Values.main.senzing.engineConfigurationJson  | nindent 16 }}
             {{- end }}
+            {{- if .Values.main.senzing.licenseStringBase64 }}
+            - name: SENZING_LICENSE_BASE64_ENCODED
+              value: "{{ .Values.main.senzing.licenseStringBase64 }}"
+            {{- end }}
             {{- if .Values.main.extraEnvVars }}
             {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}

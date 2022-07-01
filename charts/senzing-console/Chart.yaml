@@ -21,4 +21,4 @@ sources:
   - https://github.com/Senzing/charts/tree/main/charts/senzing-console
   - https://github.com/Senzing/docker-senzing-console
 type: application
-version: 2.3.0
+version: 2.3.1

@@ -516,6 +516,10 @@ main:
     ##
     kafkaRedoTopic: ""
 
+    ## @param main.senzing.licenseStringBase64
+    ##
+    licenseStringBase64: ""
+
     ## @param main.senzing.logLevel
     ##
     logLevel: ""
