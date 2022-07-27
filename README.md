@@ -7,7 +7,7 @@ Charts used by
 to manage
 [Kubernetes](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/kubernetes.md).
 
-To see how to use the Senzing Helm charts in practice, visit
+To see how to use the Senzing Helm Charts in practice, visit
 [kubernetes-demo](https://github.com/Senzing/kubernetes-demo).
 
 ### Contents
