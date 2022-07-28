@@ -2,11 +2,13 @@
 
 ## Overview
 
-Charts used with [Kubernetes](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/kubernetes.md).
+Charts used by
+[Helm](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/helm.md)
+to manage
+[Kubernetes](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/kubernetes.md).
 
-Used by:
-
-- [Helm](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/helm.md)
+To see how to use the Senzing Helm Charts in practice, visit
+[kubernetes-demo](https://github.com/Senzing/kubernetes-demo).
 
 ### Contents
 
@@ -91,22 +93,16 @@ Used by:
       "db2-client" \
       "ibm-db2-driver-installer" \
       "microsoft-mssql-tools" \
-      "phppgadmin" \
       "senzing-api-server" \
       "senzing-apt" \
       "senzing-base" \
       "senzing-common" \
       "senzing-configurator" \
       "senzing-console" \
-      "senzing-debug" \
       "senzing-entity-search-web-app" \
-      "senzing-hello-world" \
-      "senzing-hello-world-on-hub-docker-com" \
       "senzing-ibm-db2" \
       "senzing-init-container" \
       "senzing-installer" \
-      "senzing-mock-data-generator" \
-      "senzing-package" \
       "senzing-postgresql-client" \
       "senzing-redoer" \
       "senzing-resolver" \
