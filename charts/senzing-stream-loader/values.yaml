@@ -452,10 +452,6 @@ main:
     ##
     awsSessionToken: ""
 
-    ## @param main.senzing.azureConnectionString
-    ##
-    azureConnectionString: ""
-
     ## @param main.senzing.azureFailureConnectionString
     ##
     azureFailureConnectionString: ""
@@ -471,6 +467,10 @@ main:
     ## @param main.senzing.azureInfoQueueName
     ##
     azureInfoQueueName: ""
+
+    ## @param main.senzing.azureQueueConnectionString
+    ##
+    azureQueueConnectionString: ""
 
     ## @param main.senzing.azureQueueName
     ##

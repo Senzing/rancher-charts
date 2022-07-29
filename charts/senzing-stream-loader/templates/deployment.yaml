@@ -89,10 +89,6 @@ spec:
             - name: AWS_SESSION_TOKEN
               value: "{{ .Values.main.senzing.awsSessionToken }}"
             {{- end }}
-            {{- if .Values.main.senzing.azureConnectionString }}
-            - name: SENZING_AZURE_CONNECTION_STRING
-              value: "{{ .Values.main.senzing.azureConnectionString }}"
-            {{- end }}
             {{- if .Values.main.senzing.azureFailureConnectionString }}
             - name: SENZING_AZURE_FAILURE_CONNECTION_STRING
               value: "{{ .Values.main.senzing.azureFailureConnectionString }}"
@@ -108,6 +104,10 @@ spec:
             {{- if .Values.main.senzing.azureInfoQueueName }}
             - name: SENZING_AZURE_INFO_QUEUE_NAME
               value: "{{ .Values.main.senzing.azureInfoQueueName }}"
+            {{- end }}
+            {{- if .Values.main.senzing.azureQueueConnectionString }}
+            - name: SENZING_AZURE_QUEUE_CONNECTION_STRING
+              value: "{{ .Values.main.senzing.azureQueueConnectionString }}"
             {{- end }}
             {{- if .Values.main.senzing.azureQueueName }}
             - name: SENZING_AZURE_QUEUE_NAME

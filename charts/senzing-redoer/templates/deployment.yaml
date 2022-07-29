@@ -65,9 +65,29 @@ spec:
             - name: ODBCSYSINI
               value: /opt/microsoft/msodbcsql17/etc
             {{- end }}
-            {{- if .Values.main.senzing.azureConnectionString }}
-            - name: SENZING_AZURE_CONNECTION_STRING
-              value: "{{ .Values.main.senzing.azureConnectionString }}"
+            {{- if .Values.main.senzing.awsAccessKeyId }}
+            - name: AWS_ACCESS_KEY_ID
+              value: "{{ .Values.main.senzing.awsAccessKeyId }}"
+            {{- end }}
+            {{- if .Values.main.senzing.awsDefaultRegion }}
+            - name: AWS_DEFAULT_REGION
+              value: "{{ .Values.main.senzing.awsDefaultRegion }}"
+            {{- end }}
+            {{- if .Values.main.senzing.awsMetadataServiceNumAttempts }}
+            - name: AWS_METADATA_SERVICE_NUM_ATTEMPTS
+              value: "{{ .Values.main.senzing.awsMetadataServiceNumAttempts }}"
+            {{- end }}
+            {{- if .Values.main.senzing.awsMetadataServiceTimeout }}
+            - name: AWS_METADATA_SERVICE_TIMEOUT
+              value: "{{ .Values.main.senzing.awsMetadataServiceTimeout }}"
+            {{- end }}
+            {{- if .Values.main.senzing.awsSecretAccessKey }}
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "{{ .Values.main.senzing.awsSecretAccessKey }}"
+            {{- end }}
+            {{- if .Values.main.senzing.awsSessionToken }}
+            - name: AWS_SESSION_TOKEN
+              value: "{{ .Values.main.senzing.awsSessionToken }}"
             {{- end }}
             {{- if .Values.main.senzing.azureFailureConnectionString }}
             - name: SENZING_AZURE_FAILURE_CONNECTION_STRING
@@ -84,6 +104,10 @@ spec:
             {{- if .Values.main.senzing.azureInfoQueueName }}
             - name: SENZING_AZURE_INFO_QUEUE_NAME
               value: "{{ .Values.main.senzing.azureInfoQueueName }}"
+            {{- end }}
+            {{- if .Values.main.senzing.azureQueueConnectionString }}
+            - name: SENZING_AZURE_QUEUE_CONNECTION_STRING
+              value: "{{ .Values.main.senzing.azureQueueConnectionString }}"
             {{- end }}
             {{- if .Values.main.senzing.azureQueueName }}
             - name: SENZING_AZURE_QUEUE_NAME

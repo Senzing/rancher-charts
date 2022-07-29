@@ -448,6 +448,30 @@ main:
     ##
     autoRefreshPeriod: ""
 
+    ## @param main.senzing.awsAccessKeyId
+    ##
+    awsAccessKeyId: ""
+
+    ## @param main.senzing.awsDefaultRegion
+    ##
+    awsDefaultRegion: ""
+
+    ## @param main.senzing.awsMetadataServiceNumAttempts
+    ##
+    awsMetadataServiceNumAttempts: ""
+
+    ## @param main.senzing.awsMetadataServiceTimeout
+    ##
+    awsMetadataServiceTimeout: ""
+
+    ## @param main.senzing.awsSecretAccessKey
+    ##
+    awsSecretAccessKey: ""
+
+    ## @param main.senzing.awsSessionToken
+    ##
+    awsSessionToken: ""
+
     ## @param main.senzing.azureQueueConnectionString
     ##
     azureQueueConnectionString: ""
