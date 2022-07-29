@@ -428,9 +428,29 @@ main:
   ##
   senzing:
 
-    ## @param main.senzing.azureConnectionString
+    ## @param main.senzing.awsAccessKeyId
     ##
-    azureConnectionString: ""
+    awsAccessKeyId: ""
+
+    ## @param main.senzing.awsDefaultRegion
+    ##
+    awsDefaultRegion: ""
+
+    ## @param main.senzing.awsMetadataServiceNumAttempts
+    ##
+    awsMetadataServiceNumAttempts: ""
+
+    ## @param main.senzing.awsMetadataServiceTimeout
+    ##
+    awsMetadataServiceTimeout: ""
+
+    ## @param main.senzing.awsSecretAccessKey
+    ##
+    awsSecretAccessKey: ""
+
+    ## @param main.senzing.awsSessionToken
+    ##
+    awsSessionToken: ""
 
     ## @param main.senzing.azureFailureConnectionString
     ##
@@ -447,6 +467,10 @@ main:
     ## @param main.senzing.azureInfoQueueName
     ##
     azureInfoQueueName: ""
+
+    ## @param main.senzing.azureQueueConnectionString
+    ##
+    azureQueueConnectionString: ""
 
     ## @param main.senzing.azureQueueName
     ##

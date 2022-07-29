@@ -404,6 +404,14 @@ main:
     ##
     awsDefaultRegion: ""
 
+    ## @param main.senzing.awsMetadataServiceNumAttempts
+    ##
+    awsMetadataServiceNumAttempts: ""
+
+    ## @param main.senzing.awsMetadataServiceTimeout
+    ##
+    awsMetadataServiceTimeout: ""
+
     ## @param main.senzing.awsSecretAccessKey
     ##
     awsSecretAccessKey: ""
@@ -412,9 +420,9 @@ main:
     ##
     awsSessionToken: ""
 
-    ## @param main.senzing.azureConnectionString
+    ## @param main.senzing.azureQueueConnectionString
     ##
-    azureConnectionString: ""
+    azureQueueConnectionString: ""
 
     ## @param main.senzing.azureQueueName
     ##

@@ -24,4 +24,4 @@ sources:
   - https://github.com/Senzing/charts/tree/main/charts/senzing-api-server
   - https://github.com/Senzing/senzing-api-server
 type: application
-version: 2.4.1
+version: 2.4.2
