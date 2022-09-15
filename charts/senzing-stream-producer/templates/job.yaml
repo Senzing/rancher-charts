@@ -94,10 +94,6 @@ spec:
             - name: SENZING_DEFAULT_DATA_SOURCE
               value: "{{ .Values.main.senzing.defaultDataSource }}"
             {{- end }}
-            {{- if .Values.main.senzing.defaultEntityType }}
-            - name: SENZING_DEFAULT_ENTITY_TYPE
-              value: "{{ .Values.main.senzing.defaultEntityType }}"
-            {{- end }}
             {{- if .Values.main.senzing.delayInSeconds }}
             - name: SENZING_DELAY_IN_SECONDS
               value: "{{ .Values.main.senzing.delayInSeconds }}"

@@ -27,10 +27,6 @@ spec:
             - name: "SENZING_DEBUG"
               value: "{{ .Values.senzing.debug }}"
             {{- end }}
-            {{- if .Values.senzing.entityType }}
-            - name: "SENZING_ENTITY_TYPE"
-              value: "{{ .Values.senzing.entityType }}"
-            {{- end }}
             {{- if .Values.senzing.inputUrl }}
             - name: "SENZING_INPUT_URL"
               value: "{{ .Values.senzing.inputUrl }}"

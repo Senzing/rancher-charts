@@ -42,7 +42,6 @@ senzing:
   dataSource: ""
   debug: ""
   engineConfigurationJson: ""
-  entityType: ""
   host: ""
   inputFile: ""
   internalDatabase: ""
