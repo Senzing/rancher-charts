@@ -444,10 +444,6 @@ main:
     ##
     defaultDataSource: ""
 
-    ## @param main.senzing.defaultEntityType
-    ##
-    defaultEntityType: ""
-
     ## @param main.senzing.delayInSeconds
     ##
     delayInSeconds: ""

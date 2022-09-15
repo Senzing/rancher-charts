@@ -25,9 +25,6 @@ resolver.py {{ .Values.senzing.subcommand -}}
   {{- if .Values.senzing.engineConfigurationJson }} \
   --engine-configuration-json "{{ .Values.senzing.engineConfigurationJson }}"
   {{- end }}
-  {{- if .Values.senzing.entityType }} \
-  --entity-type "{{ .Values.senzing.entityType }}"
-  {{- end }}
   {{- if .Values.senzing.host }} \
   --host "{{ .Values.senzing.host }}"
   {{- end }}

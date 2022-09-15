@@ -80,10 +80,6 @@ spec:
               value: >-
               {{ .Values.main.senzing.engineConfigurationJson  | nindent 16 }}
             {{- end }}
-            {{- if .Values.main.senzing.entityType }}
-            - name: SENZING_ENTITY_TYPE
-              value: "{{ .Values.main.senzing.entityType }}"
-            {{- end }}
             {{- if .Values.main.senzing.internalDatabase }}
             - name: SENZING_INTERNAL_DATABASE
               value: "{{ .Values.main.senzing.internalDatabase }}"

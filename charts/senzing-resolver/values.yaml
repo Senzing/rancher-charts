@@ -326,7 +326,6 @@ main:
     dataSource: ""
     debug: ""
     engineConfigurationJson: ""
-    entityType: ""
     host: ""
     inputFile: ""
     internalDatabase: ""
