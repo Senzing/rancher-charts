@@ -12,20 +12,6 @@ More information:
 - [GitHub](https://github.com/Senzing)
 - [Helm Chart](https://github.com/Senzing/charts/tree/main/charts)
 
-## Command
-
-The command being run:
-
-```console
-command-name.py {{ .Values.main.senzing.subcommand -}}
-  {{- if .Values.main.senzing.debug }} \
-  --debug "{{ .Values.main.senzing.debug }}"
-  {{- end }}
-  {{- if .Values.main.senzing.logLevel }} \
-  --log-level "{{ .Values.main.senzing.logLevel }}"
-  {{- end }}
-```
-
 ## Access pod
 
 {{- if .Values.diagnosticMode.enabled }}
@@ -63,47 +49,6 @@ In order to replicate the container startup scripts execute this command:
     ```console
     kubectl exec --namespace {{ .Release.Namespace }} -ti <NAME OF THE POD> -- bash
     ```
-
-{{- end }}
-
-## Access service
-
-{{- if .Values.ingress.enabled }}
-
-- http{{ if .Values.ingress.tls }}s{{ end }}://{{ .Values.ingress.hostname }}{{ .Values.ingress.path }}
-
-{{- range $host := .Values.ingress.extraHosts }}
-  {{- range .paths }}
-- http{{ if .Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }}
-  {{- end }}
-{{- end }}
-
-{{- else if contains "NodePort" .Values.service.type }}
-
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "senzing-common.names.fullname" . }})
-  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo http://$NODE_IP:$NODE_PORT
-
-{{- else if contains "LoadBalancer" .Values.service.type }}
-
-1. NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-
-2. View the status of the service.
-   Example:
-
-    ```console
-    kubectl get --namespace {{ .Release.Namespace }} svc -w {{ template "senzing-common.names.fullname" . }}
-    ```
-
-3. Access the service.
-   Example:
-
-    ```console
-    export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ template "senzing-common.names.fullname" . }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-    echo http://$SERVICE_IP:{{ .Values.service.ports.http }}
-    ```
-
-{{- else if contains "ClusterIP" .Values.service.type }}
 
 {{- end }}
 

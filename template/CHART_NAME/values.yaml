@@ -440,13 +440,13 @@ ${SENZING_HELM_MAIN_OBJECT_BLOCK}:
   ##
   senzing:
 
-    ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.databaseUrl The normalized database connection URL
-    ##
-    databaseUrl: ""
-
     ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.debug Debug?  Boolean.
     ##
     debug: "False"
+
+    ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.engineConfigurationJson JSON containing Senzing G2 Engine configuration
+    ##
+    engineConfigurationJson: ""
 
     ## @param ${SENZING_HELM_MAIN_OBJECT_BLOCK}.senzing.logLevel The logging filter: DEBUG, INFO, WARNING, ERROR, CRITICAL, FATAL
     ##

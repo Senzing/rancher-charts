@@ -404,6 +404,14 @@ main:
     ##
     debug: "False"
 
+    ## @param  main.senzing.engineConfigurationJson JSON containing Senzing G2 Engine configuration
+    ##
+    engineConfigurationJson: ""
+
+    ## @param main.senzing.inputSqlUrl The URL of an SQL file to process.
+    ##
+    inputSqlUrl: ""
+
     ## @param main.senzing.logLevel The logging filter: DEBUG, INFO, WARNING, ERROR, CRITICAL, FATAL
     ##
     logLevel: "INFO"

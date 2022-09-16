@@ -19,4 +19,4 @@ name: senzing-init-postgresql
 sources:
   - https://github.com/Senzing/charts/tree/main/charts/senzing-init-postgresql
 type: application
-version: 0.1.1
+version: 1.0.0
