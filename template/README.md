@@ -159,9 +159,7 @@ Also it is necessary to use the `senzing/senzing-common` chart to standarize som
       "senzing-configurator;configurator" \
       "senzing-console;senzing-console" \
       "senzing-entity-search-web-app;entity-search-web-app" \
-      "senzing-init-container;init-container" \
       "senzing-init-postgresql;init-postgresql" \
-      "senzing-installer;installer" \
       "senzing-postgresql-client;postgresql-client" \
       "senzing-redoer;redoer" \
       "senzing-stream-loader;stream-loader" \

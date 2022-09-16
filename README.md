@@ -101,9 +101,7 @@ To see how to use the Senzing Helm Charts in practice, visit
       "senzing-console" \
       "senzing-entity-search-web-app" \
       "senzing-ibm-db2" \
-      "senzing-init-container" \
       "senzing-init-postgresql" \
-      "senzing-installer" \
       "senzing-postgresql-client" \
       "senzing-redoer" \
       "senzing-resolver" \
