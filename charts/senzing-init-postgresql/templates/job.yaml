@@ -7,7 +7,7 @@ metadata:
   annotations: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
   labels: {{- include "senzing-common.labels.standard" . | nindent 4 }}
-    app.kubernetes.io/component: senzing-init-container-component
+    app.kubernetes.io/component: senzing-init-postgresql-component
     {{- if .Values.commonLabels }}
     {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
@@ -20,7 +20,7 @@ spec:
       annotations: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podAnnotations "context" $) | nindent 8 }}
       {{- end }}
       labels: {{- include "senzing-common.labels.standard" . | nindent 8 }}
-        app.kubernetes.io/component: senzing-init-container-component
+        app.kubernetes.io/component: senzing-init-postgresql-component
         {{- if .Values.main.podLabels }}
         {{- include "senzing-common.tplvalues.render" (dict "value" .Values.main.podLabels "context" $) | nindent 8 }}
         {{- end }}
@@ -29,12 +29,12 @@ spec:
       affinity: {{- include "senzing-common.tplvalues.render" ( dict "value" .Values.main.affinity "context" $) | nindent 8 }}
       {{- else }}
       affinity:
-        podAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAffinityPreset "component" "senzing-init-container-component" "context" $) | nindent 10 }}
-        podAntiAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAntiAffinityPreset "component" "senzing-init-container-component" "context" $) | nindent 10 }}
+        podAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAffinityPreset "component" "senzing-init-postgresql-component" "context" $) | nindent 10 }}
+        podAntiAffinity: {{- include "senzing-common.affinities.pods" (dict "type" .Values.main.podAntiAffinityPreset "component" "senzing-init-postgresql-component" "context" $) | nindent 10 }}
         nodeAffinity: {{- include "senzing-common.affinities.nodes" (dict "type" .Values.main.nodeAffinityPreset.type "key" .Values.main.nodeAffinityPreset.key "values" .Values.main.nodeAffinityPreset.values) | nindent 10 }}
       {{- end }}
       containers:
-        - name: senzing-init-container
+        - name: senzing-init-postgresql
           {{- if .Values.diagnosticMode.enabled }}
           args: {{- include "senzing-common.tplvalues.render" (dict "value" .Values.diagnosticMode.args "context" $) | nindent 12 }}
           {{- else if .Values.main.args }}
