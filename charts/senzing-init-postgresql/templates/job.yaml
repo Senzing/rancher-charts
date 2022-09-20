@@ -58,6 +58,11 @@ spec:
             - name: ODBCSYSINI
               value: /opt/microsoft/msodbcsql17/etc
             {{- end }}
+            {{- if .Values.main.senzing.configurationModifications }}
+            - name: SENZING_CONFIGURATION_MODIFICATIONS
+              value: >-
+              {{ .Values.main.senzing.configurationModifications  | nindent 16 }}
+            {{- end }}
             {{- if .Values.main.senzing.databaseUrl }}
             - name: SENZING_DATABASE_URL
               value: "{{ .Values.main.senzing.databaseUrl }}"

@@ -396,6 +396,10 @@ main:
   ##
   senzing:
 
+    ## @param  main.senzing.configurationModifications A list of GTC statements
+    ##
+    configurationModifications: ""
+
     ## @param main.senzing.databaseUrl The normalized database connection URL
     ##
     databaseUrl: ""
