@@ -34,6 +34,7 @@ To see how to use the Senzing Helm Charts in practice, visit
 
     ```console
     helm repo add senzing 'https://hub.senzing.com/charts/'
+
     ```
 
 ### List helm repositories
@@ -44,6 +45,7 @@ To see how to use the Senzing Helm Charts in practice, visit
 
     ```console
     helm repo list
+
     ```
 
 ### View charts in Senzing Helm repository
@@ -54,6 +56,7 @@ To see how to use the Senzing Helm Charts in practice, visit
 
     ```console
     helm search senzing
+
     ```
 
 ### Remove helm repository
@@ -64,6 +67,7 @@ To see how to use the Senzing Helm Charts in practice, visit
 
     ```console
     helm repo remove senzing
+
     ```
 
 ## Development
@@ -77,6 +81,7 @@ To see how to use the Senzing Helm Charts in practice, visit
     export GIT_REPOSITORY=charts
     export GIT_ACCOUNT_DIR=~/${GIT_ACCOUNT}.git
     export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
+
     ```
 
    Then follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/clone-repository.md).
@@ -101,8 +106,7 @@ To see how to use the Senzing Helm Charts in practice, visit
       "senzing-console" \
       "senzing-entity-search-web-app" \
       "senzing-ibm-db2" \
-      "senzing-init-container" \
-      "senzing-installer" \
+      "senzing-init-postgresql" \
       "senzing-postgresql-client" \
       "senzing-redoer" \
       "senzing-resolver" \
@@ -111,6 +115,7 @@ To see how to use the Senzing Helm Charts in practice, visit
       "senzing-yum" \
       "swaggerapi-swagger-ui" \
     )
+
     ```
 
 ### Helm lint
@@ -130,6 +135,7 @@ To see how to use the Senzing Helm Charts in practice, visit
     ```console
     cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm lint
+
     ```
 
 1. Public charts using
@@ -144,6 +150,7 @@ To see how to use the Senzing Helm Charts in practice, visit
       helm dependency update ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}; \
       helm lint; \
     done
+
     ```
 
 ### Helm template
@@ -163,6 +170,7 @@ To see how to use the Senzing Helm Charts in practice, visit
     ```console
     cd ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm template .
+
     ```
 
 1. Public charts using
@@ -179,6 +187,7 @@ To see how to use the Senzing Helm Charts in practice, visit
       printf "# ----------------------------------------------------------------\n\n"
       helm template .; \
     done
+
     ```
 
 ### Package Helm chart
@@ -202,6 +211,7 @@ To see how to use the Senzing Helm Charts in practice, visit
     helm dependency update ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm package ${GIT_REPOSITORY_DIR}/charts/${CHART_NAME}
     helm repo index .
+
     ```
 
 1. Public charts using
@@ -220,4 +230,5 @@ To see how to use the Senzing Helm Charts in practice, visit
     done
 
     helm repo index .
+
     ```
