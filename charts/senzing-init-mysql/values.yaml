@@ -1,0 +1,545 @@
+## ----------------------------------------------------------------------------
+## Global parameters
+## ----------------------------------------------------------------------------
+
+## @section Global parameters
+
+## Global Docker image parameters
+## Please, note that this will override the image parameters, including dependencies, configured to use the global value
+## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
+
+global:
+
+  ## @param global.imagePullSecrets Global Docker registry secret names as an array
+  ## E.g.
+  ## imagePullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  imagePullSecrets: []
+
+  ## @param global.imageRegistry Global Docker image registry
+  ##
+  imageRegistry: ""
+
+  ## @param global.storageClass Global StorageClass for Persistent Volume(s)
+  ##
+  storageClass: ""
+
+
+## ----------------------------------------------------------------------------
+## Common parameters
+## ----------------------------------------------------------------------------
+
+## @section Common parameters
+
+## @param commonAnnotations Annotations to add to all deployed objects
+##
+commonAnnotations: {}
+
+## @param commonLabels Labels to add to all deployed objects
+##
+commonLabels: {}
+
+## @param clusterDomain Kubernetes cluster domain name
+##
+clusterDomain: cluster.local
+
+## Enable diagnostic mode in the deployment.
+##
+diagnosticMode:
+
+  ## @param diagnosticMode.args Args to override all containers in the deployment
+  ##
+  args:
+    - infinity
+
+  ## @param diagnosticMode.command Command to override all containers in the deployment
+  ##
+  command:
+    - sleep
+
+  ## @param diagnosticMode.enabled Enable diagnostic mode (all probes will be disabled and the command will be overridden)
+  ##
+  enabled: false
+
+## @param extraDeploy Array of extra objects to deploy with the release
+##
+extraDeploy: []
+
+## @param fullnameOverride String to fully override senzing-common.names.fullname
+##
+fullnameOverride: ""
+
+## @param kubeVersion Override Kubernetes version
+##
+kubeVersion: ""
+
+## @param nameOverride String to partially override senzing-common.names.fullname
+##
+nameOverride: ""
+
+
+## ----------------------------------------------------------------------------
+## senzing-init-mysql container parameters
+## - Used in the following files:
+##   - _helpers.tpl
+##   - daemonset.yaml
+##   - deployment.yaml
+##   - horizontalpodautoscaler.yaml
+##   - job.yaml
+##   - NOTES.txt
+##   - statefulset.yaml
+## ----------------------------------------------------------------------------
+
+## @section senzing-init-mysql container parameters
+
+## MAIN_CONTAINER/POD_DESCRIPTION
+##
+main:
+
+  ## @param main.affinity Affinity for senzing-init-mysql pods assignment
+  ## Senzing senzing-init-mysql image
+  ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  ## NOTE: `main.podAffinityPreset`, `main.podAntiAffinityPreset`, and `main.nodeAffinityPreset` will be ignored when it's set
+  ##
+  affinity: {}
+
+  ## @param main.args Override default container args (useful when using custom images)
+  ##
+  args: []
+
+  ## @param main.command Override default container command (useful when using custom images)
+  ##
+  command: []
+
+  ## Configure Container Security Context
+  ## Takes precedence over podSecurityContext.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#securitycontext-v1-core
+  ##
+  containerSecurityContext:
+
+    ## @param main.containerSecurityContext.enabled Enabled senzing-init-mysql containers' Security Context
+    ##
+    enabled: false
+
+  ## @param main.customLivenessProbe Custom livenessProbe that overrides the default one
+  ##
+  customLivenessProbe: {}
+
+  ## @param main.customReadinessProbe Custom readinessProbe that overrides the default one
+  ##
+  customReadinessProbe: {}
+
+  ## @param main.customStartupProbe Custom startupProbe that overrides the default one
+  ##
+  customStartupProbe: {}
+
+  ## @param main.existingConfigmap The name of an existing ConfigMap with custom configuration for senzing-init-mysql
+  ##
+  existingConfigmap:
+
+  ## @param main.extraEnvVars Array with extra environment variables to add to senzing-init-mysql nodes
+  ## e.g:
+  ## extraEnvVars:
+  ##   - name: FOO
+  ##     value: "bar"
+  ##
+  extraEnvVars: []
+
+  ## @param main.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for senzing-init-mysql nodes
+  ##
+  extraEnvVarsCM:
+
+  ## @param main.extraEnvVarsSecret Name of existing Secret containing extra env vars for senzing-init-mysql nodes
+  ##
+  extraEnvVarsSecret:
+
+  ## @param main.extraVolumes Optionally specify extra list of additional volumes for the senzing-init-mysql pod(s)
+  ##
+  extraVolumes: []
+
+  ## @param main.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the senzing-init-mysql container(s)
+  ##
+  extraVolumeMounts: []
+
+  ## @param main.hostAliases senzing-init-mysql pods host aliases
+  ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
+  ##
+  hostAliases: []
+
+  ## Image parameters
+  ##
+  image:
+
+    ## @param main.image.debug Enable senzing-init-mysql image debug mode
+    ## Enable debug mode
+    ##
+    debug: false
+
+    ## @param main.image.pullPolicy senzing-init-mysql image pull policy
+    ## Specify a imagePullPolicy
+    ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+    ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+    ##
+    pullPolicy: IfNotPresent
+
+    ## @param main.image.pullSecrets senzing-init-mysql image pull secrets
+    ## Optionally specify an array of imagePullSecrets.
+    ## Secrets must be manually created in the namespace.
+    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    ## e.g:
+    ## pullSecrets:
+    ##   - myRegistryKeySecretName
+    ##
+    pullSecrets: []
+
+    ## @param main.image.registry senzing-init-mysql image registry
+    ##
+    registry: docker.io
+
+    ## @param main.image.repository senzing-init-mysql image repository
+    ##
+    repository: senzing/init-mysql
+
+    ## @param main.image.tag senzing-init-mysql image tag (immutable tags are recommended)
+    ##
+    tag: latest
+
+  ## @param main.initContainers Add additional init containers to the senzing-init-mysql pod(s)
+  ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+  ## e.g:
+  ## initContainers:
+  ##  - name: your-image-name
+  ##    image: your-image
+  ##    imagePullPolicy: Always
+  ##    command: ['sh', '-c', 'echo "hello world"']
+  ##
+  initContainers: {}
+
+  ## @param main.lifecycleHooks for the senzing-init-mysql container(s) to automate configuration before or after startup
+  ##
+  lifecycleHooks: {}
+
+  ## Configure extra options for senzing-init-mysql containers' liveness probe.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
+  ##
+  livenessProbe:
+
+    ## @param main.livenessProbe.enabled Enable livenessProbe on senzing-init-mysql containers
+    ##
+    enabled: false
+
+    ## @param main.livenessProbe.exec Action to "exec" a program on senzing-init-mysql containers
+    ##
+    exec:
+      command:
+      - stat
+      - /etc
+
+    ## @param main.livenessProbe.failureThreshold Failure threshold for livenessProbe
+    ##
+    failureThreshold: 3
+
+    ## @param main.livenessProbe.initialDelaySeconds Initial delay seconds for livenessProbe
+    ##
+    initialDelaySeconds: 0
+
+    ## @param main.livenessProbe.periodSeconds Period seconds for livenessProbe
+    ##
+    periodSeconds: 10
+
+    ## @param main.livenessProbe.successThreshold Success threshold for livenessProbe
+    ##
+    successThreshold: 1
+
+    ## @param main.livenessProbe.timeoutSeconds Timeout seconds for livenessProbe
+    ##
+    timeoutSeconds: 1
+
+  ## Node main.affinity preset
+  ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
+  ##
+  nodeAffinityPreset:
+
+    ## @param main.nodeAffinityPreset.key Node label key to match. Ignored if `main.affinity` is set
+    ##
+    key: ""
+
+    ## @param main.nodeAffinityPreset.type Node affinity preset type. Ignored if `main.affinity` is set. Allowed values: `soft` or `hard`
+    ##
+    type: ""
+
+    ## @param main.nodeAffinityPreset.values Node label values to match. Ignored if `main.affinity` is set
+    ## E.g.
+    ## values:
+    ##   - e2e-az1
+    ##   - e2e-az2
+    ##
+    values: []
+
+  ## @param main.nodeSelector Node labels for senzing-init-mysql pods assignment
+  ## ref: https://kubernetes.io/docs/user-guide/node-selection/
+  ##
+  nodeSelector: {}
+
+  ## @param main.podAffinityPreset Pod affinity preset. Ignored if `main.affinity` is set. Allowed values: `soft` or `hard`
+  ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+  ##
+  podAffinityPreset: ""
+
+  ## @param main.podAnnotations Annotations for senzing-init-mysql pods
+  ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  ##
+  podAnnotations: {}
+
+  ## @param main.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `main.affinity` is set. Allowed values: `soft` or `hard`
+  ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+  ##
+  podAntiAffinityPreset: soft
+
+  ## @param main.podLabels Extra labels for senzing-init-mysql pods
+  ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+  ##
+  podLabels: {}
+
+  ## Configure Pods Security Context
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#podsecuritycontext-v1-core
+  ##
+  podSecurityContext:
+
+    ## @param main.podSecurityContext.enabled Enabled senzing-init-mysql pod's Security Context
+    ##
+    enabled: false
+
+    ## @param main.podSecurityContext.fsGroup Set senzing-init-mysql pod's Security Context fsGroup
+    ##
+    fsGroup: 1001
+
+    ## @param main.podSecurityContext.runAsGroup Set senzing-init-mysql pod's Security Context runAsGroup
+    ##
+    runAsGroup: 1001
+
+    ## @param main.podSecurityContext.runAsNonRoot Set senzing-init-mysql pod's Security Context runAsNonRoot
+    ##
+    runAsNonRoot: true
+
+    ## @param main.podSecurityContext.runAsUser Set senzing-init-mysql pod's Security Context runAsUser
+    ##
+    runAsUser: 1001
+
+  ## @param main.priorityClassName senzing-init-mysql pods' priorityClassName
+  ##
+  priorityClassName: ""
+
+  ## Configure extra options for senzing-init-mysql containers' readiness probe.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
+  ##
+  readinessProbe:
+
+    ## @param main.readinessProbe.enabled Enable readinessProbe on senzing-init-mysql containers
+    ##
+    enabled: false
+
+    ## @param main.readinessProbe.exec Action to "exec" a program on senzing-init-mysql containers
+    ##
+    exec:
+      command:
+      - stat
+      - /etc
+
+    ## @param main.readinessProbe.failureThreshold Failure threshold for readinessProbe
+    ##
+    failureThreshold: 3
+
+    ## @param main.readinessProbe.initialDelaySeconds Initial delay seconds for readinessProbe
+    ##
+    initialDelaySeconds: 0
+
+    ## @param main.readinessProbe.periodSeconds Period seconds for readinessProbe
+    ##
+    periodSeconds: 10
+
+    ## @param main.readinessProbe.successThreshold Success threshold for readinessProbe
+    ##
+    successThreshold: 1
+
+    ## @param main.readinessProbe.timeoutSeconds Timeout seconds for readinessProbe
+    ##
+    timeoutSeconds: 1
+
+  ## @param main.replicaCount Number of senzing-init-mysql replicas to deploy
+  ##
+  replicaCount: 1
+
+  ## senzing-init-mysql resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ##
+  resources:
+
+    ## @param main.resources.limits The resources limits for the senzing-init-mysql containers
+    ##
+    limits: {}
+
+    ## @param main.resources.requests The requested resources for the senzing-init-mysql containers
+    ##
+    requests: {}
+
+  ## @param main.schedulerName Name of the k8s scheduler (other than default) for  senzing-init-mysql pods
+  ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
+  ##
+  schedulerName: ""
+
+  ## senzing-init-mysql Senzing environment variables
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ##
+  senzing:
+
+    ## @param  main.senzing.configurationModifications A list of GTC statements
+    ##
+    configurationModifications: ""
+
+    ## @param main.senzing.databaseUrl The normalized database connection URL
+    ##
+    databaseUrl: ""
+
+    ## @param main.senzing.debug Debug?  Boolean.
+    ##
+    debug: "False"
+
+    ## @param main.senzing.engineConfigurationJson JSON containing Senzing G2 Engine configuration
+    ##
+    engineConfigurationJson: ""
+
+    ## @param main.senzing.inputSqlUrl The URL of an SQL file to process.
+    ##
+    inputSqlUrl: ""
+
+    ## @param main.senzing.logLevel The logging filter: DEBUG, INFO, WARNING, ERROR, CRITICAL, FATAL
+    ##
+    logLevel: "INFO"
+
+    ## @param main.senzing.subcommand CLI sub-command
+    ##
+    subcommand: ""
+
+  ## @param main.sidecars Add additional sidecar containers to the senzing-init-mysql pod(s)
+  ## e.g:
+  ## sidecars:
+  ##   - name: your-image-name
+  ##     image: your-image
+  ##     imagePullPolicy: Always
+  ##     ports:
+  ##       - name: portname
+  ##         containerPort: 1234
+  ##
+  sidecars: {}
+
+  ## Configure extra options for senzing-init-mysql containers' start up probe
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
+  ##
+  startupProbe:
+
+    ## @param main.startupProbe.enabled Enable startupProbe on senzing-init-mysql containers
+    ##
+    enabled: false
+
+    ## @param main.startupProbe.exec Action to "exec" a program on senzing-init-mysql containers
+    ##
+    exec:
+      command:
+      - stat
+      - /etc
+
+    ## @param main.startupProbe.failureThreshold Failure threshold for startupProbe
+    ##
+    failureThreshold: 3
+
+    ## @param main.startupProbe.initialDelaySeconds Initial delay seconds for startupProbe
+    ##
+    initialDelaySeconds: 0
+
+    ## @param main.startupProbe.periodSeconds Period seconds for startupProbe
+    ##
+    periodSeconds: 10
+
+    ## @param main.startupProbe.successThreshold Success threshold for startupProbe
+    ##
+    successThreshold: 1
+
+    ## @param main.startupProbe.timeoutSeconds Timeout seconds for startupProbe
+    ##
+    timeoutSeconds: 1
+
+  ## @param main.tolerations Tolerations for senzing-init-mysql pods assignment
+  ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+  ##
+  tolerations: []
+
+
+## ----------------------------------------------------------------------------
+## Pod Disruption Budget Parameters
+## - Used in the following files:
+##   - poddisruptionbudget.yaml
+## ----------------------------------------------------------------------------
+
+## @section Pod Disruption Budget Parameters
+
+## Pod disruption budget configuration
+## ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
+##
+podDisruptionBudget:
+
+  ## @param podDisruptionBudget.enabled If true, create a pod disruption budget for pods.
+  ##
+  enabled: false
+
+  ## @param podDisruptionBudget.minAvailable Minimum number / percentage of pods that should remain scheduled
+  ##
+  minAvailable: 1
+
+  ## @param podDisruptionBudget.maxUnavailable Maximum number / percentage of pods that may be made unavailable
+  ##
+  maxUnavailable: ""
+
+
+## ----------------------------------------------------------------------------
+## Role Based Access Control (RBAC) Parameters
+## - Used in the following files:
+##   - role.yaml
+##   - rolebinding.yaml
+## ----------------------------------------------------------------------------
+
+## @section Role Based Access Control (RBAC) Parameters
+
+## RBAC configuration
+##
+rbac:
+
+  ## @param rbac.enabled Specifies whether RBAC resources should be created
+  ##
+  enabled: false
+
+
+## ----------------------------------------------------------------------------
+## Service Account parameters
+## - Used in the following files:
+##   - _helpers.tpl
+##   - service-account.yaml
+## ----------------------------------------------------------------------------
+
+## @section Service Account Parameters
+
+## ServiceAccount configuration
+##
+serviceAccount:
+
+  ## @param serviceAccount.enabled Specifies whether a ServiceAccount should be created
+  ##
+  enabled: false
+
+  ## @param serviceAccount.name The name of the ServiceAccount to use.
+  ## If not set and create is true, a name is generated using the senzing-common.names.fullname template
+  ##
+  name: ""
